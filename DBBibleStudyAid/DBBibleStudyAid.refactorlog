@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="983ebe0b-7ee8-44ae-ba85-852f9c57a93e" ChangeDateTime="02/06/2021 19:51:45">
+    <Property Name="ElementName" Value="[dbo].[tblTalks].[Documents]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[tblTalks]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="TalkDocument" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="11cfbc9f-8b9d-46d7-8505-0827baa92ed0" ChangeDateTime="02/06/2021 19:53:38">
+    <Property Name="ElementName" Value="[dbo].[tblTalks].[MeetingAssignmentType]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[tblTalks]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="MeetingType" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="98fa127d-b9f0-4986-85a4-a2a24c392466" ChangeDateTime="02/06/2021 20:10:54">
+    <Property Name="ElementName" Value="[dbo].[tblDailyBibleReading].[CreatedDate]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[tblDailyBibleReading]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="DateTimeWhenDone" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="737e0b8f-929f-406e-93b6-7eadd7f466c5" ChangeDateTime="02/06/2021 20:11:17">
+    <Property Name="ElementName" Value="[dbo].[tblDailyBibleReading].[Scripture]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[tblDailyBibleReading]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ScriptureStartPoint" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="1c9637ca-fbda-4202-9f8b-1e28146d0a74" ChangeDateTime="02/06/2021 20:29:22">
+    <Property Name="ElementName" Value="[dbo].[tblDailyBibleReading].[Reference]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[tblDailyBibleReading]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ReferenceId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="4df63c27-ca82-4b87-ba52-34ffc364c2f3" ChangeDateTime="02/06/2021 20:30:28">
+    <Property Name="ElementName" Value="[dbo].[tblFamilyStudyProjects].[Reference]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[tblFamilyStudyProjects]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ReferenceId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="aa55be2e-7902-4011-b11e-046d9570a264" ChangeDateTime="02/06/2021 20:30:58">
+    <Property Name="ElementName" Value="[dbo].[tblMeetingAssemblies].[Reference]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[tblMeetingAssemblies]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ReferenceId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="e239c06e-159f-4835-8171-70ac35856adf" ChangeDateTime="02/06/2021 20:31:13">
+    <Property Name="ElementName" Value="[dbo].[tblPersonalStudyFindings].[Reference]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[tblPersonalStudyFindings]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ReferenceId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="e71ed8e5-9c8b-4ca0-9428-eb1a2a3621bb" ChangeDateTime="02/06/2021 20:35:46">
+    <Property Name="ElementName" Value="[dbo].[tblTalks].[MeetingType]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[tblTalks]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="MeetingTypeId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="85efe085-43ff-476d-a51a-65c853527249" ChangeDateTime="02/06/2021 21:28:58">
+    <Property Name="ElementName" Value="[dbo].[tblTagsToDailyBibleReading].[tblGUID]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[tblTagsToDailyBibleReading]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Temporary" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="429a3a8b-76ac-469e-9d3c-53f2c14a4fd8" ChangeDateTime="02/06/2021 21:31:49">
+    <Property Name="ElementName" Value="[dbo].[tblTagsToDailyBibleReading].[DailyBibleReadingId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[tblTagsToDailyBibleReading]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="tblId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="76107764-e1d5-4772-a0e0-a4fe22aafd19" ChangeDateTime="02/06/2021 21:31:58">
+    <Property Name="ElementName" Value="[dbo].[tblTagsToDailyBibleReading].[Temporary]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[tblTagsToDailyBibleReading]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="tblName" />
+  </Operation>
+</Operations>
