@@ -75,12 +75,21 @@
     <Build Include="dbo\Tables\tblTags.sql" />
     <Build Include="dbo\Tables\tblTagsToOtherTables.sql" />
     <Build Include="dbo\Stored Procedures\spCreateTag.sql" />
+    <Build Include="dbo\Stored Procedures\spCreateDailyBibleReading.sql" />
+    <Build Include="dbo\Stored Procedures\spCreateMeetingType.sql" />
+    <Build Include="dbo\Stored Procedures\spCreateReferences.sql" />
+    <Build Include="dbo\Stored Procedures\spCreateFamilyStudyProjects.sql" />
+    <Build Include="dbo\Stored Procedures\spCreateMeetingAssemblies.sql" />
+    <Build Include="dbo\Stored Procedures\spCreatePersonalStudyFindings.sql" />
+    <Build Include="dbo\Stored Procedures\spCreatePersonalStudyProjects.sql" />
+    <Build Include="dbo\Stored Procedures\spCreateTalk.sql" />
+    <Build Include="dbo\Stored Procedures\spCreateTagsToOtherTables.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="DBBibleStudyAid.refactorlog" />
   </ItemGroup>
   <ItemGroup>
     <None Include="PublishLocations\DBBibleStudyAid.publish.xml" />
-    <None Include="dbo\Stored Procedures\spCreateReference.sql" />
+    <None Include="TestScripts\TestScript.sql" />
   </ItemGroup>
 </Project>

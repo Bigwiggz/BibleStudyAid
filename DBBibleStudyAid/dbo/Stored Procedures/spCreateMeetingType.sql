@@ -1,10 +1,10 @@
 ﻿/*
 ----------------------------------------------------------------------------
--- Object Name: dbo.spCreateReference
+-- Object Name: dbo.spCreateMeetingType
 -- Project: DBBibleStudyAid
 -- Business Process: N/A
 -- Purpose: C Operations on a record into a table
--- Detailed Description: Insert a record into the dbo.Reference table
+-- Detailed Description: Insert a record into the dbo.MeetingType table
 -- Database: DBBibleStudyAid
 -- Dependent Objects: None
 -- Called By: Application
@@ -18,12 +18,13 @@
 --
 */
 
-CREATE PROCEDURE [dbo].[spCreateReference]
-    @Reference NVARCHAR(1000) NOT NULL
+CREATE PROCEDURE [dbo].[spCreateMeetingType]
+    @MeetingTypeName NVARCHAR(100),
+	@MeetingTypeDescription NVARCHAR(1000) NULL
 
 AS
 BEGIN
     SET NOCOUNT ON;
-	INSERT INTO [dbo].[tblReference] ([Reference])
-	VALUES (@Reference);
+	INSERT INTO [dbo].[tblMeetingType] ([MeetingTypeName],[MeetingTypeDescription])
+	VALUES (@MeetingTypeName,@MeetingTypeDescription);
 END

@@ -7,9 +7,9 @@
     [MeetingTypeId] INT NOT NULL, 
     [Description] NVARCHAR(1000) NOT NULL, 
     [TalkDocument] VARBINARY(MAX) NOT NULL, 
-    [Theme Scripture] NVARCHAR(1000) NULL, 
+    [ThemeScripture] NVARCHAR(1000) NULL, 
     [ReferenceId] INT NULL, 
-    [FKIdtblTalks] AS CONCAT(CAST([Id] AS VARCHAR),'tblTalks'), 
+    [FKIdtblTalks] AS CONCAT(CONVERT(VARCHAR,[Id]),'tblTalks'), 
     CONSTRAINT [FK_tblTalks_tblReferences] FOREIGN KEY ([ReferenceId]) REFERENCES [tblReferences]([Id]), 
     CONSTRAINT [FK_tblTalks_tblMeetingType] FOREIGN KEY ([MeetingTypeId]) REFERENCES [tblMeetingType]([Id])
 )

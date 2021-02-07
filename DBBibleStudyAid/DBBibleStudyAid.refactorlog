@@ -84,4 +84,11 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="tblName" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="67076f22-9b7e-4d56-8258-75ee365a403b" ChangeDateTime="02/07/2021 03:15:19">
+    <Property Name="ElementName" Value="[dbo].[tblTalks].[Theme Scripture]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[tblTalks]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ThemeScripture" />
+  </Operation>
 </Operations>

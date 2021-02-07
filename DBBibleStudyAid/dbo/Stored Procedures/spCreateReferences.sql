@@ -1,11 +1,11 @@
 ﻿/*
 ----------------------------------------------------------------------------
--- Object Name: dbo.spCreateTag
+-- Object Name: dbo.spCreateReferences
 -- Project: DBBibleStudyAid
 -- Business Process: N/A
--- Purpose: CRUD Operations on a record into a table
--- Detailed Description: Insert a record into the dbo.Tag table
--- Database: SqlTerritoriesDB
+-- Purpose: C Operations on a record into a table
+-- Detailed Description: Insert a record into the dbo.Reference table
+-- Database: DBBibleStudyAid
 -- Dependent Objects: None
 -- Called By: Application
 -- Upstream Systems: N\A
@@ -18,14 +18,12 @@
 --
 */
 
-CREATE PROCEDURE [dbo].[spCreateTag]
-	@TagName NVARCHAR(100), 
-    @TagDescription NVARCHAR(1000) NULL
+CREATE PROCEDURE [dbo].[spCreateReferences]
+    @Reference NVARCHAR(1000)
+
 AS
 BEGIN
-	SET NOCOUNT ON;
-	INSERT INTO [dbo].[tblTags] ([TagName],[TagDescription])
-	VALUES (@TagName,@TagDescription);
+    SET NOCOUNT ON;
+	INSERT INTO [dbo].[tblReferences] ([Reference])
+	VALUES (@Reference);
 END
-
-

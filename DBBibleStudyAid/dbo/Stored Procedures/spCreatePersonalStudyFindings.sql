@@ -1,11 +1,11 @@
 ﻿/*
 ----------------------------------------------------------------------------
--- Object Name: dbo.spCreateTag
+-- Object Name: dbo.spCreatePersonalStudyFindings
 -- Project: DBBibleStudyAid
 -- Business Process: N/A
--- Purpose: CRUD Operations on a record into a table
--- Detailed Description: Insert a record into the dbo.Tag table
--- Database: SqlTerritoriesDB
+-- Purpose: C Operations on a record into a table
+-- Detailed Description: Insert a record into the dbo.PersonalStudyFindings table
+-- Database: DBBibleStudyAid
 -- Dependent Objects: None
 -- Called By: Application
 -- Upstream Systems: N\A
@@ -18,14 +18,19 @@
 --
 */
 
-CREATE PROCEDURE [dbo].[spCreateTag]
-	@TagName NVARCHAR(100), 
-    @TagDescription NVARCHAR(1000) NULL
+CREATE PROCEDURE [dbo].[spCreatePersonalStudyFindings]
+    @Scripture NVARCHAR(1000) NULL, 
+    @Explanation NVARCHAR(1000), 
+    @ReferenceId INT NULL 
 AS
 BEGIN
-	SET NOCOUNT ON;
-	INSERT INTO [dbo].[tblTags] ([TagName],[TagDescription])
-	VALUES (@TagName,@TagDescription);
+    SET NOCOUNT ON;
+	INSERT INTO [dbo].[tblPersonalStudyFindings] 
+    ([Scripture], 
+    [Explanation], 
+    [ReferenceId])
+	VALUES(
+    @Scripture, 
+    @Explanation, 
+    @ReferenceId);
 END
-
-

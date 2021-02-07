@@ -7,6 +7,6 @@
     [PersonalStudyQuestionAssignment] NVARCHAR(1000) NOT NULL, 
     [DateFinished] DATETIME2 NULL, 
     [Scripture] NVARCHAR(1000) NULL, 
-    [PersonalStudyFindingsId] INT NOT NULL, 
-    CONSTRAINT [FK_tblPersonalStudyProjects_tblPersonalStudyProjects] FOREIGN KEY ([PersonalStudyFindingsId]) REFERENCES [tblPersonalStudyProjects]([Id])
+    [PersonalStudyFindingsId] INT NULL, 
+    CONSTRAINT [FK_tblPersonalStudyProjects_tblPersonalStudyProjects] FOREIGN KEY ([PersonalStudyFindingsId]) REFERENCES [tblPersonalStudyFindings]([Id])
 )

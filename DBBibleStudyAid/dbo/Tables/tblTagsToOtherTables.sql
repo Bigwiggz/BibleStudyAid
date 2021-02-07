@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[tblTagsToDailyBibleReading]
+﻿CREATE TABLE [dbo].[tblTagsToOtherTables]
 (
 	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
     [TagsId] INT NOT NULL, 
@@ -6,7 +6,7 @@
     [tblName] NVARCHAR(100) NOT NULL, 
     [TagApplicationGUID] UNIQUEIDENTIFIER NOT NULL DEFAULT newId(), 
     [FKtblIdAndName] NVARCHAR(1000) NOT NULL, 
-    CONSTRAINT [FK_tblTagsToDailyBibleReading_tblTags] FOREIGN KEY ([TagsId]) REFERENCES [tblTags]([Id]) 
+    CONSTRAINT [FK_tblTagsToOtherTables_tblTags] FOREIGN KEY ([TagsId]) REFERENCES [tblTags]([Id]) 
 )
 
 GO
@@ -15,7 +15,7 @@ EXEC sp_addextendedproperty @name = N'MS_Description',
     @level0type = N'SCHEMA',
     @level0name = N'dbo',
     @level1type = N'TABLE',
-    @level1name = N'tblTagsToDailyBibleReading',
+    @level1name = N'tblTagsToOtherTables',
     @level2type = N'COLUMN',
     @level2name = N'tblName'
 GO
@@ -24,7 +24,7 @@ EXEC sp_addextendedproperty @name = N'MS_Description',
     @level0type = N'SCHEMA',
     @level0name = N'dbo',
     @level1type = N'TABLE',
-    @level1name = N'tblTagsToDailyBibleReading',
+    @level1name = N'tblTagsToOtherTables',
     @level2type = N'COLUMN',
     @level2name = N'tblId'
 GO
@@ -33,7 +33,7 @@ EXEC sp_addextendedproperty @name = N'MS_Description',
     @level0type = N'SCHEMA',
     @level0name = N'dbo',
     @level1type = N'TABLE',
-    @level1name = N'tblTagsToDailyBibleReading',
+    @level1name = N'tblTagsToOtherTables',
     @level2type = N'COLUMN',
     @level2name = N'TagApplicationGUID'
 GO
@@ -42,6 +42,6 @@ EXEC sp_addextendedproperty @name = N'MS_Description',
     @level0type = N'SCHEMA',
     @level0name = N'dbo',
     @level1type = N'TABLE',
-    @level1name = N'tblTagsToDailyBibleReading',
+    @level1name = N'tblTagsToOtherTables',
     @level2type = N'COLUMN',
     @level2name = N'TagsId'
