@@ -6,7 +6,5 @@
     [FamilyStudyTitle] NVARCHAR(100) NOT NULL, 
     [FamilyStudyDescription] NVARCHAR(1000) NOT NULL, 
     [FamilyStudyFindings] NVARCHAR(2000) NOT NULL, 
-    [ReferenceId] INT NULL, 
-    [FKIdtblFamilyStudyProjects] AS CONCAT(CONVERT(VARCHAR,[Id]),'tblFamilyStudyProjects'), 
-    CONSTRAINT [FK_tblFamilyStudyProjects_tblReferences] FOREIGN KEY ([ReferenceId]) REFERENCES [tblReferences]([Id])
+    [FKIdtblFamilyStudyProjects] AS CONCAT(CONVERT(VARCHAR,[Id]),'tblFamilyStudyProjects')
 )

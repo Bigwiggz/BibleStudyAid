@@ -23,7 +23,6 @@ CREATE PROCEDURE [dbo].[spCreateMeetingAssemblies]
     @PartTitle NCHAR(100), 
     @MeetingTypeId INT, 
     @Scripture NVARCHAR(1000), 
-    @ReferenceId INT NULL, 
     @LessonLearnedDescription NVARCHAR(1000) 
 AS
 BEGIN
@@ -33,13 +32,11 @@ BEGIN
     [PartTitle], 
     [MeetingTypeId], 
     [Scripture], 
-    [ReferenceId], 
     [LessonLearnedDescription])
 	VALUES(
     @DateOfMeeting, 
     @PartTitle, 
     @MeetingTypeId, 
     @Scripture, 
-    @ReferenceId, 
     @LessonLearnedDescription);
 END

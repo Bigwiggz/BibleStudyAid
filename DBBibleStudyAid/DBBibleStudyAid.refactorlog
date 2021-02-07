@@ -91,4 +91,46 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="ThemeScripture" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="8cf22a5a-d5fb-40ae-aece-6edae885840f" ChangeDateTime="02/07/2021 21:46:54">
+    <Property Name="ElementName" Value="[dbo].[tblReferences].[FKtblAndName]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[tblReferences]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="FKtblandName" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="6ec495f9-5f7e-40f3-806a-4fbeaf8ff135" ChangeDateTime="02/07/2021 21:47:10">
+    <Property Name="ElementName" Value="[dbo].[tblScriptures].[FKtableIdandName]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[tblScriptures]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="FKtblIdandName" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="fd0772ca-9e4d-417d-b8a1-6444d3634e44" ChangeDateTime="02/07/2021 21:47:27">
+    <Property Name="ElementName" Value="[dbo].[tblReferences].[FKtblandName]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[tblReferences]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="FKTableIdandName" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="e310684d-3016-48f0-8a55-8c5601735687" ChangeDateTime="02/07/2021 21:47:34">
+    <Property Name="ElementName" Value="[dbo].[tblScriptures].[FKtblIdandName]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[tblScriptures]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="FKTableIdandName" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="97ef8456-fed3-4866-95ac-dd8da29e8341" ChangeDateTime="02/07/2021 21:49:45">
+    <Property Name="ElementName" Value="[dbo].[tblTagsToOtherTables].[FKtblIdAndName]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[tblTagsToOtherTables]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="FKTableIdandName" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="dcbe7336-d53d-4a44-8d32-36a21baf585b" ChangeDateTime="02/07/2021 22:08:14">
+    <Property Name="ElementName" Value="[dbo].[tblPersonalStudyProjects].[Scripture]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[tblPersonalStudyProjects]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="BaseScripture" />
+  </Operation>
 </Operations>

@@ -1,5 +1,7 @@
 ﻿CREATE TABLE [dbo].[tblReferences]
 (
 	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
+	[FKTableIdandName] NVARCHAR(1000) NOT NULL,
     [Reference] NVARCHAR(1000) NOT NULL
+
 )

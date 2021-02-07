@@ -23,7 +23,7 @@ CREATE PROCEDURE [dbo].[spCreatePersonalStudyProjects]
     @PersonalStudyDescription NVARCHAR(1000) , 
     @PersonalStudyQuestionAssignment NVARCHAR(1000) , 
     @DateFinished DATETIME2 NULL, 
-    @Scripture NVARCHAR(1000) NULL, 
+    @BaseScripture NVARCHAR(1000) NULL, 
     @PersonalStudyFindingsId INT NULL 
 AS
 BEGIN
@@ -33,13 +33,13 @@ BEGIN
     [PersonalStudyDescription], 
     [PersonalStudyQuestionAssignment], 
     [DateFinished], 
-    [Scripture], 
+    [BaseScripture], 
     [PersonalStudyFindingsId])
 	VALUES(
     @PersonalStudyTitle, 
     @PersonalStudyDescription, 
     @PersonalStudyQuestionAssignment, 
     @DateFinished, 
-    @Scripture, 
+    @BaseScripture, 
     @PersonalStudyFindingsId);
 END

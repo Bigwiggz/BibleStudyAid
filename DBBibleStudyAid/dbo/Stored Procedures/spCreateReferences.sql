@@ -19,11 +19,11 @@
 */
 
 CREATE PROCEDURE [dbo].[spCreateReferences]
-    @Reference NVARCHAR(1000)
-
+    @Reference NVARCHAR(1000),
+	@FKTableIdandName NVARCHAR(1000)
 AS
 BEGIN
     SET NOCOUNT ON;
-	INSERT INTO [dbo].[tblReferences] ([Reference])
-	VALUES (@Reference);
+	INSERT INTO [dbo].[tblReferences] ([Reference],[FKTableIdandName])
+	VALUES (@Reference,@FKTableIdandName);
 END

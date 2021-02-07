@@ -5,8 +5,6 @@
     [ScriptureStartPoint] NVARCHAR(1000) NOT NULL, 
     [ScriptureEndPoint] NVARCHAR(1000) NOT NULL, 
     [LessonLearnedDescription] NVARCHAR(1000) NOT NULL, 
-    [ReferenceId] INT NULL, 
     [DateRead] DATETIME2 NULL, 
-    [FKIdtblDailyBibleReadings] AS CONCAT(CONVERT(VARCHAR,[Id]),'tblDailyBibleReading'), 
-    CONSTRAINT [FK_tblDailyBibleReading_tblReferences] FOREIGN KEY ([ReferenceId]) REFERENCES [tblReferences]([Id])
+    [FKIdtblDailyBibleReadings] AS CONCAT(CONVERT(VARCHAR,[Id]),'tblDailyBibleReading')
 )

@@ -1,10 +1,10 @@
 ﻿/*
 ----------------------------------------------------------------------------
--- Object Name: dbo.spCreatePersonalStudyFindings
+-- Object Name: dbo.spCreateScriptures
 -- Project: DBBibleStudyAid
 -- Business Process: N/A
 -- Purpose: C Operations on a record into a table
--- Detailed Description: Insert a record into the dbo.PersonalStudyFindings table
+-- Detailed Description: Insert a record into the dbo.Reference table
 -- Database: DBBibleStudyAid
 -- Dependent Objects: None
 -- Called By: Application
@@ -18,17 +18,13 @@
 --
 */
 
-CREATE PROCEDURE [dbo].[spCreatePersonalStudyFindings]
-    @Scripture NVARCHAR(1000) NULL, 
-    @Explanation NVARCHAR(1000)
+CREATE PROCEDURE [dbo].[spCreateScriptures]
+    @Scripture NVARCHAR(1000),
+	@FKTableIdandName NVARCHAR(1000)
 
 AS
 BEGIN
     SET NOCOUNT ON;
-	INSERT INTO [dbo].[tblPersonalStudyFindings] 
-    ([Scripture], 
-    [Explanation])
-	VALUES(
-    @Scripture, 
-    @Explanation);
+	INSERT INTO [dbo].[tblScriptures] ([Scripture],[FKTableIdandName])
+	VALUES (@Scripture,@FKTableIdandName);
 END

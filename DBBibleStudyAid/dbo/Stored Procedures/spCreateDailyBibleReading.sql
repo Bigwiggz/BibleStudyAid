@@ -22,11 +22,10 @@ CREATE PROCEDURE [dbo].[spCreateDailyBibleReading]
     @ScriptureStartPoint NVARCHAR(1000), 
     @ScriptureEndPoint NVARCHAR(1000), 
     @LessonLearnedDescription NVARCHAR(1000), 
-    @ReferenceId INT NULL, 
     @DateRead DATETIME2 NULL
 AS
 BEGIN
     SET NOCOUNT ON;
-	INSERT INTO [dbo].[tblDailyBibleReading] ([ScriptureStartPoint],[ScriptureEndPoint],[LessonLearnedDescription],[ReferenceId],[DateRead])
-	VALUES (@ScriptureStartPoint,@ScriptureEndPoint,@LessonLearnedDescription,@ReferenceId,@DateRead);
+	INSERT INTO [dbo].[tblDailyBibleReading] ([ScriptureStartPoint],[ScriptureEndPoint],[LessonLearnedDescription],[DateRead])
+	VALUES (@ScriptureStartPoint,@ScriptureEndPoint,@LessonLearnedDescription,@DateRead);
 END

@@ -24,8 +24,7 @@ CREATE PROCEDURE [dbo].[spCreateTalk]
     @MeetingTypeId INT, 
     @Description NVARCHAR(1000), 
     @TalkDocument VARBINARY(MAX), 
-    @ThemeScripture NVARCHAR(1000) NULL,
-    @ReferenceId INT NULL
+    @ThemeScripture NVARCHAR(1000) NULL
 AS
 BEGIN
     SET NOCOUNT ON;
@@ -35,14 +34,12 @@ BEGIN
     [MeetingTypeId], 
     [Description], 
     [TalkDocument], 
-    [ThemeScripture], 
-    [ReferenceId])
+    [ThemeScripture])
 	VALUES(
     @TalkTitle, 
     @DateGiven,  
     @MeetingTypeId, 
     @Description, 
     @TalkDocument, 
-    @ThemeScripture,
-    @ReferenceId);
+    @ThemeScripture);
 END
