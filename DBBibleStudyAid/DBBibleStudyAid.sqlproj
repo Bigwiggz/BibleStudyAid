@@ -82,10 +82,32 @@
     <Build Include="dbo\Stored Procedures\spCreateMeetingAssemblies.sql" />
     <Build Include="dbo\Stored Procedures\spCreatePersonalStudyFindings.sql" />
     <Build Include="dbo\Stored Procedures\spCreatePersonalStudyProjects.sql" />
-    <Build Include="dbo\Stored Procedures\spCreateTalk.sql" />
+    <Build Include="dbo\Stored Procedures\spDeleteTalk.sql" />
     <Build Include="dbo\Stored Procedures\spCreateTagsToOtherTables.sql" />
     <Build Include="dbo\Tables\tblScriptures.sql" />
     <Build Include="dbo\Stored Procedures\spCreateScriptures.sql" />
+    <Build Include="dbo\Stored Procedures\spUpdateTag.sql" />
+    <Build Include="dbo\Stored Procedures\spUpdateDailyBibleReading.sql" />
+    <Build Include="dbo\Stored Procedures\spUpdatePersonalStudyProjects.sql" />
+    <Build Include="dbo\Stored Procedures\spUpdateMeetingAssemblies.sql" />
+    <Build Include="dbo\Stored Procedures\spUpdateMeetingType.sql" />
+    <Build Include="dbo\Stored Procedures\spUpdateFamilyStudyProjects.sql" />
+    <Build Include="dbo\Stored Procedures\spUpdatePersonalStudyFindings.sql" />
+    <Build Include="dbo\Stored Procedures\spUpdateReferences.sql" />
+    <Build Include="dbo\Stored Procedures\spUpdateScriptures.sql" />
+    <Build Include="dbo\Stored Procedures\spUpdateTagsToOtherTables.sql" />
+    <Build Include="dbo\Stored Procedures\spUpdateTalks.sql" />
+    <Build Include="dbo\Stored Procedures\spDeleteDailyBibleReading.sql" />
+    <Build Include="dbo\Stored Procedures\spDeleteFamilyStudyProjects.sql" />
+    <Build Include="dbo\Stored Procedures\spDeleteMeetingAssemblies.sql" />
+    <Build Include="dbo\Stored Procedures\spDeleteMeetingType.sql" />
+    <Build Include="dbo\Stored Procedures\spDeletePersonalStudyFindings.sql" />
+    <Build Include="dbo\Stored Procedures\spDeletePersonalStudyProjects.sql" />
+    <Build Include="dbo\Stored Procedures\spDeleteReferences.sql" />
+    <Build Include="dbo\Stored Procedures\spDeleteScriptures.sql" />
+    <Build Include="dbo\Stored Procedures\spDeleteTag.sql" />
+    <Build Include="dbo\Stored Procedures\spDeleteTagsToOtherTables.sql" />
+    <Build Include="dbo\Stored Procedures\spCreateTalk.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="DBBibleStudyAid.refactorlog" />
