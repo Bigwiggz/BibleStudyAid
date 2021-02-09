@@ -21,7 +21,8 @@
 CREATE PROCEDURE [dbo].[spUpdatePersonalStudyFindings]
     @Id INT,
     @Scripture NVARCHAR(1000) NULL, 
-    @Explanation NVARCHAR(1000)
+    @Explanation NVARCHAR(1000),
+    @FKPersonalStudyProjectId INT
 
 AS
 BEGIN 
@@ -32,7 +33,8 @@ BEGIN
     UPDATE [dbo].[tblPersonalStudyFindings]
     SET 
     Scripture=ISNULL(@Scripture,Scripture), 
-	Explanation=ISNULL(@Explanation,Explanation)
+	Explanation=ISNULL(@Explanation,Explanation),
+    FKPersonalStudyProjectId=ISNULL(@FKPersonalStudyProjectId,FKPersonalStudyProjectId)
 
 
 	WHERE Id=@Id

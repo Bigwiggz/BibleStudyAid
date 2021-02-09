@@ -20,15 +20,18 @@
 
 CREATE PROCEDURE [dbo].[spCreatePersonalStudyFindings]
     @Scripture NVARCHAR(1000) NULL, 
-    @Explanation NVARCHAR(1000)
+    @Explanation NVARCHAR(1000),
+    @FKPersonalStudyProjectId INT
 
 AS
 BEGIN
     SET NOCOUNT ON;
 	INSERT INTO [dbo].[tblPersonalStudyFindings] 
     ([Scripture], 
-    [Explanation])
+    [Explanation],
+    [FKPersonalStudyProjectId])
 	VALUES(
     @Scripture, 
-    @Explanation);
+    @Explanation,
+    @FKPersonalStudyProjectId);
 END

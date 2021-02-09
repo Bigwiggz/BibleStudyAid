@@ -7,6 +7,6 @@
     [MeetingTypeId] INT NOT NULL, 
     [Scripture] NVARCHAR(1000) NOT NULL, 
     [LessonLearnedDescription] NVARCHAR(1000) NOT NULL, 
-    [FKIdtblMeetingAssemblies] AS CONCAT(CONVERT(VARCHAR,[Id]),'tblMeetingAssemblies'),
+    [PKIdtblMeetingAssemblies] AS CONCAT(CONVERT(VARCHAR,[Id]),'tblMeetingAssemblies'),
     CONSTRAINT [FK_tblMeetingAssemblies_tblMeetingType] FOREIGN KEY ([MeetingTypeId]) REFERENCES [tblMeetingType]([Id])
 )

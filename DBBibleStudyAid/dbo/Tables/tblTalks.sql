@@ -8,6 +8,6 @@
     [Description] NVARCHAR(1000) NOT NULL, 
     [TalkDocument] VARBINARY(MAX) NOT NULL, 
     [ThemeScripture] NVARCHAR(1000) NULL, 
-    [FKIdtblTalks] AS CONCAT(CONVERT(VARCHAR,[Id]),'tblTalks'), 
+    [PKIdtblTalks] AS CONCAT(CONVERT(VARCHAR,[Id]),'tblTalks'), 
     CONSTRAINT [FK_tblTalks_tblMeetingType] FOREIGN KEY ([MeetingTypeId]) REFERENCES [tblMeetingType]([Id])
 )
