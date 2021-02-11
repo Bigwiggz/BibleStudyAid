@@ -33,6 +33,18 @@ namespace BibleStudyDataAccessLibrary.Internal
             }
         }
 
+        public async Task<T> LoadSingleRecord<T, U>(string storedProcedure, U parameters)
+        {
+            string connectionString = _config.GetConnectionString(ConnectionStringName);
+
+            using (IDbConnection connection = new SqlConnection(connectionString))
+            {
+                var data = await connection.QueryFirstOrDefaultAsync<T>(storedProcedure, parameters, commandType: CommandType.StoredProcedure);
+
+                return data;
+            }
+        }
+
         public async Task SaveData<T>(string storedProcedure, T parameters)
         {
             string connectionString = _config.GetConnectionString(ConnectionStringName);

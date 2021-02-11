@@ -108,6 +108,28 @@
     <Build Include="dbo\Stored Procedures\spDeleteTag.sql" />
     <Build Include="dbo\Stored Procedures\spDeleteTagsToOtherTables.sql" />
     <Build Include="dbo\Stored Procedures\spCreateTalk.sql" />
+    <Build Include="dbo\Stored Procedures\spGetAllDailyBibleReading.sql" />
+    <Build Include="dbo\Stored Procedures\spGetAllFamilyStudyProjects.sql" />
+    <Build Include="dbo\Stored Procedures\spGetAllMeetingAssemblies.sql" />
+    <Build Include="dbo\Stored Procedures\spGetAllMeetingType.sql" />
+    <Build Include="dbo\Stored Procedures\spGetAllPersonalStudyFindings.sql" />
+    <Build Include="dbo\Stored Procedures\spGetAllPersonalStudyProjects.sql" />
+    <Build Include="dbo\Stored Procedures\spGetAllReferences.sql" />
+    <Build Include="dbo\Stored Procedures\spGetAllScriptures.sql" />
+    <Build Include="dbo\Stored Procedures\spGetAllTag.sql" />
+    <Build Include="dbo\Stored Procedures\spGetAllTagToOtherTables.sql" />
+    <Build Include="dbo\Stored Procedures\spGetAllTalk.sql" />
+    <Build Include="dbo\Stored Procedures\spGetByIdDailyBibleReading.sql" />
+    <Build Include="dbo\Stored Procedures\spGetByIdFamilyStudyProjects.sql" />
+    <Build Include="dbo\Stored Procedures\spGetByIdMeetingAssemblies.sql" />
+    <Build Include="dbo\Stored Procedures\spGetByIdMeetingType.sql" />
+    <Build Include="dbo\Stored Procedures\spGetByIdPersonalStudyFindings.sql" />
+    <Build Include="dbo\Stored Procedures\spGetByIdPersonalStudyProjects.sql" />
+    <Build Include="dbo\Stored Procedures\spGetByIdReferences.sql" />
+    <Build Include="dbo\Stored Procedures\spGetByIdScriptures.sql" />
+    <Build Include="dbo\Stored Procedures\spGetByIdTag.sql" />
+    <Build Include="dbo\Stored Procedures\spGetByIdTagToOtherTables.sql" />
+    <Build Include="dbo\Stored Procedures\spGetByIdTalk.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="DBBibleStudyAid.refactorlog" />
