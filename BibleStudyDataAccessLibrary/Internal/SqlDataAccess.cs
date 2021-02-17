@@ -14,7 +14,7 @@ namespace BibleStudyDataAccessLibrary.Internal
     {
         private readonly IConfiguration _config;
 
-        public string ConnectionStringName { get; set; } = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=DBBibleStudyAid;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        
 
         public SqlDataAccess(IConfiguration config)
         {
@@ -23,7 +23,7 @@ namespace BibleStudyDataAccessLibrary.Internal
 
         public async Task<List<T>> LoadData<T, U>(string storedProcedure, U parameters)
         {
-            string connectionString = _config.GetConnectionString(ConnectionStringName);
+            string connectionString = _config.GetConnectionString("DBBibleStudyAid");
 
             using (IDbConnection connection = new SqlConnection(connectionString))
             {
@@ -35,7 +35,7 @@ namespace BibleStudyDataAccessLibrary.Internal
 
         public async Task<T> LoadSingleRecord<T, U>(string storedProcedure, U parameters)
         {
-            string connectionString = _config.GetConnectionString(ConnectionStringName);
+            string connectionString = _config.GetConnectionString("DBBibleStudyAid");
 
             using (IDbConnection connection = new SqlConnection(connectionString))
             {
@@ -47,7 +47,7 @@ namespace BibleStudyDataAccessLibrary.Internal
 
         public async Task SaveData<T>(string storedProcedure, T parameters)
         {
-            string connectionString = _config.GetConnectionString(ConnectionStringName);
+            string connectionString = _config.GetConnectionString("DBBibleStudyAid");
 
             using (IDbConnection connection = new SqlConnection(connectionString))
             {
@@ -83,7 +83,7 @@ namespace BibleStudyDataAccessLibrary.Internal
 
         public void StartTransaction(string connectionStringName)
         {
-            string connectionString = _config.GetConnectionString(ConnectionStringName);
+            string connectionString = _config.GetConnectionString(connectionStringName);
             _connection = new SqlConnection(connectionString);
             _connection.Open();
             _transaction = _connection.BeginTransaction();
