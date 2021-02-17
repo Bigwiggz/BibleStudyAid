@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace BibleStudyDataAccessLibrary.Internal
 {
-    public class SqlDataAccess : ISqlDataAccess
+    public class SqlDataAccess : ISqlDataAccess, IDisposable
     {
         private readonly IConfiguration _config;
 
-        public string ConnectionStringName { get; set; } = "Default";
+        public string ConnectionStringName { get; set; } = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=DBBibleStudyAid;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
 
         public SqlDataAccess(IConfiguration config)
         {
@@ -54,6 +54,78 @@ namespace BibleStudyDataAccessLibrary.Internal
                 await connection.ExecuteAsync(storedProcedure, parameters, commandType: CommandType.StoredProcedure);
 
             }
+        }
+
+        public async Task<T> LoadSingleObjectInTransaction<T, U>(string storedProcedure, U parameters)
+        {
+            var data= await _connection.QueryFirstOrDefaultAsync<T>(storedProcedure, parameters, commandType: CommandType.StoredProcedure, transaction: _transaction);
+
+            return data;
+        }
+
+        public async Task<List<T>> LoadDataInTransaction<T, U>(string storedProcedure, U parameters)
+        {
+
+            List<T> rows = (List<T>)await _connection.QueryAsync<T>(storedProcedure, parameters, commandType: CommandType.StoredProcedure, transaction: _transaction);
+
+            return rows.ToList();
+
+        }
+
+        public async void SaveDataInTransaction<T>(string storedProcedure, T parameters)
+        {
+
+            await _connection.ExecuteAsync(storedProcedure, parameters, commandType: CommandType.StoredProcedure, transaction: _transaction);
+        }
+
+        private IDbConnection _connection;
+        private IDbTransaction _transaction;
+
+        public void StartTransaction(string connectionStringName)
+        {
+            string connectionString = _config.GetConnectionString(ConnectionStringName);
+            _connection = new SqlConnection(connectionString);
+            _connection.Open();
+            _transaction = _connection.BeginTransaction();
+
+            isTransactionClosed = false;
+        }
+
+        private bool isTransactionClosed = false;
+
+        public void CommitTransaction()
+        {
+            _transaction?.Commit();
+            _connection?.Close();
+
+            isTransactionClosed = true;
+        }
+
+        public void RollBackTransaction()
+        {
+            _transaction?.Rollback();
+            _connection?.Close();
+
+            isTransactionClosed = true;
+        }
+
+        public void Dispose()
+        {
+            if (isTransactionClosed == false)
+            {
+                try
+                {
+                    CommitTransaction();
+                }
+                catch
+                {
+
+                    //TODO-Log this Issue
+                }
+            }
+
+            _transaction = null;
+            _connection = null;
         }
 
     }

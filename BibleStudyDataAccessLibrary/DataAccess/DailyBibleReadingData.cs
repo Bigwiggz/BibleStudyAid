@@ -71,5 +71,55 @@ namespace BibleStudyDataAccessLibrary.DataAccess
 
             return result; 
         }
+
+        public async void SaveFullDailyBibleReading(DailyBibleReading dailyBibleReading, 
+            List<References> references, 
+            List<Scriptures> scriptures,
+            List<TagsToOtherTables> tagsToOtherTables)
+        {
+            //TODO: Make this SOLID/DRY/BETTER
+            using(SqlDataAccess sql = new SqlDataAccess(_config))
+            {
+                try
+                {
+                    sql.StartTransaction("DBBibleStudyAid");
+                    //Step 1: Save to Master Table dailyBibleReading
+                    sql.SaveDataInTransaction<DailyBibleReading>("spCreateDailyBibleReading", dailyBibleReading);
+
+                    //Step 2: Get the Id from the Master Table
+                    string tblId=await sql.LoadSingleObjectInTransaction<string, dynamic>("spInsertDailyBibleReadingLookup", new { });
+
+                    //Step 3: add Id to references and add in all references
+                    foreach (var item in references)
+                    {
+                        item.FIKTableIdandName = tblId;
+                        sql.SaveDataInTransaction("spCreateReferences", item);
+                    }
+
+                    //Step 4: add Id to all scriptures and add in all scriptures
+                    foreach (var item in scriptures)
+                    {
+                        item.FKTableIdandName = tblId;
+                        sql.SaveDataInTransaction("spCreateReferences", item);
+                    }
+
+                    //Step 5: add Id to all tagsToOtherTables
+                    foreach (var item in tagsToOtherTables)
+                    {
+                        item.FKTableIdandName = tblId;
+                        sql.SaveDataInTransaction("spCreateReferences", item);
+                    }
+
+
+                    sql.CommitTransaction();
+                }
+                catch
+                {
+                    sql.RollBackTransaction();
+                    throw;
+                }
+            }
+
+        }
     }
 }
