@@ -19,6 +19,7 @@
 */
 
 CREATE PROCEDURE [dbo].[spCreateDailyBibleReading]
+    @Id INT OUTPUT,
     @ScriptureStartPoint NVARCHAR(1000), 
     @ScriptureEndPoint NVARCHAR(1000), 
     @LessonLearnedDescription NVARCHAR(1000), 
@@ -28,4 +29,5 @@ BEGIN
     SET NOCOUNT ON;
 	INSERT INTO [dbo].[tblDailyBibleReading] ([ScriptureStartPoint],[ScriptureEndPoint],[LessonLearnedDescription],[DateRead])
 	VALUES (@ScriptureStartPoint,@ScriptureEndPoint,@LessonLearnedDescription,@DateRead);
+    SELECT @Id=SCOPE_IDENTITY();
 END

@@ -24,6 +24,6 @@ AS
 BEGIN
     SET NOCOUNT ON;
 	SELECT *
-	FROM [dbo].[tblTalk]
+	FROM [dbo].[tblTalks]
 	WHERE Id=@Id;
 END

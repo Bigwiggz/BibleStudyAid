@@ -1,10 +1,10 @@
 ﻿/*
 ----------------------------------------------------------------------------
--- Object Name: dbo.spGetAllTag
+-- Object Name: dbo.spCreateDailyBibleReading
 -- Project: DBBibleStudyAid
 -- Business Process: N/A
 -- Purpose: C Operations on a record into a table
--- Detailed Description: Insert a record into the dbo.Tag table
+-- Detailed Description: Insert a record into the dbo.DailyBibleReading table
 -- Database: DBBibleStudyAid
 -- Dependent Objects: None
 -- Called By: Application
@@ -18,11 +18,11 @@
 --
 */
 
-CREATE PROCEDURE [dbo].[spGetAllTag]
+CREATE PROCEDURE [dbo].[spInsertDailyBibleReadingLookup]
+    @tblId NVARCHAR(1000) OUTPUT
 
 AS
 BEGIN
     SET NOCOUNT ON;
-	SELECT *
-	FROM [dbo].[tblTags];
+    SELECT @tblId=[PKIdtblDailyBibleReadings] FROM [dbo].[tblDailyBibleReading] WHERE  Id=SCOPE_IDENTITY();
 END

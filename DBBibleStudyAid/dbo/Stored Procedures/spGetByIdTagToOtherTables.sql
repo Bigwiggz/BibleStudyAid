@@ -24,6 +24,6 @@ AS
 BEGIN
     SET NOCOUNT ON;
 	SELECT *
-	FROM [dbo].[tblTagToOtherTables]
+	FROM [dbo].[tblTagsToOtherTables]
 	WHERE Id=@Id;
 END
