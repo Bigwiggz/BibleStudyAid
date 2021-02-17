@@ -14,8 +14,6 @@ namespace BibleStudyDataAccessLibrary.Internal
     {
         private readonly IConfiguration _config;
 
-        
-
         public SqlDataAccess(IConfiguration config)
         {
             _config = config;

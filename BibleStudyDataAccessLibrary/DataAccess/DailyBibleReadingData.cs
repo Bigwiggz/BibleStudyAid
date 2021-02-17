@@ -17,14 +17,17 @@ namespace BibleStudyDataAccessLibrary.DataAccess
     {
         private readonly IConfiguration _config;
 
+
         public DailyBibleReadingData(IConfiguration config)
         {
             _config = config;
+
         }
 
         public async void InsertAsync(DailyBibleReading dailyBibleReading)
         {
             SqlDataAccess sql = new SqlDataAccess(_config);
+
 
             await sql.SaveData<DailyBibleReading>("spCreateDailyBibleReading", dailyBibleReading);
 
@@ -83,6 +86,7 @@ namespace BibleStudyDataAccessLibrary.DataAccess
                 try
                 {
                     sql.StartTransaction("DBBibleStudyAid");
+
                     //Step 1: Save to Master Table dailyBibleReading
                     sql.SaveDataInTransaction<DailyBibleReading>("spCreateDailyBibleReading", dailyBibleReading);
 
