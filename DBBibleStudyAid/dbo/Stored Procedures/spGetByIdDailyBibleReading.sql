@@ -19,7 +19,7 @@
 */
 
 CREATE PROCEDURE [dbo].[spGetByIdDailyBibleReading]
-	@Id INT
+	@Id INT,
 
 AS
 BEGIN

@@ -64,7 +64,7 @@
     <Folder Include="TestScripts" />
     <Folder Include="dbo\Stored Procedures\Transactional" />
     <Folder Include="dbo\Types" />
-    <Folder Include="dbo\Stored Procedures\NewFolder1\" />
+    <Folder Include="dbo\Stored Procedures\ChildTableSP" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\tblTalks.sql" />
