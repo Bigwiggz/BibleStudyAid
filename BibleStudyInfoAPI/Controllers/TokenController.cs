@@ -75,7 +75,7 @@ namespace BibleStudyInfoAPI.Controllers
             var token = new JwtSecurityToken(
                 new JwtHeader(
                     new SigningCredentials(
-                        new SymmetricSecurityKey(Encoding.UTF8.GetBytes("MySuperSecretKeyForNobody")),
+                        new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config.GetValue<string>("Secrets:TokenKey"))),
                         SecurityAlgorithms.HmacSha256)),
                 new JwtPayload(claims));
 

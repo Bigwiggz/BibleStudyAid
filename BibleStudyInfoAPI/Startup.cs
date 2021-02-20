@@ -16,6 +16,7 @@ using System.Threading.Tasks;
 using Microsoft.OpenApi.Models;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using BibleStudyDataAccessLibrary.DataAccess;
 
 namespace BibleStudyInfoAPI
 {
@@ -33,6 +34,10 @@ namespace BibleStudyInfoAPI
         {
             //Add  Personal Services
             services.AddTransient<ISqlDataAccess, SqlDataAccess>();
+            services.AddTransient<IDailyBibleReadingData, DailyBibleReadingData>();
+
+            //Add AutoMapper
+            services.AddAutoMapper(typeof(Startup));
 
 
             services.AddDbContext<ApplicationDbContext>(options =>
@@ -56,7 +61,7 @@ namespace BibleStudyInfoAPI
                     jwtBearerOptions.TokenValidationParameters = new TokenValidationParameters
                     {
                         ValidateIssuerSigningKey = true,
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("MySuperSecretKeyForNobody")),
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration.GetValue<string>("Secrets:TokenKey"))),
                         ValidateIssuer = false,
                         ValidateLifetime = false,
                         ClockSkew = TimeSpan.FromMinutes(5)

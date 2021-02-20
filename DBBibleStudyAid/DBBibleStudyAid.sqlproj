@@ -138,6 +138,9 @@
     <Build Include="dbo\Types\ScripturesType.sql" />
     <Build Include="dbo\Types\TagsToOtherTablesType.sql" />
     <Build Include="dbo\Stored Procedures\Transactional\spInsertDailyBibleReadingLookup.sql" />
+    <Build Include="dbo\Stored Procedures\ChildTableSP\spGetByFKReferences.sql" />
+    <Build Include="dbo\Stored Procedures\ChildTableSP\spGetByFKScriptures.sql" />
+    <Build Include="dbo\Stored Procedures\ChildTableSP\spGetByFKTagsToOtherScriptures.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="DBBibleStudyAid.refactorlog" />

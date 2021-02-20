@@ -1,10 +1,10 @@
 ﻿/*
 ----------------------------------------------------------------------------
--- Object Name: dbo.spGetByIdDailyBibleReading
+-- Object Name: dbo.spGetByFKReferences
 -- Project: DBBibleStudyAid
 -- Business Process: N/A
 -- Purpose: C Operations on a record into a table
--- Detailed Description: Insert a record into the dbo.DailyBibleReading table
+-- Detailed Description: Insert a record into the dbo.References table
 -- Database: DBBibleStudyAid
 -- Dependent Objects: None
 -- Called By: Application
@@ -18,13 +18,12 @@
 --
 */
 
-CREATE PROCEDURE [dbo].[spGetByIdDailyBibleReading]
-	@Id INT
-
+CREATE PROCEDURE [dbo].[spGetByFKReferences]
+	@FK INT
 AS
 BEGIN
     SET NOCOUNT ON;
 	SELECT *
-	FROM [dbo].[tblDailyBibleReading]
-	WHERE Id=@Id;
+	FROM [dbo].[tblReferences]
+	WHERE FKTableIdandName=@FK;
 END
