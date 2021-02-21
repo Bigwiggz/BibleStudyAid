@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using BibleStudyDataAccessLibrary.Models;
+using BibleStudyInfoAPI.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,8 +12,9 @@ namespace BibleStudyInfoAPI.Extensions
     {
         public Automapping()
         {
-            //Create Controller Mapping
-
+            //Create DailyBibleReading Mapping
+            CreateMap<DailyBibleReading, DailyBibleReadingDTO>();
+            CreateMap<DailyBibleReadingDTO, DailyBibleReading>();
         }
     }
 }

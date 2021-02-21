@@ -29,8 +29,15 @@ namespace BibleStudyDataAccessLibrary.DataAccess
 
         public async void InsertAsync(DailyBibleReading dailyBibleReading)
         {
+            var p = new
+            {
+                ScriptureStartPoint=dailyBibleReading.ScriptureStartPoint,
+                ScriptureEndPoint=dailyBibleReading.ScriptureEndPoint,
+                LessonLearnedDescription=dailyBibleReading.LessonLearnedDescription,
+                DateRead=dailyBibleReading.DateRead
+            };
 
-            await _sql.SaveData<DailyBibleReading>("spCreateDailyBibleReading", dailyBibleReading);
+            await _sql.SaveData("spCreateDailyBibleReading", p);
 
         }
 
@@ -38,7 +45,7 @@ namespace BibleStudyDataAccessLibrary.DataAccess
         {
 
 
-            await _sql.SaveData<DailyBibleReading>("spUpdateDailyBibleReading", dailyBibleReading);
+            await _sql.SaveData("spUpdateDailyBibleReading", dailyBibleReading);
         }
 
         public async void DeleteAsync(object Id)
@@ -128,7 +135,7 @@ namespace BibleStudyDataAccessLibrary.DataAccess
                 //Step 1) Get Parent Record Info
                 var dailyBibleReading = await _sql.LoadSingleObjectInTransaction<DailyBibleReading, dynamic>("spGetByIdDailyBibleReadings", new { Id });
                 //Step 2) Get Parent Key for all children tables
-                var PKId = dailyBibleReading.PKdtblDailyBibleReadings;
+                var PKId = dailyBibleReading.PKIdtblDailyBibleReadings;
                 //Step 3) Get all children table info: References
 
                 var referencesList = await _sql.LoadDataInTransaction<References, dynamic>("spGetByFKReferences", new { FK = PKId });
@@ -143,7 +150,7 @@ namespace BibleStudyDataAccessLibrary.DataAccess
                     Id = dailyBibleReading.Id,
                     DateRead = dailyBibleReading.DateRead,
                     LessonLearnedDescription = dailyBibleReading.LessonLearnedDescription,
-                    PKdtblDailyBibleReadings = dailyBibleReading.PKdtblDailyBibleReadings,
+                    PKIdtblDailyBibleReadings = dailyBibleReading.PKIdtblDailyBibleReadings,
                     ScriptureStartPoint = dailyBibleReading.ScriptureStartPoint,
                     ScriptureEndPoint = dailyBibleReading.ScriptureEndPoint,
                     ReferencesList = referencesList,

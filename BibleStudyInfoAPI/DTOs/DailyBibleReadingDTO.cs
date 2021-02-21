@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace BibleStudyDataAccessLibrary.Models
+namespace BibleStudyInfoAPI.DTOs
 {
-    public class DailyBibleReading
+    public class DailyBibleReadingDTO
     {
         public int Id { get; set; }
         public DateTime DateTimeWhenDone { get; }
@@ -12,7 +13,6 @@ namespace BibleStudyDataAccessLibrary.Models
         public string ScriptureEndPoint { get; set; }
         public string LessonLearnedDescription { get; set; }
         public DateTime DateRead { get; set; }
-        public string PKIdtblDailyBibleReadings { get; set; }
-
+        public string PKIdtblDailyBibleReadings { get; }
     }
 }

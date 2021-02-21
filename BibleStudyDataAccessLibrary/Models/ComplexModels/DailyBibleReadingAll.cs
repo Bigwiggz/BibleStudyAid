@@ -12,7 +12,7 @@ namespace BibleStudyDataAccessLibrary.Models.ComplexModels
         public string ScriptureEndPoint { get; set; }
         public string LessonLearnedDescription { get; set; }
         public DateTime DateRead { get; set; }
-        public string PKdtblDailyBibleReadings { get; set; }
+        public string PKIdtblDailyBibleReadings { get; set; }
         public List<References> ReferencesList { get; set; }
         public List<Scriptures> ScripturesList { get; set; }
         public List<TagsToOtherTables> TagsToOtherTables { get; set; }
