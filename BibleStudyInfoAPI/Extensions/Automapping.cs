@@ -15,6 +15,10 @@ namespace BibleStudyInfoAPI.Extensions
             //Create DailyBibleReading Mapping
             CreateMap<DailyBibleReading, DailyBibleReadingDTO>();
             CreateMap<DailyBibleReadingDTO, DailyBibleReading>();
+
+            //Create FamilyStudyProjects Mapping
+            CreateMap<FamilyStudyProjects, FamilyStudyProjectsDTO>();
+            CreateMap<FamilyStudyProjectsDTO, FamilyStudyProjects>();
         }
     }
 }

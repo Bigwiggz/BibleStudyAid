@@ -35,6 +35,7 @@ namespace BibleStudyInfoAPI
             //Add  Personal Services
             services.AddTransient<ISqlDataAccess, SqlDataAccess>();
             services.AddTransient<IDailyBibleReadingData, DailyBibleReadingData>();
+            services.AddTransient<IFamilyStudyProjectsData, FamilyStudyProjectsData>();
 
             //Add AutoMapper
             services.AddAutoMapper(typeof(Startup));

@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace BibleStudyDataAccessLibrary.Models
+namespace BibleStudyInfoAPI.DTOs
 {
-    public class FamilyStudyProjects
+    public class FamilyStudyProjectsDTO
     {
         public int Id { get; set; }
         public DateTime DateCreated { get; }
