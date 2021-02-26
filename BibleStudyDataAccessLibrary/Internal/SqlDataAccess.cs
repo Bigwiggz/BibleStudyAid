@@ -118,7 +118,7 @@ namespace BibleStudyDataAccessLibrary.Internal
                 catch
                 {
 
-                    //TODO-Log this Issue
+                    //TODO: Log this Issue
                 }
             }
 

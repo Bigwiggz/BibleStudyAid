@@ -12,6 +12,6 @@ namespace BibleStudyDataAccessLibrary.Models
         public string FamilyStudyTitle { get; set; }
         public string FamilyStudyDescription { get; set; }
         public string FamilyStudyFindings { get; set; }
-        public string PKldtblFamilyStudyProjects { get; set; }
+        public string PKIdtblFamilyStudyProjects { get; set; }
     }
 }

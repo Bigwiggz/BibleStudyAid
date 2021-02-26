@@ -42,7 +42,7 @@ namespace BibleStudyDataAccessLibrary.DataAccess
                 Id = Id
             };
 
-            var result = await _sql.LoadSingleRecord<FamilyStudyProjects, dynamic>("sqlGetByIdFamilyStudyProjects", p);
+            var result = await _sql.LoadSingleRecord<FamilyStudyProjects, dynamic>("spGetByIdFamilyStudyProjects", p);
 
             return result;
         }

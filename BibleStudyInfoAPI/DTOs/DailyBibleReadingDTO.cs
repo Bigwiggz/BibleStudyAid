@@ -13,6 +13,6 @@ namespace BibleStudyInfoAPI.DTOs
         public string ScriptureEndPoint { get; set; }
         public string LessonLearnedDescription { get; set; }
         public DateTime DateRead { get; set; }
-        public string PKIdtblDailyBibleReadings { get; }
+        public string PKIdtblDailyBibleReadings { get; set; }
     }
 }
