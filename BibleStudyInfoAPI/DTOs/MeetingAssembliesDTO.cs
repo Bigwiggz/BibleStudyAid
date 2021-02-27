@@ -8,7 +8,7 @@ namespace BibleStudyInfoAPI.DTOs
     public class MeetingAssembliesDTO
     {
         public int Id { get; set; }
-        public DateTime CreatedDate { get; }
+        public DateTime CreatedDate { get; set; }
         public DateTime DateofMeeting { get; set; }
         public string PartTitle { get; set; }
         public int MeetingTypeId { get; set; }

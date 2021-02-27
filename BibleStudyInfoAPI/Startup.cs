@@ -39,6 +39,7 @@ namespace BibleStudyInfoAPI
             services.AddTransient<IDocumentsData, DocumentsData>();
             services.AddTransient<IReferencesData, ReferencesData>();
             services.AddTransient<IScripturesData, ScripturesData>();
+            services.AddTransient<IMeetingAssembliesData, MeetingAssembliesData>();
 
             //Add AutoMapper
             services.AddAutoMapper(typeof(Startup));
