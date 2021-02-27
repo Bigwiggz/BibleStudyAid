@@ -141,6 +141,12 @@
     <Build Include="dbo\Stored Procedures\ChildTableSP\spGetByFKReferences.sql" />
     <Build Include="dbo\Stored Procedures\ChildTableSP\spGetByFKScriptures.sql" />
     <Build Include="dbo\Stored Procedures\ChildTableSP\spGetByFKTagsToOtherScriptures.sql" />
+    <Build Include="dbo\Tables\tblDocuments.sql" />
+    <Build Include="dbo\Stored Procedures\spCreateDocuments.sql" />
+    <Build Include="dbo\Stored Procedures\spDeleteDocuments.sql" />
+    <Build Include="dbo\Stored Procedures\spGetAllDocuments.sql" />
+    <Build Include="dbo\Stored Procedures\spGetByIdDocuments.sql" />
+    <Build Include="dbo\Stored Procedures\spUpdateDocuments.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="DBBibleStudyAid.refactorlog" />

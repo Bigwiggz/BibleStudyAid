@@ -6,7 +6,8 @@
     [DateGiven] DATETIME2 NOT NULL,  
     [MeetingTypeId] INT NOT NULL, 
     [Description] NVARCHAR(1000) NOT NULL, 
-    [TalkDocument] VARBINARY(MAX) NOT NULL, 
+    [TalkDocument] VARBINARY(MAX) NOT NULL,
+    [TalkDocumentName] NVARCHAR(256) NOT NULL,
     [ThemeScripture] NVARCHAR(1000) NULL, 
     [PKIdtblTalks] AS CONCAT(CONVERT(VARCHAR,[Id]),'tblTalks'), 
     CONSTRAINT [FK_tblTalks_tblMeetingType] FOREIGN KEY ([MeetingTypeId]) REFERENCES [tblMeetingType]([Id])
