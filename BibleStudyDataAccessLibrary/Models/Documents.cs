@@ -12,5 +12,6 @@ namespace BibleStudyDataAccessLibrary.Models
         public byte[] Document { get; set; }
         public DateTime DateUploaded { get; set; }
         public string DocumentType { get; set; }
+        public string DocumentDescription { get; set; }
     }
 }
