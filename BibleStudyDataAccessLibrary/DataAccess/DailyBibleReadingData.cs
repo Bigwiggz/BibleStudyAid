@@ -82,7 +82,8 @@ namespace BibleStudyDataAccessLibrary.DataAccess
         public async void SaveFullParentAndAllChildrenRecords(DailyBibleReading dailyBibleReading,
             List<References> references,
             List<Scriptures> scriptures,
-            List<TagsToOtherTables> tagsToOtherTables)
+            List<TagsToOtherTables> tagsToOtherTables,
+            List<Documents> documents)
         {
             //TODO: Make this SOLID/DRY/BETTER
             try
@@ -105,14 +106,21 @@ namespace BibleStudyDataAccessLibrary.DataAccess
                 foreach (var item in scriptures)
                 {
                     item.FKTableIdandName = tblId;
-                    _sql.SaveDataInTransaction("spCreateReferences", item);
+                    _sql.SaveDataInTransaction("spCreateScriptures", item);
                 }
 
                 //Step 5: add Id to all tagsToOtherTables
                 foreach (var item in tagsToOtherTables)
                 {
                     item.FKTableIdandName = tblId;
-                    _sql.SaveDataInTransaction("spCreateReferences", item);
+                    _sql.SaveDataInTransaction("spCreateTagsToOtherTables", item);
+                }
+
+                //Step6 add in all documents
+                foreach (var item in documents)
+                {
+                    item.FKProject = tblId;
+                    _sql.SaveDataInTransaction("spCreateDocuments", item);
                 }
 
 
@@ -127,7 +135,7 @@ namespace BibleStudyDataAccessLibrary.DataAccess
 
         }
 
-        public async Task<DailyBibleReadingAll> GetParentAndAllChildrenRecords(int Id)
+        public async Task<DailyBibleReadingAll> GetParentAndAllChildrenRecordsAsync(int Id)
         {
             try
             {
@@ -143,6 +151,8 @@ namespace BibleStudyDataAccessLibrary.DataAccess
                 var scripturesList = await _sql.LoadDataInTransaction<Scriptures, dynamic>("spGetByFKScriptures", new { FK = PKId });
                 //Step 5) Get all children table info: Tags to Other Tables
                 var tagsToOtherTablesList = await _sql.LoadDataInTransaction<TagsToOtherTables, dynamic>("spGetByFKTagsToOtherScriptures", new { FK = PKId });
+                //Step 6) Get all children documents
+                var documentsList = await _sql.LoadDataInTransaction<Documents, dynamic>("spGetByFKDocuments", new { FK = PKId });
 
                 //Build return model
                 DailyBibleReadingAll dailyBibleReadingAll = new DailyBibleReadingAll
@@ -155,13 +165,14 @@ namespace BibleStudyDataAccessLibrary.DataAccess
                     ScriptureEndPoint = dailyBibleReading.ScriptureEndPoint,
                     ReferencesList = referencesList,
                     ScripturesList = scripturesList,
-                    TagsToOtherTables = tagsToOtherTablesList
+                    TagsToOtherTables = tagsToOtherTablesList,
+                    DocumentsList= documentsList
                 };
                 return dailyBibleReadingAll;
             }
             catch
             {
-                _logger.LogInformation("Unable to retreive full record of Daily Bible Reading Record of{Id}.", Id);
+                _logger.LogInformation("Unable to retreive full record of Daily Bible Reading Record of {Id}.", Id);
                 throw;
             }
         }

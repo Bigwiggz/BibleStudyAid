@@ -10,9 +10,9 @@ namespace BibleStudyDataAccessLibrary.DataAccess
         void DeleteAsync(object Id);
         Task<IEnumerable<DailyBibleReading>> GetAllAsync();
         Task<DailyBibleReading> GetByIdAsync(object Id);
-        Task<DailyBibleReadingAll> GetParentAndAllChildrenRecords(int Id);
+        Task<DailyBibleReadingAll> GetParentAndAllChildrenRecordsAsync(int Id);
         void InsertAsync(DailyBibleReading dailyBibleReading);
-        void SaveFullParentAndAllChildrenRecords(DailyBibleReading dailyBibleReading, List<References> references, List<Scriptures> scriptures, List<TagsToOtherTables> tagsToOtherTables);
+        void SaveFullParentAndAllChildrenRecords(DailyBibleReading dailyBibleReading, List<References> references, List<Scriptures> scriptures, List<TagsToOtherTables> tagsToOtherTables, List<Documents> documents);
         void UpdateAsync(DailyBibleReading dailyBibleReading);
     }
 }

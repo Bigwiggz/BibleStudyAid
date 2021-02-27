@@ -7,7 +7,7 @@ namespace BibleStudyDataAccessLibrary.Models
     public class FamilyStudyProjects
     {
         public int Id { get; set; }
-        public DateTime DateCreated { get; }
+        public DateTime DateCreated { get; set; }
         public DateTime DateWhenCreated { get; set; }
         public string FamilyStudyTitle { get; set; }
         public string FamilyStudyDescription { get; set; }

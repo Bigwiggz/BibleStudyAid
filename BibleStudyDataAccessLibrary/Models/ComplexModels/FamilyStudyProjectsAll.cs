@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 
-namespace BibleStudyInfoAPI.DTOs
+namespace BibleStudyDataAccessLibrary.Models.ComplexModels
 {
-    public class FamilyStudyProjectsDTO
+    public class FamilyStudyProjectsAll
     {
         public int Id { get; set; }
         public DateTime DateCreated { get; set; }
@@ -14,5 +13,10 @@ namespace BibleStudyInfoAPI.DTOs
         public string FamilyStudyDescription { get; set; }
         public string FamilyStudyFindings { get; set; }
         public string PKIdtblFamilyStudyProjects { get; set; }
+        public List<References> ReferencesList { get; set; }
+        public List<Scriptures> ScripturesList { get; set; }
+        public List<TagsToOtherTables> TagsToOtherTables { get; set; }
+        public List<Documents> DocumentsList { get; set; }
+
     }
 }
