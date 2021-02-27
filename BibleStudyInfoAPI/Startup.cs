@@ -32,10 +32,13 @@ namespace BibleStudyInfoAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //Add  Personal Services
+            //Add Personal Services
             services.AddTransient<ISqlDataAccess, SqlDataAccess>();
             services.AddTransient<IDailyBibleReadingData, DailyBibleReadingData>();
             services.AddTransient<IFamilyStudyProjectsData, FamilyStudyProjectsData>();
+            services.AddTransient<IDocumentsData, DocumentsData>();
+            services.AddTransient<IReferencesData, ReferencesData>();
+            services.AddTransient<IScripturesData, ScripturesData>();
 
             //Add AutoMapper
             services.AddAutoMapper(typeof(Startup));

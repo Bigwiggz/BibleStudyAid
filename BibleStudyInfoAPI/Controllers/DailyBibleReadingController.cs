@@ -39,11 +39,12 @@ namespace BibleStudyInfoAPI.Controllers
 
         // GET api/<DailyBibleReadingController>/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<DailyBibleReading>> GetByIdAsync(int id)
+        public async Task<ActionResult<DailyBibleReadingDTO>> GetByIdAsync(int id)
         {
             var dailyBibleReading = await _dailyBibleReadingData.GetByIdAsync(id);
+            var dTOModel = _mapper.Map<DailyBibleReadingDTO>(dailyBibleReading);
 
-            return Ok(dailyBibleReading);
+            return Ok(dTOModel);
         }
 
         // POST api/<DailyBibleReadingController>
