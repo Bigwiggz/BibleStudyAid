@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace BibleStudyDataAccessLibrary.Models
+namespace BibleStudyInfoAPI.DTOs
 {
-    public class Talks
+    public class TalksDTO
     {
         public int Id { get; set; }
         public string TalkTitle { get; set; }
-        public DateTime CreatedDate { get;}
+        public DateTime CreatedDate { get; }
         public DateTime DateGiven { get; set; }
         public int MeetingTypeId { get; set; }
         public string Description { get; set; }

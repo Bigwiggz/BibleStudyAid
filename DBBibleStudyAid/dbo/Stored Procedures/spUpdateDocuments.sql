@@ -22,7 +22,8 @@ CREATE PROCEDURE [dbo].[spUpdateDocuments]
     @Id INT,
     @FKProject NVARCHAR(1000), 
     @DocumentName NVARCHAR(256), 
-    @Document VARBINARY(MAX)
+    @Document VARBINARY(MAX),
+    @DocumentType NVARCHAR(256)
 
 AS
 BEGIN 
@@ -34,7 +35,8 @@ BEGIN
     SET 
     FKProject=ISNULL(@FKProject,FKProject), 
     DocumentName=ISNULL(@DocumentName,DocumentName), 
-	Document =ISNULL(@Document ,Document)
+	Document =ISNULL(@Document ,Document),
+    DocumentType =ISNULL(@DocumentType , DocumentType)
 
 	WHERE Id=@Id
     END 

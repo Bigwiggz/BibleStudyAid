@@ -21,12 +21,13 @@
 CREATE PROCEDURE [dbo].[spCreateDocuments]
     @FKProject NVARCHAR(1000), 
     @DocumentName NVARCHAR(256), 
-    @Document VARBINARY(MAX)
+    @Document VARBINARY(MAX),
+    @DocumentType NVARCHAR(256)
 AS
 BEGIN
     SET NOCOUNT ON;
-	INSERT INTO [dbo].[tblDocuments] ([FKProject],[DocumentName],[Document])
-	VALUES (@FKProject,@DocumentName,@Document);
+	INSERT INTO [dbo].[tblDocuments] ([FKProject],[DocumentName],[Document],[DocumentType])
+	VALUES (@FKProject,@DocumentName,@Document,@DocumentType);
     DECLARE @Id INT;
     SET @Id=SCOPE_IDENTITY();
 END
