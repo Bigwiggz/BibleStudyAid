@@ -41,6 +41,11 @@ namespace BibleStudyInfoAPI
             services.AddTransient<IScripturesData, ScripturesData>();
             services.AddTransient<IMeetingAssembliesData, MeetingAssembliesData>();
 
+            //Enable CORS
+            services.AddCors(o => o.AddDefaultPolicy(
+                builder=>builder.AllowAnyOrigin()
+                ));
+
             //Add AutoMapper
             services.AddAutoMapper(typeof(Startup));
 
@@ -104,6 +109,8 @@ namespace BibleStudyInfoAPI
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseCors();
 
             app.UseAuthentication();
             app.UseAuthorization();
