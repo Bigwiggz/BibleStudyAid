@@ -1,0 +1,47 @@
+﻿@page "/dailybiblereading"
+@inject HttpClient Http
+
+
+<h3>Daily Bible Reading</h3>
+
+@if (dailyBibleReadingList == null)
+{
+    <div id="loading">Loading...</div>
+}
+else
+{
+<table class="table">
+    <thead>
+        <tr>No.</tr>
+        <tr>Starting Scripture</tr>
+        <tr>Ending Scripture</tr>
+        <tr>Lesson Learned</tr>
+
+    </thead>
+    @foreach (var item in dailyBibleReadingList)
+    {
+        <tbody>
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.LessonLearnedDescription</td>
+                <td>@item.ScriptureStartPoint</td>
+                <td>@item.ScriptureEndPoint</td>
+            </tr>
+        </tbody>
+    }
+
+</table>
+}
+
+
+@code {
+    private IEnumerable<DailyBibleReadingViewModel> dailyBibleReadingList;
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        dailyBibleReadingList = await Http.GetFromJsonAsync<IEnumerable<DailyBibleReadingViewModel>>("https://localhost:5001/api/dailybiblereading/");
+    }
+
+
+}
