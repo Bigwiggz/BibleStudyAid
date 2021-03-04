@@ -16,7 +16,7 @@ namespace BibleStudyBWAUI
     {
         public static async Task Main(string[] args)
         {
-            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("NDA3MTQxQDMxMzgyZTM0MmUzME5iRTBaTkp6Slh1d3ZEK21YQjFXR3hid1l0TUVob08zVGRKVS9RMVJ4bzg9");
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("");
             var config = new ConfigurationSettings
             {
                 WebBaseUrI = "https://localhost:5001",
