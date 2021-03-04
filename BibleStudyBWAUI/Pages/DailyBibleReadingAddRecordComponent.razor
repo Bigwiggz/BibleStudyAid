@@ -1,0 +1,66 @@
+﻿@page "/dailybiblereading/add"
+@inject HttpClient Http
+@using System.ComponentModel.DataAnnotations
+
+
+<h3>Daily Bible Reading</h3>
+
+<EditForm OnValidSubmit="@ValidFormSubmitted" Model="@dailyBibleReading">
+    <DataAnnotationsValidator/>
+    <ValidationSummary/>
+    <div class="form-group">
+        <label>
+            Scripture Start Point:<br />
+            <InputText class="form-control" id="scriptureStartPoint" @bind-Value="dailyBibleReading.ScriptureStartPoint"></InputText>
+        </label>
+        <br />
+    </div>
+    <div class="form-group">
+        <label>
+            Scripture End Point:<br />
+            <InputText class="form-control" id="scriptureEndPoint" @bind-Value="dailyBibleReading.ScriptureEndPoint"></InputText>
+        </label>
+        <br />
+    </div>
+    <div class="form-group">
+        <label>
+            Lesson Learned:<br />
+            <InputTextArea class="form-control" id="lessonlearnedDescription" @bind-Value="dailyBibleReading.LessonLearnedDescription"></InputTextArea>
+        </label>
+        <br />
+    </div>
+    <div class="form-group">
+        <label>
+            Date Read:<br />
+            <InputDate type="Date" class="form-control" id="dateRead" @bind-Value="dailyBibleReading.DateRead" ></InputDate>
+        </label>
+    </div>
+    <button type="Submit" class="btn btn-primary">Submit</button>
+</EditForm>
+
+<br />
+<br />
+<NavLink class="nav-link" href="dailybiblereading/">
+    <span class="oi oi-arrow-circle-top" aria-hidden="true"></span> Return to Daily Bible Reading List
+</NavLink>
+
+
+@code {
+
+    DailyBibleReadingViewModel dailyBibleReading = new DailyBibleReadingViewModel();
+
+    public DailyBibleReadingAddRecordComponent()
+    {
+        dailyBibleReading.DateRead = DateTime.UtcNow;
+    }
+
+
+    private async Task ValidFormSubmitted()
+    {
+
+        var response = await Http.PostAsJsonAsync<DailyBibleReadingViewModel>("https://localhost:5001/api/dailybiblereading/", dailyBibleReading);
+
+        //Navigate back to main page
+        
+    }
+}

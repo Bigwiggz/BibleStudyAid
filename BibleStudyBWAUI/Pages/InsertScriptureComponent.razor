@@ -1,0 +1,34 @@
+﻿@page "/dropdownlist" 
+
+<h3>InsertScriptureComponent</h3>
+
+<SfDropDownList TItem="GamesData" TValue="string" DataSource="Games"
+                Placeholder="Select a game">
+    <DropDownListFieldSettings Text="Name" Value="ID">
+    </DropDownListFieldSettings>
+</SfDropDownList>
+
+
+<SfCalendar TValue="DateTime?"></SfCalendar>
+
+@code {
+    public class GamesData
+    {
+        public string Name { get; set; }
+        public string ID { get; set; }
+    }
+
+    List<GamesData> Games = new List<GamesData>
+    {
+        new GamesData(){ID="Game1", Name="Badminton"},
+        new GamesData(){ID="Game2", Name="Football"},
+        new GamesData(){ID="Game3", Name="Soccer"},
+        new GamesData(){ID="Game4", Name="Basketball"},
+        new GamesData(){ID="Game5", Name="Track & Field"},
+        new GamesData(){ID="Game6", Name="Softball"},
+        new GamesData(){ID="Game7", Name="Water Polo"},
+        new GamesData(){ID="Game8", Name="Ultimate Frisby"},
+        new GamesData(){ID="Game9", Name="Baseball"}
+
+    };
+}

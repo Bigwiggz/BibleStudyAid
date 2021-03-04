@@ -43,8 +43,10 @@ namespace BibleStudyInfoAPI
 
             //Enable CORS
             services.AddCors(o => o.AddDefaultPolicy(
-                builder=>builder.AllowAnyOrigin()
-                ));
+                builder => builder.AllowAnyOrigin()
+                    .AllowAnyHeader()
+                    .AllowAnyMethod()
+                )); 
 
             //Add AutoMapper
             services.AddAutoMapper(typeof(Startup));

@@ -12,11 +12,12 @@ else
 {
 <table class="table">
     <thead>
-        <tr>No.</tr>
-        <tr>Starting Scripture</tr>
-        <tr>Ending Scripture</tr>
-        <tr>Lesson Learned</tr>
-
+        <tr>
+            <th>No.</th>
+            <th>Starting Scripture</th>
+            <th>Ending Scripture</th>
+            <th>Lesson Learned</th>
+        </tr>
     </thead>
     @foreach (var item in dailyBibleReadingList)
     {
@@ -31,6 +32,10 @@ else
     }
 
 </table>
+
+    <NavLink class="nav-link" href="dailybiblereading/add">
+        <span class="oi oi-plus" aria-hidden="true"></span> Add Record
+    </NavLink>
 }
 
 
