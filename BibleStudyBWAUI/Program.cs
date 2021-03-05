@@ -16,15 +16,21 @@ namespace BibleStudyBWAUI
     {
         public static async Task Main(string[] args)
         {
-            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("");
+            
+            
             var config = new ConfigurationSettings
             {
                 WebBaseUrI = "https://localhost:5001",
             };
 
-            
-
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
+
+            var syncFusionKey=builder.Configuration["Syncfusion:ProjectUserKey"];
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense(syncFusionKey);
+
+            //Add SyncFusion
+            builder.Services.AddSyncfusionBlazor();
+
             builder.RootComponents.Add<App>("#app");
 
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
