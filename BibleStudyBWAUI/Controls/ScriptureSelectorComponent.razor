@@ -1,7 +1,35 @@
-﻿
+﻿@page "/Test"
+@inherits ScriptureSelectorBase
+
 
 <h3>ScriptureSelectorComponent</h3>
 
-@code {
 
-}
+<label>Select Book</label>
+<SfDropDownList TItem="BookListMapping" TValue="string" DataSource="bibleBooks"
+                Placeholder="Select a book" class="w-50 p-3">
+    <DropDownListFieldSettings Text="Name" Value="ID">
+    </DropDownListFieldSettings>
+</SfDropDownList>
+<br />
+<br />
+
+<label>Select Chapter</label>
+<SfDropDownList TItem="BookListMapping" TValue="string" DataSource="bibleBooks"
+                Placeholder="Select a Chapter" class="w-50 p-3">
+    <DropDownListFieldSettings Text="Name" Value="ID">
+    </DropDownListFieldSettings>
+</SfDropDownList>
+<br />
+<br />
+
+<label>Select Verse</label>
+<SfDropDownList TItem="BookListMapping" TValue="string" DataSource="bibleBooks"
+                Placeholder="Select a Verse" class="w-50 p-3">
+    <DropDownListFieldSettings Text="Name" Value="ID">
+    </DropDownListFieldSettings>
+</SfDropDownList>
+
+
+
+
