@@ -13,10 +13,9 @@ namespace BibleStudyBWAUI.Base
 {
     public class ScriptureSelectorBase: ComponentBase
     {
-        //Temp test variables
-        public string reachTest;
-        public int numberofChapters;
-
+        //Hidden fields
+        [Parameter]
+        public string tblId { get; set; }
 
         //Initialize Bible Verification
         BibleSelectorMethods bibleMethods = new BibleSelectorMethods();
@@ -85,8 +84,6 @@ namespace BibleStudyBWAUI.Base
 
         protected void OnSelectedBook()
         {
-            reachTest = "Reached Here";
-
             var chapterList = bibleMethods.GetNumberOfChapters(_selectedBook);
             int i = 1;
             foreach (var item in chapterList)
@@ -100,7 +97,6 @@ namespace BibleStudyBWAUI.Base
                 i++;
             }
             citation.BibleBook = _selectedBook;
-            numberofChapters = chapterList.Count;
             enableSelectBook = false;
             enableSelectChapter = true;
         }
@@ -134,10 +130,16 @@ namespace BibleStudyBWAUI.Base
             enableSelectVerse = false;
         }
 
-        private async Task ValidFormSubmitted()
+        public ScripturesViewModel scriptures = new ScripturesViewModel
+        {
+            FKTableIdandName = tblId,
+            Scripture=$"{} {}:{}"
+        };
+
+        protected async Task SubmitScripture()
         {
 
-            var response = await Http.PostAsJsonAsync<ScripturesViewModel>("https://localhost:5001/api/dailybiblereading/", dailyBibleReading);
+            var response = await Http.PostAsJsonAsync<ScripturesViewModel>("https://localhost:5001/api/dailybiblereading/", scriptures);
 
             //Navigate back to main page
 

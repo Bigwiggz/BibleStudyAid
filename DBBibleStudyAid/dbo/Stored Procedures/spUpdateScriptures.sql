@@ -21,7 +21,10 @@
 CREATE PROCEDURE [dbo].[spUpdateScriptures]
     @Id INT,
     @Scripture NVARCHAR(1000),
-	@FKTableIdandName NVARCHAR(1000)
+	@FKTableIdandName NVARCHAR(1000),
+    @Book NVARCHAR(1000),
+    @Chapter NVARCHAR(3),
+    @Verse NVARCHAR(1000)
 
 AS
 BEGIN 
@@ -32,8 +35,10 @@ BEGIN
     UPDATE [dbo].[tblScriptures]
     SET 
     Scripture=ISNULL(@Scripture,Scripture), 
-	FKTableIdandName=ISNULL(@FKTableIdandName,FKTableIdandName)
-
+	FKTableIdandName=ISNULL(@FKTableIdandName,FKTableIdandName),
+    Book=ISNULL(@Book,Book), 
+	Chapter=ISNULL(@Chapter,Chapter),
+    Verse=ISNULL(@Verse,Verse)
 
 	WHERE Id=@Id
     END 

@@ -8,10 +8,11 @@
 <h2>Selected Scripture: <strong>@citation.BibleBook @citation.BibleChapter: @citation.BibleVerse</strong></h2>
 <br />
 <br />
-<EditForm OnValidSubmit="@SubmitScripture" Model="@Scritures">
+<EditForm OnValidSubmit="@SubmitScripture" Model="@scriptures">
     <DataAnnotationsValidator />
     <ValidationSummary />
     <label>Select Book</label>
+    <input type="hidden" id="@tblId" name="ID">
     <SfAutoComplete @bind-Value="@_selectedBook" TItem="BookListMapping" TValue="string" DataSource="bibleBooks"
                     Placeholder="Select a book" Enabled=@enableSelectBook>
         <AutoCompleteEvents TItem="BookListMapping" TValue="string" ValueChange="OnSelectedBook"></AutoCompleteEvents>

@@ -20,11 +20,14 @@
 
 CREATE PROCEDURE [dbo].[spCreateScriptures]
     @Scripture NVARCHAR(1000),
-	@FKTableIdandName NVARCHAR(1000)
+	@FKTableIdandName NVARCHAR(1000),
+	@Book NVARCHAR(1000),
+    @Chapter NVARCHAR(3),
+    @Verse NVARCHAR(1000)
 
 AS
 BEGIN
     SET NOCOUNT ON;
-	INSERT INTO [dbo].[tblScriptures] ([Scripture],[FKTableIdandName])
-	VALUES (@Scripture,@FKTableIdandName);
+	INSERT INTO [dbo].[tblScriptures] ([Scripture],[Book],[Chapter],[Verse],[FKTableIdandName])
+	VALUES (@Scripture,@Book,@Chapter,@Verse,@FKTableIdandName);
 END

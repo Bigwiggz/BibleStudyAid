@@ -52,7 +52,11 @@ namespace BibleStudyDataAccessLibrary.DataAccess
             var p = new
             {
                 FKTableIdandName = obj.FKTableIdandName,
-                Scripture = obj.Scripture
+                Scripture = obj.Scripture,
+                Book=obj.Book,
+                Chapter=obj.Chapter,
+                Verse=obj.Verse
+
             };
 
             await _sql.SaveData("spCreateScriptures", p);
@@ -63,7 +67,10 @@ namespace BibleStudyDataAccessLibrary.DataAccess
             var p = new
             {
                 FKTableIdandName = obj.FKTableIdandName,
-                Scripture = obj.Scripture
+                Scripture = obj.Scripture,
+                Book = obj.Book,
+                Chapter = obj.Chapter,
+                Verse = obj.Verse
             };
 
             await _sql.SaveData("spUpdateScriptures", p);
