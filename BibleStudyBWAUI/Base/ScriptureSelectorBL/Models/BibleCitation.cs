@@ -7,14 +7,11 @@ namespace BibleStudyBWAUI.Base.ScriptureSelectorBL.Models
     public class BibleCitation
     {
         public string BibleBook { get; set; }
-        public string BibleChapter { get; set; }
-        public string BibleVerse { get; set; }
-
-        private string fullBibleCitation;
+        public int? BibleChapter { get; set; }
+        public int? BibleVerse { get; set; }
         public string FullBibleCitation 
         {
-            get { return fullBibleCitation; } 
-            set { fullBibleCitation = $"{BibleBook} {BibleChapter}:{BibleVerse}"; } 
+            get { return $"{BibleBook} {BibleChapter}:{BibleVerse}"; } 
         }
     }
 }
