@@ -9,6 +9,9 @@ namespace BibleStudyBWAUI.ViewModels
     {
         public int Id { get; set; }
         public string Scripture { get; set; }
+        public string Book { get; set; }
+        public string Chapter { get; set; }
+        public string Verse { get; set; }
         public string UniqueId { get; set; }
         public string FKTableIdandName { get; set; }
     }

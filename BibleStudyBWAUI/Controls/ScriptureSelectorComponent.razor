@@ -5,15 +5,15 @@
 <h3>Scripture Selector</h3>
 
 
-<h2>Selected Scripture: <strong>@citation.BibleBook @citation.BibleChapter: @citation.BibleVerse</strong></h2>
+<h2>Selected Scripture: <strong>@scriptures.Book @scriptures.Chapter: @scriptures.Verse</strong></h2>
 <br />
 <br />
 <EditForm OnValidSubmit="@SubmitScripture" Model="@scriptures">
     <DataAnnotationsValidator />
     <ValidationSummary />
     <label>Select Book</label>
-    <input type="hidden" id="@tblId" name="ID">
-    <SfAutoComplete @bind-Value="@_selectedBook" TItem="BookListMapping" TValue="string" DataSource="bibleBooks"
+    <input type="hidden" id="@scriptures.FKTableIdandName" name="ID" @bind-value="@scriptures.FKTableIdandName">
+    <SfAutoComplete @bind-Value="@scriptures.Book" TItem="BookListMapping" TValue="string" DataSource="bibleBooks"
                     Placeholder="Select a book" Enabled=@enableSelectBook>
         <AutoCompleteEvents TItem="BookListMapping" TValue="string" ValueChange="OnSelectedBook"></AutoCompleteEvents>
         <AutoCompleteFieldSettings Text="Name" Value="Name">
@@ -22,24 +22,24 @@
     <br />
     <br />
     <label>Select Chapter</label>
-    <SfDropDownList @bind-Value="@_selectedChapter" TItem="SelectedChapter" TValue="int" DataSource="bibleChapters"
+    <SfDropDownList @bind-Value="@scriptures.Chapter" TItem="SelectedChapter" TValue="string" DataSource="bibleChapters"
                     Placeholder="Select a Chapter" Enabled="@enableSelectChapter">
-        <DropDownListEvents TItem="SelectedChapter" TValue="int" ValueChange="OnSelectedChapter"></DropDownListEvents>
+        <DropDownListEvents TItem="SelectedChapter" TValue="string" ValueChange="OnSelectedChapter"></DropDownListEvents>
         <DropDownListFieldSettings Text="ChapterNumber" Value="ChapterNumber">
         </DropDownListFieldSettings>
     </SfDropDownList>
     <br />
     <br />
     <label>Select Verse</label>
-    <SfDropDownList @bind-Value="@_selectedVerse" TItem="SelectedVerse" TValue="int" DataSource="bibleVerses"
+    <SfDropDownList @bind-Value="@scriptures.Verse" TItem="SelectedVerse" TValue="string" DataSource="bibleVerses"
                     Placeholder="Select a Verse" Enabled="@enableSelectVerse">
-        <DropDownListEvents TItem="SelectedVerse" TValue="int" ValueChange="OnSelectedVerse"></DropDownListEvents>
+        <DropDownListEvents TItem="SelectedVerse" TValue="string" ValueChange="OnSelectedVerse"></DropDownListEvents>
         <DropDownListFieldSettings Text="VerseNumber" Value="VerseNumber">
         </DropDownListFieldSettings>
     </SfDropDownList>
     <br />
     <br />
-    <button type="Submit" class="btn btn-primary">Submit</button>
+    <button type="Submit" class="btn btn-primary">Save Scripture</button>
 </EditForm>
 
 

@@ -7,6 +7,8 @@ using Syncfusion.Blazor.DropDowns;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Json;
 using System.Threading.Tasks;
 
 namespace BibleStudyBWAUI.Base
@@ -17,18 +19,16 @@ namespace BibleStudyBWAUI.Base
         [Parameter]
         public string tblId { get; set; }
 
+        [Inject]
+        public HttpClient Http { get; set; }
+
         //Initialize Bible Verification
         BibleSelectorMethods bibleMethods = new BibleSelectorMethods();
         List<string> bookList = new List<string>();
-        public BibleCitation citation = new BibleCitation
-        {
-            BibleBook = null,
-            BibleChapter=null,
-            BibleVerse=null
-        };
+
+        public ScripturesViewModel scriptures = new ScripturesViewModel();
 
         //Book Selection
-        public string _selectedBook;
         public bool enableSelectBook = true;
 
         public class BookListMapping
@@ -40,7 +40,6 @@ namespace BibleStudyBWAUI.Base
         public List<BookListMapping> bibleBooks= new List<BookListMapping>();
 
         //Chapter Selection
-        public int _selectedChapter;
         public bool enableSelectChapter = false;
 
         public class SelectedChapter
@@ -52,7 +51,6 @@ namespace BibleStudyBWAUI.Base
         public List<SelectedChapter> bibleChapters = new List<SelectedChapter>();
 
         //Verse Selection
-        public int _selectedVerse;
         public bool enableSelectVerse = false;
         public class SelectedVerse
         {
@@ -84,7 +82,7 @@ namespace BibleStudyBWAUI.Base
 
         protected void OnSelectedBook()
         {
-            var chapterList = bibleMethods.GetNumberOfChapters(_selectedBook);
+            var chapterList = bibleMethods.GetNumberOfChapters(scriptures.Book);
             int i = 1;
             foreach (var item in chapterList)
             {
@@ -96,14 +94,14 @@ namespace BibleStudyBWAUI.Base
                 bibleChapters.Add(chapter);
                 i++;
             }
-            citation.BibleBook = _selectedBook;
             enableSelectBook = false;
             enableSelectChapter = true;
         }
 
         public void OnSelectedChapter()
         {
-            var verseList = bibleMethods.GetNumberofVerses(_selectedBook, _selectedChapter);
+            var chapter = Int32.Parse(scriptures.Chapter);
+            var verseList = bibleMethods.GetNumberofVerses(scriptures.Book, chapter);
 
             int i = 1;
             foreach (var item in verseList)
@@ -116,7 +114,6 @@ namespace BibleStudyBWAUI.Base
                 bibleVerses.Add(verse);
                 i++;
             }
-            citation.BibleChapter = _selectedChapter;
             enableSelectBook = false;
             enableSelectChapter = false;
             enableSelectVerse = true;
@@ -124,22 +121,17 @@ namespace BibleStudyBWAUI.Base
 
         public void OnSelectedVerse()
         {
-            citation.BibleVerse = _selectedVerse;
             enableSelectBook = false;
             enableSelectChapter = false;
             enableSelectVerse = false;
         }
 
-        public ScripturesViewModel scriptures = new ScripturesViewModel
-        {
-            FKTableIdandName = tblId,
-            Scripture=$"{} {}:{}"
-        };
+
 
         protected async Task SubmitScripture()
         {
-
-            var response = await Http.PostAsJsonAsync<ScripturesViewModel>("https://localhost:5001/api/dailybiblereading/", scriptures);
+            scriptures.Scripture = $"{scriptures.Book} {scriptures.Chapter}:{scriptures.Verse}";
+            var response = await Http.PostAsJsonAsync<ScripturesViewModel>("https://localhost:5001/api/scrpitures/", scriptures);
 
             //Navigate back to main page
 
