@@ -9,6 +9,9 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Syncfusion.Blazor;
+using BibleStudyBWAUI.Authentication;
+using Blazored.LocalStorage;
+using Microsoft.AspNetCore.Components.Authorization;
 
 namespace BibleStudyBWAUI
 {
@@ -32,6 +35,12 @@ namespace BibleStudyBWAUI
             builder.Services.AddSyncfusionBlazor();
 
             builder.RootComponents.Add<App>("#app");
+
+            //Authentication
+            builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
+            builder.Services.AddBlazoredLocalStorage();
+            builder.Services.AddAuthorizationCore();
+            builder.Services.AddScoped<AuthenticationStateProvider, AuthStateProvider>();
 
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
