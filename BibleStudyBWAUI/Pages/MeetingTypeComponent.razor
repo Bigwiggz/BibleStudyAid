@@ -1,0 +1,44 @@
+﻿@page "/meetingtype"
+@inject HttpClient Http 
+
+<h3>Meeting Type</h3>
+
+<EditForm OnValidSubmit="@ValidFormSubmitted" Model="@meetingType">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <div class="form-group">
+        <label>
+            Enter New Meeting Type:<br />
+            <InputText class="form-control" id="meetingTypeName" @bind-Value="meetingType.MeetingTypeName"></InputText>
+        </label>
+        <br />
+    </div>
+    <div class="form-group">
+        <label>
+            Description of Meeting Type:<br />
+            <InputTextArea class="form-control" id="meetingTypeDescription" @bind-Value="meetingType.MeetingTypeDescription"></InputTextArea>
+        </label>
+        <br />
+    </div>
+    <button type="Submit" class="btn btn-primary">Submit</button>
+</EditForm>
+
+<br />
+<br />
+<NavLink class="nav-link" href="/">
+    <span class="oi oi-arrow-circle-top" aria-hidden="true"></span> Return to Previous Page
+</NavLink>
+
+@code {
+    MeetingTypeViewModel meetingType = new MeetingTypeViewModel();
+
+
+    private async Task ValidFormSubmitted()
+    {
+
+        var response = await Http.PostAsJsonAsync<MeetingTypeViewModel>("https://localhost:5001/api/meetingtype/", meetingType);
+
+        //Navigate back to main page
+
+    }
+}

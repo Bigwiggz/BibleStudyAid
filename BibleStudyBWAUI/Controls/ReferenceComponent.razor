@@ -1,0 +1,38 @@
+﻿@page "/reference"
+@inject HttpClient Http 
+
+<h3>Publication Reference</h3>
+
+<EditForm OnValidSubmit="@ValidFormSubmitted" Model="@reference">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <input type="hidden" id="@reference.FIKTableIdandName" name="ID" @bind-value="@reference.FIKTableIdandName">
+    <div class="form-group">
+        <label>
+            Enter New Meeting Type:<br />
+            <InputText class="form-control" id="meetingTypeName" @bind-Value="reference.Reference"></InputText>
+        </label>
+        <br />
+    </div>
+    <button type="Submit" class="btn btn-primary">Submit</button>
+</EditForm>
+
+<br />
+<br />
+<NavLink class="nav-link" href="/">
+    <span class="oi oi-arrow-circle-top" aria-hidden="true"></span> Return to Previous Page
+</NavLink>
+
+@code {
+    ReferenceViewModel reference = new ReferenceViewModel();
+
+
+    private async Task ValidFormSubmitted()
+    {
+
+        var response = await Http.PostAsJsonAsync<ReferenceViewModel>("https://localhost:5001/api/meetingtype/", reference);
+
+        //Navigate back to main page
+
+    }
+}
