@@ -10,32 +10,28 @@
 }
 else
 {
-<table class="table">
-    <thead>
-        <tr>
-            <th>No.</th>
-            <th>Starting Scripture</th>
-            <th>Ending Scripture</th>
-            <th>Lesson Learned</th>
-        </tr>
-    </thead>
-    @foreach (var item in dailyBibleReadingList)
-    {
-        <tbody>
+    <table class="table">
+        <thead>
             <tr>
-                <td>@item.Id</td>
-                <td>@item.LessonLearnedDescription</td>
-                <td>@item.ScriptureStartPoint</td>
-                <td>@item.ScriptureEndPoint</td>
+                <th>No.</th>
+                <th>Starting Scripture</th>
+                <th>Ending Scripture</th>
+                <th>Lesson Learned</th>
             </tr>
-        </tbody>
-    }
+        </thead>
+        @foreach (var item in dailyBibleReadingList)
+        {
+            <tbody>
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.LessonLearnedDescription</td>
+                    <td>@item.ScriptureStartPoint</td>
+                    <td>@item.ScriptureEndPoint</td>
+                </tr>
+            </tbody>
+        }
 
-</table>
-
-    <NavLink class="nav-link" href="dailybiblereading/add">
-        <span class="oi oi-plus" aria-hidden="true"></span> Add Record
-    </NavLink>
+    </table>
 }
 
 

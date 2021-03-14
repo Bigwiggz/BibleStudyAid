@@ -1,4 +1,4 @@
-﻿@page "/reference"
+﻿@page "/reference/add"
 @inject HttpClient Http 
 
 <h3>Publication Reference</h3>
@@ -24,11 +24,18 @@
 </NavLink>
 
 @code {
+
+    [Parameter]
+    public string tblId { get; set; }
+
     ReferenceViewModel reference = new ReferenceViewModel();
+
+
 
 
     private async Task ValidFormSubmitted()
     {
+        reference.FIKTableIdandName = tblId;
 
         var response = await Http.PostAsJsonAsync<ReferenceViewModel>("https://localhost:5001/api/meetingtype/", reference);
 

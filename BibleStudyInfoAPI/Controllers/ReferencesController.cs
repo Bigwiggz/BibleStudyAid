@@ -24,13 +24,23 @@ namespace BibleStudyInfoAPI.Controllers
             _ReferencesData = ReferencesData;
             _mapper = mapper;
         }
+
+        //Get by tblId
+        [HttpGet("/tblId/{tblId")]
+        public async Task<ActionResult<IEnumerable<ReferencesDTO>>> GetByTblIdAsync(string tblId)
+        {
+            var referenceList = await _ReferencesData.GetByForeignKey(tblId);
+            var dTOModel = _mapper.Map<IEnumerable<ReferencesDTO>>(referenceList);
+            return Ok(dTOModel);
+        }
+
         // GET: api/<ReferencesController>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ReferencesDTO>>> GetAllAsync()
         {
-            var ReferencesList = await _ReferencesData.GetAllAsync();
+            var referencesList = await _ReferencesData.GetAllAsync();
 
-            var DTOList = _mapper.Map<IEnumerable<ReferencesDTO>>(ReferencesList);
+            var DTOList = _mapper.Map<IEnumerable<ReferencesDTO>>(referencesList);
 
             return Ok(DTOList);
         }
@@ -40,7 +50,7 @@ namespace BibleStudyInfoAPI.Controllers
         public async Task<ActionResult<ReferencesDTO>> GetByIdAsync(int id)
         {
             var References = await _ReferencesData.GetByIdAsync(id);
-            var dTOModel = _mapper.Map<DailyBibleReadingDTO>(References);
+            var dTOModel = _mapper.Map<ReferencesDTO>(References);
 
             return Ok(dTOModel);
         }

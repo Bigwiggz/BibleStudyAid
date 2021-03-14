@@ -1,0 +1,49 @@
+﻿@inject HttpClient Http
+
+<h3>Reference List</h3>
+
+@if (referenceList == null)
+{
+    <div id="loading">Loading...</div>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>No.</th>
+                <th>Reference</th>
+            </tr>
+        </thead>
+        @foreach (var item in referenceList)
+        {
+            <tbody>
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Reference</td>
+                </tr>
+            </tbody>
+        }
+
+    </table>
+
+    <NavLink class="nav-link" href="reference/add">
+        <span class="oi oi-plus" aria-hidden="true"></span> Add Record
+    </NavLink>
+}
+
+
+@code {
+    [Parameter]
+    public string tblId { get; set; }
+
+    private IEnumerable<ReferenceViewModel> referenceList;
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        referenceList = await Http.GetFromJsonAsync<IEnumerable<ReferenceViewModel>>($"https://localhost:5001/api/dailybiblereading/TblId/{tblId}");
+    }
+
+
+}

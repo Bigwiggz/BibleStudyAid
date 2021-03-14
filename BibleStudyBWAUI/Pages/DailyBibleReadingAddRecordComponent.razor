@@ -5,9 +5,10 @@
 
 <h3>Daily Bible Reading</h3>
 
+<!--Main Parent Element-->
 <EditForm OnValidSubmit="@ValidFormSubmitted" Model="@dailyBibleReading">
-    <DataAnnotationsValidator/>
-    <ValidationSummary/>
+    <DataAnnotationsValidator />
+    <ValidationSummary />
     <div class="form-group">
         <label>
             Scripture Start Point:<br />
@@ -37,6 +38,16 @@
     </div>
     <button type="Submit" class="btn btn-primary">Submit</button>
 </EditForm>
+<br />
+<br />
+
+<!--Child Elements to Daily Bible Reading-->
+<!--References-->
+<ReferenceListComponent tblId=@dailyBibleReading.PKIdtblDailyBibleReadings />
+
+<!--Document Upload-->
+<DocumentUploadComponent tblId=@dailyBibleReading.PKIdtblDailyBibleReadings />
+
 
 <br />
 <br />
@@ -61,6 +72,6 @@
         var response = await Http.PostAsJsonAsync<DailyBibleReadingViewModel>("https://localhost:5001/api/dailybiblereading/", dailyBibleReading);
 
         //Navigate back to main page
-        
+
     }
 }
