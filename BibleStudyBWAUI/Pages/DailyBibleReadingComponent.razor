@@ -13,18 +13,16 @@ else
     <table class="table">
         <thead>
             <tr>
-                <th>No.</th>
+                <th>Lesson Learned</th>
                 <th>Starting Scripture</th>
                 <th>Ending Scripture</th>
-                <th>Lesson Learned</th>
             </tr>
         </thead>
         @foreach (var item in dailyBibleReadingList)
         {
             <tbody>
                 <tr>
-                    <td>@item.Id</td>
-                    <td>@item.LessonLearnedDescription</td>
+                    <td><a href="@($"/dailybiblereading/{item.Id}")" class="nav-link">@item.LessonLearnedDescription</a></td>
                     <td>@item.ScriptureStartPoint</td>
                     <td>@item.ScriptureEndPoint</td>
                 </tr>
@@ -39,10 +37,10 @@ else
     private IEnumerable<DailyBibleReadingViewModel> dailyBibleReadingList;
 
 
+
     protected override async Task OnInitializedAsync()
     {
         dailyBibleReadingList = await Http.GetFromJsonAsync<IEnumerable<DailyBibleReadingViewModel>>("https://localhost:5001/api/dailybiblereading/");
     }
-
 
 }

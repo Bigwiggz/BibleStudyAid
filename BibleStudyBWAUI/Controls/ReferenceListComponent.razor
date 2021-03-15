@@ -42,7 +42,7 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        referenceList = await Http.GetFromJsonAsync<IEnumerable<ReferenceViewModel>>($"https://localhost:5001/api/dailybiblereading/TblId/{tblId}");
+        referenceList = await Http.GetFromJsonAsync<IEnumerable<ReferenceViewModel>>($"https://localhost:5001/api/References/TblId/{tblId}");
     }
 
 

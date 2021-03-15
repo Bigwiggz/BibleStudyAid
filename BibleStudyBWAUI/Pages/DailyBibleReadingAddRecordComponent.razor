@@ -1,6 +1,7 @@
 ﻿@page "/dailybiblereading/add"
 @inject HttpClient Http
 @using System.ComponentModel.DataAnnotations
+@using BibleStudyBWAUI.Controls 
 
 
 <h3>Daily Bible Reading</h3>
@@ -38,15 +39,7 @@
     </div>
     <button type="Submit" class="btn btn-primary">Submit</button>
 </EditForm>
-<br />
-<br />
 
-<!--Child Elements to Daily Bible Reading-->
-<!--References-->
-<ReferenceListComponent tblId=@dailyBibleReading.PKIdtblDailyBibleReadings />
-
-<!--Document Upload-->
-<DocumentUploadComponent tblId=@dailyBibleReading.PKIdtblDailyBibleReadings />
 
 
 <br />

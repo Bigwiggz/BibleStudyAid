@@ -26,7 +26,7 @@ namespace BibleStudyInfoAPI.Controllers
         }
 
         //Get by tblId
-        [HttpGet("/tblId/{tblId")]
+        [HttpGet("tblId/{tblId}")]
         public async Task<ActionResult<IEnumerable<ReferencesDTO>>> GetByTblIdAsync(string tblId)
         {
             var referenceList = await _ReferencesData.GetByForeignKey(tblId);

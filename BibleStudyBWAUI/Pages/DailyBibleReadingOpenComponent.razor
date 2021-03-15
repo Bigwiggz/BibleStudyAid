@@ -1,0 +1,43 @@
+﻿@page "/dailybiblereading/{Id:int}"
+@inject HttpClient Http
+@using BibleStudyBWAUI.ViewModels
+
+
+<h3>Daily BibleReading</h3>
+
+<h4>Start Scripture</h4>
+<h4>@dailyBibleReading?.ScriptureStartPoint</h4>
+
+<h4>End Scripture</h4>
+<h4>@dailyBibleReading?.ScriptureEndPoint</h4>
+
+<h4>Lesson Learned</h4>
+<h4>@dailyBibleReading?.LessonLearnedDescription</h4>
+
+<h4>FK</h4>
+<h4>@dailyBibleReading?.PKIdtblDailyBibleReadings</h4>
+
+<!--Child Elements to Daily Bible Reading-->
+<!--References-->
+<ReferenceListComponent tblId=@dailyBibleReading?.PKIdtblDailyBibleReadings/>
+
+<!--Document Upload-->
+<DocumentUploadComponent tblId=@dailyBibleReading?.PKIdtblDailyBibleReadings/>
+
+
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+
+    private DailyBibleReadingViewModel dailyBibleReading { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        dailyBibleReading = await Http.GetFromJsonAsync<DailyBibleReadingViewModel>($"https://localhost:5001/api/dailybiblereading/{Id}");
+
+
+        base.OnInitialized();
+    }
+
+}
