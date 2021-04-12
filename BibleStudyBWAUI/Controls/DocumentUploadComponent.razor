@@ -19,11 +19,9 @@
 @code {
 
     [Parameter]
-    public string tblId { get; set; } = "";
+    public IEnumerable<DocumentsUserModel> documentList { get; set; }=null;
 
     DocumentsUserModel documents = new DocumentsUserModel();
-
-    List<DocumentsUserModel> documentList = new List<DocumentsUserModel>();
 
 
 
@@ -39,7 +37,7 @@
             file.Stream.WriteTo(filestream);
 
             //Set Parameter
-            documents.FKProject = tblId;
+            documents.FKProject = tbld;
 
             //Save to Byte Array
             byte[] byteArray = file.Stream.ToArray();

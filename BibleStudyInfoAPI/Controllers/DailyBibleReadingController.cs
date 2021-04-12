@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace BibleStudyInfoAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class DailyBibleReadingController : ControllerBase
     {
@@ -28,6 +28,7 @@ namespace BibleStudyInfoAPI.Controllers
 
         // GET: api/<DailyBibleReadingController>
         [HttpGet]
+        [ActionName("Basic")]
         public async Task<ActionResult<IEnumerable<DailyBibleReadingDTO>>> GetAllAsync()
         {
             var dailyBibleReadingList = await _dailyBibleReadingData.GetAllAsync();
@@ -39,6 +40,7 @@ namespace BibleStudyInfoAPI.Controllers
 
         // GET api/<DailyBibleReadingController>/5
         [HttpGet("{id}")]
+        [ActionName("Basic")]
         public async Task<ActionResult<DailyBibleReadingDTO>> GetByIdAsync(int id)
         {
             var dailyBibleReading = await _dailyBibleReadingData.GetByIdAsync(id);
@@ -47,8 +49,20 @@ namespace BibleStudyInfoAPI.Controllers
             return Ok(dTOModel);
         }
 
+        // GET: api/<DailyBibleReadingController>/id
+        [HttpGet("{id}")]
+        [ActionName("FullRecord")]
+        public async Task<ActionResult<DailyBibleReadingAllDTO>> GetFullRecordsAsync(int id)
+        {
+            var dailyBibleReadingAll = await _dailyBibleReadingData.GetParentAndAllChildrenRecordsAsync(id);
+
+            var DTOList = _mapper.Map<IEnumerable<DailyBibleReadingAllDTO>>(dailyBibleReadingAll);
+            return Ok(DTOList);
+        }
+
         // POST api/<DailyBibleReadingController>
         [HttpPost]
+        [ActionName("Basic")]
         public void Post([FromBody] DailyBibleReadingDTO dailyBibleReadingDTO)
         {
             var Model = _mapper.Map<DailyBibleReading>(dailyBibleReadingDTO);
@@ -58,6 +72,7 @@ namespace BibleStudyInfoAPI.Controllers
 
         // PUT api/<DailyBibleReadingController>/5
         [HttpPut("{id}")]
+        [ActionName("Basic")]
         public void Put(int id, [FromBody] DailyBibleReadingDTO dailyBibleReadingDTO)
         {
             dailyBibleReadingDTO.Id = id;
@@ -67,6 +82,7 @@ namespace BibleStudyInfoAPI.Controllers
 
         // DELETE api/<DailyBibleReadingController>/5
         [HttpDelete("{id}")]
+        [ActionName("Basic")]
         public void Delete(int id)
         {
             _dailyBibleReadingData.DeleteAsync(id);

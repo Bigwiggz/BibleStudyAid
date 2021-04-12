@@ -19,25 +19,31 @@
 
 <!--Child Elements to Daily Bible Reading-->
 <!--References-->
-<ReferenceListComponent tblId=@dailyBibleReading?.PKIdtblDailyBibleReadings />
+<CascadingValue Value=@dailyBibleReading?.ReferencesList>
+    <ReferenceListComponent tblId=@dailyBibleReading?.ReferencesList />
+</CascadingValue>
+
 
 <!--Document Upload-->
-<DocumentUploadComponent tblId=@dailyBibleReading?.PKIdtblDailyBibleReadings />
+<CascadingValue Value=@dailyBibleReading?.DocumentsList>
+    <DocumentUploadComponent tblId=@dailyBibleReading?.DocumentsList />
+</CascadingValue>
+
+
+    @code {
+        [Parameter]
+        public int Id { get; set; }
 
 
 
-@code {
-    [Parameter]
-    public int Id { get; set; }
+        private DailyBibleReadingAllViewModel dailyBibleReading { get; set; }
 
-    private DailyBibleReadingViewModel dailyBibleReading { get; set; }
-
-    protected override async Task OnInitializedAsync()
-    {
-        dailyBibleReading = await Http.GetFromJsonAsync<DailyBibleReadingViewModel>($"https://localhost:5001/api/dailybiblereading/{Id}");
+        protected override async Task OnInitializedAsync()
+        {
+            dailyBibleReading = await Http.GetFromJsonAsync<DailyBibleReadingAllViewModel>($"https://localhost:5001/api/dailybiblereading/{Id}");
 
 
-        base.OnInitialized();
+            base.OnInitialized();
+        }
+
     }
-
-}

@@ -34,16 +34,7 @@ else
 
 
 @code {
-    [Parameter]
-    public string tblId { get; set; }
-
-    private IEnumerable<ReferenceViewModel> referenceList;
-
-
-    protected override async Task OnInitializedAsync()
-    {
-        referenceList = await Http.GetFromJsonAsync<IEnumerable<ReferenceViewModel>>($"https://localhost:5001/api/References/TblId/{tblId}");
-    }
-
+    [CascadingParameter]
+    public IEnumerable<ReferenceViewModel> referenceList { get; set; }
 
 }

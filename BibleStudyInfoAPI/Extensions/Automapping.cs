@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BibleStudyDataAccessLibrary.Models;
+using BibleStudyDataAccessLibrary.Models.ComplexModels;
 using BibleStudyInfoAPI.DTOs;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,10 @@ namespace BibleStudyInfoAPI.Extensions
             //Create DailyBibleReading Mapping
             CreateMap<DailyBibleReading, DailyBibleReadingDTO>();
             CreateMap<DailyBibleReadingDTO, DailyBibleReading>();
+
+            //Create DailyBibleReading Mapping
+            CreateMap<DailyBibleReadingAll, DailyBibleReadingAllDTO>();
+            CreateMap<DailyBibleReadingAllDTO, DailyBibleReadingAll>();
 
             //Create FamilyStudyProjects Mapping
             CreateMap<FamilyStudyProjects, FamilyStudyProjectsDTO>();
