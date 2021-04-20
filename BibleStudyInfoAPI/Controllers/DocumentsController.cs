@@ -2,6 +2,7 @@
 using BibleStudyDataAccessLibrary.DataAccess;
 using BibleStudyDataAccessLibrary.Models;
 using BibleStudyInfoAPI.DTOs;
+using BibleStudyInfoAPI.Validators;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -49,9 +50,14 @@ namespace BibleStudyInfoAPI.Controllers
         [HttpPost]
         public void Post([FromBody] DocumentsDTO documentsDTO)
         {
-            var model =  _mapper.Map<Documents>(documentsDTO);
+            DocumentsValidator validator = new DocumentsValidator();
+            var result = validator.Validate(documentsDTO);
+            if (result.IsValid)
+            {
+                var model = _mapper.Map<Documents>(documentsDTO);
+                _documentsData.InsertAsync(model);
+            }
 
-            _documentsData.InsertAsync(model);
         }
 
         // PUT api/<DocumentsController>/5
