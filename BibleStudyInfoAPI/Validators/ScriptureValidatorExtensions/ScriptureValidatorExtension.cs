@@ -7,43 +7,8 @@ namespace BibleStudyInfoAPI.Validators.ScriptureValidatorExtensions
 {
     public class ScriptureValidatorExtension
     {
-        //Verified Book
-        public bool BeVerifiedBibleBook(string bookEntered)
-        {
-            bool isVerifiedBook = false;
-            isVerifiedBook = books.Any(book => book == bookEntered);
-            return isVerifiedBook;
-        }
-
-        //Verified Chapter
-        public bool BeVerifiedChapter(string chapterEntered, string bookEntered)
-        {
-            bool isVerifiedChapter = false;
-            if(chapterEntered!=null && int.Parse(chapterEntered)<150)
-            {
-                isVerifiedChapter = true;
-            }
-            else if(chapterEntered==null && singleChapterBooks.Any(book=>book==bookEntered))
-            {
-                isVerifiedChapter = true;
-            }
-
-            return isVerifiedChapter;
-        }
-
-        //Verified Verse
-        public bool BeVerifiedVerse(string chapterEntered)
-        {
-            bool isVerifiedVerse = false;
-            if (int.Parse(chapterEntered)<176)
-            {
-                isVerifiedVerse = true;
-            }
-            return isVerifiedVerse;
-        }
-
         //List of Bible books without chapters
-        string[] singleChapterBooks = new string[]
+        public string[] singleChapterBooks = new string[]
         {
             "Philemon",
             "2 John",
@@ -52,7 +17,7 @@ namespace BibleStudyInfoAPI.Validators.ScriptureValidatorExtensions
         };
 
         //List of Bible Books
-        string[] books = new string[]
+        public string[] books = new string[]
         {
             "Genesis",
             "Exodus",
@@ -121,7 +86,5 @@ namespace BibleStudyInfoAPI.Validators.ScriptureValidatorExtensions
             "Jude",
             "Revelation"
         };
-
-
     }
 }
