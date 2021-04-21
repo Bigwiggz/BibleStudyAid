@@ -48,6 +48,7 @@ namespace BibleStudyInfoAPI.Controllers
         [HttpPost]
         public void Post([FromBody] ScripturesDTO ScripturesDTO)
         {
+
             var model = _mapper.Map<Scriptures>(ScripturesDTO);
 
             _ScripturesData.InsertAsync(model);
