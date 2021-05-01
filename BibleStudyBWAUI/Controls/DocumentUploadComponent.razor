@@ -57,12 +57,9 @@
             documents.DocumentDescription = file.FileInfo.RawFile.ToString();
 
 
-
             file.Stream.WriteTo(filestream);
             filestream.Close();
             file.Stream.Close();
-
-
         }
     }
 

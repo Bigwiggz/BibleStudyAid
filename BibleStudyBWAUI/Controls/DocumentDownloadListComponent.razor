@@ -1,0 +1,29 @@
+﻿@using BibleStudyBWAUI.ViewModels
+
+<h3>Documents Download</h3>
+
+@foreach (var document in MyDocuments)
+{
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">@document.DocumentName</h5>
+            <h6>Document Type: @document.DocumentType</h6>
+            <p class="card-text">@document.DocumentDescription</p>
+            <a href="#" class="btn btn-primary" @onclick="()=>DownloadSelectedFile(document)">Download File</a>
+        </div>
+    </div>
+}
+
+
+@code {
+    [Parameter]
+    public IEnumerable<DocumentsUserModel> MyDocuments { get; set; }
+
+
+
+    private void DownloadSelectedFile(DocumentsUserModel document)
+    {
+
+    }
+
+}
