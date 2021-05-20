@@ -1,10 +1,10 @@
 ﻿/*
 ----------------------------------------------------------------------------
--- Object Name: dbo.spGetByFKTagToOtherTables
+-- Object Name: dbo.spGetByFKTagToOtherScriptures
 -- Project: DBBibleStudyAid
 -- Business Process: N/A
 -- Purpose: C Operations on a record into a table
--- Detailed Description: Insert a record into the dbo.TagToOtherTables table
+-- Detailed Description: Insert a record into the dbo.TagToOtherScriptures table
 -- Database: DBBibleStudyAid
 -- Dependent Objects: None
 -- Called By: Application
@@ -18,12 +18,12 @@
 --
 */
 
-CREATE PROCEDURE [dbo].[spGetByFKTagToOtherTables]
+CREATE PROCEDURE [dbo].[spGetByFKTagsToOtherScriptures]
 	@FK NVARCHAR(1000)
 AS
 BEGIN
     SET NOCOUNT ON;
 	SELECT *
-	FROM [dbo].[tblTagsToOtherTables]
+	FROM [dbo].[tblScriptures]
 	WHERE FKTableIdandName=@FK;
 END
