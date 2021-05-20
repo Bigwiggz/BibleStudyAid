@@ -49,7 +49,7 @@ namespace BibleStudyInfoAPI.Controllers
             return Ok(dTOModel);
         }
 
-        // GET: api/<DailyBibleReadingController>/id
+        // GET: api/<DailyBibleReadingController>/FullRecord/id
         [HttpGet("{id}")]
         [ActionName("FullRecord")]
         public async Task<ActionResult<DailyBibleReadingAllDTO>> GetFullRecordsAsync(int id)

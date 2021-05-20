@@ -19,7 +19,7 @@
 */
 
 CREATE PROCEDURE [dbo].[spGetByFKTagToOtherTables]
-	@FK INT
+	@FK NVARCHAR(1000)
 AS
 BEGIN
     SET NOCOUNT ON;

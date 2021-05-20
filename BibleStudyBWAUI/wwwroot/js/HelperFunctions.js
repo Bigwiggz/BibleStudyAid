@@ -14,7 +14,7 @@ function base64ToArrayBuffer(base64) {
     return bytes;
 }
 
-//function to sae file
+//function to save file
 function saveByteArray(reportName, byte, filetype) {
     var blob = new Blob([byte], { type: filetype });
     var link = document.createElement('a');
@@ -24,9 +24,12 @@ function saveByteArray(reportName, byte, filetype) {
     link.click();
 };
 
-/*
- * Example of use
-var sampleArr = base64ToArrayBuffer(data);
-var fileType="application/pdf";
-saveByteArray("Sample Report", sampleArr,fileType);
- */
+//Call function from C# blazor code
+function downloadSelectedFile(document) {
+    let data = document.Document;
+    let fileName = document.DocumentName;
+    let fileType = document.DocumentType;
+    var sampleArr = base64ToArrayBuffer(data);
+    saveByteArray(fileName, sampleArr, fileType);
+}
+

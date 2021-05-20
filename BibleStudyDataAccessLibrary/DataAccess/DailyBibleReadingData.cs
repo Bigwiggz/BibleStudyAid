@@ -139,9 +139,10 @@ namespace BibleStudyDataAccessLibrary.DataAccess
         {
             try
             {
+                _sql.StartTransaction("DBBibleStudyAid");
 
                 //Step 1) Get Parent Record Info
-                var dailyBibleReading = await _sql.LoadSingleObjectInTransaction<DailyBibleReading, dynamic>("spGetByIdDailyBibleReadings", new { Id });
+                var dailyBibleReading = await _sql.LoadSingleObjectInTransaction<DailyBibleReading, dynamic>("spGetByIdDailyBibleReading", new { Id });
                 //Step 2) Get Parent Key for all children tables
                 var PKId = dailyBibleReading.PKIdtblDailyBibleReadings;
                 //Step 3) Get all children table info: References
@@ -153,6 +154,8 @@ namespace BibleStudyDataAccessLibrary.DataAccess
                 var tagsToOtherTablesList = await _sql.LoadDataInTransaction<TagsToOtherTables, dynamic>("spGetByFKTagsToOtherScriptures", new { FK = PKId });
                 //Step 6) Get all children documents
                 var documentsList = await _sql.LoadDataInTransaction<Documents, dynamic>("spGetByFKDocuments", new { FK = PKId });
+
+                _sql.CommitTransaction();
 
                 //Build return model
                 DailyBibleReadingAll dailyBibleReadingAll = new DailyBibleReadingAll

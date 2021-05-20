@@ -1,4 +1,4 @@
-﻿@page "/dailybiblereading/{Id:int}"
+﻿@page "/dailybiblereading/fullrecord/{Id:int}"
 @inject HttpClient Http
 @using BibleStudyBWAUI.ViewModels
 
@@ -30,20 +30,20 @@
 </CascadingValue>
 
 
-    @code {
-        [Parameter]
-        public int Id { get; set; }
+@code {
+    [Parameter]
+    public int Id { get; set; }
 
 
 
-        private DailyBibleReadingAllViewModel dailyBibleReading { get; set; }
+    private DailyBibleReadingAllViewModel dailyBibleReading { get; set; }
 
-        protected override async Task OnInitializedAsync()
-        {
-            dailyBibleReading = await Http.GetFromJsonAsync<DailyBibleReadingAllViewModel>($"https://localhost:5001/api/dailybiblereading/{Id}");
+    protected override async Task OnInitializedAsync()
+    {
+        dailyBibleReading = await Http.GetFromJsonAsync<DailyBibleReadingAllViewModel>($"https://localhost:5001/api/dailybiblereading/fullrecord/{Id}");
 
 
-            base.OnInitialized();
-        }
-
+        base.OnInitialized();
     }
+
+}

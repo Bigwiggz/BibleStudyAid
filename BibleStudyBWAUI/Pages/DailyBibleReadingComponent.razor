@@ -1,4 +1,4 @@
-﻿@page "/dailybiblereading"
+﻿@page "/dailybiblereading/basic"
 @inject HttpClient Http
 
 
@@ -22,7 +22,7 @@ else
         {
             <tbody>
                 <tr>
-                    <td><a href="@($"/dailybiblereading/{item.Id}")" class="nav-link">@item.LessonLearnedDescription</a></td>
+                    <td><a href="@($"/dailybiblereading/fullrecord/{item.Id}")" class="nav-link">@item.LessonLearnedDescription</a></td>
                     <td>@item.ScriptureStartPoint</td>
                     <td>@item.ScriptureEndPoint</td>
                 </tr>
@@ -45,7 +45,7 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        dailyBibleReadingList = await Http.GetFromJsonAsync<IEnumerable<DailyBibleReadingViewModel>>("https://localhost:5001/api/dailybiblereading/");
+        dailyBibleReadingList = await Http.GetFromJsonAsync<IEnumerable<DailyBibleReadingViewModel>>("https://localhost:5001/api/dailybiblereading/basic");
     }
 
 }

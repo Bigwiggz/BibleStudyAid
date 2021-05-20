@@ -1,4 +1,5 @@
 ﻿@using BibleStudyBWAUI.ViewModels
+@inject JSRuntime JSRuntime
 
 <h3>Documents Download</h3>
 
@@ -21,9 +22,9 @@
 
 
 
-    private void DownloadSelectedFile(DocumentsUserModel document)
+    private async Task DownloadSelectedFile(DocumentsUserModel document)
     {
-
+        await JSRuntime.InvokeAsync<DocumentsUserModel>("downloadSelectedFile", document);
     }
 
 }
