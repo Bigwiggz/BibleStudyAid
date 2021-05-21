@@ -2,7 +2,7 @@
 
 <h3>Reference List</h3>
 
-@if (referenceList == null)
+@if (ReferenceList == null)
 {
     <div id="loading">Loading...</div>
 }
@@ -15,7 +15,7 @@ else
                 <th>Reference</th>
             </tr>
         </thead>
-        @foreach (var item in referenceList)
+        @foreach (var item in ReferenceList)
         {
             <tbody>
                 <tr>
@@ -35,6 +35,6 @@ else
 
 @code {
     [CascadingParameter]
-    public IEnumerable<ReferenceViewModel> referenceList { get; set; }
+    public IEnumerable<ReferenceViewModel> ReferenceList { get; set; }
 
 }

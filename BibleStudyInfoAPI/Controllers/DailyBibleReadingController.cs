@@ -56,7 +56,7 @@ namespace BibleStudyInfoAPI.Controllers
         {
             var dailyBibleReadingAll = await _dailyBibleReadingData.GetParentAndAllChildrenRecordsAsync(id);
 
-            var DTOList = _mapper.Map<IEnumerable<DailyBibleReadingAllDTO>>(dailyBibleReadingAll);
+            var DTOList = _mapper.Map<DailyBibleReadingAllDTO>(dailyBibleReadingAll);
             return Ok(DTOList);
         }
 
