@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30907.101
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32002.185
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "DBBibleStudyAid", "DBBibleStudyAid\DBBibleStudyAid.sqlproj", "{9700B582-F559-4348-A372-B6D13633D36F}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BibleStudyInfoAPI", "BibleStudyInfoAPI\BibleStudyInfoAPI.csproj", "{CB7D2E14-4843-407B-81A8-F37AC95FDD63}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BibleStudyBWAUI", "BibleStudyBWAUI\BibleStudyBWAUI.csproj", "{4E235D2F-98C5-4856-99BF-C42DB10014F5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BibleStudyAidMVC", "BibleStudyAidMVC\BibleStudyAidMVC.csproj", "{E915872B-089C-44C6-99B0-66B4B3CC6FC6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,6 +37,10 @@ Global
 		{4E235D2F-98C5-4856-99BF-C42DB10014F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4E235D2F-98C5-4856-99BF-C42DB10014F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4E235D2F-98C5-4856-99BF-C42DB10014F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E915872B-089C-44C6-99B0-66B4B3CC6FC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E915872B-089C-44C6-99B0-66B4B3CC6FC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E915872B-089C-44C6-99B0-66B4B3CC6FC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E915872B-089C-44C6-99B0-66B4B3CC6FC6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
