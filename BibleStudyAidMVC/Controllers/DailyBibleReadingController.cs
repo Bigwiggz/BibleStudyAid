@@ -20,7 +20,7 @@ namespace BibleStudyAidMVC.Controllers
         }
 
         // GET: DailyBibleReadingController
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> IndexAsync()
         {
             var dailyBibleReadingList = await _dailyBibleReadingData.GetAllAsync();
             var viewModel = _mapper.Map<IEnumerable<DailyBibleReadingVM>>(dailyBibleReadingList);
@@ -28,9 +28,19 @@ namespace BibleStudyAidMVC.Controllers
         }
 
         // GET: DailyBibleReadingController/Details/5
-        public ActionResult Details(int id)
+        public async Task<IActionResult> DetailsAsync(int? id)
         {
-            return View();
+            if (id is null)
+            {
+                return NotFound();
+            }
+            var dailyBibleReadingAll = await _dailyBibleReadingData.GetParentAndAllChildrenRecordsAsync(id.Value);
+            if (dailyBibleReadingAll is null)
+            {
+                return NotFound();
+            }
+            var viewModel = _mapper.Map<DailyBibleReadingAllVM>(dailyBibleReadingAll);
+            return View(viewModel);
         }
 
         // GET: DailyBibleReadingController/Create

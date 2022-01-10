@@ -146,7 +146,6 @@ namespace BibleStudyDataAccessLibrary.DataAccess
                 //Step 2) Get Parent Key for all children tables
                 var PKId = dailyBibleReading.PKIdtblDailyBibleReadings;
                 //Step 3) Get all children table info: References
-
                 var referencesList = await _sql.LoadDataInTransaction<References, dynamic>("spGetByFKReferences", new { FK = PKId });
                 //Step 4) Get all children table info: Scriptures
                 var scripturesList = await _sql.LoadDataInTransaction<Scriptures, dynamic>("spGetByFKScriptures", new { FK = PKId });

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using BibleStudyAidMVC.ViewModels;
 using BibleStudyDataAccessLibrary.Models;
+using BibleStudyDataAccessLibrary.Models.ComplexModels;
 
 namespace BibleStudyAidMVC.Extensions
 {
@@ -10,6 +11,11 @@ namespace BibleStudyAidMVC.Extensions
         {
             //DailyBibleReading
             CreateMap<DailyBibleReading, DailyBibleReadingVM>();
+            CreateMap<DailyBibleReadingVM, DailyBibleReading>();
+
+            //DailyBibleReadingAll
+            CreateMap<DailyBibleReadingAll, DailyBibleReadingAllVM>();
+            CreateMap<DailyBibleReadingAllVM,DailyBibleReadingAll>();
         }
     }
 }
