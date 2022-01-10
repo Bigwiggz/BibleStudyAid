@@ -65,6 +65,17 @@
             @if(User.Identity.IsAuthenticated)
             {
                 <li class="nav-item">
+                    <a class="nav-link @Url.MakeActiveClass("home","index")" asp-controller="DailyBibleReading" asp-action="Index">
+                        <i class="nav-icon fas fa-book"></i>
+                        <p>
+                         Daily Bible Reading
+                        </p>
+                    </a>
+                </li>
+            }
+            @if(User.Identity.IsAuthenticated)
+            {
+                <li class="nav-item">
                     <a class="nav-link @Url.MakeActiveClass("home","privacy")" asp-controller="Home" asp-action="Privacy">
                         <i class="nav-icon fas fa-lock"></i>
                         <p>

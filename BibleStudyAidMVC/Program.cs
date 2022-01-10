@@ -1,11 +1,14 @@
 using BibleStudyAidMVC.Data;
 using BibleStudyAidMVC.Services.EmailServices;
 using BibleStudyAidMVC.ViewModels;
+using BibleStudyDataAccessLibrary.DataAccess;
+using BibleStudyDataAccessLibrary.Internal;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using System.Configuration;
+using AutoMapper;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +21,18 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
+
+//Add Personal Services
+builder.Services.AddTransient<ISqlDataAccess, SqlDataAccess>();
+builder.Services.AddTransient<IDailyBibleReadingData, DailyBibleReadingData>();
+builder.Services.AddTransient<IFamilyStudyProjectsData, FamilyStudyProjectsData>();
+builder.Services.AddTransient<IDocumentsData, DocumentsData>();
+builder.Services.AddTransient<IReferencesData, ReferencesData>();
+builder.Services.AddTransient<IScripturesData, ScripturesData>();
+builder.Services.AddTransient<IMeetingAssembliesData, MeetingAssembliesData>();
+
+//Add Automapper
+builder.Services.AddAutoMapper(typeof(Program));
 
 //Make everything authorized access
 builder.Services.AddMvc(o => 
