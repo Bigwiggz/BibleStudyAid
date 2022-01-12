@@ -1,0 +1,96 @@
+﻿
+@model DailyBibleReadingAllVM
+@{
+    ViewData["Title"]="Daily Bible Reading";
+    Layout = "~/Views/Shared/AdminLTE/_Layout.cshtml";
+}
+<h1>@ViewData["Title"]</h1>
+@*SCRIPTURES*@
+<div class="row">
+    <div class="col-12 col-lg-6 card m-1">
+        <div class="card-header">
+            <h4>From</h4>
+        </div>
+        <div class="car-body">
+            <h4>@Model.ScriptureStartPoint</h4>
+        </div>
+    </div>
+    <div class="col-12 col-lg-6 card m-1">
+        <div class="card-header">
+            <h4>To</h4>
+        </div>
+        <div class="car-body">
+            <h4>@Model.ScriptureEndPoint</h4>
+        </div>
+    </div>
+</div>
+@*LESSSONS LEARNED*@
+<div class="row">
+    <div class="col-11 card m-1">
+        <div class="card-header">
+            <h4>Lessons Learned</h4>
+        </div>
+        <div class="card-body">
+            <p>@Model.LessonLearnedDescription</p>
+        </div>
+    </div>
+</div>
+
+@*REFERENCES*@
+<div class="row">
+    <div class="col-11 card m-1">
+        <div class="card-header">
+            <h3>References</h3>
+        </div>
+        @if(@Model.ReferencesList.Count>0)
+        {
+            <div class="card-body">
+                @foreach(var reference in @Model.ReferencesList)
+                {
+                    <p>@reference.Reference</p>
+                }
+            </div>
+        }
+        else
+        {
+            <div class="card-body">NONE</div>
+        }
+    </div>
+</div>
+
+@*DOCUMENTS*@
+@if(Model.DocumentsList.Count>0)
+{
+    @*TODO:Finish Documents List*@
+}
+else
+{
+    <h3>Documents: None</h3>
+}
+
+@*SCRIPTURAL REFERENCES*@
+@if(Model.ScripturesList.Count>0)
+{
+    @*TODO:Finish Schriptural List*@
+}
+else
+{
+    <h3>Scriptural References: None</h3>
+}
+
+@*TEXT READ*@
+@if(Model.BibleText is not null)
+{
+    <div class="row">
+        <div class="col-12">
+            <h3>Scriptural Citation</h3>
+        </div>
+    </div>
+    <p>@Model.BibleText</p>
+}
+else
+{
+    <h3>Scriptural Text: Not Available</h3>
+}
+
+

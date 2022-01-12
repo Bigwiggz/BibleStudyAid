@@ -65,7 +65,7 @@
             @if(User.Identity.IsAuthenticated)
             {
                 <li class="nav-item">
-                    <a class="nav-link @Url.MakeActiveClass("home","index")" asp-controller="DailyBibleReading" asp-action="Index">
+                    <a class="nav-link @Url.MakeActiveClass("dailybiblereading","index")" asp-controller="DailyBibleReading" asp-action="Index">
                         <i class="nav-icon fas fa-book"></i>
                         <p>
                          Daily Bible Reading
@@ -87,7 +87,7 @@
             @if(User.Identity.IsAuthenticated)
             {
                 <li class="nav-item">
-                    <a class="nav-link @Url.MakeActiveClass("home","index")" asp-controller="Home" asp-action="Index">
+                    <a class="nav-link @Url.MakeActiveClass("simple","index")" asp-controller="Home" asp-action="Index">
                         <i class="nav-icon fas fa-th"></i>
                         <p>
                         Simple Link
@@ -98,7 +98,7 @@
             @if(User.Identity.IsAuthenticated)
             {
                 <li class="nav-item menu-open">
-                    <a href="#" class="nav-link active">
+                    <a href="#" class="nav-link @Url.MakeActiveClass("test","index")">
                       <i class="nav-icon fas fa-tachometer-alt"></i>
                       <p>
                         Starter Pages

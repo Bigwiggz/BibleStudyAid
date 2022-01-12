@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using System.Configuration;
 using AutoMapper;
+using BibleStudyAidMVC.Services.HttpServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,6 +31,15 @@ builder.Services.AddTransient<IDocumentsData, DocumentsData>();
 builder.Services.AddTransient<IReferencesData, ReferencesData>();
 builder.Services.AddTransient<IScripturesData, ScripturesData>();
 builder.Services.AddTransient<IMeetingAssembliesData, MeetingAssembliesData>();
+
+//Add HttpClient
+string uri = builder.Configuration.GetValue<string>("BibleTextAPI");
+builder.Services.AddHttpClient("BibleTextAPI", c =>
+{
+    c.BaseAddress = new Uri(uri);
+});
+
+builder.Services.AddSingleton<IHttpRequestService, HttpRequestService>();
 
 //Add Automapper
 builder.Services.AddAutoMapper(typeof(Program));

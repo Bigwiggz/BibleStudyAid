@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using BibleStudyAidMVC.Services.HttpServices;
 using BibleStudyAidMVC.ViewModels;
 using BibleStudyDataAccessLibrary.DataAccess;
 using Microsoft.AspNetCore.Http;
@@ -11,12 +12,14 @@ namespace BibleStudyAidMVC.Controllers
         private readonly IDailyBibleReadingData _dailyBibleReadingData;
         private readonly ILogger<DailyBibleReadingData> _logger;
         private readonly IMapper _mapper;
+        private readonly IHttpRequestService _httpRequestService;
 
-        public DailyBibleReadingController(IDailyBibleReadingData dailyBibleReadingData, ILogger<DailyBibleReadingData> logger, IMapper mapper)
+        public DailyBibleReadingController(IDailyBibleReadingData dailyBibleReadingData, ILogger<DailyBibleReadingData> logger, IMapper mapper, IHttpRequestService httpRequestService)
         {
             _dailyBibleReadingData = dailyBibleReadingData;
             _logger = logger;
             _mapper = mapper;
+            _httpRequestService = httpRequestService;
         }
 
         // GET: DailyBibleReadingController
@@ -35,11 +38,27 @@ namespace BibleStudyAidMVC.Controllers
                 return NotFound();
             }
             var dailyBibleReadingAll = await _dailyBibleReadingData.GetParentAndAllChildrenRecordsAsync(id.Value);
-            if (dailyBibleReadingAll is null)
+            var viewModel = _mapper.Map<DailyBibleReadingAllVM>(dailyBibleReadingAll);
+            if (viewModel.ScriptureStartPoint is not null)
+            {
+                try
+                {
+                    var bibleCitation = dailyBibleReadingAll.ScriptureStartPoint.Split(':').First();
+                    var bibleAPIModel = await _httpRequestService.GetBibleVersesText(bibleCitation);
+                    viewModel.BibleText = bibleAPIModel.text;
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogInformation($"There was an error returning the Bible Text: {ex.Message}");
+                    throw;
+                }
+
+            }
+            if (viewModel is null)
             {
                 return NotFound();
             }
-            var viewModel = _mapper.Map<DailyBibleReadingAllVM>(dailyBibleReadingAll);
+
             return View(viewModel);
         }
 
