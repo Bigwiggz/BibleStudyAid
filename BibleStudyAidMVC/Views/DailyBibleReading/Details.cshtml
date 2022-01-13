@@ -7,28 +7,28 @@
 <h1>@ViewData["Title"]</h1>
 @*SCRIPTURES*@
 <div class="row">
-    <div class="col-12 col-lg-6 card m-1">
-        <div class="card-header">
-            <h4>From</h4>
+    <div class="col-12 col-lg-4 card m-1">
+        <div class="card-header text-white bg-secondary mb-3">
+            <h5>From</h5>
         </div>
         <div class="car-body">
-            <h4>@Model.ScriptureStartPoint</h4>
+            <h5>@Model.ScriptureStartPoint</h5>
         </div>
     </div>
-    <div class="col-12 col-lg-6 card m-1">
-        <div class="card-header">
-            <h4>To</h4>
+    <div class="col-12 col-lg-4 card m-1">
+        <div class="card-header text-white bg-secondary mb-3">
+            <h5>To</h5>
         </div>
         <div class="car-body">
-            <h4>@Model.ScriptureEndPoint</h4>
+            <h5>@Model.ScriptureEndPoint</h5>
         </div>
     </div>
 </div>
 @*LESSSONS LEARNED*@
 <div class="row">
     <div class="col-11 card m-1">
-        <div class="card-header">
-            <h4>Lessons Learned</h4>
+        <div class="card-header text-white bg-secondary mb-3">
+            <h5>Lessons Learned</h5>
         </div>
         <div class="card-body">
             <p>@Model.LessonLearnedDescription</p>
@@ -39,58 +39,85 @@
 @*REFERENCES*@
 <div class="row">
     <div class="col-11 card m-1">
-        <div class="card-header">
-            <h3>References</h3>
+        <div class="card-header text-white bg-secondary mb-3">
+            <h5>References</h5>
         </div>
-        @if(@Model.ReferencesList.Count>0)
-        {
-            <div class="card-body">
-                @foreach(var reference in @Model.ReferencesList)
-                {
-                    <p>@reference.Reference</p>
-                }
-            </div>
-        }
-        else
-        {
-            <div class="card-body">NONE</div>
-        }
+        <div class="card-body">
+            @if(@Model.ReferencesList.Count>0)
+            {
+            
+                    @foreach(var reference in @Model.ReferencesList)
+                    {
+                        <p>@reference.Reference</p>
+                    }
+            
+            }
+            else
+            {
+                <p>NONE</p>
+            }
+        </div>
     </div>
 </div>
 
 @*DOCUMENTS*@
-@if(Model.DocumentsList.Count>0)
-{
-    @*TODO:Finish Documents List*@
-}
-else
-{
-    <h3>Documents: None</h3>
-}
-
-@*SCRIPTURAL REFERENCES*@
-@if(Model.ScripturesList.Count>0)
-{
-    @*TODO:Finish Schriptural List*@
-}
-else
-{
-    <h3>Scriptural References: None</h3>
-}
-
-@*TEXT READ*@
-@if(Model.BibleText is not null)
-{
-    <div class="row">
-        <div class="col-12">
-            <h3>Scriptural Citation</h3>
+<div class="row">
+    <div class="col-11 card m-1">
+        <div class="card-header text-white bg-secondary mb-3">
+            <h5>Documents</h5>
+        </div>
+        <div class="card-body">
+            @if(@Model.DocumentsList.Count>0)
+            {
+            
+                    @foreach(var doc in @Model.DocumentsList)
+                    {
+                        <a asp-controller="Documents" asp-action="Details" asp-route-id="@doc.Id">@doc.DocumentName</a>
+                    }
+            
+            }
+            else
+            {
+                <p>NONE</p>
+            }
         </div>
     </div>
-    <p>@Model.BibleText</p>
-}
-else
-{
-    <h3>Scriptural Text: Not Available</h3>
-}
+</div>
+
+@*SCRIPTURAL REFERENCES*@
+<div class="row">
+    <div class="col-11 card m-1">
+        <div class="card-header text-white bg-secondary mb-3">
+            <h5>Scriptural References</h5>
+        </div>
+        <div class="card-body">
+            @if(@Model.ScripturesList.Count>0)
+            {
+            
+                    @foreach(var scripture in @Model.ScripturesList)
+                    {
+                        <a asp-controller="Scriptures" asp-action="Details" asp-route-id="@scripture.Id">@scripture.Scripture</a>
+                    }
+            
+            }
+            else
+            {
+                <p>NONE</p>
+            }
+        </div>
+    </div>
+</div>
+
+@*TEXT READ*@
+<div class="row">
+    <div class="col-11 card m-1">
+        <div class="card-header text-white bg-secondary mb-3">
+            <h5>Scriptural Text</h5>
+        </div>
+        <div class="card-body">
+            <p>@Model.BibleText</p>
+        </div>
+    </div>
+</div>
 
 

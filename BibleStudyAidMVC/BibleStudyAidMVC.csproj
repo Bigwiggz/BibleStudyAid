@@ -24,4 +24,8 @@
     <ProjectReference Include="..\BibleStudyDataAccessLibrary\BibleStudyDataAccessLibrary.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\Tabs\" />
+  </ItemGroup>
+
 </Project>
