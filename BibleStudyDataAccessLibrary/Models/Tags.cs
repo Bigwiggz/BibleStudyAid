@@ -10,5 +10,6 @@ namespace BibleStudyDataAccessLibrary.Models
         public string TagName { get; set; }
         public string TagDescription { get; set; }
         public DateTime TagCreatedDate { get;}
+        public bool IsDeleted { get; set; }
     }
 }

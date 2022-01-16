@@ -27,35 +27,40 @@ namespace BibleStudyDataAccessLibrary.DataAccess
             _logger = logger;
         }
 
-        public async void InsertAsync(DailyBibleReading dailyBibleReading)
+        public async Task<object> InsertAsync(DailyBibleReading dailyBibleReading)
         {
             var p = new
             {
                 ScriptureStartPoint=dailyBibleReading.ScriptureStartPoint,
                 ScriptureEndPoint=dailyBibleReading.ScriptureEndPoint,
                 LessonLearnedDescription=dailyBibleReading.LessonLearnedDescription,
-                DateRead=dailyBibleReading.DateRead
+                DateRead=dailyBibleReading.DateRead,
+                IsDeleted=dailyBibleReading.IsDeleted
             };
 
-            await _sql.SaveData("spCreateDailyBibleReading", p);
+            var result=await _sql.SaveData<object,dynamic>("spCreateDailyBibleReading", p);
+
+            return result;
 
         }
 
-        public async void UpdateAsync(DailyBibleReading dailyBibleReading)
+        public async Task<object> UpdateAsync(DailyBibleReading dailyBibleReading)
         {
 
 
-            await _sql.SaveData("spUpdateDailyBibleReading", dailyBibleReading);
+            var result=await _sql.SaveData<object,dynamic>("spUpdateDailyBibleReading", dailyBibleReading);
+            return result;
         }
 
-        public async void DeleteAsync(object Id)
+        public async Task<object> DeleteAsync(object Id)
         {
             var p = new
             {
                 Id = Id
             };
 
-            await _sql.SaveData("spDeleteDailyBibleReading", p);
+            var result=await _sql.SaveData<object,dynamic>("spDeleteDailyBibleReading", p);
+            return result;
         }
 
         public async Task<IEnumerable<DailyBibleReading>> GetAllAsync()

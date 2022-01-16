@@ -13,5 +13,6 @@ namespace BibleStudyDataAccessLibrary.Models
         public string Verse { get; set; }
         public string UniqueId { get; set; }
         public string FKTableIdandName { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }

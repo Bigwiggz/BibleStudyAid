@@ -11,5 +11,6 @@ namespace BibleStudyDataAccessLibrary.Models
         public string Explanation { get; set; }
         public string FKldtblPeronalStudyFindings { get; set; }
         public int FKPersonalStudyProjectId { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }

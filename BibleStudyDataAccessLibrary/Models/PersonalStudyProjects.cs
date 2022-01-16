@@ -12,5 +12,6 @@ namespace BibleStudyDataAccessLibrary.Models
         public string PersonalStudyQuestionAssignment { get; set; }
         public DateTime DateFinished { get; set; }
         public string BaseScripture { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }

@@ -20,7 +20,8 @@
 
 CREATE PROCEDURE [dbo].[spCreateReferences]
     @Reference NVARCHAR(1000),
-	@FKTableIdandName NVARCHAR(1000)
+	@FKTableIdandName NVARCHAR(1000),
+	@IsDeleted BIT NULL
 AS
 BEGIN
     SET NOCOUNT ON;

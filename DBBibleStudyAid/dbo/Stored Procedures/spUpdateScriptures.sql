@@ -24,7 +24,8 @@ CREATE PROCEDURE [dbo].[spUpdateScriptures]
 	@FKTableIdandName NVARCHAR(1000),
     @Book NVARCHAR(1000),
     @Chapter NVARCHAR(3),
-    @Verse NVARCHAR(1000)
+    @Verse NVARCHAR(1000),
+    @IsDeleted BIT
 
 AS
 BEGIN 
@@ -38,7 +39,8 @@ BEGIN
 	FKTableIdandName=ISNULL(@FKTableIdandName,FKTableIdandName),
     Book=ISNULL(@Book,Book), 
 	Chapter=ISNULL(@Chapter,Chapter),
-    Verse=ISNULL(@Verse,Verse)
+    Verse=ISNULL(@Verse,Verse),
+    IsDeleted=ISNULL(@IsDeleted,IsDeleted)
 
 	WHERE Id=@Id
     END 

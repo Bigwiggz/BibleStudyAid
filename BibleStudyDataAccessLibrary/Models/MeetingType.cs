@@ -9,5 +9,6 @@ namespace BibleStudyDataAccessLibrary.Models
         public int Id { get; set; }
         public string MeetingTypeName { get; set; }
         public string MeetingTypeDescription { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }

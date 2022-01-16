@@ -22,10 +22,11 @@ namespace BibleStudyDataAccessLibrary.DataAccess
             _logger = Logger;
         }
 
-        public async void DeleteAsync(object Id)
+        public async Task<object> DeleteAsync(object Id)
         {
-            await _sql.SaveData("spDeleteMeetingAssembliesData", Id);
+            var result=await _sql.SaveData<object,dynamic>("spDeleteMeetingAssembliesData", Id);
             _logger.LogInformation("Family Study Project Record {Id} was deleted", Id);
+            return result;
         }
 
         public async Task<IEnumerable<MeetingAssemblies>> GetAllAsync()
@@ -47,7 +48,7 @@ namespace BibleStudyDataAccessLibrary.DataAccess
             return result;
         }
 
-        public async void InsertAsync(MeetingAssemblies obj)
+        public async Task<object> InsertAsync(MeetingAssemblies obj)
         {
             var p = new
             {
@@ -55,13 +56,15 @@ namespace BibleStudyDataAccessLibrary.DataAccess
                 MeetingTypeId = obj.MeetingTypeId,
                 PartTitle = obj.PartTitle,
                 Scripture = obj.Scripture,
-                DateofMeeting = obj.DateofMeeting
+                DateofMeeting = obj.DateofMeeting,
+                IsDeleted=obj.IsDeleted
             };
 
-            await _sql.SaveData("spCreateMeetingAssemblies", p);
+            var result=await _sql.SaveData<object,dynamic>("spCreateMeetingAssemblies", p);
+            return result;
         }
 
-        public async void UpdateAsync(MeetingAssemblies obj)
+        public async Task<object>UpdateAsync(MeetingAssemblies obj)
         {
             var p = new
             {
@@ -69,10 +72,12 @@ namespace BibleStudyDataAccessLibrary.DataAccess
                 MeetingTypeId = obj.MeetingTypeId,
                 PartTitle = obj.PartTitle,
                 Scripture = obj.Scripture,
-                DateofMeeting = obj.DateofMeeting
+                DateofMeeting = obj.DateofMeeting,
+                IsDeleted = obj.IsDeleted
             };
 
-            await _sql.SaveData("spUpdateMeetingAssemblies", p);
+            var result=await _sql.SaveData<object,dynamic>("spUpdateMeetingAssemblies", p);
+            return result;
         }
 
         public async void SaveFullParentAndAllChildrenRecords(MeetingAssemblies meetingAssemblies,

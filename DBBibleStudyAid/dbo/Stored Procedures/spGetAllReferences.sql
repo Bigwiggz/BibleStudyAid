@@ -24,5 +24,6 @@ AS
 BEGIN
     SET NOCOUNT ON;
 	SELECT *
-	FROM [dbo].[tblReferences];
+	FROM [dbo].[tblReferences]
+	WHERE [dbo].[tblReferences].[IsDeleted]='FALSE';
 END

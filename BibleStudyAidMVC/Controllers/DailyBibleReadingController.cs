@@ -2,6 +2,7 @@
 using BibleStudyAidMVC.Services.HttpServices;
 using BibleStudyAidMVC.ViewModels;
 using BibleStudyDataAccessLibrary.DataAccess;
+using BibleStudyDataAccessLibrary.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -39,7 +40,7 @@ namespace BibleStudyAidMVC.Controllers
             }
             var dailyBibleReadingAll = await _dailyBibleReadingData.GetParentAndAllChildrenRecordsAsync(id.Value);
             var viewModel = _mapper.Map<DailyBibleReadingAllVM>(dailyBibleReadingAll);
-            if (viewModel.ScriptureStartPoint is not null)
+            if (viewModel is not null)
             {
                 try
                 {
@@ -65,17 +66,21 @@ namespace BibleStudyAidMVC.Controllers
         // GET: DailyBibleReadingController/Create
         public ActionResult Create()
         {
-            return View();
+            var viewModel = new DailyBibleReadingVM();
+            return View(viewModel);
         }
 
         // POST: DailyBibleReadingController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<IActionResult> CreateAsync(DailyBibleReadingVM viewModel)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                var model=_mapper.Map<DailyBibleReading>(viewModel);
+                var Id=await _dailyBibleReadingData.InsertAsync(model);
+                
+                return View("EditAsync", Id);
             }
             catch
             {
@@ -84,9 +89,36 @@ namespace BibleStudyAidMVC.Controllers
         }
 
         // GET: DailyBibleReadingController/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<IActionResult> EditAsync(int? id)
         {
-            return View();
+            if (id is null)
+            {
+                return NotFound();
+            }
+
+            var dailyBibleReadingAll = await _dailyBibleReadingData.GetParentAndAllChildrenRecordsAsync(id.Value);
+            var viewModel = _mapper.Map<DailyBibleReadingAllVM>(dailyBibleReadingAll);
+            if (viewModel is not null)
+            {
+                try
+                {
+                    var bibleCitation = dailyBibleReadingAll.ScriptureStartPoint.Split(':').First();
+                    var bibleAPIModel = await _httpRequestService.GetBibleVersesText(bibleCitation);
+                    viewModel.BibleText = bibleAPIModel.text;
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogInformation($"There was an error returning the Bible Text: {ex.Message}");
+                    throw;
+                }
+
+            }
+            if (viewModel is null)
+            {
+                return NotFound();
+            }
+
+            return View(viewModel);
         }
 
         // POST: DailyBibleReadingController/Edit/5

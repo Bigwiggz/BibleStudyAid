@@ -6,5 +6,6 @@
     [ScriptureEndPoint] NVARCHAR(1000) NOT NULL, 
     [LessonLearnedDescription] NVARCHAR(1000) NOT NULL, 
     [DateRead] DATETIME2 NULL, 
-    [PKIdtblDailyBibleReadings] AS CONCAT(CONVERT(VARCHAR,[Id]),'tblDailyBibleReading')
+    [PKIdtblDailyBibleReadings] AS CONCAT(CONVERT(VARCHAR,[Id]),'tblDailyBibleReading'), 
+    [IsDeleted] BIT NOT NULL DEFAULT 0
 )

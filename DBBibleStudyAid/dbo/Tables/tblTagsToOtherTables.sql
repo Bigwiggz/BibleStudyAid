@@ -6,6 +6,7 @@
     [tblName] NVARCHAR(100) NOT NULL, 
     [TagApplicationGUID] UNIQUEIDENTIFIER NOT NULL DEFAULT newId(), 
     [FKTableIdandName] NVARCHAR(1000) NOT NULL, 
+    [IsDeleted] BIT NOT NULL DEFAULT 0,
     CONSTRAINT [FK_tblTagsToOtherTables_tblTags] FOREIGN KEY ([TagsId]) REFERENCES [tblTags]([Id]) 
 )
 

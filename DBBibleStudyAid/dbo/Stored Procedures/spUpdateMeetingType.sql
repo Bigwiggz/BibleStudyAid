@@ -21,7 +21,8 @@
 CREATE PROCEDURE [dbo].[spUpdateMeetingType]
     @Id INT,
     @MeetingTypeName NVARCHAR(100),
-	@MeetingTypeDescription NVARCHAR(1000) NULL
+	@MeetingTypeDescription NVARCHAR(1000) NULL,
+    @IsDeleted BIT
 
 AS
 BEGIN 
@@ -32,7 +33,8 @@ BEGIN
     UPDATE [dbo].[tblMeetingType]
     SET 
     MeetingTypeName=ISNULL(@MeetingTypeName,MeetingTypeName), 
-	MeetingTypeDescription=ISNULL(@MeetingTypeDescription,MeetingTypeDescription)
+	MeetingTypeDescription=ISNULL(@MeetingTypeDescription,MeetingTypeDescription),
+    IsDeleted=ISNULL(@IsDeleted,IsDeleted)
 
 	WHERE Id=@Id
     END 

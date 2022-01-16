@@ -24,5 +24,6 @@ AS
 BEGIN
     SET NOCOUNT ON;
 	SELECT *
-	FROM [dbo].[tblDailyBibleReading];
+	FROM [dbo].[tblDailyBibleReading]
+	WHERE[dbo].[tblDailyBibleReading].[IsDeleted]='FALSE';
 END

@@ -23,7 +23,8 @@ CREATE PROCEDURE [dbo].[spCreateMeetingAssemblies]
     @PartTitle NCHAR(100), 
     @MeetingTypeId INT, 
     @Scripture NVARCHAR(1000), 
-    @LessonLearnedDescription NVARCHAR(1000) 
+    @LessonLearnedDescription NVARCHAR(1000),
+    @IsDeleted BIT NULL
 AS
 BEGIN
     SET NOCOUNT ON;

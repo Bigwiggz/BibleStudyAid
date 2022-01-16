@@ -23,7 +23,8 @@ CREATE PROCEDURE [dbo].[spUpdateFamilyStudyProjects]
     @DateWhenCreated DATETIME2, 
     @FamilyStudyTitle NVARCHAR(100), 
     @FamilyStudyDescription NVARCHAR(1000), 
-    @FamilyStudyFindings NVARCHAR(2000)
+    @FamilyStudyFindings NVARCHAR(2000),
+    @IsDeleted BIT
 
 AS
 BEGIN 
@@ -36,7 +37,8 @@ BEGIN
     DateWhenCreated=ISNULL(@DateWhenCreated,DateWhenCreated), 
 	FamilyStudyTitle=ISNULL(@FamilyStudyTitle,FamilyStudyTitle),
     FamilyStudyDescription=ISNULL(@FamilyStudyDescription,FamilyStudyDescription), 
-	FamilyStudyFindings =ISNULL(@FamilyStudyFindings, FamilyStudyFindings)
+	FamilyStudyFindings =ISNULL(@FamilyStudyFindings, FamilyStudyFindings),
+    IsDeleted=ISNULL(@IsDeleted,IsDeleted)
 
 	WHERE Id=@Id
     END 

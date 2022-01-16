@@ -6,6 +6,7 @@
     [PersonalStudyDescription] NVARCHAR(1000) NOT NULL, 
     [PersonalStudyQuestionAssignment] NVARCHAR(1000) NOT NULL, 
     [DateFinished] DATETIME2 NULL, 
-    [BaseScripture] NVARCHAR(1000) NULL
+    [BaseScripture] NVARCHAR(1000) NULL,
+    [IsDeleted] BIT NOT NULL DEFAULT 0
     
 )

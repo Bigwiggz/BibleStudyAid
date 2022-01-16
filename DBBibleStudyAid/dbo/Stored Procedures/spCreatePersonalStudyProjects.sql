@@ -23,7 +23,8 @@ CREATE PROCEDURE [dbo].[spCreatePersonalStudyProjects]
     @PersonalStudyDescription NVARCHAR(1000) , 
     @PersonalStudyQuestionAssignment NVARCHAR(1000) , 
     @DateFinished DATETIME2 NULL, 
-    @BaseScripture NVARCHAR(1000) NULL
+    @BaseScripture NVARCHAR(1000) NULL,
+    @IsDeleted BIT NULL
 
 AS
 BEGIN

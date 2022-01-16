@@ -23,7 +23,8 @@ CREATE PROCEDURE [dbo].[spUpdateDailyBibleReading]
     @ScriptureStartPoint NVARCHAR(1000), 
     @ScriptureEndPoint NVARCHAR(1000), 
     @LessonLearnedDescription NVARCHAR(1000), 
-    @DateRead DATETIME2 NULL
+    @DateRead DATETIME2 NULL,
+    @IsDeleted BIT
 
 AS
 BEGIN 
@@ -36,8 +37,8 @@ BEGIN
     ScriptureStartPoint=ISNULL(@ScriptureStartPoint,ScriptureStartPoint), 
 	ScriptureEndPoint=ISNULL(@ScriptureEndPoint,ScriptureEndPoint),
     LessonLearnedDescription=ISNULL(@LessonLearnedDescription,LessonLearnedDescription), 
-	DateRead =ISNULL(@DateRead ,DateRead)
-
+	DateRead =ISNULL(@DateRead ,DateRead),
+    IsDeleted=ISNULL(@IsDeleted,IsDeleted)
 	WHERE Id=@Id
     END 
 END

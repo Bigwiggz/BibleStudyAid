@@ -24,5 +24,6 @@ AS
 BEGIN
     SET NOCOUNT ON;
 	SELECT *
-	FROM [dbo].[tblDocuments];
+	FROM [dbo].[tblDocuments]
+	WHERE[dbo].[tblDocuments].[IsDeleted]='FALSE';
 END

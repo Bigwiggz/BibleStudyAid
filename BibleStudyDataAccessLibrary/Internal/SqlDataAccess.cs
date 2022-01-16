@@ -43,14 +43,14 @@ namespace BibleStudyDataAccessLibrary.Internal
             }
         }
 
-        public async Task SaveData<T>(string storedProcedure, T parameters)
+        public async Task<T> SaveData<T,U>(string storedProcedure, U parameters)
         {
             string connectionString = _config.GetConnectionString("DBBibleStudyAid");
 
             using (IDbConnection connection = new SqlConnection(connectionString))
             {
-                await connection.ExecuteAsync(storedProcedure, parameters, commandType: CommandType.StoredProcedure);
-
+                var data=await connection.QueryFirstOrDefaultAsync<T>(storedProcedure, parameters, commandType: CommandType.StoredProcedure);
+                return data;
             }
         }
 

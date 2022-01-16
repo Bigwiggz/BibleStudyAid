@@ -17,10 +17,11 @@ namespace BibleStudyDataAccessLibrary.DataAccess
             _sql = sql;
         }
 
-        public async void DeleteAsync(object Id)
+        public async Task<object> DeleteAsync(object Id)
         {
             var p = new { Id = Id };
-            await _sql.SaveData("spDeleteReferences", p);
+            var result=await _sql.SaveData<object,dynamic>("spDeleteReferences", p);
+            return result;
         }
 
         public async Task<IEnumerable<References>> GetAllAsync()
@@ -42,25 +43,29 @@ namespace BibleStudyDataAccessLibrary.DataAccess
             return result;
         }
 
-        public async void InsertAsync(References obj)
+        public async Task<object> InsertAsync(References obj)
         {
             var p = new
             {
                 FKProject = obj.FIKTableIdandName,
-                DocumentName = obj.Reference
+                DocumentName = obj.Reference,
+                IsDeleted = obj.IsDeleted
             };
 
-            await _sql.SaveData("spCreateReferences", p);
+            var result=await _sql.SaveData<object,dynamic>("spCreateReferences", p);
+            return result;
         }
 
-        public async void UpdateAsync(References obj)
+        public async Task<object>UpdateAsync(References obj)
         {
             var p = new
             {
                 FKProject = obj.FIKTableIdandName,
-                DocumentName = obj.Reference
+                DocumentName = obj.Reference,
+                IsDeleted = obj.IsDeleted
             };
-            await _sql.SaveData("spUpdateReferences", p);
+            var result=await _sql.SaveData<object,dynamic>("spUpdateReferences", p);
+            return result;
         }
     }
 }

@@ -7,12 +7,12 @@ namespace BibleStudyDataAccessLibrary.DataAccess
 {
     public interface IMeetingAssembliesData
     {
-        void DeleteAsync(object Id);
+        Task<object> DeleteAsync(object Id);
         Task<IEnumerable<MeetingAssemblies>> GetAllAsync();
         Task<MeetingAssemblies> GetByIdAsync(object Id);
         Task<MeetingAssembliesAll> GetParentAndAllChildrenRecordsAsync(int Id);
-        void InsertAsync(MeetingAssemblies obj);
+        Task<object> InsertAsync(MeetingAssemblies obj);
         void SaveFullParentAndAllChildrenRecords(MeetingAssemblies meetingAssemblies, List<References> references, List<Scriptures> scriptures, List<TagsToOtherTables> tagsToOtherTables, List<Documents> documents);
-        void UpdateAsync(MeetingAssemblies obj);
+        Task<object> UpdateAsync(MeetingAssemblies obj);
     }
 }

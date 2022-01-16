@@ -9,8 +9,8 @@ namespace BibleStudyDataAccessLibrary.GenericInterfaces
     {
         Task<IEnumerable<T>> GetAllAsync();
         Task<T> GetByIdAsync(object Id);
-        void InsertAsync(T obj);
-        void UpdateAsync(T obj);
-        void DeleteAsync(object Id);
+        Task<object> InsertAsync(T obj);
+        Task<object> UpdateAsync(T obj);
+        Task<object> DeleteAsync(object Id);
     }
 }

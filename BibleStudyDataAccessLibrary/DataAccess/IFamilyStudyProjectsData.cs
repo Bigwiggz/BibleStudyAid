@@ -6,10 +6,10 @@ namespace BibleStudyDataAccessLibrary.DataAccess
 {
     public interface IFamilyStudyProjectsData
     {
-        void DeleteAsync(object Id);
+        Task<object> DeleteAsync(object Id);
         Task<IEnumerable<FamilyStudyProjects>> GetAllAsync();
         Task<FamilyStudyProjects> GetByIdAsync(object Id);
-        void InsertAsync(FamilyStudyProjects obj);
-        void UpdateAsync(FamilyStudyProjects obj);
+        Task<object> InsertAsync(FamilyStudyProjects obj);
+        Task<object> UpdateAsync(FamilyStudyProjects obj);
     }
 }

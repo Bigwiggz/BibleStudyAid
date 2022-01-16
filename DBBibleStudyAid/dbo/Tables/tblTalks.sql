@@ -10,5 +10,6 @@
     [TalkDocumentName] NVARCHAR(256) NOT NULL,
     [ThemeScripture] NVARCHAR(1000) NULL, 
     [PKIdtblTalks] AS CONCAT(CONVERT(VARCHAR,[Id]),'tblTalks'), 
+    [IsDeleted] BIT NOT NULL DEFAULT 0,
     CONSTRAINT [FK_tblTalks_tblMeetingType] FOREIGN KEY ([MeetingTypeId]) REFERENCES [tblMeetingType]([Id])
 )

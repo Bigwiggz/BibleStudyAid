@@ -17,10 +17,11 @@ namespace BibleStudyDataAccessLibrary.DataAccess
             _sql = sql;
         }
 
-        public async void DeleteAsync(object Id)
+        public async Task<object> DeleteAsync(object Id)
         {
             var p = new { Id = Id };
-            await _sql.SaveData("spDeleteScriptures", p);
+            var result=await _sql.SaveData<object,dynamic>("spDeleteScriptures", p);
+            return result;
         }
 
         public async Task<IEnumerable<Scriptures>> GetAllAsync()
@@ -47,7 +48,7 @@ namespace BibleStudyDataAccessLibrary.DataAccess
             return result;
         }
 
-        public async void InsertAsync(Scriptures obj)
+        public async Task<object> InsertAsync(Scriptures obj)
         {
             var p = new
             {
@@ -55,14 +56,16 @@ namespace BibleStudyDataAccessLibrary.DataAccess
                 Scripture = obj.Scripture,
                 Book=obj.Book,
                 Chapter=obj.Chapter,
-                Verse=obj.Verse
+                Verse=obj.Verse,
+                IsDeleted = obj.IsDeleted
 
             };
 
-            await _sql.SaveData("spCreateScriptures", p);
+            var result=await _sql.SaveData<object,dynamic>("spCreateScriptures", p);
+            return result;
         }
 
-        public async void UpdateAsync(Scriptures obj)
+        public async Task<object>UpdateAsync(Scriptures obj)
         {
             var p = new
             {
@@ -70,10 +73,12 @@ namespace BibleStudyDataAccessLibrary.DataAccess
                 Scripture = obj.Scripture,
                 Book = obj.Book,
                 Chapter = obj.Chapter,
-                Verse = obj.Verse
+                Verse = obj.Verse,
+                IsDeleted = obj.IsDeleted
             };
 
-            await _sql.SaveData("spUpdateScriptures", p);
+            var result=await _sql.SaveData<object,dynamic>("spUpdateScriptures", p);
+            return result;
         }
     }
 }

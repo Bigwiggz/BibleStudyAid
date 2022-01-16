@@ -16,5 +16,6 @@ namespace BibleStudyDataAccessLibrary.Models
         public string TalkDocumentName { get; set; }
         public string ThemeScripture { get; set; }
         public string PKldtblTalks { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }

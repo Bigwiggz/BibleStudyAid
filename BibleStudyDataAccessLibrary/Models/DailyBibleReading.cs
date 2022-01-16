@@ -13,6 +13,7 @@ namespace BibleStudyDataAccessLibrary.Models
         public string LessonLearnedDescription { get; set; }
         public DateTime DateRead { get; set; }
         public string PKIdtblDailyBibleReadings { get; set; }
+        public bool IsDeleted { get; set; }
 
     }
 }

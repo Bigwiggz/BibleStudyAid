@@ -22,7 +22,8 @@ CREATE PROCEDURE [dbo].[spCreateDailyBibleReading]
     @ScriptureStartPoint NVARCHAR(1000), 
     @ScriptureEndPoint NVARCHAR(1000), 
     @LessonLearnedDescription NVARCHAR(1000), 
-    @DateRead DATETIME2 NULL
+    @DateRead DATETIME2 NULL,
+    @IsDeleted BIT NULL
 AS
 BEGIN
     SET NOCOUNT ON;

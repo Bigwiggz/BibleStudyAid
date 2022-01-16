@@ -19,10 +19,11 @@ namespace BibleStudyDataAccessLibrary.DataAccess
             _sql = sql;
             _logger = logger;
         }
-        public async void DeleteAsync(object Id)
+        public async Task<object> DeleteAsync(object Id)
         {
             var p = new { Id = Id };
-            await _sql.SaveData("spDeleteDocuments", p);
+            var result=await _sql.SaveData<object,dynamic>("spDeleteDocuments", p);
+            return result;
         }
 
         public async Task<IEnumerable<Documents>> GetAllAsync()
@@ -49,30 +50,34 @@ namespace BibleStudyDataAccessLibrary.DataAccess
             return result;
         }
 
-        public async void InsertAsync(Documents obj)
+        public async Task<object> InsertAsync(Documents obj)
         {
             var p = new
             {
                 FKProject = obj.FKProject,
                 DocumentName = obj.DocumentName,
                 Document = obj.Document,
-                DocumentType = obj.DocumentType
+                DocumentType = obj.DocumentType,
+                IsDeleted=obj.IsDeleted
             };
 
-            await _sql.SaveData("spCreateDocuments", p);
+            var result=await _sql.SaveData<object,dynamic>("spCreateDocuments", p);
+            return result;
         }
 
-        public async void UpdateAsync(Documents obj)
+        public async Task<object>UpdateAsync(Documents obj)
         {
             var p = new
             {
                 FKProject = obj.FKProject,
                 DocumentName = obj.DocumentName,
                 Document = obj.Document,
-                DocumentType = obj.DocumentType
+                DocumentType = obj.DocumentType,
+                IsDeleted = obj.IsDeleted
             };
 
-            await _sql.SaveData("spUpdateDocuments", p);
+            var result=await _sql.SaveData<object,dynamic>("spUpdateDocuments", p);
+            return result;
         }
     }
 }

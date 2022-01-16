@@ -24,5 +24,6 @@ AS
 BEGIN
     SET NOCOUNT ON;
 	SELECT *
-	FROM [dbo].[tblMeetingType];
+	FROM [dbo].[tblMeetingType]
+	WHERE [dbo].[tblMeetingType].[IsDeleted]='FALSE';
 END

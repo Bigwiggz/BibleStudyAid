@@ -24,5 +24,6 @@ AS
 BEGIN
     SET NOCOUNT ON;
 	SELECT *
-	FROM [dbo].[tblScriptures];
+	FROM [dbo].[tblScriptures]
+	WHERE [dbo].[tblScriptures].[IsDeleted]='FALSE';
 END

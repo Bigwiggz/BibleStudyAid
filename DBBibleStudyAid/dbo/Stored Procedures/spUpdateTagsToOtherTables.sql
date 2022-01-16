@@ -23,7 +23,8 @@ CREATE PROCEDURE [dbo].[spUpdateTagsToOtherTables]
     @TagsId INT, 
     @tblId INT, 
     @tblName NVARCHAR(100), 
-    @FKTableIdandName NVARCHAR(1000)
+    @FKTableIdandName NVARCHAR(1000),
+    @IsDeleted BIT
 
 AS
 BEGIN 
@@ -36,7 +37,8 @@ BEGIN
     TagsId=ISNULL(@TagsId,TagsId), 
 	tblId=ISNULL(@tblId,tblId),
     tblName=ISNULL(@tblName,tblName), 
-	FKTableIdandName=ISNULL(@FKTableIdandName,FKTableIdandName)
+	FKTableIdandName=ISNULL(@FKTableIdandName,FKTableIdandName),
+    IsDeleted=ISNULL(@IsDeleted,IsDeleted)
 
 
 	WHERE Id=@Id

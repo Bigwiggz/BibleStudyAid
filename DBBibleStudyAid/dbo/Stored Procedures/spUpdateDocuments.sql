@@ -24,7 +24,8 @@ CREATE PROCEDURE [dbo].[spUpdateDocuments]
     @DocumentName NVARCHAR(256), 
     @Document VARBINARY(MAX),
     @DocumentType NVARCHAR(256),
-    @DocumentDescription NVARCHAR(1000)
+    @DocumentDescription NVARCHAR(1000),
+    @IsDeleted BIT
 
 AS
 BEGIN 
@@ -38,7 +39,8 @@ BEGIN
     DocumentName=ISNULL(@DocumentName,DocumentName), 
 	Document =ISNULL(@Document ,Document),
     DocumentType =ISNULL(@DocumentType , DocumentType),
-    DocumentDescription=ISNULL(@DocumentDescription,[DocumentDescription])
+    DocumentDescription=ISNULL(@DocumentDescription,[DocumentDescription]),
+    IsDeleted=ISNULL(@IsDeleted,IsDeleted)
 
 	WHERE Id=@Id
     END 

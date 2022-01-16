@@ -22,7 +22,8 @@ CREATE PROCEDURE [dbo].[spCreateTagsToOtherTables]
     @TagsId INT, 
     @tblId INT, 
     @tblName NVARCHAR(100), 
-    @FKTableIdandName NVARCHAR(1000)
+    @FKTableIdandName NVARCHAR(1000),
+    @IsDeleted BIT NULL
 AS
 BEGIN
     SET NOCOUNT ON;

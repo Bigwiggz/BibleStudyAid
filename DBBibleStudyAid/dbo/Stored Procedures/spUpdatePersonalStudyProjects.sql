@@ -24,7 +24,8 @@ CREATE PROCEDURE [dbo].[spUpdatePersonalStudyProjects]
     @PersonalStudyDescription NVARCHAR(1000) , 
     @PersonalStudyQuestionAssignment NVARCHAR(1000) , 
     @DateFinished DATETIME2 NULL, 
-    @BaseScripture NVARCHAR(1000) NULL
+    @BaseScripture NVARCHAR(1000) NULL,
+    @IsDeleted BIT
 
 AS
 BEGIN 
@@ -38,7 +39,8 @@ BEGIN
 	PersonalStudyDescription=ISNULL(@PersonalStudyDescription,PersonalStudyDescription),
     PersonalStudyQuestionAssignment=ISNULL(@PersonalStudyQuestionAssignment,PersonalStudyQuestionAssignment), 
 	DateFinished=ISNULL(@DateFinished,DateFinished),
-    BaseScripture=ISNULL(@BaseScripture,BaseScripture)
+    BaseScripture=ISNULL(@BaseScripture,BaseScripture),
+    IsDeleted=ISNULL(@IsDeleted,IsDeleted)
 
 
 	WHERE Id=@Id

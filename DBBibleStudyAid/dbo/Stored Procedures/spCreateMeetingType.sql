@@ -20,7 +20,8 @@
 
 CREATE PROCEDURE [dbo].[spCreateMeetingType]
     @MeetingTypeName NVARCHAR(100),
-	@MeetingTypeDescription NVARCHAR(1000) NULL
+	@MeetingTypeDescription NVARCHAR(1000) NULL,
+	@IsDeleted BIT NULL
 
 AS
 BEGIN

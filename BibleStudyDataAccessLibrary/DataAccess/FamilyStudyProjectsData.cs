@@ -24,10 +24,12 @@ namespace BibleStudyDataAccessLibrary.DataAccess
             _logger = logger;
         }
 
-        public async void DeleteAsync(object Id)
+        public async Task<object> DeleteAsync(object Id)
         {
-            await _sql.SaveData("spDeleteFamilyStudyProjectsData", Id);
+            var result=await _sql.SaveData<object,dynamic>("spDeleteFamilyStudyProjectsData", Id);
             _logger.LogInformation("Family Study Project Record {Id} was deleted", Id);
+            return result;
+
         }
 
         public async Task<IEnumerable<FamilyStudyProjects>> GetAllAsync()
@@ -49,20 +51,22 @@ namespace BibleStudyDataAccessLibrary.DataAccess
             return result;
         }
 
-        public async void InsertAsync(FamilyStudyProjects obj)
+        public async Task<object> InsertAsync(FamilyStudyProjects obj)
         {
             var p = new
             {
                 FamilyStudyDescription = obj.FamilyStudyDescription,
                 FamilyStudyFindings = obj.FamilyStudyFindings,
                 DateWhenCreated = obj.DateWhenCreated,
-                FamilyStudyTitle = obj.FamilyStudyTitle
+                FamilyStudyTitle = obj.FamilyStudyTitle,
+                IsDeleted=obj.IsDeleted
             };
 
-            await _sql.SaveData("spCreateFamilyStudyProjects", p);
+            var result=await _sql.SaveData<object,dynamic>("spCreateFamilyStudyProjects", p);
+            return result;
         }
 
-        public async void UpdateAsync(FamilyStudyProjects obj)
+        public async Task<object>UpdateAsync(FamilyStudyProjects obj)
         {
             var p = new
             {
@@ -70,10 +74,12 @@ namespace BibleStudyDataAccessLibrary.DataAccess
                 FamilyStudyDescription = obj.FamilyStudyDescription,
                 FamilyStudyFindings = obj.FamilyStudyFindings,
                 DateWhenCreated = obj.DateWhenCreated,
-                FamilyStudyTitle = obj.FamilyStudyTitle
+                FamilyStudyTitle = obj.FamilyStudyTitle,
+                IsDeleted = obj.IsDeleted
             };
 
-            await _sql.SaveData("spUpdateFamilyStudyProjects", p);
+            var result=await _sql.SaveData<object,dynamic>("spUpdateFamilyStudyProjects", p);
+            return result;
         }
 
         public async void SaveFullParentAndAllChildrenRecords(

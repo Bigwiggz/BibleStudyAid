@@ -22,7 +22,8 @@ CREATE PROCEDURE [dbo].[spUpdateTag]
 
 	@Id INT,
 	@TagName NVARCHAR(100), 
-    @TagDescription NVARCHAR(1000) NULL
+    @TagDescription NVARCHAR(1000) NULL,
+	@IsDeleted BIT
 
 AS
 BEGIN 
@@ -32,7 +33,8 @@ BEGIN
   BEGIN 
     UPDATE [dbo].[tblTags]
     SET TagName=ISNULL(@TagName,TagName), 
-		TagDescription=ISNULL(@TagDescription,TagDescription)
+		TagDescription=ISNULL(@TagDescription,TagDescription),
+		IsDeleted=ISNULL(@IsDeleted,IsDeleted)
 	WHERE Id=@Id
     END 
 END

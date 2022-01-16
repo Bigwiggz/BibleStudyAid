@@ -4,6 +4,7 @@
     [Scripture] NVARCHAR(1000) NULL, 
     [Explanation] NVARCHAR(1000) NOT NULL, 
     [FKIdtblPersonalStudyFindings] AS CONCAT(CONVERT(VARCHAR,[Id]),'tblPersonalStudyFindings'), 
-    [FKPersonalStudyProjectId] INT NOT NULL, 
+    [FKPersonalStudyProjectId] INT NOT NULL,
+    [IsDeleted] BIT NOT NULL DEFAULT 0,
     CONSTRAINT [FK_tblPersonalStudyFindings_ToTable] FOREIGN KEY ([FKPersonalStudyProjectId]) REFERENCES [tblPersonalStudyProjects]([Id])
 )

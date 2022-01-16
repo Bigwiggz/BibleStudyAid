@@ -24,5 +24,6 @@ AS
 BEGIN
     SET NOCOUNT ON;
 	SELECT *
-	FROM [dbo].[tblFamilyStudyProjects];
+	FROM [dbo].[tblFamilyStudyProjects]
+	WHERE [dbo].[tblFamilyStudyProjects].[IsDeleted]='FALSE';
 END

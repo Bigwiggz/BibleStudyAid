@@ -26,7 +26,8 @@ CREATE PROCEDURE [dbo].[spUpdateTalks]
     @Description NVARCHAR(1000), 
     @TalkDocument VARBINARY(MAX), 
     @TalkDocumentName NVARCHAR(256),
-    @ThemeScripture NVARCHAR(1000) NULL
+    @ThemeScripture NVARCHAR(1000) NULL,
+    @IsDeleted BIT
 
 AS
 BEGIN 
@@ -42,7 +43,8 @@ BEGIN
 	[Description]=ISNULL(@Description,[Description]),
     TalkDocument=ISNULL(@TalkDocument,TalkDocument), 
     TalkDocumentName=ISNULL(@TalkDocumentName,[TalkDocumentName]),
-	ThemeScripture=ISNULL(@ThemeScripture,ThemeScripture)
+	ThemeScripture=ISNULL(@ThemeScripture,ThemeScripture),
+    IsDeleted=ISNULL(@IsDeleted,IsDeleted)
 
 
 	WHERE Id=@Id

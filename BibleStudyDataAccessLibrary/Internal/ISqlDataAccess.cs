@@ -6,7 +6,7 @@ namespace BibleStudyDataAccessLibrary.Internal
     public interface ISqlDataAccess
     {
         Task<List<T>> LoadData<T, U>(string storedProcedure, U parameters);
-        Task SaveData<T>(string storedProcedure, T parameters);
+        Task<T> SaveData<T,U>(string storedProcedure, U parameters);
 
         Task<T> LoadSingleRecord<T, U>(string storedProcedure, U parameters);
 

@@ -14,5 +14,6 @@ namespace BibleStudyDataAccessLibrary.Models
         public string Scripture { get; set; }
         public string LessonLearnedDescription { get; set; }
         public string PKldtblMeetingAssemblies { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }

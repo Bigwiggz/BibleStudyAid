@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BibleStudyInfoAPI", "BibleS
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BibleStudyBWAUI", "BibleStudyBWAUI\BibleStudyBWAUI.csproj", "{4E235D2F-98C5-4856-99BF-C42DB10014F5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BibleStudyAidMVC", "BibleStudyAidMVC\BibleStudyAidMVC.csproj", "{E915872B-089C-44C6-99B0-66B4B3CC6FC6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BibleStudyAidMVC", "BibleStudyAidMVC\BibleStudyAidMVC.csproj", "{E915872B-089C-44C6-99B0-66B4B3CC6FC6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

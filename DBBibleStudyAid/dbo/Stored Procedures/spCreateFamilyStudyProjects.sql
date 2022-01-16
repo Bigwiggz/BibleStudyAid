@@ -22,7 +22,8 @@ CREATE PROCEDURE [dbo].[spCreateFamilyStudyProjects]
     @DateWhenCreated DATETIME2, 
     @FamilyStudyTitle NVARCHAR(100), 
     @FamilyStudyDescription NVARCHAR(1000), 
-    @FamilyStudyFindings NVARCHAR(2000)
+    @FamilyStudyFindings NVARCHAR(2000),
+    @IsDeleted BIT NULL
 
 AS
 BEGIN

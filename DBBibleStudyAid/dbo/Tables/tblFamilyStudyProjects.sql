@@ -6,5 +6,6 @@
     [FamilyStudyTitle] NVARCHAR(100) NOT NULL, 
     [FamilyStudyDescription] NVARCHAR(1000) NOT NULL, 
     [FamilyStudyFindings] NVARCHAR(2000) NOT NULL, 
-    [PKIdtblFamilyStudyProjects] AS CONCAT(CONVERT(VARCHAR,[Id]),'tblFamilyStudyProjects')
+    [PKIdtblFamilyStudyProjects] AS CONCAT(CONVERT(VARCHAR,[Id]),'tblFamilyStudyProjects'), 
+    [IsDeleted] BIT NOT NULL DEFAULT 0
 )

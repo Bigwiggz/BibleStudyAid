@@ -23,7 +23,8 @@ CREATE PROCEDURE [dbo].[spCreateDocuments]
     @DocumentName NVARCHAR(256), 
     @Document VARBINARY(MAX),
     @DocumentType NVARCHAR(256),
-    @DocumentDescription NVARCHAR(1000)
+    @DocumentDescription NVARCHAR(1000),
+    @IsDeleted BIT NULL
 
 AS
 BEGIN

@@ -20,7 +20,8 @@
 
 CREATE PROCEDURE [dbo].[spCreateTag]
 	@TagName NVARCHAR(100), 
-    @TagDescription NVARCHAR(1000) NULL
+    @TagDescription NVARCHAR(1000) NULL,
+	@IsDeleted BIT NULL
 AS
 BEGIN
 	SET NOCOUNT ON;

@@ -25,7 +25,8 @@ CREATE PROCEDURE [dbo].[spCreateTalk]
     @Description NVARCHAR(1000), 
     @TalkDocument VARBINARY(MAX),
     @TalkDocumentName NVARCHAR(256),
-    @ThemeScripture NVARCHAR(1000) NULL
+    @ThemeScripture NVARCHAR(1000) NULL,
+    @IsDeleted BIT NULL
 AS
 BEGIN
     SET NOCOUNT ON;

@@ -23,7 +23,8 @@ CREATE PROCEDURE [dbo].[spCreateScriptures]
 	@FKTableIdandName NVARCHAR(1000),
 	@Book NVARCHAR(1000),
     @Chapter NVARCHAR(3),
-    @Verse NVARCHAR(1000)
+    @Verse NVARCHAR(1000),
+	@IsDeleted BIT NULL
 
 AS
 BEGIN

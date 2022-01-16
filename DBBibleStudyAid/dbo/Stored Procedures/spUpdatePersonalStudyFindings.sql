@@ -22,7 +22,8 @@ CREATE PROCEDURE [dbo].[spUpdatePersonalStudyFindings]
     @Id INT,
     @Scripture NVARCHAR(1000) NULL, 
     @Explanation NVARCHAR(1000),
-    @FKPersonalStudyProjectId INT
+    @FKPersonalStudyProjectId INT,
+    @IsDeleted BIT
 
 AS
 BEGIN 
@@ -34,7 +35,8 @@ BEGIN
     SET 
     Scripture=ISNULL(@Scripture,Scripture), 
 	Explanation=ISNULL(@Explanation,Explanation),
-    FKPersonalStudyProjectId=ISNULL(@FKPersonalStudyProjectId,FKPersonalStudyProjectId)
+    FKPersonalStudyProjectId=ISNULL(@FKPersonalStudyProjectId,FKPersonalStudyProjectId),
+    IsDeleted=ISNULL(@IsDeleted,IsDeleted)
 
 
 	WHERE Id=@Id

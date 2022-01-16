@@ -6,5 +6,6 @@
     [Chapter] NVARCHAR(3),
     [Verse] NVARCHAR(1000) NOT NULL,
     [UniqueId] UNIQUEIDENTIFIER NOT NULL DEFAULT newId(), 
-    [FKTableIdandName] NVARCHAR(1000) NOT NULL
+    [FKTableIdandName] NVARCHAR(1000) NOT NULL,
+    [IsDeleted] BIT NOT NULL DEFAULT 0
 )

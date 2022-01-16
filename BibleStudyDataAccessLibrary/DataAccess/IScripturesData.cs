@@ -6,11 +6,11 @@ namespace BibleStudyDataAccessLibrary.DataAccess
 {
     public interface IScripturesData
     {
-        void DeleteAsync(object Id);
+        Task<object> DeleteAsync(object Id);
         Task<IEnumerable<Scriptures>> GetAllAsync();
         Task<IEnumerable<Scriptures>> GetByForeignKey(object obj);
         Task<Scriptures> GetByIdAsync(object Id);
-        void InsertAsync(Scriptures obj);
-        void UpdateAsync(Scriptures obj);
+        Task<object> InsertAsync(Scriptures obj);
+        Task<object> UpdateAsync(Scriptures obj);
     }
 }

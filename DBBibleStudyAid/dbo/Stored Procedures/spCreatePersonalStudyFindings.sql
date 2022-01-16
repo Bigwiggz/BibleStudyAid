@@ -21,7 +21,8 @@
 CREATE PROCEDURE [dbo].[spCreatePersonalStudyFindings]
     @Scripture NVARCHAR(1000) NULL, 
     @Explanation NVARCHAR(1000),
-    @FKPersonalStudyProjectId INT
+    @FKPersonalStudyProjectId INT,
+    @IsDeleted BIT NULL
 
 AS
 BEGIN

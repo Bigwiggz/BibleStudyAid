@@ -8,5 +8,6 @@
     [Scripture] NVARCHAR(1000) NOT NULL, 
     [LessonLearnedDescription] NVARCHAR(1000) NOT NULL, 
     [PKIdtblMeetingAssemblies] AS CONCAT(CONVERT(VARCHAR,[Id]),'tblMeetingAssemblies'),
+    [IsDeleted] BIT NOT NULL DEFAULT 0,
     CONSTRAINT [FK_tblMeetingAssemblies_tblMeetingType] FOREIGN KEY ([MeetingTypeId]) REFERENCES [tblMeetingType]([Id])
 )
