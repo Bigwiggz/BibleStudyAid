@@ -21,6 +21,7 @@
 CREATE PROCEDURE [dbo].[spCreateReferences]
     @Reference NVARCHAR(1000),
 	@FKTableIdandName NVARCHAR(1000),
+	@Description NVARCHAR(2500) NULL,
 	@IsDeleted BIT NULL
 AS
 BEGIN

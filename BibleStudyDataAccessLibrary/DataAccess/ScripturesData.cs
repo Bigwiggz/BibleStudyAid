@@ -57,6 +57,7 @@ namespace BibleStudyDataAccessLibrary.DataAccess
                 Book=obj.Book,
                 Chapter=obj.Chapter,
                 Verse=obj.Verse,
+                Description = obj.Description,
                 IsDeleted = obj.IsDeleted
 
             };
@@ -74,6 +75,7 @@ namespace BibleStudyDataAccessLibrary.DataAccess
                 Book = obj.Book,
                 Chapter = obj.Chapter,
                 Verse = obj.Verse,
+                Description = obj.Description,
                 IsDeleted = obj.IsDeleted
             };
 

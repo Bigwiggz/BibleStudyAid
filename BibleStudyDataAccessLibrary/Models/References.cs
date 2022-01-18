@@ -9,6 +9,7 @@ namespace BibleStudyDataAccessLibrary.Models
         public int Id { get; set; }
         public string FIKTableIdandName { get; set; }
         public string Reference { get; set; }
+        public string Description { get; set; }
         public bool IsDeleted { get; set; }
     }
 }

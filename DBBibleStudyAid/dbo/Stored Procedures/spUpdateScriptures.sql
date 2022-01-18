@@ -25,6 +25,7 @@ CREATE PROCEDURE [dbo].[spUpdateScriptures]
     @Book NVARCHAR(1000),
     @Chapter NVARCHAR(3),
     @Verse NVARCHAR(1000),
+    @Description NVARCHAR(2500) NULL,
     @IsDeleted BIT
 
 AS
@@ -40,6 +41,7 @@ BEGIN
     Book=ISNULL(@Book,Book), 
 	Chapter=ISNULL(@Chapter,Chapter),
     Verse=ISNULL(@Verse,Verse),
+    [Description]=ISNULL(@Description,[Description]),
     IsDeleted=ISNULL(@IsDeleted,IsDeleted)
 
 	WHERE Id=@Id

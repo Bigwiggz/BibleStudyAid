@@ -6,3 +6,89 @@
 
 
 
+@*REFERENCES*@
+<div class="row">
+    <div class="col-11 card m-1">
+        <div class="card-header border-primary">
+            <h5>References</h5>
+        </div>
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            Reference
+                        </th>
+                        <th>
+                            Edits
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach(var reference in Model.ReferencesList)
+                    {
+                        <tr>
+                            <td id="referenceText">@reference.Reference</td>
+                            <td>
+                                <a asp-controller="References" asp-action="Edit" asp-route-id="@reference.Id">
+                                    <i class="fas fa-edit nav-icon"></i>
+                                </a> |
+                                <a asp-controller="References" asp-action="Create" asp-route-id="@reference.Id">
+                                    <i class="fas fa-plus-square nav-icon"></i>
+                                </a> |
+                                <a asp-controller="References" asp-action="Delete" asp-route-id="@reference.Id">
+                                    <i class="fas fa-trash-alt nav-icon"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@*SCRIPTURAL REFERENCES*@
+<div class="row">
+    <div class="col-11 card m-1">
+        <div class="card-header border-primary">
+            <h5>Scriptural References</h5>
+        </div>
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Scripture</th>
+                        <th>Scripture Point</th>
+                        <th>Edit</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach(var scripture in Model.ScripturesList)
+                    {
+                        <tr>
+                            <td>@scripture.Scripture</td>
+                            <td>@scripture.Description</td>
+                            <td>
+                                <a asp-controller="Scriptures" asp-action="Edit" asp-route-id="@scripture.Id">
+                                    <i class="fas fa-edit nav-icon"></i>
+                                </a> |
+                                <a asp-controller="Scriptures" asp-action="Create" asp-route-id="@scripture.Id">
+                                    <i class="fas fa-plus-square nav-icon"></i>
+                                </a> |
+                                <a asp-controller="Scriptures" asp-action="Delete" asp-route-id="@scripture.Id">
+                                    <i class="fas fa-trash-alt nav-icon"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@*MODAL LIST*@
+
+@*REFERENCES MODAL*@
+

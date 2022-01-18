@@ -49,6 +49,7 @@ namespace BibleStudyDataAccessLibrary.DataAccess
             {
                 FKProject = obj.FIKTableIdandName,
                 DocumentName = obj.Reference,
+                Description=obj.Description,
                 IsDeleted = obj.IsDeleted
             };
 
@@ -62,6 +63,7 @@ namespace BibleStudyDataAccessLibrary.DataAccess
             {
                 FKProject = obj.FIKTableIdandName,
                 DocumentName = obj.Reference,
+                Description = obj.Description,
                 IsDeleted = obj.IsDeleted
             };
             var result=await _sql.SaveData<object,dynamic>("spUpdateReferences", p);

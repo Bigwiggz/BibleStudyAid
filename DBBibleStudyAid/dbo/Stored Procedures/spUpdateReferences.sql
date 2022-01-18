@@ -22,6 +22,7 @@ CREATE PROCEDURE [dbo].[spUpdateReferences]
     @Id INT,
     @Reference NVARCHAR(1000),
 	@FKTableIdandName NVARCHAR(1000),
+    @Description NVARCHAR(2500) NULL,
     @IsDeleted BIT
 
 AS
@@ -34,6 +35,7 @@ BEGIN
     SET 
     Reference=ISNULL(@Reference,Reference), 
 	FKTableIdandName=ISNULL(@FKTableIdandName,FKTableIdandName),
+    [Description]=ISNULL(@Description,[Description]),
     IsDeleted=ISNULL(@IsDeleted,IsDeleted)
 
 
