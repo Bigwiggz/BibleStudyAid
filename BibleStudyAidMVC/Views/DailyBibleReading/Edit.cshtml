@@ -1,6 +1,6 @@
 ﻿@model DailyBibleReadingAllVM
 @{
-        ViewData["Title"]="Daily Bible Reading";
+    ViewData["Title"]="Daily Bible Reading";
     Layout = "~/Views/Shared/AdminLTE/_Layout.cshtml";
 }
 
@@ -13,37 +13,46 @@
             <h5>References</h5>
         </div>
         <div class="card-body">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>
-                            Reference
-                        </th>
-                        <th>
-                            Edits
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach(var reference in Model.ReferencesList)
-                    {
+            @if(@Model.ReferencesList.Count==0)
+            {
+                <p>NONE</p>
+            }
+            else
+            {
+                <table class="table">
+                    <thead>
                         <tr>
-                            <td id="referenceText">@reference.Reference</td>
-                            <td>
-                                <a asp-controller="References" asp-action="Edit" asp-route-id="@reference.Id">
-                                    <i class="fas fa-edit nav-icon"></i>
-                                </a> |
-                                <a asp-controller="References" asp-action="Create" asp-route-id="@reference.Id">
-                                    <i class="fas fa-plus-square nav-icon"></i>
-                                </a> |
-                                <a asp-controller="References" asp-action="Delete" asp-route-id="@reference.Id">
-                                    <i class="fas fa-trash-alt nav-icon"></i>
-                                </a>
-                            </td>
+                            <th>
+                                Reference
+                            </th>
+                            <th>Reference Description</th>
+                            <th>
+                                Edits
+                            </th>
                         </tr>
-                    }
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody >
+                        @foreach(var reference in @Model.ReferencesList)
+                        {
+                            <tr>
+                                <td id="referenceText">@reference.Reference</td>
+                                <td>@reference.Description</td>
+                                <td>
+                                    <a asp-controller="References" asp-action="Edit" asp-route-id="@reference.Id">
+                                        <i class="fas fa-edit nav-icon referenceTableEdits" data-toggle="modal" data-target="#referenceModal" data-id="@reference.Id"></i>
+                                    </a> |
+                                    <a asp-controller="References" asp-action="Create" asp-route-id="@reference.Id">
+                                        <i class="fas fa-plus-square nav-icon"></i>
+                                    </a> |
+                                    <a asp-controller="References" asp-action="Delete" asp-route-id="@reference.Id">
+                                        <i class="fas fa-trash-alt nav-icon"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
         </div>
     </div>
 </div>
@@ -55,35 +64,42 @@
             <h5>Scriptural References</h5>
         </div>
         <div class="card-body">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Scripture</th>
-                        <th>Scripture Point</th>
-                        <th>Edit</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach(var scripture in Model.ScripturesList)
-                    {
+            @if(@Model.ScripturesList.Count==0)
+            {
+                <p>NONE</p>   
+            }
+            else
+            {
+                <table class="table">
+                    <thead>
                         <tr>
-                            <td>@scripture.Scripture</td>
-                            <td>@scripture.Description</td>
-                            <td>
-                                <a asp-controller="Scriptures" asp-action="Edit" asp-route-id="@scripture.Id">
-                                    <i class="fas fa-edit nav-icon"></i>
-                                </a> |
-                                <a asp-controller="Scriptures" asp-action="Create" asp-route-id="@scripture.Id">
-                                    <i class="fas fa-plus-square nav-icon"></i>
-                                </a> |
-                                <a asp-controller="Scriptures" asp-action="Delete" asp-route-id="@scripture.Id">
-                                    <i class="fas fa-trash-alt nav-icon"></i>
-                                </a>
-                            </td>
+                            <th>Scripture</th>
+                            <th>Scripture Point</th>
+                            <th>Edit</th>
                         </tr>
-                    }
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        @foreach(var scripture in @Model.ScripturesList)
+                        {
+                            <tr data-toggle="modal" data-target="#scriptureModal" data-id="@scripture.Id">
+                                <td>@scripture.Scripture</td>
+                                <td>@scripture.Description</td>
+                                <td>
+                                    <a asp-controller="Scriptures" asp-action="Edit" asp-route-id="@scripture.Id">
+                                        <i class="fas fa-edit nav-icon"></i>
+                                    </a> |
+                                    <a asp-controller="Scriptures" asp-action="Create" asp-route-id="@scripture.Id">
+                                        <i class="fas fa-plus-square nav-icon"></i>
+                                    </a> |
+                                    <a asp-controller="Scriptures" asp-action="Delete" asp-route-id="@scripture.Id">
+                                        <i class="fas fa-trash-alt nav-icon"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>     
+            }
         </div>
     </div>
 </div>
@@ -91,4 +107,38 @@
 @*MODAL LIST*@
 
 @*REFERENCES MODAL*@
+<div class="modal fade" id="referenceModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ModalLabel">Edit Reference</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form asp-controller="References" asp-action="Edit" method="post">
+            <input type="hidden" id="referenceId" name="custId" value="3487">
+            <div class="form-group">
+                <label for="referenceCitation">References</label>
+                <input type="text" class="form-control" id="referenceCitation" aria-describedby="referenceCitation">
+            </div>
+            <div class="form-group">
+                <label for="referenceDescription">Description</label>
+                <textarea type="text" class="form-control" id="referenceDescription"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
 
+@*Scripts Section*@
+@section Scripts{
+    <script src="~/js/Views/DailyBibleReading/EditDailyBibleReading.js"></script>
+}
