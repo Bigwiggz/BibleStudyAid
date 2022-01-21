@@ -41,8 +41,6 @@ BEGIN
 	DateFinished=ISNULL(@DateFinished,DateFinished),
     BaseScripture=ISNULL(@BaseScripture,BaseScripture),
     IsDeleted=ISNULL(@IsDeleted,IsDeleted)
-
-
-	WHERE Id=@Id
+	WHERE Id=@Id;
     END 
 END

@@ -39,8 +39,6 @@ BEGIN
     tblName=ISNULL(@tblName,tblName), 
 	FKTableIdandName=ISNULL(@FKTableIdandName,FKTableIdandName),
     IsDeleted=ISNULL(@IsDeleted,IsDeleted)
-
-
-	WHERE Id=@Id
+	WHERE Id=@Id;
     END 
 END

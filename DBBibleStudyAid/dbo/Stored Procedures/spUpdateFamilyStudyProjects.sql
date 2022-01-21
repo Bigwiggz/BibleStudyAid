@@ -39,7 +39,6 @@ BEGIN
     FamilyStudyDescription=ISNULL(@FamilyStudyDescription,FamilyStudyDescription), 
 	FamilyStudyFindings =ISNULL(@FamilyStudyFindings, FamilyStudyFindings),
     IsDeleted=ISNULL(@IsDeleted,IsDeleted)
-
-	WHERE Id=@Id
+	WHERE Id=@Id;
     END 
 END

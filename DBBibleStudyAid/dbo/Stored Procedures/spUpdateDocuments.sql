@@ -41,7 +41,6 @@ BEGIN
     DocumentType =ISNULL(@DocumentType , DocumentType),
     DocumentDescription=ISNULL(@DocumentDescription,[DocumentDescription]),
     IsDeleted=ISNULL(@IsDeleted,IsDeleted)
-
-	WHERE Id=@Id
+	WHERE Id=@Id;
     END 
 END

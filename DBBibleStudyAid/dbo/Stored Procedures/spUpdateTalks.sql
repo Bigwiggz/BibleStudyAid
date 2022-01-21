@@ -45,8 +45,6 @@ BEGIN
     TalkDocumentName=ISNULL(@TalkDocumentName,[TalkDocumentName]),
 	ThemeScripture=ISNULL(@ThemeScripture,ThemeScripture),
     IsDeleted=ISNULL(@IsDeleted,IsDeleted)
-
-
-	WHERE Id=@Id
+	WHERE Id=@Id;
     END 
 END

@@ -26,6 +26,6 @@ CREATE PROCEDURE [dbo].[spCreateReferences]
 AS
 BEGIN
     SET NOCOUNT ON;
-	INSERT INTO [dbo].[tblReferences] ([Reference],[FKTableIdandName])
-	VALUES (@Reference,@FKTableIdandName);
+	INSERT INTO [dbo].[tblReferences] ([Reference],[FKTableIdandName],[Description])
+	VALUES (@Reference,@FKTableIdandName,@Description);
 END

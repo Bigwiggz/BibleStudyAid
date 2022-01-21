@@ -39,6 +39,6 @@ BEGIN
     LessonLearnedDescription=ISNULL(@LessonLearnedDescription,LessonLearnedDescription), 
 	DateRead =ISNULL(@DateRead ,DateRead),
     IsDeleted=ISNULL(@IsDeleted,IsDeleted)
-	WHERE Id=@Id
+	WHERE Id=@Id;
     END 
 END

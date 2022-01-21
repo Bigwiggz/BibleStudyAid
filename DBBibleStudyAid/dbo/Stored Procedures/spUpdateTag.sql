@@ -35,6 +35,6 @@ BEGIN
     SET TagName=ISNULL(@TagName,TagName), 
 		TagDescription=ISNULL(@TagDescription,TagDescription),
 		IsDeleted=ISNULL(@IsDeleted,IsDeleted)
-	WHERE Id=@Id
+	WHERE Id=@Id;
     END 
 END

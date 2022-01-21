@@ -37,8 +37,6 @@ BEGIN
 	Explanation=ISNULL(@Explanation,Explanation),
     FKPersonalStudyProjectId=ISNULL(@FKPersonalStudyProjectId,FKPersonalStudyProjectId),
     IsDeleted=ISNULL(@IsDeleted,IsDeleted)
-
-
-	WHERE Id=@Id
+	WHERE Id=@Id;
     END 
 END

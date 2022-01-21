@@ -41,7 +41,6 @@ BEGIN
 	Scripture =ISNULL(@Scripture ,Scripture),
     LessonLearnedDescription =ISNULL(@LessonLearnedDescription ,LessonLearnedDescription),
     IsDeleted=ISNULL(@IsDeleted,IsDeleted)
-
-	WHERE Id=@Id
+	WHERE Id=@Id;
     END 
 END

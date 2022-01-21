@@ -47,8 +47,8 @@ namespace BibleStudyDataAccessLibrary.DataAccess
         {
             var p = new
             {
-                FKProject = obj.FIKTableIdandName,
-                DocumentName = obj.Reference,
+                FKTableIdandName = obj.FKTableIdandName,
+                Reference = obj.Reference,
                 Description=obj.Description,
                 IsDeleted = obj.IsDeleted
             };
@@ -61,8 +61,9 @@ namespace BibleStudyDataAccessLibrary.DataAccess
         {
             var p = new
             {
-                FKProject = obj.FIKTableIdandName,
-                DocumentName = obj.Reference,
+                Id=obj.Id,
+                FKTableIdandName = obj.FKTableIdandName,
+                Reference = obj.Reference,
                 Description = obj.Description,
                 IsDeleted = obj.IsDeleted
             };

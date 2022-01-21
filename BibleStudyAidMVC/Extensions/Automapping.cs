@@ -16,6 +16,10 @@ namespace BibleStudyAidMVC.Extensions
             //DailyBibleReadingAll
             CreateMap<DailyBibleReadingAll, DailyBibleReadingAllVM>();
             CreateMap<DailyBibleReadingAllVM,DailyBibleReadingAll>();
+
+            //References
+            CreateMap<References, ReferencesViewModel>();
+            CreateMap<ReferencesViewModel, References>();
         }
     }
 }

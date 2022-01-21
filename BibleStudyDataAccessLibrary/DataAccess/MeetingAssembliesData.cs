@@ -68,6 +68,7 @@ namespace BibleStudyDataAccessLibrary.DataAccess
         {
             var p = new
             {
+                Id=obj.Id,
                 LessonLearnedDescription = obj.LessonLearnedDescription,
                 MeetingTypeId = obj.MeetingTypeId,
                 PartTitle = obj.PartTitle,
@@ -99,7 +100,7 @@ namespace BibleStudyDataAccessLibrary.DataAccess
                 //Step 3: add Id to references and add in all references
                 foreach (var item in references)
                 {
-                    item.FIKTableIdandName = tblId;
+                    item.FKTableIdandName = tblId;
                     _sql.SaveDataInTransaction("spCreateReferences", item);
                 }
 

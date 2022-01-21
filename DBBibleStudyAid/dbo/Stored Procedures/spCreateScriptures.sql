@@ -30,6 +30,6 @@ CREATE PROCEDURE [dbo].[spCreateScriptures]
 AS
 BEGIN
     SET NOCOUNT ON;
-	INSERT INTO [dbo].[tblScriptures] ([Scripture],[Book],[Chapter],[Verse],[FKTableIdandName])
-	VALUES (@Scripture,@Book,@Chapter,@Verse,@FKTableIdandName);
+	INSERT INTO [dbo].[tblScriptures] ([Scripture],[Book],[Chapter],[Verse],[FKTableIdandName],[Description])
+	VALUES (@Scripture,@Book,@Chapter,@Verse,@FKTableIdandName,@Description);
 END

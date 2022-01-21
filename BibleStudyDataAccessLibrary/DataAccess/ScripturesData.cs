@@ -70,6 +70,7 @@ namespace BibleStudyDataAccessLibrary.DataAccess
         {
             var p = new
             {
+                Id=obj.Id,
                 FKTableIdandName = obj.FKTableIdandName,
                 Scripture = obj.Scripture,
                 Book = obj.Book,

@@ -10,24 +10,33 @@ window.addEventListener("load", function () {
         focus:true
     });
 
+    AddReferenceEditModal();
 
 });
 
 
 //function to add eventlistener to reference modal
 function AddReferenceEditModal() {
-    const refTable = document.getElementsByClassName("referenceTableEdits");
-    for (let i = 0; i <= refTable.length; i++) {
-        refTable[i].addEventListener("click", () => {
+    const refTable = document.getElementById("referenceTableEdits");
+    
+    for (let i = 0; i < refTable.rows.length; i++) {
+        const dataParentElement = refTable.rows[i];
+        let editItemElement = refTable.rows[i].getElementsByTagName("td")[2].getElementsByTagName("i")[0];
+
+        //Populate form
+        editItemElement.addEventListener("click", () => {
             //Get current row Id
-            const currentRowId = refTable.getAttribute("data-id");
+            const currentRowId = editItemElement.getAttribute("data-id");
             document.getElementById("referenceId").setAttribute("value", currentRowId);
+            //Get FK ID
+            const referenceForeignKeyId = editItemElement.getAttribute("reference-FK");
+            document.getElementById("referenceFKId").setAttribute("value", referenceForeignKeyId);
             //Get current row Reference
-            const currentRowReference = refTable.closest("tr")[0].innerHTML;
+            const currentRowReference = dataParentElement.children[0].innerHTML;
             document.getElementById("referenceCitation").setAttribute("value", currentRowReference);
             //Get current row Reference Description
-            const currentRowReferenceDescription = refTable.closest("tr")[1].innerHTML;
-            document.getElementById("referenceDescription").setAttribute("value", currentRowReferenceDescription);
+            const currentRowReferenceDescription = dataParentElement.children[1].innerHTML;
+            document.getElementById("referenceDescription").innerHTML = currentRowReferenceDescription;
             //show reference Modal
             referenceModal.show();
         });

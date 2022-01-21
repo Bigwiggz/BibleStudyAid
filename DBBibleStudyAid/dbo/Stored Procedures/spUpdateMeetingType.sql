@@ -35,7 +35,6 @@ BEGIN
     MeetingTypeName=ISNULL(@MeetingTypeName,MeetingTypeName), 
 	MeetingTypeDescription=ISNULL(@MeetingTypeDescription,MeetingTypeDescription),
     IsDeleted=ISNULL(@IsDeleted,IsDeleted)
-
-	WHERE Id=@Id
+	WHERE Id=@Id;
     END 
 END
