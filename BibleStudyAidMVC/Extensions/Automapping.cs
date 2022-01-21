@@ -10,12 +10,12 @@ namespace BibleStudyAidMVC.Extensions
         public Automapping()
         {
             //DailyBibleReading
-            CreateMap<DailyBibleReading, DailyBibleReadingVM>();
-            CreateMap<DailyBibleReadingVM, DailyBibleReading>();
+            CreateMap<DailyBibleReading, DailyBibleReadingViewModel>();
+            CreateMap<DailyBibleReadingViewModel, DailyBibleReading>();
 
             //DailyBibleReadingAll
-            CreateMap<DailyBibleReadingAll, DailyBibleReadingAllVM>();
-            CreateMap<DailyBibleReadingAllVM,DailyBibleReadingAll>();
+            CreateMap<DailyBibleReadingAll, DailyBibleReadingAllViewModel>();
+            CreateMap<DailyBibleReadingAllViewModel,DailyBibleReadingAll>();
 
             //References
             CreateMap<References, ReferencesViewModel>();

@@ -12,10 +12,19 @@ window.addEventListener("load", function () {
 
     AddReferenceEditModal();
 
+    let addReferenceModal = new bootstrap.Modal(document.getElementById('referenceNewModal'), {
+        backdrop: true,
+        keyboard: false,
+        focus: true
+    });
+
+    AddReferenceNewModal();
+
+
 });
 
 
-//function to add eventlistener to reference modal
+//function to add eventlistener to edit reference modal
 function AddReferenceEditModal() {
     const refTable = document.getElementById("referenceTableEdits");
     
@@ -29,7 +38,7 @@ function AddReferenceEditModal() {
             const currentRowId = editItemElement.getAttribute("data-id");
             document.getElementById("referenceId").setAttribute("value", currentRowId);
             //Get FK ID
-            const referenceForeignKeyId = editItemElement.getAttribute("reference-FK");
+            let referenceForeignKeyId = editItemElement.getAttribute("reference-FK");
             document.getElementById("referenceFKId").setAttribute("value", referenceForeignKeyId);
             //Get current row Reference
             const currentRowReference = dataParentElement.children[0].innerHTML;
@@ -42,4 +51,24 @@ function AddReferenceEditModal() {
         });
     };
 }
+
+//function to add eventlistener to add new reference modal
+function AddReferenceNewModal() {
+    const refTable = document.getElementById("referenceTableEdits");
+
+    for (let i = 0; i < refTable.rows.length; i++) {
+        let newItemElement = refTable.rows[i].getElementsByTagName("td")[2].getElementsByTagName("i")[1];
+
+        //Populate form
+        newItemElement.addEventListener("click", () => {
+            //Get FK ID
+            let referenceForeignKeyId = newItemElement.getAttribute("reference-FK");
+            document.getElementById("referenceNewFKId").setAttribute("value", referenceForeignKeyId);
+            //show reference Modal
+            referenceModal.show();
+        });
+    };
+}
+
+
 

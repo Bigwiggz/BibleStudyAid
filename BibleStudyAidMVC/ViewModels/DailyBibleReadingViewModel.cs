@@ -1,6 +1,6 @@
 ﻿namespace BibleStudyAidMVC.ViewModels
 {
-    public class DailyBibleReadingVM
+    public class DailyBibleReadingViewModel
     {
         public int Id { get; set; }
         public DateTime DateTimeWhenDone { get; }

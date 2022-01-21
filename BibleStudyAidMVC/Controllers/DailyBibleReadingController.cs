@@ -27,7 +27,7 @@ namespace BibleStudyAidMVC.Controllers
         public async Task<IActionResult> IndexAsync()
         {
             var dailyBibleReadingList = await _dailyBibleReadingData.GetAllAsync();
-            var viewModel = _mapper.Map<IEnumerable<DailyBibleReadingVM>>(dailyBibleReadingList);
+            var viewModel = _mapper.Map<IEnumerable<DailyBibleReadingViewModel>>(dailyBibleReadingList);
             return View(viewModel);
         }
 
@@ -39,7 +39,7 @@ namespace BibleStudyAidMVC.Controllers
                 return NotFound();
             }
             var dailyBibleReadingAll = await _dailyBibleReadingData.GetParentAndAllChildrenRecordsAsync(id.Value);
-            var viewModel = _mapper.Map<DailyBibleReadingAllVM>(dailyBibleReadingAll);
+            var viewModel = _mapper.Map<DailyBibleReadingAllViewModel>(dailyBibleReadingAll);
             if (viewModel is not null)
             {
                 try
@@ -66,14 +66,14 @@ namespace BibleStudyAidMVC.Controllers
         // GET: DailyBibleReadingController/Create
         public ActionResult Create()
         {
-            var viewModel = new DailyBibleReadingVM();
+            var viewModel = new DailyBibleReadingViewModel();
             return View(viewModel);
         }
 
         // POST: DailyBibleReadingController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateAsync(DailyBibleReadingVM viewModel)
+        public async Task<IActionResult> CreateAsync(DailyBibleReadingViewModel viewModel)
         {
             try
             {
@@ -97,7 +97,7 @@ namespace BibleStudyAidMVC.Controllers
             }
 
             var dailyBibleReadingAll = await _dailyBibleReadingData.GetParentAndAllChildrenRecordsAsync(id.Value);
-            var viewModel = _mapper.Map<DailyBibleReadingAllVM>(dailyBibleReadingAll);
+            var viewModel = _mapper.Map<DailyBibleReadingAllViewModel>(dailyBibleReadingAll);
             if (viewModel is not null)
             {
                 try

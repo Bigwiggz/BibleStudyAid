@@ -41,11 +41,13 @@ namespace BibleStudyAidMVC.Controllers
         // POST: ReferencesController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create([Bind("Reference,Description,FKTableIdandName")] ReferencesViewModel viewModel)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                var model = _mapper.Map<References>(viewModel);
+                var id = _referencesData.InsertAsync(model);
+                return Redirect(HttpContext.Request.Headers["Referer"]);
             }
             catch
             {
