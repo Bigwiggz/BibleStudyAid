@@ -25,5 +25,6 @@ BEGIN
     SET NOCOUNT ON;
 	SELECT *
 	FROM [dbo].[tblScriptures]
-	WHERE FKTableIdandName=@FK;
+	WHERE FKTableIdandName=@FK
+	AND [tblScriptures].[IsDeleted]='FALSE';
 END

@@ -25,5 +25,6 @@ BEGIN
     SET NOCOUNT ON;
 	SELECT *
 	FROM [dbo].[tblDocuments]
-	WHERE FKProject=@FK;
+	WHERE FKProject=@FK
+	AND [tblDocuments].[IsDeleted]='FALSE';
 END

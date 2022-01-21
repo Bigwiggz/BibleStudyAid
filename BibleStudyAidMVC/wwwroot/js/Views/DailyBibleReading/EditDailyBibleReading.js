@@ -20,6 +20,13 @@ window.addEventListener("load", function () {
 
     AddReferenceNewModal();
 
+    let deleteReferenceModal = new bootstrap.Modal(document.getElementById('referenceDeleteModal'), {
+        backdrop: true,
+        keyboard: false,
+        focus: true
+    });
+
+    AddReferenceDeleteModal();
 
 });
 
@@ -64,6 +71,31 @@ function AddReferenceNewModal() {
             //Get FK ID
             let referenceForeignKeyId = newItemElement.getAttribute("reference-FK");
             document.getElementById("referenceNewFKId").setAttribute("value", referenceForeignKeyId);
+            //show reference Modal
+            referenceModal.show();
+        });
+    };
+}
+
+//function to add eventlistener to delete reference modal
+function AddReferenceDeleteModal() {
+    const refTable = document.getElementById("referenceTableEdits");
+
+    for (let i = 0; i < refTable.rows.length; i++) {
+        const dataParentElement = refTable.rows[i];
+        let deleteItemElement = refTable.rows[i].getElementsByTagName("td")[2].getElementsByTagName("i")[2];
+
+        //Populate form
+        deleteItemElement.addEventListener("click", () => {
+            //Get current row Id
+            let currentRowDeletedId = deleteItemElement.getAttribute("data-id");
+            document.getElementById("referenceDeleteId").setAttribute("value", currentRowDeletedId);
+            //Get current row Reference
+            const currentRowReference = dataParentElement.children[0].innerHTML;
+            document.getElementById("referenceCitationDelete").innerHTML=currentRowReference;
+            //Get current row Reference Description
+            const currentRowReferenceDescription = dataParentElement.children[1].innerHTML;
+            document.getElementById("referenceDescriptionDelete").innerHTML = currentRowReferenceDescription;
             //show reference Modal
             referenceModal.show();
         });

@@ -64,7 +64,7 @@ namespace BibleStudyAidMVC.Controllers
         // POST: ReferencesController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind("Id,Reference,Description,FKTableIdandName")] ReferencesViewModel viewModel)
+        public ActionResult Edit([Bind("Id,Reference,Description,FKTableIdandName,IsDeleted")] ReferencesViewModel viewModel)
         {
             try
             {
