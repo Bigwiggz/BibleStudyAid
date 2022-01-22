@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace BibleStudyDataAccessLibrary.Models
+﻿namespace BibleStudyAidMVC.ViewModels
 {
-    public class Scriptures
+    public class ScripturesViewModel
     {
         public int Id { get; set; }
         public string Scripture { get; set; }

@@ -20,6 +20,10 @@ namespace BibleStudyAidMVC.Extensions
             //References
             CreateMap<References, ReferencesViewModel>();
             CreateMap<ReferencesViewModel, References>();
+
+            //Scriptures
+            CreateMap<Scriptures, ScripturesViewModel>();
+            CreateMap<ScripturesViewModel, Scriptures>();   
         }
     }
 }

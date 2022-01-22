@@ -1,10 +1,23 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using BibleStudyDataAccessLibrary.DataAccess;
+using BibleStudyDataAccessLibrary.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BibleStudyAidMVC.Controllers
 {
     public class ScripturesController : Controller
     {
+        private readonly IScripturesData _scripturesData;
+        private readonly ILogger<Scriptures> _logger;
+        private readonly IMapper _mapper;
+
+        public ScripturesController(IScripturesData scripturesData,ILogger<Scriptures> logger, IMapper mapper)
+        {
+            _scripturesData = scripturesData;
+            _logger = logger;
+            _mapper = mapper;
+        }
         // GET: ScripturesController
         public ActionResult Index()
         {
@@ -26,11 +39,21 @@ namespace BibleStudyAidMVC.Controllers
         // POST: ScripturesController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create([Bind("Scripture,Book,Chapter,Verse,FKTableIdandName,Description")] Scriptures viewModel)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                if(viewModel.Chapter is null)
+                {
+                    viewModel.Scripture = $"{viewModel.Book} {viewModel.Verse}";
+                }
+                else
+                {
+                    viewModel.Scripture = $"{viewModel.Book} {viewModel.Chapter}: {viewModel.Verse}";
+                }
+                var model=_mapper.Map<Scriptures>(viewModel);
+                var id=_scripturesData.InsertAsync(model);
+                return Redirect(HttpContext.Request.Headers["Referer"]);
             }
             catch
             {
@@ -47,11 +70,13 @@ namespace BibleStudyAidMVC.Controllers
         // POST: ScripturesController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit([Bind("Id,Scripture,Book,Chapter,Verse,UniqueId,FKTableIdandName,Description")] Scriptures viewModel)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                var model = _mapper.Map<Scriptures>(viewModel);
+                var id=_scripturesData.UpdateAsync(model);
+                return Redirect(HttpContext.Request.Headers["Referer"]);
             }
             catch
             {

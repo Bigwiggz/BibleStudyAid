@@ -4,6 +4,7 @@
 
 //Events
 window.addEventListener("load", function () {
+
     let referenceModal = new bootstrap.Modal(document.getElementById('referenceModal'), {
         backdrop: true,
         keyboard: false,
@@ -28,8 +29,17 @@ window.addEventListener("load", function () {
 
     AddReferenceDeleteModal();
 
+    let addScriptureModal = new bootstrap.Modal(document.getElementById('scriptureNewModal'), {
+        backdrop: true,
+        keyboard: false,
+        focus: true
+    });
+
+    AddScriptureNewModal();
+
 });
 
+/*REFERENCE MODAL*/
 
 //function to add eventlistener to edit reference modal
 function AddReferenceEditModal() {
@@ -102,5 +112,23 @@ function AddReferenceDeleteModal() {
     };
 }
 
+/*SCRIPTURE MODALS*/
+
+//functionto add eventlistener to new scripture modal
+function AddScriptureNewModal() {
+    const scripturalTable = document.getElementById("scripturalTableEdits");
+    for (let i = 0; i < scripturalTable.rows.length; i++) {
+        let newItemElement = scripturalTable.rows[i].getElementsByTagName("td")[2].getElementsByTagName("i")[1];
+        newItemElement.addEventListener("click", () => {
+            //Get FK ID
+            let currentScripturalFKID = newItemElement.getAttribute("scripture-FK");
+            document.getElementById("scriptureNewFKId").setAttribute("value", currentScripturalFKID);
+
+            //show reference modal
+            referenceModal.show();
+
+        });
+    }
+}
 
 

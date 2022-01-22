@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[tblScriptures]
 (
-	[Id] INT NOT NULL PRIMARY KEY, 
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
     [Scripture] NVARCHAR(1000) NOT NULL,
     [Book] NVARCHAR(1000) NOT NULL,
     [Chapter] NVARCHAR(3) NULL,

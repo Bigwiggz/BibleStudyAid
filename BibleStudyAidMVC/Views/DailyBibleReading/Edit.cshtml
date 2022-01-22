@@ -12,14 +12,14 @@
 
 @*REFERENCES*@
 <div class="row">
-    <div class="col-11 card m-1">
+    <div class="col-12 card m-1">
         <div class="card-header border-primary">
             <h5>References</h5>
         </div>
         <div class="card-body">
             @if(@Model.ReferencesList.Count==0)
             {
-                <p>NONE</p>
+                <p>NONE click <a asp-controller="References" asp-action="Create">here</a to add scriptures></p>
             }
             else
             {
@@ -57,14 +57,14 @@
 
 @*SCRIPTURAL REFERENCES*@
 <div class="row">
-    <div class="col-11 card m-1">
+    <div class="col-12 card m-1">
         <div class="card-header border-primary">
             <h5>Scriptural References</h5>
         </div>
         <div class="card-body">
             @if(@Model.ScripturesList.Count==0)
             {
-                <p>NONE</p>   
+                <p>NONE click <a asp-controller="Scriptures" asp-action="Create">here</a to add scriptures></p>   
             }
             else
             {
@@ -76,22 +76,16 @@
                             <th>Edit</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="scripturalTableEdits">
                         @foreach(var scripture in @Model.ScripturesList)
                         {
                             <tr data-toggle="modal" data-target="#scriptureModal" data-id="@scripture.Id">
                                 <td>@scripture.Scripture</td>
                                 <td>@scripture.Description</td>
                                 <td>
-                                    <a asp-controller="Scriptures" asp-action="Edit" asp-route-id="@scripture.Id">
-                                        <i class="fas fa-edit nav-icon"></i>
-                                    </a> |
-                                    <a asp-controller="Scriptures" asp-action="Create" asp-route-id="@scripture.Id">
-                                        <i class="fas fa-plus-square nav-icon"></i>
-                                    </a> |
-                                    <a asp-controller="Scriptures" asp-action="Delete" asp-route-id="@scripture.Id">
-                                        <i class="fas fa-trash-alt nav-icon"></i>
-                                    </a>
+                                    <i class="fas fa-edit nav-icon" data-toggle="modal" data-target="#scriptureEditModal" data-id="@scripture.Id" scripture-FK="@scripture.FKTableIdandName"></i>|
+                                    <i class="fas fa-plus-square nav-icon" data-toggle="modal" data-target="#scriptureNewModal" data-id="@scripture.Id" scripture-FK="@scripture.FKTableIdandName"></i>|
+                                    <i class="fas fa-trash-alt nav-icon" data-toggle="modal" data-target="#scriptureDeleteModal" data-id="@scripture.Id" scripture-FK="@scripture.FKTableIdandName"></i>
                                 </td>
                             </tr>
                         }
@@ -102,6 +96,7 @@
     </div>
 </div>
 
+<a asp-controller="DailyBibleReading" asp-action="Details" asp-route-id="@Model.Id">See Details</a>
 @*MODAL LIST*@
 
 @*REFERENCES MODAL*@
@@ -169,7 +164,7 @@
   </div>
 </div>
 
-<!--Soft Delete-->
+<!--Reference Soft Delete Modal-->
 <div class="modal fade" id="referenceDeleteModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -202,9 +197,73 @@
 
 
 @*Scripture Modal*@
+<!--Scripture Edit Modal-->
+@*TODO:Finish Scripture Edit Modal*@
+<!--Scripture New Modal-->
+<div class="modal fade" id="scriptureNewModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ModalLabelScriptureNew">Create Scripture Reference</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form asp-controller="Scriptures" asp-action="Create" method="post">
+            <div class="form-group">
+                <label for="SelectBook">Select Book</label>
+                <select class="form-control" id="SelectBook">
+                <option disabled>Choose...</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="SelectChapter">Select Chapter</label>
+                <select class="form-control" id="SelectChapter" disabled>
+                    <option disabled>Choose...</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="SelectVerse">Select Verse</label>
+                <select class="form-control" id="SelectVerse" disabled>
+                    <option disabled>Choose...</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="SelectVerseGroup">Select Verse To...</label>
+                <select class="form-control" id="SelectVerseGroup" disabled>
+                <option disabled>Choose...</option>
+                </select>
+            </div>
+            <input type="hidden" id="scriptureNewFKId" name="FKTableIdandName" />
+            <input type="hidden" id="scriptureNewBook" name="Book" />
+            <input type="hidden" id="scriptureNewChapter" name="Chapter" />
+            <input type="hidden" id="scriptureNewVerse" name="Verse" />
+
+            <label>Reference Scripture</label>
+            <p name="Scripture" id="scriptureNewScripture">Scripture is Here</p>
+
+            <div class="form-group">
+                <label for="scriptureDescription">Description</label>
+                <textarea type="text" class="form-control" name="Description" id="scriptureNewDescription"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--Scripture Soft Delete Modal-->
+
+@*TODO:Finish Scripture Soft Delete Modal*@
 
 
 @*Scripts Section*@
 @section Scripts{
+    <script src="~/js/Helpers/ScriptureValidator/BibleScriptureDoc.js"></script>
+    <script src="~/js/Helpers/ScriptureValidator/BibleScriptureLogic.js"></script>
     <script src="~/js/Views/DailyBibleReading/EditDailyBibleReading.js"></script>
 }
