@@ -20,12 +20,15 @@
 
 CREATE PROCEDURE [dbo].[spUpdateDocuments]
     @Id INT,
-    @FKProject NVARCHAR(1000), 
-    @DocumentName NVARCHAR(256), 
-    @Document VARBINARY(MAX),
-    @DocumentType NVARCHAR(256),
+    @FKTableIdandName NVARCHAR(1000), 
+    @ContentType NVARCHAR(255),
+    @ContentDisposition NVARCHAR(255),
+    @ContentSize BIGINT,
+    @FileName NVARCHAR(255),
+    @UniqueGUIDId UNIQUEIDENTIFIER,
+    @Name NVARCHAR(255),
     @DocumentDescription NVARCHAR(1000),
-    @IsDeleted BIT
+    @IsDeleted BIT NULL
 
 AS
 BEGIN 
@@ -35,11 +38,14 @@ BEGIN
   BEGIN 
     UPDATE [dbo].[tblDocuments]
     SET 
-    FKProject=ISNULL(@FKProject,FKProject), 
-    DocumentName=ISNULL(@DocumentName,DocumentName), 
-	Document =ISNULL(@Document ,Document),
-    DocumentType =ISNULL(@DocumentType , DocumentType),
-    DocumentDescription=ISNULL(@DocumentDescription,[DocumentDescription]),
+    FKTableIdandName=ISNULL(@FKTableIdandName,FKTableIdandName), 
+    ContentType=ISNULL(@ContentType,ContentType), 
+	ContentDisposition =ISNULL(@ContentDisposition ,ContentDisposition),
+    ContentSize =ISNULL(@ContentSize , ContentSize),
+    [FileName]=ISNULL(@FileName,[FileName]),
+    [UniqueGUIDId]=ISNULL(@UniqueGUIDId,[UniqueGUIDId]),
+    [Name]=ISNULL(@Name,[Name]),
+    [DocumentDescription]=ISNULL(@DocumentDescription,[DocumentDescription]),
     IsDeleted=ISNULL(@IsDeleted,IsDeleted)
 	WHERE Id=@Id;
     END 

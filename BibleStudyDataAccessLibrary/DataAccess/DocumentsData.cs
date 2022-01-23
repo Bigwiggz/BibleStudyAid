@@ -54,10 +54,14 @@ namespace BibleStudyDataAccessLibrary.DataAccess
         {
             var p = new
             {
-                FKProject = obj.FKProject,
-                DocumentName = obj.DocumentName,
-                Document = obj.Document,
-                DocumentType = obj.DocumentType,
+                FKTableIdandName = obj.FKTableIdandName,
+                ContentType=obj.ContentType,
+                ContextDisposition=obj.ContentDisposition,
+                ContentSize=obj.ContentSize,
+                FileName=obj.FileName,
+                UniqueGUIDId=obj.UniqueGUIDId,
+                Name=obj.Name,
+                DocumentDescription=obj.DocumentDescription,
                 IsDeleted=obj.IsDeleted
             };
 
@@ -69,10 +73,15 @@ namespace BibleStudyDataAccessLibrary.DataAccess
         {
             var p = new
             {
-                FKProject = obj.FKProject,
-                DocumentName = obj.DocumentName,
-                Document = obj.Document,
-                DocumentType = obj.DocumentType,
+                Id=obj.Id,
+                FKTableIdandName = obj.FKTableIdandName,
+                ContentType = obj.ContentType,
+                ContextDisposition = obj.ContentDisposition,
+                ContentSize = obj.ContentSize,
+                FileName = obj.FileName,
+                UniqueGUIDId = obj.UniqueGUIDId,
+                Name = obj.Name,
+                DocumentDescription = obj.DocumentDescription,
                 IsDeleted = obj.IsDeleted
             };
 

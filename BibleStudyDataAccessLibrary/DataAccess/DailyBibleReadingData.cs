@@ -124,7 +124,7 @@ namespace BibleStudyDataAccessLibrary.DataAccess
                 //Step6 add in all documents
                 foreach (var item in documents)
                 {
-                    item.FKProject = tblId;
+                    item.FKTableIdandName = tblId;
                     _sql.SaveDataInTransaction("spCreateDocuments", item);
                 }
 

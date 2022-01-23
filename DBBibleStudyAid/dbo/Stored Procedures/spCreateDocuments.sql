@@ -19,18 +19,21 @@
 */
 
 CREATE PROCEDURE [dbo].[spCreateDocuments]
-    @FKProject NVARCHAR(1000), 
-    @DocumentName NVARCHAR(256), 
-    @Document VARBINARY(MAX),
-    @DocumentType NVARCHAR(256),
+    @FKTableIdandName NVARCHAR(1000), 
+    @ContentType NVARCHAR(255),
+    @ContentDisposition NVARCHAR(255),
+    @ContentSize BIGINT,
+    @FileName NVARCHAR(255),
+    @UniqueGUIDId UNIQUEIDENTIFIER,
+    @Name NVARCHAR(255),
     @DocumentDescription NVARCHAR(1000),
     @IsDeleted BIT NULL
 
 AS
 BEGIN
     SET NOCOUNT ON;
-	INSERT INTO [dbo].[tblDocuments] ([FKProject],[DocumentName],[Document],[DocumentType],[DocumentDescription])
-	VALUES (@FKProject,@DocumentName,@Document,@DocumentType,@DocumentDescription);
+	INSERT INTO [dbo].[tblDocuments] ([FKTableIdandName],[ContentType],[ContentDisposition],[ContentSize],[FileName],[UniqueGUIDId],[Name],[DocumentDescription])
+	VALUES (@FKTableIdandName,@ContentType,@ContentDisposition,@ContentSize,@FileName,@UniqueGUIDId,@Name,@DocumentDescription);
     DECLARE @Id INT;
     SET @Id=SCOPE_IDENTITY();
 END

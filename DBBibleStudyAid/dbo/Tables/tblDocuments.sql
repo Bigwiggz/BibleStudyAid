@@ -1,11 +1,14 @@
 ﻿CREATE TABLE [dbo].[tblDocuments]
 (
-	[Id] INT NOT NULL PRIMARY KEY, 
-    [FKProject] NVARCHAR(1000) NOT NULL, 
-    [DocumentName] NVARCHAR(256) NOT NULL, 
-    [Document] VARBINARY(MAX) NOT NULL, 
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
+    [FKTableIdandName] NVARCHAR(1000) NOT NULL, 
+    [ContentType] NVARCHAR(255) NOT NULL,
+    [ContentDisposition] NVARCHAR(255) NOT NULL,
+    [ContentSize] BIGINT NOT NULL,
+    [FileName] NVARCHAR(255) NOT NULL,
+    [UniqueGUIDId] UNIQUEIDENTIFIER NOT NULL,
+    [Name] NVARCHAR(255) NOT NULL,
     [DateUploaded] DATETIME2 NOT NULL DEFAULT getUTCDate(), 
-    [DocumentType] NVARCHAR(256) NOT NULL,
     [DocumentDescription] NVARCHAR(1000) NULL, 
     [IsDeleted] BIT NOT NULL DEFAULT 0
 )

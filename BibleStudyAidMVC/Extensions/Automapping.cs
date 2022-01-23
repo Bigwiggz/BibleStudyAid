@@ -23,7 +23,11 @@ namespace BibleStudyAidMVC.Extensions
 
             //Scriptures
             CreateMap<Scriptures, ScripturesViewModel>();
-            CreateMap<ScripturesViewModel, Scriptures>();   
+            CreateMap<ScripturesViewModel, Scriptures>(); 
+            
+            //Documents
+            CreateMap<Documents, DocumentsViewModel>();
+            CreateMap<DocumentsViewModel, Documents>(); 
         }
     }
 }

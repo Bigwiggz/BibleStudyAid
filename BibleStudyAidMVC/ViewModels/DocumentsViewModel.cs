@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace BibleStudyDataAccessLibrary.Models
+﻿namespace BibleStudyAidMVC.ViewModels
 {
-    public class Documents
+    public class DocumentsViewModel
     {
         public int Id { get; set; }
         public string FKTableIdandName { get; set; }
@@ -16,6 +12,7 @@ namespace BibleStudyDataAccessLibrary.Models
         public Guid UniqueGUIDId { get; set; }
         public DateTime DateUploaded { get; set; }
         public string DocumentDescription { get; set; }
+        public IFormFile Document { get; set; }
         public bool IsDeleted { get; set; }
     }
 }
