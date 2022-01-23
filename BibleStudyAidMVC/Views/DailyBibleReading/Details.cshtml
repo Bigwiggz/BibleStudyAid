@@ -75,7 +75,7 @@
             
                     @foreach(var doc in @Model.DocumentsList)
                     {
-                        <a asp-controller="Documents" asp-action="Details" asp-route-id="@doc.Id">@doc.DocumentName</a>
+                        <a asp-controller="Documents" asp-action="Details" asp-route-id="@doc.Id">@doc.FileName</a>
                     }
             
             }

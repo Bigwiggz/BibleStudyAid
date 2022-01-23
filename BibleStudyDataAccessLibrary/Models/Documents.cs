@@ -11,6 +11,7 @@ namespace BibleStudyDataAccessLibrary.Models
         public string ContentType { get; set; }
         public string ContentDisposition { get; set; }
         public long ContentSize { get; set; }
+        public string UniqueFileName { get; set; }
         public string FileName { get; set; }
         public string Name { get; set; }
         public Guid UniqueGUIDId { get; set; }

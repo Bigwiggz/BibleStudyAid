@@ -5,6 +5,7 @@
     [ContentType] NVARCHAR(255) NOT NULL,
     [ContentDisposition] NVARCHAR(255) NOT NULL,
     [ContentSize] BIGINT NOT NULL,
+    [UniqueFileName] NVARCHAR(255) NOT NULL,
     [FileName] NVARCHAR(255) NOT NULL,
     [UniqueGUIDId] UNIQUEIDENTIFIER NOT NULL,
     [Name] NVARCHAR(255) NOT NULL,
