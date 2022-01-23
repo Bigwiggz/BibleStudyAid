@@ -5,6 +5,7 @@
 //Events
 window.addEventListener("load", function () {
 
+    //Reference Modals
     let referenceModal = new bootstrap.Modal(document.getElementById('referenceModal'), {
         backdrop: true,
         keyboard: false,
@@ -29,6 +30,7 @@ window.addEventListener("load", function () {
 
     AddReferenceDeleteModal();
 
+    //Scripture Modals
     let addScriptureModal = new bootstrap.Modal(document.getElementById('scriptureNewModal'), {
         backdrop: true,
         keyboard: false,
@@ -36,6 +38,14 @@ window.addEventListener("load", function () {
     });
 
     AddScriptureNewModal();
+
+    let scriptureDeleteModal = new bootstrap.Modal(document.getElementById('scriptureDeleteModal'), {
+        backdrop: true,
+        keyboard: false,
+        focus: true
+    });
+
+    AddScriptureDeleteModal();
 
 });
 
@@ -130,5 +140,32 @@ function AddScriptureNewModal() {
         });
     }
 }
+
+//function to add eventlistener to delete reference modal
+function AddScriptureDeleteModal() {
+    const scripturalTable = document.getElementById("scripturalTableEdits");
+
+    for (let i = 0; i < scripturalTable.rows.length; i++) {
+        const dataParentElement = scripturalTable.rows[i];
+        let deleteItemElement = scripturalTable.rows[i].getElementsByTagName("td")[2].getElementsByTagName("i")[2];
+
+        //Populate form
+        deleteItemElement.addEventListener("click", () => {
+            //Get current row Id
+            let currentRowDeletedId = deleteItemElement.getAttribute("data-id");
+            document.getElementById("scriptureDeleteId").setAttribute("value", currentRowDeletedId);
+            //Get current row Scripture
+            const currentRowScripture = dataParentElement.children[0].innerHTML;
+            document.getElementById("scriptureDelete").innerHTML = currentRowScripture;
+            //Get current row Reference Description
+            const currentRowScriptureDescription = dataParentElement.children[1].innerHTML;
+            document.getElementById("scriptureDescriptionDelete").innerHTML = currentRowScriptureDescription;
+            //show reference Modal
+            referenceModal.show();
+        });
+    };
+}
+
+
 
 

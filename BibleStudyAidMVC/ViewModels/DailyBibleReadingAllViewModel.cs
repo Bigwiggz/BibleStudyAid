@@ -15,6 +15,7 @@ namespace BibleStudyAidMVC.ViewModels
         public List<Scriptures> ScripturesList { get; set; }
         public List<TagsToOtherTables> TagsToOtherTables { get; set; }
         public List<Documents> DocumentsList { get; set; }
+        public List<IFormFile> DocumentFiles { get; set; }
         public string BibleText { get; set; }
     }
 }

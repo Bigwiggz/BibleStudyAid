@@ -49,7 +49,7 @@ namespace BibleStudyAidMVC.Controllers
                 }
                 else
                 {
-                    viewModel.Scripture = $"{viewModel.Book} {viewModel.Chapter}: {viewModel.Verse}";
+                    viewModel.Scripture = $"{viewModel.Book} {viewModel.Chapter}:{viewModel.Verse}";
                 }
                 var model=_mapper.Map<Scriptures>(viewModel);
                 var id=_scripturesData.InsertAsync(model);
@@ -70,7 +70,7 @@ namespace BibleStudyAidMVC.Controllers
         // POST: ScripturesController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind("Id,Scripture,Book,Chapter,Verse,UniqueId,FKTableIdandName,Description")] Scriptures viewModel)
+        public ActionResult Edit([Bind("Id,Scripture,Book,Chapter,Verse,FKTableIdandName,Description,IsDeleted")] Scriptures viewModel)
         {
             try
             {
