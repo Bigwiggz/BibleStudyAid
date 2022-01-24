@@ -16,7 +16,17 @@ namespace BibleStudyAidMVC.Extensions
             _webHostEnvironment = webHostEnvironment;
             _configuration = configuration;
         }
-
+        
+        public async Task UpdateSingleFile(DocumentsViewModel viewModel, Documents model)
+        {
+            //TODO: finish this UpdateSingleFile
+        }
+        
+        public async Task DeleteSingleFile(Documents model)
+        {
+            //TODO: add public async Task DeleteSingleFile(Documents model)
+        }
+        
         public async Task UploadMultipleFilesAysnc(List<DocumentsViewModel> viewModel, List<Documents> model)
         {   //TODO: Setup a production and develop environment for blob storage
             //TODO: Figure out how to sanitize documents before uploading them
