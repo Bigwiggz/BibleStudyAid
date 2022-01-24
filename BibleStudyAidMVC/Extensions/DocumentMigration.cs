@@ -20,6 +20,20 @@ namespace BibleStudyAidMVC.Extensions
         public async Task UpdateSingleFile(DocumentsViewModel viewModel, Documents model)
         {
             //TODO: finish this UpdateSingleFile
+            string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, _configuration.GetSection("FileBlobStorage")["FolderName"]);
+            
+            model.ContentType = viewModel.Document.ContentType;
+            model.Name = viewModel.Document.Name;
+            model.ContentSize = viewModel.Document.Length;
+            model.ContentDisposition = viewModel.Document.ContentDisposition;
+
+            string filePath = Path.Combine(uploadsFolder, model.UniqueFileName);
+
+            using (var stream = new FileStream(filePath, FileMode.Create))
+            {
+                await viewModel.Document.CopyToAsync(stream);
+                await stream.FlushAsync();
+            }
         }
         
         public async Task DeleteSingleFile(Documents model)
