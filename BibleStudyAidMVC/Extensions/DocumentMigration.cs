@@ -54,20 +54,26 @@ namespace BibleStudyAidMVC.Extensions
             }
         }
 
-        public async Task<byte[]> DownloadMultipleFilesAsync(List<DocumentsViewModel> viewModel, List<Documents> model)
+        public async Task<(byte[] fileBytes,string contentType,string fileName)> DownloadMultipleFilesAsync(List<DocumentsViewModel> viewModel, List<Documents> model)
         {
             byte[] fileBytes;
+            string contentType="application/octet-stream";
+            string fileName="";
             string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, _configuration.GetSection("FileBlobStorage")["FolderName"]);
             if(model.Count == 1)
             {
                 string filePath=Path.Combine(uploadsFolder, model[0].UniqueFileName); 
                 fileBytes=await File.ReadAllBytesAsync(filePath);
+                contentType=model[0].ContentType;
+                fileName=model[0].FileName;
             }
             else
             {
                 fileBytes= await ZipMultipleFilesAsync(model, uploadsFolder);
+                var myUniqueFileName = string.Format($"ZipFile_{DateTime.Now.Ticks}.zip");
+                fileName=myUniqueFileName;
             }
-            return fileBytes;
+            return (fileBytes,contentType,fileName);
             //https://www.youtube.com/watch?v=DuAXUbxGcVc
             //https://ourcodeworld.com/articles/read/629/how-to-create-and-extract-zip-files-compress-and-decompress-zip-with-sharpziplib-with-csharp-in-winforms
 
