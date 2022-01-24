@@ -54,7 +54,7 @@ namespace BibleStudyAidMVC.Extensions
             }
         }
 
-        public async Task<(byte[] fileBytes,string contentType,string fileName)> DownloadMultipleFilesAsync(List<DocumentsViewModel> viewModel, List<Documents> model)
+        public async Task<(byte[] fileBytes,string contentType,string fileName)> DownloadMultipleFilesAsync(List<Documents> model)
         {
             byte[] fileBytes;
             string contentType="application/octet-stream";
