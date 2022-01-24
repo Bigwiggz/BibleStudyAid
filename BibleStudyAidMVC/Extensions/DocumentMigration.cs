@@ -143,8 +143,8 @@ namespace BibleStudyAidMVC.Extensions
                         int sourceBytes;
                         do
                         {
-                            sourceBytes = fileStream.Read(buffer, 0, buffer.Length);
-                            zipOutputStream.Write(buffer, 0, sourceBytes);
+                            sourceBytes = await fileStream.ReadAsync(buffer, 0, buffer.Length);
+                            await zipOutputStream.WriteAsync(buffer, 0, sourceBytes);
                         } while (sourceBytes > 0);
                     }
                     zipOutputStream.Finish();
