@@ -24,26 +24,24 @@ namespace BibleStudyAidMVC.Extensions
 
             if(model.Count > 0)
             {
-                foreach (var viewModelDocument in viewModel)
+                for (int i=0; i<viewModel.Count; i++)
                 {
                     var viewModelDocumentGUID = new Guid();
-                    var uniqueFileName = $"{ viewModelDocumentGUID.ToString()}_{viewModelDocument.Document.FileName}";
-                    for (int i = 0; i < model.Count; i++)
-                    {
-                        model[i].ContentType = viewModelDocument.Document.ContentType;
-                        model[i].UniqueGUIDId = viewModelDocumentGUID;
-                        model[i].UniqueFileName = $"{ viewModelDocumentGUID.ToString()}_{viewModelDocument.Document.FileName}";
-                        model[i].FileName = viewModelDocument.Document.FileName;
-                        model[i].Name = viewModelDocument.Document.Name;
-                        model[i].ContentSize = viewModelDocument.Document.Length;
-                        model[i].ContentDisposition = viewModelDocument.Document.ContentDisposition;
-                    }
+                    var uniqueFileName = $"{ viewModelDocumentGUID.ToString()}_{viewModel[i].Document.FileName}";
+
+                    model[i].ContentType = viewModel[i].Document.ContentType;
+                    model[i].UniqueGUIDId = viewModelDocumentGUID;
+                    model[i].UniqueFileName = uniqueFileName;
+                    model[i].FileName = viewModel[i].Document.FileName;
+                    model[i].Name = viewModel[i].Document.Name;
+                    model[i].ContentSize = viewModel[i].Document.Length;
+                    model[i].ContentDisposition = viewModel[i].Document.ContentDisposition;
 
                     string filePath = Path.Combine(uploadsFolder, uniqueFileName);
 
                     using (var stream = new FileStream(filePath, FileMode.Create))
                     {
-                        await viewModelDocument.Document.CopyToAsync(stream);
+                        await viewModel[i].Document.CopyToAsync(stream);
                         await stream.FlushAsync();
                     }
 
