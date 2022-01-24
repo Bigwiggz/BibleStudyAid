@@ -39,6 +39,13 @@ namespace BibleStudyAidMVC.Extensions
         public async Task DeleteSingleFile(Documents model)
         {
             //TODO: add public async Task DeleteSingleFile(Documents model)
+            string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, _configuration.GetSection("FileBlobStorage")["FolderName"]);
+            string filePath = Path.Combine(uploadsFolder, model.UniqueFileName);
+            
+            if(File.exists(filePath)
+            {
+                File.Delete(filePath);
+            }
         }
         
         public async Task UploadMultipleFilesAysnc(List<DocumentsViewModel> viewModel, List<Documents> model)
