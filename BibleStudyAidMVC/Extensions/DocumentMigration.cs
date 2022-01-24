@@ -58,20 +58,16 @@ namespace BibleStudyAidMVC.Extensions
 
         public async Task<byte[]> DownloadMultipleFilesAsync(List<DocumentsViewModel> viewModel, List<Documents> model)
         {
+            byte[] fileBytes;
             string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, _configuration.GetSection("FileBlobStorage")["FolderName"]);
             if(model.Count == 1)
             {
                 string filePath=Path.Combine(uploadsFolder, model[0].UniqueFileName); 
-                byte[] fileBytes=await File.ReadAllBytesAsync(filePath);
-                
+                fileBytes=await File.ReadAllBytesAsync(filePath);
             }
             else
             {
-                foreach (var document in model)
-                {
-
-                }
-                byte[] fileBytes = ;
+                fileBytes= await ZipMultipleFilesAsync(model, uploadsFolder);
             }
             return fileBytes;
             //https://www.youtube.com/watch?v=DuAXUbxGcVc
@@ -89,7 +85,7 @@ namespace BibleStudyAidMVC.Extensions
              */
         }
 
-        private byte[] ZipMultipleFiles(List<Documents> model,string folderpath , int zipCompressionLevel)
+        private async Task<byte[]> ZipMultipleFilesAsync(List<Documents> model, string folderpath , int zipCompressionLevel=9)
         {
             var outputMemStream=new MemoryStream();
             using(ZipOutputStream zipOutputStream=new ZipOutputStream(outputMemStream))
@@ -118,8 +114,11 @@ namespace BibleStudyAidMVC.Extensions
                     }
                     zipOutputStream.Finish();
                     zipOutputStream.Close();
-
                 }
+                byte[] resultFileBytes=outputMemStream.ToBuffer();
+                long fileLength = outputMemStream.Length;
+                
+                return resultFileBytes;
             }
         }
     }
