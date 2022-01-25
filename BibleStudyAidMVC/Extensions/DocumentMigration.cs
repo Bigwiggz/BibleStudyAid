@@ -19,18 +19,31 @@ namespace BibleStudyAidMVC.Extensions
 
         public async Task UpdateSingleFile(DocumentsViewModel viewModel, Documents model)
         {
-            //TODO: finish this UpdateSingleFile
             string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, _configuration.GetSection("FileBlobStorage")["FolderName"]);
+            
+            var viewModelDocumentGUID = Guid.NewGuid();
+            var uniqueFileName = $"{viewModelDocumentGUID.ToString()}_{viewModel[i].Document.FileName}";
+            string filePath = Path.Combine(uploadsFolder, model.uniqueFileName);
+            
+            if(File.Exists(filePath))
+            {
+                File.Delete(filePath);
+            }
+            
+            // Create a new file path
+            filePath = Path.Combine(uploadsFolder, uniqueFileName);
             
             model.Id=viewModel.Id;
             model.FKTableIdandName=viewModel.FKTableIdandName;
             model.ContentType = viewModel.Document.ContentType;
+            model.UniqueGUIDId = viewModelDocumentGUID;
+            model.UniqueFileName = uniqueFileName;
+            model.FileName = viewModel.Document.FileName;
             model.Name = viewModel.Document.Name;
             model.ContentSize = viewModel.Document.Length;
             model.ContentDisposition = viewModel.Document.ContentDisposition;
 
-            string filePath = Path.Combine(uploadsFolder, model.UniqueFileName);
-
+            
             using (var stream = new FileStream(filePath, FileMode.Create))
             {
                 await viewModel.Document.CopyToAsync(stream);
@@ -60,7 +73,7 @@ namespace BibleStudyAidMVC.Extensions
                 for (int i = 0; i < viewModel.Count; i++)
                 {
                     var viewModelDocumentGUID = Guid.NewGuid();
-                    var uniqueFileName = $"{ viewModelDocumentGUID.ToString()}_{viewModel[i].Document.FileName}";
+                    var uniqueFileName = $"{viewModelDocumentGUID.ToString()}_{viewModel[i].Document.FileName}";
                     
                     model[i].FKTableIdandName=viewModel[i].FKTableIdandName;
                     model[i].ContentType = viewModel[i].Document.ContentType;
