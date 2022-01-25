@@ -2,6 +2,8 @@
 @{
     ViewData["Title"]="Daily Bible Reading";
     Layout = "~/Views/Shared/AdminLTE/_Layout.cshtml";
+
+
 }
 
 @*Styles*@
@@ -97,13 +99,33 @@
 </div>
 
 @*DOCUMENTS LIST*@
+
 <div class="row">
     <div class="col-12 card m-1">
         <div class="card-header border-primary">
             <h5>Documents</h5>
         </div>
         <div class="card-body">
-            <form asp-controller="Documents" asp-action="Create" enctype="multipart/form-data" method="post">
+            <!--Download Files-->
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>File Name</th>
+                        <th>File Size (kB)</th>
+                    </tr>
+                </thead>
+                @foreach(var file in @Model.DocumentsList)
+                {
+                    <tbody>
+                        <tr>
+                            <td>@file.FileName</td>
+                            <td>@(file.ContentSize/1024)</td>
+                        </tr>
+                    </tbody>
+                }
+            </table>
+            <!--Upload-->
+            <form asp-controller="Documents" asp-action="Upload" enctype="multipart/form-data" method="post">
                 <input type="hidden" name="FKTableIdandName" value="@Model.PKIdtblDailyBibleReadings"/>
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Insert Documents</label>
@@ -116,7 +138,7 @@
             </div>
             <div class="form-group row">
                 <div class="col-sm-10">
-                    <button type="submit" class="btn btn-primary">Create</button>
+                    <button type="submit" class="btn btn-primary">Upload File(s)</button>
                 </div>
             </div>
             </form>

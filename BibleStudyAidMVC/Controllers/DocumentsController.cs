@@ -43,7 +43,7 @@ namespace BibleStudyAidMVC.Controllers
         // POST: DocumentsController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateAsync([Bind("FKTableIdandName","Document")] DocumentsUpload documentsUploadViewModelList)
+        public async Task<IActionResult> UploadAsync([Bind("FKTableIdandName","Document")] DocumentsUpload documentsUploadViewModelList)
         {
             try
             {
