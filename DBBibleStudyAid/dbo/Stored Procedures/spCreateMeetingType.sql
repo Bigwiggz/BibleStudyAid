@@ -26,6 +26,6 @@ CREATE PROCEDURE [dbo].[spCreateMeetingType]
 AS
 BEGIN
     SET NOCOUNT ON;
-	INSERT INTO [dbo].[tblMeetingType] ([MeetingTypeName],[MeetingTypeDescription])
-	VALUES (@MeetingTypeName,@MeetingTypeDescription);
+	INSERT INTO [dbo].[tblMeetingType] ([MeetingTypeName],[MeetingTypeDescription],[IsDeleted])
+	VALUES (@MeetingTypeName,@MeetingTypeDescription,@IsDeleted);
 END

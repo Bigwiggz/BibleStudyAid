@@ -25,8 +25,8 @@ CREATE PROCEDURE [dbo].[spCreateTag]
 AS
 BEGIN
 	SET NOCOUNT ON;
-	INSERT INTO [dbo].[tblTags] ([TagName],[TagDescription])
-	VALUES (@TagName,@TagDescription);
+	INSERT INTO [dbo].[tblTags] ([TagName],[TagDescription],[IsDeleted])
+	VALUES (@TagName,@TagDescription,@IsDeleted);
 END
 
 

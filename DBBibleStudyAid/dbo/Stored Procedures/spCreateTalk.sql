@@ -37,7 +37,8 @@ BEGIN
     [Description], 
     [TalkDocument], 
     [TalkDocumentName],
-    [ThemeScripture])
+    [ThemeScripture],
+    [IsDeleted])
 	VALUES(
     @TalkTitle, 
     @DateGiven,  
@@ -45,5 +46,6 @@ BEGIN
     @Description, 
     @TalkDocument, 
     @TalkDocumentName,
-    @ThemeScripture);
+    @ThemeScripture,
+    @IsDeleted);
 END

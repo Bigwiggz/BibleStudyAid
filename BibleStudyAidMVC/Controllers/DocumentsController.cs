@@ -1,10 +1,27 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using BibleStudyAidMVC.Extensions;
+using BibleStudyAidMVC.ViewModels;
+using BibleStudyDataAccessLibrary.DataAccess;
+using BibleStudyDataAccessLibrary.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BibleStudyAidMVC.Controllers
 {
     public class DocumentsController : Controller
     {
+        private readonly IDocumentsData _documentsData;
+        private readonly ILogger<Documents> _logger;
+        private readonly IMapper _mapper;
+        private readonly IDocumentMigration _documentMigration;
+
+        public DocumentsController(IDocumentsData documentsData, ILogger<Documents> logger, IMapper mapper, IDocumentMigration documentMigration)
+        {
+            _documentsData = documentsData;
+            _logger = logger;
+            _mapper = mapper;
+            _documentMigration = documentMigration;
+        }
         // GET: DocumentsController
         public ActionResult Index()
         {
@@ -26,11 +43,30 @@ namespace BibleStudyAidMVC.Controllers
         // POST: DocumentsController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<IActionResult> CreateAsync([Bind("FKTableIdandName","Document")] DocumentsUpload documentsUploadViewModelList)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                var viewModelList = new List<DocumentsViewModel>();
+
+                foreach (var document in documentsUploadViewModelList.Document)
+                {
+                   var newDoc = new DocumentsViewModel
+                   {
+                       FKTableIdandName=documentsUploadViewModelList.FKTableIdandName,
+                       Document=document
+                   };
+                    viewModelList.Add(newDoc);
+                }
+                
+                var modelList = _mapper.Map<List<Documents>>(viewModelList);
+                await _documentMigration.UploadMultipleFilesAysnc(viewModelList, modelList);
+
+                foreach (var model in modelList)
+                {
+                    var Id =await _documentsData.InsertAsync(model);
+                }
+                return Redirect(HttpContext.Request.Headers["Referer"]);
             }
             catch
             {

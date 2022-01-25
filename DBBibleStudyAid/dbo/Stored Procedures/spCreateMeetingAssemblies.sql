@@ -33,11 +33,13 @@ BEGIN
     [PartTitle], 
     [MeetingTypeId], 
     [Scripture], 
-    [LessonLearnedDescription])
+    [LessonLearnedDescription],
+    [IsDeleted])
 	VALUES(
     @DateOfMeeting, 
     @PartTitle, 
     @MeetingTypeId, 
     @Scripture, 
-    @LessonLearnedDescription);
+    @LessonLearnedDescription,
+    @IsDeleted);
 END

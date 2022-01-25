@@ -31,10 +31,11 @@ BEGIN
     ([TagsId], 
     [tblId], 
     [tblName], 
-    [FKTableIdandName])
+    [FKTableIdandName],[IsDeleted])
 	VALUES(
     @TagsId, 
     @tblId, 
     @tblName, 
-    @FKTableIdandName);
+    @FKTableIdandName,
+    @IsDeleted);
 END

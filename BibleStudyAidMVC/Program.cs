@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Configuration;
 using AutoMapper;
 using BibleStudyAidMVC.Services.HttpServices;
+using BibleStudyAidMVC.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -43,6 +44,9 @@ builder.Services.AddSingleton<IHttpRequestService, HttpRequestService>();
 
 //Add Automapper
 builder.Services.AddAutoMapper(typeof(Program));
+
+//Add Document Migration
+builder.Services.AddSingleton<IDocumentMigration, DocumentMigration>();
 
 //Make everything authorized access
 builder.Services.AddMvc(o => 

@@ -34,11 +34,13 @@ BEGIN
     [PersonalStudyDescription], 
     [PersonalStudyQuestionAssignment], 
     [DateFinished], 
-    [BaseScripture])
+    [BaseScripture],
+    [IsDeleted])
 	VALUES(
     @PersonalStudyTitle, 
     @PersonalStudyDescription, 
     @PersonalStudyQuestionAssignment, 
     @DateFinished, 
-    @BaseScripture);
+    @BaseScripture,
+    @IsDeleted);
 END

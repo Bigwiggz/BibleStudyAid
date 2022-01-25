@@ -33,8 +33,8 @@ CREATE PROCEDURE [dbo].[spCreateDocuments]
 AS
 BEGIN
     SET NOCOUNT ON;
-	INSERT INTO [dbo].[tblDocuments] ([FKTableIdandName],[ContentType],[ContentDisposition],[ContentSize],[UniqueFileName],[FileName],[UniqueGUIDId],[Name],[DocumentDescription])
-	VALUES (@FKTableIdandName,@ContentType,@ContentDisposition,@ContentSize,@UniqueFileName,@FileName,@UniqueGUIDId,@Name,@DocumentDescription);
+	INSERT INTO [dbo].[tblDocuments] ([FKTableIdandName],[ContentType],[ContentDisposition],[ContentSize],[UniqueFileName],[FileName],[UniqueGUIDId],[Name],[DocumentDescription],[IsDeleted])
+	VALUES (@FKTableIdandName,@ContentType,@ContentDisposition,@ContentSize,@UniqueFileName,@FileName,@UniqueGUIDId,@Name,@DocumentDescription,@IsDeleted);
     DECLARE @Id INT;
     SET @Id=SCOPE_IDENTITY();
 END

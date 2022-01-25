@@ -28,6 +28,6 @@ CREATE PROCEDURE [dbo].[spCreateFamilyStudyProjects]
 AS
 BEGIN
     SET NOCOUNT ON;
-	INSERT INTO [dbo].[tblFamilyStudyProjects] ([DateWhenCreated],[FamilyStudyTitle],[FamilyStudyDescription],[FamilyStudyFindings])
-	VALUES (@DateWhenCreated,@FamilyStudyTitle,@FamilyStudyDescription,@FamilyStudyFindings);
+	INSERT INTO [dbo].[tblFamilyStudyProjects] ([DateWhenCreated],[FamilyStudyTitle],[FamilyStudyDescription],[FamilyStudyFindings],[IsDeleted])
+	VALUES (@DateWhenCreated,@FamilyStudyTitle,@FamilyStudyDescription,@FamilyStudyFindings,@IsDeleted);
 END

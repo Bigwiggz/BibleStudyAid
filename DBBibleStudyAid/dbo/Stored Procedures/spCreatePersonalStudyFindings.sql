@@ -30,9 +30,11 @@ BEGIN
 	INSERT INTO [dbo].[tblPersonalStudyFindings] 
     ([Scripture], 
     [Explanation],
-    [FKPersonalStudyProjectId])
+    [FKPersonalStudyProjectId],
+    [IsDeleted])
 	VALUES(
     @Scripture, 
     @Explanation,
-    @FKPersonalStudyProjectId);
+    @FKPersonalStudyProjectId,
+    [IsDeleted]);
 END

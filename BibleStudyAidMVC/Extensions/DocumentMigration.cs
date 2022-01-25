@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BibleStudyAidMVC.Extensions
 {
-    public class DocumentMigration
+    public class DocumentMigration : IDocumentMigration
     {
         private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly IConfiguration _configuration;
@@ -16,12 +16,12 @@ namespace BibleStudyAidMVC.Extensions
             _webHostEnvironment = webHostEnvironment;
             _configuration = configuration;
         }
-        
+
         public async Task UpdateSingleFile(DocumentsViewModel viewModel, Documents model)
         {
             //TODO: finish this UpdateSingleFile
             string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, _configuration.GetSection("FileBlobStorage")["FolderName"]);
-            
+
             model.ContentType = viewModel.Document.ContentType;
             model.Name = viewModel.Document.Name;
             model.ContentSize = viewModel.Document.Length;
@@ -35,29 +35,29 @@ namespace BibleStudyAidMVC.Extensions
                 await stream.FlushAsync();
             }
         }
-        
-        public async Task DeleteSingleFile(Documents model)
+
+        public void DeleteSingleFile(Documents model)
         {
             //TODO: add public async Task DeleteSingleFile(Documents model)
             string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, _configuration.GetSection("FileBlobStorage")["FolderName"]);
             string filePath = Path.Combine(uploadsFolder, model.UniqueFileName);
-            
-            if(File.exists(filePath)
+
+            if (File.Exists(filePath))
             {
                 File.Delete(filePath);
             }
         }
-        
+
         public async Task UploadMultipleFilesAysnc(List<DocumentsViewModel> viewModel, List<Documents> model)
         {   //TODO: Setup a production and develop environment for blob storage
             //TODO: Figure out how to sanitize documents before uploading them
             string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, _configuration.GetSection("FileBlobStorage")["FolderName"]);
 
-            if(model.Count > 0)
+            if (model.Count > 0)
             {
-                for (int i=0; i<viewModel.Count; i++)
+                for (int i = 0; i < viewModel.Count; i++)
                 {
-                    var viewModelDocumentGUID = new Guid();
+                    var viewModelDocumentGUID = Guid.NewGuid();
                     var uniqueFileName = $"{ viewModelDocumentGUID.ToString()}_{viewModel[i].Document.FileName}";
 
                     model[i].ContentType = viewModel[i].Document.ContentType;
@@ -78,33 +78,28 @@ namespace BibleStudyAidMVC.Extensions
 
                 }
             }
-            else
-            {
-                //TODO: Finish this error
-                throw;
-            }
         }
 
         public async Task<(byte[] fileBytes, string contentType, string fileName)> DownloadMultipleFilesAsync(List<Documents> model)
         {
             byte[] fileBytes;
-            string contentType="application/octet-stream";
-            string fileName="";
+            string contentType = "application/octet-stream";
+            string fileName = "";
             string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, _configuration.GetSection("FileBlobStorage")["FolderName"]);
-            if(model.Count == 1)
+            if (model.Count == 1)
             {
-                string filePath=Path.Combine(uploadsFolder, model[0].UniqueFileName); 
-                fileBytes=await File.ReadAllBytesAsync(filePath);
-                contentType=model[0].ContentType;
-                fileName=model[0].FileName;
+                string filePath = Path.Combine(uploadsFolder, model[0].UniqueFileName);
+                fileBytes = await File.ReadAllBytesAsync(filePath);
+                contentType = model[0].ContentType;
+                fileName = model[0].FileName;
             }
             else
             {
-                fileBytes= await ZipMultipleFilesAsync(model, uploadsFolder);
+                fileBytes = await ZipMultipleFilesAsync(model, uploadsFolder);
                 var myUniqueFileName = string.Format($"ZipFile_{DateTime.Now.Ticks}.zip");
-                fileName=myUniqueFileName;
+                fileName = myUniqueFileName;
             }
-            return (fileBytes,contentType,fileName);
+            return (fileBytes, contentType, fileName);
             //https://www.youtube.com/watch?v=DuAXUbxGcVc
             //https://ourcodeworld.com/articles/read/629/how-to-create-and-extract-zip-files-compress-and-decompress-zip-with-sharpziplib-with-csharp-in-winforms
 
@@ -120,10 +115,10 @@ namespace BibleStudyAidMVC.Extensions
              */
         }
 
-        private async Task<byte[]> ZipMultipleFilesAsync(List<Documents> model, string folderpath , int zipCompressionLevel=9)
+        private async Task<byte[]> ZipMultipleFilesAsync(List<Documents> model, string folderpath, int zipCompressionLevel = 9)
         {
-            var outputMemStream=new MemoryStream();
-            using(ZipOutputStream zipOutputStream=new ZipOutputStream(outputMemStream))
+            var outputMemStream = new MemoryStream();
+            using (ZipOutputStream zipOutputStream = new ZipOutputStream(outputMemStream))
             {
                 zipOutputStream.SetLevel(zipCompressionLevel);
 
@@ -133,12 +128,12 @@ namespace BibleStudyAidMVC.Extensions
                 {
                     string filePath = Path.Combine(folderpath, document.FileName);
 
-                    var entry=new ZipEntry(filePath);
+                    var entry = new ZipEntry(filePath);
 
                     entry.DateTime = DateTime.UtcNow;
                     zipOutputStream.PutNextEntry(entry);
 
-                    using(FileStream fileStream = File.OpenRead(filePath))
+                    using (FileStream fileStream = File.OpenRead(filePath))
                     {
                         int sourceBytes;
                         do
@@ -150,9 +145,9 @@ namespace BibleStudyAidMVC.Extensions
                     zipOutputStream.Finish();
                     zipOutputStream.Close();
                 }
-                byte[] resultFileBytes=outputMemStream.ToBuffer();
+                byte[] resultFileBytes = outputMemStream.GetBuffer();
                 long fileLength = outputMemStream.Length;
-                
+
                 return resultFileBytes;
             }
         }
