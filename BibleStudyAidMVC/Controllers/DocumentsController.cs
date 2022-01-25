@@ -22,6 +22,28 @@ namespace BibleStudyAidMVC.Controllers
             _mapper = mapper;
             _documentMigration = documentMigration;
         }
+        // GET DOWNLOAD CONTROLLER
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DownloadAsync(int[] IdList)
+        {
+            if(IdList.Length>0)
+            {
+                var documentsList= new List<Documents>();
+                
+                foreach(var Id in IdList)
+                {   
+                    var documentModel=await _documentsData.GetByIdAsync(Id);
+                    documentsList.add(documentModel);
+                }
+                
+                var fileResult= await _documentMigration.DownloadMultipleFilesAsync(documentsList);
+                
+                return File(fileResult.fileBytes,fileResult.contentType,fileResult.fileName);
+            }
+            
+            return NotFound();
+        }
         // GET: DocumentsController
         public ActionResult Index()
         {
