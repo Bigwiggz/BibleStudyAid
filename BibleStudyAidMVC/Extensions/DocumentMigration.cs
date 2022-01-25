@@ -21,7 +21,9 @@ namespace BibleStudyAidMVC.Extensions
         {
             //TODO: finish this UpdateSingleFile
             string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, _configuration.GetSection("FileBlobStorage")["FolderName"]);
-
+            
+            model.Id=viewModel.Id;
+            model.FKTableIdandName=viewModel.FKTableIdandName;
             model.ContentType = viewModel.Document.ContentType;
             model.Name = viewModel.Document.Name;
             model.ContentSize = viewModel.Document.Length;
@@ -59,7 +61,8 @@ namespace BibleStudyAidMVC.Extensions
                 {
                     var viewModelDocumentGUID = Guid.NewGuid();
                     var uniqueFileName = $"{ viewModelDocumentGUID.ToString()}_{viewModel[i].Document.FileName}";
-
+                    
+                    model[i].FKTableIdandName=viewModel[i].FKTableIdandName;
                     model[i].ContentType = viewModel[i].Document.ContentType;
                     model[i].UniqueGUIDId = viewModelDocumentGUID;
                     model[i].UniqueFileName = uniqueFileName;
