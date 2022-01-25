@@ -56,7 +56,7 @@ namespace BibleStudyDataAccessLibrary.DataAccess
             {
                 FKTableIdandName = obj.FKTableIdandName,
                 ContentType=obj.ContentType,
-                ContextDisposition=obj.ContentDisposition,
+                ContentDisposition=obj.ContentDisposition,
                 ContentSize=obj.ContentSize,
                 UniqueFileName = obj.UniqueFileName,
                 FileName =obj.FileName,
@@ -77,7 +77,7 @@ namespace BibleStudyDataAccessLibrary.DataAccess
                 Id=obj.Id,
                 FKTableIdandName = obj.FKTableIdandName,
                 ContentType = obj.ContentType,
-                ContextDisposition = obj.ContentDisposition,
+                ContentDisposition = obj.ContentDisposition,
                 ContentSize = obj.ContentSize,
                 UniqueFileName=obj.UniqueFileName,
                 FileName = obj.FileName,

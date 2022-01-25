@@ -36,5 +36,5 @@ BEGIN
     @Scripture, 
     @Explanation,
     @FKPersonalStudyProjectId,
-    [IsDeleted]);
+    @IsDeleted);
 END
