@@ -112,7 +112,7 @@ namespace BibleStudyAidMVC.Controllers
                 var model= await _documentsData.GetByIdAsync(Id);
                 await _documentMigration.UpdateSingleFile(viewModel,model);
                 var updatedId=await_documentsData.UpdateAsync(model);
-                return RedirectToAction(nameof(Index));
+                return Redirect(HttpContext.Request.Headers["Referer"]);
             }
             catch
             {
@@ -136,7 +136,7 @@ namespace BibleStudyAidMVC.Controllers
                 var model=await _documents.Data.GetByIdAsync(Id);
                 var deletedId= await _documentsData.DeleteByIdAsync(Id);
                 await _documentMigration.DeleteSingleFile(model);
-                return RedirectToAction(nameof(Index));
+                return Redirect(HttpContext.Request.Headers["Referer"]);
             }
             catch
             {
