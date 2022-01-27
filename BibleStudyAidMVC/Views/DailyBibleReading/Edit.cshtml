@@ -112,18 +112,22 @@
                     <tr>
                         <th>File Name</th>
                         <th>File Size (kB)</th>
+                        <th>File Type</th>
                     </tr>
                 </thead>
                 @foreach(var file in @Model.DocumentsList)
                 {
-                    <tbody>
-                        <tr>
+                    <tbody id="tableDocumentBody">
+                        <tr doc-id="@file.Id">
                             <td>@file.FileName</td>
                             <td>@(file.ContentSize/1024)</td>
+                            <td>@file.ContentType</td>
                         </tr>
                     </tbody>
                 }
             </table>
+            <!--Button Submit-->
+	        <button type="button" class="btn btn-primary" id="submitDownloadButton">Submit</button>
             <!--Upload-->
             <form asp-controller="Documents" asp-action="Upload" enctype="multipart/form-data" method="post">
                 <input type="hidden" name="FKTableIdandName" value="@Model.PKIdtblDailyBibleReadings"/>

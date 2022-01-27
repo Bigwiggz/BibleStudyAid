@@ -25,16 +25,16 @@ namespace BibleStudyAidMVC.Controllers
         // GET DOWNLOAD CONTROLLER
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DownloadAsync(int[] IdList)
+        public async Task<IActionResult> DownloadAsync(List<string> IdList)
         {
-            if(IdList.Length>0)
+            if(IdList.Count>0)
             {
                 var documentsList= new List<Documents>();
                 
                 foreach(var Id in IdList)
                 {   
-                    var documentModel=await _documentsData.GetByIdAsync(Id);
-                    documentsList.add(documentModel);
+                    var documentModel=await _documentsData.GetByIdAsync(Int32.Parse(Id));
+                    documentsList.Add(documentModel);
                 }
                 
                 var fileResult= await _documentMigration.DownloadMultipleFilesAsync(documentsList);
@@ -109,9 +109,9 @@ namespace BibleStudyAidMVC.Controllers
         {
             try
             {
-                var model= await _documentsData.GetByIdAsync(Id);
+                var model= await _documentsData.GetByIdAsync(viewModel.Id);
                 await _documentMigration.UpdateSingleFile(viewModel,model);
-                var updatedId=await_documentsData.UpdateAsync(model);
+                var updatedId=await _documentsData.UpdateAsync(model);
                 return Redirect(HttpContext.Request.Headers["Referer"]);
             }
             catch
@@ -129,13 +129,13 @@ namespace BibleStudyAidMVC.Controllers
         // POST: DocumentsController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id)
+        public async Task<IActionResult> DeleteAsync(int Id)
         {
             try
             {
-                var model=await _documents.Data.GetByIdAsync(Id);
-                var deletedId= await _documentsData.DeleteByIdAsync(Id);
-                await _documentMigration.DeleteSingleFile(model);
+                var model=await _documentsData.GetByIdAsync(Id);
+                var deletedId= await _documentsData.DeleteAsync(Id);
+                _documentMigration.DeleteSingleFile(model);
                 return Redirect(HttpContext.Request.Headers["Referer"]);
             }
             catch

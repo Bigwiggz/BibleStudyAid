@@ -22,8 +22,8 @@ namespace BibleStudyAidMVC.Extensions
             string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, _configuration.GetSection("FileBlobStorage")["FolderName"]);
             
             var viewModelDocumentGUID = Guid.NewGuid();
-            var uniqueFileName = $"{viewModelDocumentGUID.ToString()}_{viewModel[i].Document.FileName}";
-            string filePath = Path.Combine(uploadsFolder, model.uniqueFileName);
+            var uniqueFileName = $"{viewModelDocumentGUID.ToString()}_{viewModel.Document.FileName}";
+            string filePath = Path.Combine(uploadsFolder, model.UniqueFileName);
             
             if(File.Exists(filePath))
             {
