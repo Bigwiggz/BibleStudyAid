@@ -142,9 +142,9 @@ namespace BibleStudyAidMVC.Extensions
 
                 foreach (var document in model)
                 {
-                    string filePath = Path.Combine(folderpath, document.FileName);
-
-                    var entry = new ZipEntry(filePath);
+                    string filePath = Path.Combine(folderpath, document.UniqueFileName);
+                    string fileNamedPath=Path.Combine(folderpath, document.FileName);
+                    var entry = new ZipEntry(fileNamedPath);
 
                     entry.DateTime = DateTime.UtcNow;
                     zipOutputStream.PutNextEntry(entry);
@@ -158,11 +158,13 @@ namespace BibleStudyAidMVC.Extensions
                             await zipOutputStream.WriteAsync(buffer, 0, sourceBytes);
                         } while (sourceBytes > 0);
                     }
-                    zipOutputStream.Finish();
-                    zipOutputStream.Close();
                 }
+
                 byte[] resultFileBytes = outputMemStream.GetBuffer();
                 long fileLength = outputMemStream.Length;
+
+                zipOutputStream.Finish();
+                zipOutputStream.Close();
 
                 return resultFileBytes;
             }

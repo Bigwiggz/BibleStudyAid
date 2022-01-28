@@ -5,6 +5,7 @@ using BibleStudyDataAccessLibrary.DataAccess;
 using BibleStudyDataAccessLibrary.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
 
 namespace BibleStudyAidMVC.Controllers
 {
@@ -25,15 +26,16 @@ namespace BibleStudyAidMVC.Controllers
         // GET DOWNLOAD CONTROLLER
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DownloadAsync(List<string> IdList)
+        public async Task<IActionResult> DownloadAsync(string downloadIdString)
         {
-            if(IdList.Count>0)
+            var IdListInfo=JsonSerializer.Deserialize<List<int>>(downloadIdString);
+            if(IdListInfo.Count>0)
             {
                 var documentsList= new List<Documents>();
                 
-                foreach(var Id in IdList)
+                foreach(var Id in IdListInfo)
                 {   
-                    var documentModel=await _documentsData.GetByIdAsync(Int32.Parse(Id));
+                    var documentModel=await _documentsData.GetByIdAsync(Id);
                     documentsList.Add(documentModel);
                 }
                 
@@ -142,6 +144,23 @@ namespace BibleStudyAidMVC.Controllers
             {
                 return View();
             }
+        }
+
+        //Test Download
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DownloadTestAsync(string downloadIdString)
+        {
+            var Id = 1;
+            var Id2 = 2;
+            var documentsList = new List<Documents>();
+            var documentModel = await _documentsData.GetByIdAsync(Id);
+            documentsList.Add(documentModel);
+            var documentModel2 = await _documentsData.GetByIdAsync(Id2);
+            documentsList.Add(documentModel2);
+            var fileResult = await _documentMigration.DownloadMultipleFilesAsync(documentsList);
+            return File(fileResult.fileBytes, fileResult.contentType, fileResult.fileName);
+            
         }
     }
 }
