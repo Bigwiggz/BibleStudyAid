@@ -133,6 +133,7 @@ namespace BibleStudyAidMVC.Extensions
 
         private async Task<byte[]> ZipMultipleFilesAsync(List<Documents> model, string folderpath, int zipCompressionLevel = 9)
         {
+            byte[] resultFileBytes;
             var outputMemStream = new MemoryStream();
             using (ZipOutputStream zipOutputStream = new ZipOutputStream(outputMemStream))
             {
@@ -160,14 +161,14 @@ namespace BibleStudyAidMVC.Extensions
                     }
                 }
 
-                byte[] resultFileBytes = outputMemStream.GetBuffer();
+                resultFileBytes = outputMemStream.GetBuffer();
                 long fileLength = outputMemStream.Length;
 
                 zipOutputStream.Finish();
                 zipOutputStream.Close();
-
-                return resultFileBytes;
             }
+
+            return resultFileBytes;
         }
     }
 }

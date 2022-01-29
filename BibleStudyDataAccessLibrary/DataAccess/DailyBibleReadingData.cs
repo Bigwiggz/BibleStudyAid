@@ -155,7 +155,7 @@ namespace BibleStudyDataAccessLibrary.DataAccess
                 //Step 4) Get all children table info: Scriptures
                 var scripturesList = await _sql.LoadDataInTransaction<Scriptures, dynamic>("spGetByFKScriptures", new { FK = PKId });
                 //Step 5) Get all children table info: Tags to Other Tables
-                var tagsToOtherTablesList = await _sql.LoadDataInTransaction<TagsToOtherTables, dynamic>("spGetByFKTagsToOtherScriptures", new { FK = PKId });
+                var tagsList = await _sql.LoadDataInTransaction<Tags, dynamic>("spGetByFKTags", new { FK = PKId });
                 //Step 6) Get all children documents
                 var documentsList = await _sql.LoadDataInTransaction<Documents, dynamic>("spGetByFKDocuments", new { FK = PKId });
 
@@ -172,7 +172,7 @@ namespace BibleStudyDataAccessLibrary.DataAccess
                     ScriptureEndPoint = dailyBibleReading.ScriptureEndPoint,
                     ReferencesList = referencesList,
                     ScripturesList = scripturesList,
-                    TagsToOtherTables = tagsToOtherTablesList,
+                    Tags = tagsList,
                     DocumentsList= documentsList
                 };
                 return dailyBibleReadingAll;

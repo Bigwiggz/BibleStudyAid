@@ -28,6 +28,10 @@ namespace BibleStudyAidMVC.Extensions
             //Documents
             CreateMap<Documents, DocumentsViewModel>();
             CreateMap<DocumentsViewModel, Documents>(); 
+
+            //Tags
+            CreateMap<Tags,TagsViewModel>();
+            CreateMap<TagsViewModel, Tags>();
         }
     }
 }

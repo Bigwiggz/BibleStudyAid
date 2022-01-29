@@ -18,13 +18,14 @@
 --
 */
 
-CREATE PROCEDURE [dbo].[spGetByFKTagsToOtherScriptures]
+CREATE PROCEDURE [dbo].[spGetByFKTags]
 	@FK NVARCHAR(1000)
 AS
 BEGIN
     SET NOCOUNT ON;
-	SELECT *
-	FROM [dbo].[tblScriptures]
+	SELECT [tblTags].*
+	FROM [dbo].[tblTagsToOtherTables]
+	INNER JOIN [dbo].[tblTags] ON [tblTagsToOtherTables].[TagsId]=[tblTags].[Id]
 	WHERE FKTableIdandName=@FK
-	AND [dbo].[tblScriptures].[IsDeleted]='FALSE';
+	AND [dbo].[tblTagsToOtherTables].[IsDeleted]='FALSE';
 END
