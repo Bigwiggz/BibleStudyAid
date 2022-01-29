@@ -20,8 +20,6 @@
 
 CREATE PROCEDURE [dbo].[spCreateTagsToOtherTables]
     @TagsId INT, 
-    @tblId INT, 
-    @tblName NVARCHAR(100), 
     @FKTableIdandName NVARCHAR(1000),
     @IsDeleted BIT NULL
 AS
@@ -29,13 +27,9 @@ BEGIN
     SET NOCOUNT ON;
 	INSERT INTO [dbo].[tblTagsToOtherTables] 
     ([TagsId], 
-    [tblId], 
-    [tblName], 
     [FKTableIdandName],[IsDeleted])
 	VALUES(
     @TagsId, 
-    @tblId, 
-    @tblName, 
     @FKTableIdandName,
     @IsDeleted);
 END

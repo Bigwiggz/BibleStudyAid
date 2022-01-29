@@ -8,8 +8,6 @@ namespace BibleStudyDataAccessLibrary.Models
     {
         public int Id { get; set; }
         public int TagsId { get; set; }
-        public int tblId { get; set; }
-        public string tblName { get; set; }
         public string FKTableIdandName { get; set; }
         public bool IsDeleted { get; set; }
     }
