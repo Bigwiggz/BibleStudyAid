@@ -147,6 +147,7 @@
     <Build Include="dbo\Stored Procedures\spGetByIdDocuments.sql" />
     <Build Include="dbo\Stored Procedures\spUpdateDocuments.sql" />
     <Build Include="dbo\Stored Procedures\ChildTableSP\spGetByFKDocuments.sql" />
+    <Build Include="dbo\Stored Procedures\ChildTableSP\spGetByFKTagsToTables.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="DBBibleStudyAid.refactorlog" />

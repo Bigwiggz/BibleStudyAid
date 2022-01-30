@@ -32,6 +32,10 @@ namespace BibleStudyAidMVC.Extensions
             //Tags
             CreateMap<Tags,TagsViewModel>();
             CreateMap<TagsViewModel, Tags>();
+
+            //TagsToOtherTables
+            CreateMap<TagsToOtherTables, TagsToOtherTablesViewModel>();
+            CreateMap<TagsToOtherTablesViewModel, TagsToOtherTables>();
         }
     }
 }

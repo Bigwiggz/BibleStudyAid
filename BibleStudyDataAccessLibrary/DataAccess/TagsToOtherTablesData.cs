@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BibleStudyDataAccessLibrary.DataAccess
 {
-    public class TagsToOtherTablesData : IGenericInterface<TagsToOtherTables>
+    public class TagsToOtherTablesData : IGenericInterface<TagsToOtherTables>, ITagsToOtherTablesData
     {
         private readonly ISqlDataAccess _sql;
         private readonly ILogger<TagsToOtherTables> _logger;
@@ -29,6 +29,18 @@ namespace BibleStudyDataAccessLibrary.DataAccess
         public Task<IEnumerable<TagsToOtherTables>> GetAllAsync()
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<TagsToOtherTables> GetByForeignKey(TagsToOtherTables obj)
+        {
+            var p = new
+            {
+                TagsId = obj.TagsId,
+                FKTableIdandName = obj.FKTableIdandName
+            };
+
+            var result = await _sql.LoadSingleRecord<TagsToOtherTables, dynamic>("spGetByFKTagsToTables", p);
+            return result;
         }
 
         public Task<TagsToOtherTables> GetByIdAsync(object Id)

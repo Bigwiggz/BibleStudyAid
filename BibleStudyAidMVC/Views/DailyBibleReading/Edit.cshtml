@@ -10,7 +10,11 @@
 @section Styles{
     <link  rel="stylesheet" href="~/css/Views/DailyBibleReading/EditDailyBibleReading.css"/>
 }
-
+@*TAGS LIST*@
+@foreach(var tag in @Model.Tags)
+{
+    <span class="badge bg-secondary">@tag.TagName</span>
+}
 
 @*REFERENCES*@
 <div class="row">
