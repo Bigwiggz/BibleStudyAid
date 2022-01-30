@@ -11,10 +11,22 @@
     <link  rel="stylesheet" href="~/css/Views/DailyBibleReading/EditDailyBibleReading.css"/>
 }
 @*TAGS LIST*@
-@foreach(var tag in @Model.Tags)
-{
-    <span class="badge bg-secondary">@tag.TagName</span>
-}
+<div class="row">
+    <div class="col-12 card m-1">
+        <div class="card-header border-primary">
+            <h5>Tags</h5>
+        </div>
+        <div class="card-body">
+            @foreach(var tag in @Model.Tags)
+            {
+                <a asp-controller="Tags" asp-action="Details" asp-route-id="@tag.Id">
+                    <span class="badge bg-secondary" data-toggle="tooltip" data-placement="bottom" title="@tag.TagDescription">@tag.TagName</span>
+                </a>
+            }
+        </div>
+    </div>
+</div>
+
 
 @*REFERENCES*@
 <div class="row">
