@@ -24,6 +24,9 @@
                 </a>
             }
         </div>
+        <div class="card-footer">
+            <button class="btn btn-primary" data-toggle="modal" data-target="#tagsModal">Edit Tags</button>
+        </div>
     </div>
 </div>
 
@@ -367,16 +370,32 @@
 @*Tag Modals*@
 
 <!--Add Tag Modal-->
-<div class="modal fade" id="xxxxx" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+<div class="modal fade" id="tagsModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="xxxxx">Add Tag</h5>
+        <h5 class="modal-title">Edit Tags</h5>
       </div>
       <div class="modal-body">
+          <div class="row">
+              <form>
+              <div class="col-6">
+                    <h4>Current Tags</h4>
+                    <select id="ExistingTagList" multiple size="10">
+
+                    </select>
+              </div>
+              <div class="col-6">
+                    <h4>List of Tags</h4>
+                    <select id="AllTagList" multiple size="10">
+
+                    </select>
+              </div>
+              </form>
+          </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Add Selected Tags</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
@@ -385,6 +404,9 @@
 
 @*Scripts Section*@
 @section Scripts{
+    <script>
+        let getDailyBibleReadingData =@Json.Serialize(@Model);
+    </script>
     <script src="~/js/Helpers/ScriptureValidator/BibleScriptureDoc.js"></script>
     <script src="~/js/Helpers/ScriptureValidator/BibleScriptureLogic.js"></script>
     <script src="~/js/Views/DailyBibleReading/EditDailyBibleReading.js"></script>

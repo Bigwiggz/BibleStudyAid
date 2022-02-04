@@ -265,18 +265,44 @@ function ResetSelection(className,tableBody) {
 /////////////////////////
 
 //Variables
-let tagList = [];
+let allTagList = [];
+let existingTagList = [];
 
+//on load
 window.addEventListener('load', () => {
-    postData('/TagsData')
-        .then(data => {
-            console.log(data);
-            tagList = data;
-        });
+    //Get tags list
+    GetCurrentTagsList();
 });
 
 
 
+
+//Functions
+//Get list data
+function GetCurrentTagsList() {
+    //Get current tags list
+    existingTagList = getDailyBibleReadingData.tags;
+    PopulateTagsList(existingTagList, "ExistingTagList");
+
+
+    //Get all tags list
+    postData('/TagsData')
+        .then(data => {
+            console.log(data);
+            allTagList = data;
+            PopulateTagsList(allTagList, "AllTagList");
+        });
+    
+}
+
+
+
+//Populate array
+function PopulateTagsList(tagsList, selectListId) {
+    let select = document.getElementById(selectListId);
+    let options = tagsList.map(tag => `<option value=${tag.id}>${tag.tagName}</option>`).join('\n');
+    select.innerHTML = options;
+}
 
 
 //FETCH FUNCTION
