@@ -378,20 +378,26 @@
       </div>
       <div class="modal-body">
           <div class="row">
-              <form>
               <div class="col-6">
                     <h4>Current Tags</h4>
-                    <select id="ExistingTagList" multiple size="10">
-
-                    </select>
+                    <select id="ExistingTagList" multiple size="10"></select>
+                <a id="AddTagButton">Test Add Tag</a>
+              <form asp-controller="TagsData" asp-action="Delete">
+                <input type="hidden" id="removeTagsId" name="Id">
+                <input type="hidden" name="FKTableIdandName" value="@Model.PKIdtblDailyBibleReadings">
+                <button class="btn btn-primary" type="submit">Remove Tags</button>
+              </form>
               </div>
               <div class="col-6">
                     <h4>List of Tags</h4>
-                    <select id="AllTagList" multiple size="10">
-
-                    </select>
-              </div>
+                    <select id="AllTagList" multiple size="10"></select>
+              <a id="AddTagButton">Test Add Tag</a>
+              <form asp-controller="TagsData" asp-action="Create">
+                <input type="hidden" id="addTagsId" name="Id">
+                <input type="hidden" name="FKTableIdandName" value="@Model.PKIdtblDailyBibleReadings">
+                <button class="btn btn-primary" type="submit">Remove Tags</button>
               </form>
+              </div>
           </div>
       </div>
       <div class="modal-footer">

@@ -267,11 +267,32 @@ function ResetSelection(className,tableBody) {
 //Variables
 let allTagList = [];
 let existingTagList = [];
+let selectedTagsToAdd = [];
 
 //on load
 window.addEventListener('load', () => {
     //Get tags list
     GetCurrentTagsList();
+});
+
+//on click add tag(s)
+document.getElementById("AllTagList").addEventListener("change", () => {
+    let select = document.getElementById("AllTagList");
+    selectedTagsToAdd = GetSelectTagValues(select);
+    console.log(selectedTagsToAdd);
+    document.getElementById("addTagsId").setAttribute("value", JSON.stringify(selectedTagsToAdd));
+
+    //TODO: Update DOM
+});
+
+//on click remove tag(s)
+document.getElementById("ExistingTagList").addEventListener("change", () => {
+    let select = document.getElementById("ExistingTagList");
+    selectTagsToRemove = GetSelectTagValues(select);
+    console.log(selectTagsToRemove);
+    document.getElementById("removeTagsId").setAttribute("value", JSON.stringify(selectTagsToRemove));
+
+    //TODO: Update DOM
 });
 
 
@@ -288,7 +309,6 @@ function GetCurrentTagsList() {
     //Get all tags list
     postData('/TagsData')
         .then(data => {
-            console.log(data);
             allTagList = data;
             PopulateTagsList(allTagList, "AllTagList");
         });
@@ -304,6 +324,22 @@ function PopulateTagsList(tagsList, selectListId) {
     select.innerHTML = options;
 }
 
+
+//get selected results
+function GetSelectTagValues(select) {
+    let result = [];
+    let options = select && select.options;
+    let opt;
+
+    for (let i = 0, iLen = options.length; i < iLen; i++) {
+        opt = options[i];
+
+        if (opt.selected) {
+            result.push(opt.value || opt.text);
+        }
+    }
+    return result;
+}
 
 //FETCH FUNCTION
 
