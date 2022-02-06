@@ -24,7 +24,7 @@ CREATE PROCEDURE [dbo].[spGetByFKTagsToTables]
 AS
 BEGIN
     SET NOCOUNT ON;
-	SELECT *
+	SELECT [tblTagsToOtherTables].*
 	FROM [dbo].[tblTagsToOtherTables]
 	INNER JOIN [dbo].[tblTags] ON [tblTagsToOtherTables].[TagsId]=[tblTags].[Id]
 	WHERE FKTableIdandName=@FKTableIdandName

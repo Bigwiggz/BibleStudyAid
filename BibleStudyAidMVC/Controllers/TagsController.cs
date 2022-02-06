@@ -50,7 +50,7 @@ namespace BibleStudyAidMVC.Controllers
             {
                 var model=_mapper.Map<Tags>(viewModel);
                 var result=await _tagsData.InsertAsync(model);
-                return RedirectToAction(nameof(Index));
+                return Redirect(HttpContext.Request.Headers["Referer"]);
             }
             catch
             {

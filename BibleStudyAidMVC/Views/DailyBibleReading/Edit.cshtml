@@ -26,6 +26,7 @@
         </div>
         <div class="card-footer">
             <button class="btn btn-primary" data-toggle="modal" data-target="#tagsModal">Edit Tags</button>
+            <a class="btn btn-primary" data-toggle="modal" data-target="#tagNewModal">Create New Tag</a>
         </div>
     </div>
 </div>
@@ -40,7 +41,7 @@
         <div class="card-body">
             @if(@Model.ReferencesList.Count==0)
             {
-                <p>NONE click <a asp-controller="References" asp-action="Create">here</a to add scriptures></p>
+                <i class="fas fa-plus-square nav-icon" data-toggle="modal" data-target="#referenceNewModal" reference-FK="@Model.PKIdtblDailyBibleReadings"></i>
             }
             else
             {
@@ -63,9 +64,9 @@
                                 <td id="referenceText">@reference.Reference</td>
                                 <td>@reference.Description</td>
                                 <td>
-                                    <i class="fas fa-edit nav-icon" data-toggle="modal" data-target="#referenceModal" data-id="@reference.Id" reference-FK="@reference.FKTableIdandName"></i>|
-                                    <i class="fas fa-plus-square nav-icon" data-toggle="modal" data-target="#referenceNewModal" data-id="@reference.Id" reference-FK="@reference.FKTableIdandName"></i>|
-                                    <i class="fas fa-trash-alt nav-icon" data-toggle="modal" data-target="#referenceDeleteModal" data-id="@reference.Id" reference-FK="@reference.FKTableIdandName"></i>
+                                    <i class="fas fa-edit nav-icon" data-toggle="modal" data-target="#referenceModal" data-id="@reference.Id"></i>|
+                                    <i class="fas fa-plus-square nav-icon" data-toggle="modal" data-target="#referenceNewModal" data-id="@reference.Id"></i>|
+                                    <i class="fas fa-trash-alt nav-icon" data-toggle="modal" data-target="#referenceDeleteModal" data-id="@reference.Id"></i>
                                 </td>
                             </tr>
                         }
@@ -85,7 +86,7 @@
         <div class="card-body">
             @if(@Model.ScripturesList.Count==0)
             {
-                <p>NONE click <a asp-controller="Scriptures" asp-action="Create">here</a to add scriptures></p>   
+                <i class="fas fa-plus-square nav-icon" data-toggle="modal" data-target="#scriptureNewModal" reference-FK="@Model.PKIdtblDailyBibleReadings"></i> 
             }
             else
             {
@@ -104,9 +105,9 @@
                                 <td>@scripture.Scripture</td>
                                 <td>@scripture.Description</td>
                                 <td>
-                                    <i class="fas fa-edit nav-icon" data-toggle="modal" data-target="#scriptureEditModal" data-id="@scripture.Id" scripture-FK="@scripture.FKTableIdandName"></i>|
-                                    <i class="fas fa-plus-square nav-icon" data-toggle="modal" data-target="#scriptureNewModal" data-id="@scripture.Id" scripture-FK="@scripture.FKTableIdandName"></i>|
-                                    <i class="fas fa-trash-alt nav-icon" data-toggle="modal" data-target="#scriptureDeleteModal" data-id="@scripture.Id" scripture-FK="@scripture.FKTableIdandName"></i>
+                                    <i class="fas fa-edit nav-icon" data-toggle="modal" data-target="#scriptureEditModal" data-id="@scripture.Id"></i>|
+                                    <i class="fas fa-plus-square nav-icon" data-toggle="modal" data-target="#scriptureNewModal" data-id="@scripture.Id"></i>|
+                                    <i class="fas fa-trash-alt nav-icon" data-toggle="modal" data-target="#scriptureDeleteModal" data-id="@scripture.Id"></i>
                                 </td>
                             </tr>
                         }
@@ -191,7 +192,7 @@
       </div>
       <div class="modal-body">
         <form asp-controller="References" asp-action="Edit" method="post">
-            <input type="hidden" id="referenceFKId" name="FKTableIdandName" />
+            <input type="hidden" id="referenceFKId" name="FKTableIdandName" value="@Model.PKIdtblDailyBibleReadings"/>
             <input type="hidden" id="referenceId" name="Id">
             <div class="form-group">
                 <label for="referenceCitation">References</label>
@@ -223,7 +224,7 @@
       </div>
       <div class="modal-body">
         <form asp-controller="References" asp-action="Create" method="post">
-            <input type="hidden" id="referenceNewFKId" name="FKTableIdandName" />
+            <input type="hidden" id="referenceNewFKId" name="FKTableIdandName" value="@Model.PKIdtblDailyBibleReadings"/>
             <div class="form-group">
                 <label for="referenceCitation">References</label>
                 <input type="text"  name="Reference" class="form-control" id="referenceNewCitation" aria-describedby="referenceCitation">
@@ -261,7 +262,7 @@
               <dd class="col-sm-8" id="referenceDescriptionDelete"></dd>
           </dl>
         <form asp-controller="References" asp-action="Edit" method="post">
-            <input type="hidden" id="referenceDeleteId" name="Id">
+            <input type="hidden" id="referenceDeleteId" name="Id" value="@Model.PKIdtblDailyBibleReadings"/>
             <input type="hidden" id="referenceDeleteBoolean" name="IsDeleted" value=true>
             <button type="submit" class="btn btn-danger">Click Here to Delete Reference</button>
         </form>
@@ -314,7 +315,7 @@
                 <option disabled>Choose...</option>
                 </select>
             </div>
-            <input type="hidden" id="scriptureNewFKId" name="FKTableIdandName" />
+            <input type="hidden" id="scriptureNewFKId" name="FKTableIdandName" value="@Model.PKIdtblDailyBibleReadings"/>
             <input type="hidden" id="scriptureNewBook" name="Book" />
             <input type="hidden" id="scriptureNewChapter" name="Chapter" />
             <input type="hidden" id="scriptureNewVerse" name="Verse" />
@@ -381,7 +382,6 @@
               <div class="col-6">
                     <h4>Current Tags</h4>
                     <select id="ExistingTagList" multiple size="10"></select>
-                <a id="AddTagButton">Test Add Tag</a>
               <form asp-controller="TagsToTables" asp-action="DeleteMultiple">
                 <input type="hidden" id="removeTagsId" name="TagsId">
                 <input type="hidden" name="FKTableIdandName" value="@Model.PKIdtblDailyBibleReadings">
@@ -391,14 +391,43 @@
               <div class="col-6">
                     <h4>List of Tags</h4>
                     <select id="AllTagList" multiple size="10"></select>
-              <a id="AddTagButton">Test Add Tag</a>
               <form asp-controller="TagsToTables" asp-action="CreateMultiple">
                 <input type="hidden" id="addTagsId" name="TagsId">
                 <input type="hidden" name="FKTableIdandName" value="@Model.PKIdtblDailyBibleReadings">
-                <button class="btn btn-primary" type="submit">Remove Tags</button>
+                <button class="btn btn-primary" type="submit">Add Tags</button>
               </form>
               </div>
           </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--New Tag Modal-->
+<div class="modal fade" id="tagNewModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ModalLabelNew">Create Tag</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form asp-controller="Tags" asp-action="Create" method="post">
+            <div class="form-group">
+                <label for="tagCitation">Tag Name</label>
+                <input type="text"  name="TagName" class="form-control" id="tagNewCitation" aria-describedby="referenceCitation">
+            </div>
+            <div class="form-group">
+                <label for="tagDescription">Tag Description</label>
+                <textarea type="text" class="form-control" name="TagDescription" id="tagNewDescription"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+        </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

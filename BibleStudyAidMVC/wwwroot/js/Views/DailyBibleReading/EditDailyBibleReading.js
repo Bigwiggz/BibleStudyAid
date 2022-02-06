@@ -68,9 +68,6 @@ function AddReferenceEditModal() {
             //Get current row Id
             const currentRowId = editItemElement.getAttribute("data-id");
             document.getElementById("referenceId").setAttribute("value", currentRowId);
-            //Get FK ID
-            let referenceForeignKeyId = editItemElement.getAttribute("reference-FK");
-            document.getElementById("referenceFKId").setAttribute("value", referenceForeignKeyId);
             //Get current row Reference
             const currentRowReference = dataParentElement.children[0].innerHTML;
             document.getElementById("referenceCitation").setAttribute("value", currentRowReference);
@@ -92,9 +89,6 @@ function AddReferenceNewModal() {
 
         //Populate form
         newItemElement.addEventListener("click", () => {
-            //Get FK ID
-            let referenceForeignKeyId = newItemElement.getAttribute("reference-FK");
-            document.getElementById("referenceNewFKId").setAttribute("value", referenceForeignKeyId);
             //show reference Modal
             referenceModal.show();
         });
@@ -134,10 +128,6 @@ function AddScriptureNewModal() {
     for (let i = 0; i < scripturalTable.rows.length; i++) {
         let newItemElement = scripturalTable.rows[i].getElementsByTagName("td")[2].getElementsByTagName("i")[1];
         newItemElement.addEventListener("click", () => {
-            //Get FK ID
-            let currentScripturalFKID = newItemElement.getAttribute("scripture-FK");
-            document.getElementById("scriptureNewFKId").setAttribute("value", currentScripturalFKID);
-
             //show reference modal
             referenceModal.show();
 
@@ -290,7 +280,7 @@ document.getElementById("ExistingTagList").addEventListener("change", () => {
     let select = document.getElementById("ExistingTagList");
     selectTagsToRemove = GetSelectTagValues(select);
     console.log(selectTagsToRemove);
-    document.getElementById("removeTagsId").setAttribute("value", JSON.stringify(selectTagsToRemove.map(String)));
+    document.getElementById("removeTagsId").setAttribute("value", JSON.stringify(selectTagsToRemove));
 
     //TODO: Update DOM
 });

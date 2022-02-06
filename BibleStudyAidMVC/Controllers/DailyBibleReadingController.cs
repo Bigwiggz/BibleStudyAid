@@ -80,7 +80,7 @@ namespace BibleStudyAidMVC.Controllers
                 var model=_mapper.Map<DailyBibleReading>(viewModel);
                 var Id=await _dailyBibleReadingData.InsertAsync(model);
                 
-                return View("EditAsync", Id);
+                return View("Edit", Id);
             }
             catch
             {

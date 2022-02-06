@@ -2,6 +2,8 @@
 This is the logic to selecting and editing scriptures
 */
 
+
+
 //Global Variables
 let SelectedBook="";
 let SelectedChapter=null;
@@ -13,9 +15,10 @@ let VerseCount=null;
 //Events
 ///////////////////////
 //On Page Load Events
-window.onload = (e) => {
-  PopulateBookSelector("SelectBook");
-};
+window.addEventListener("load", () => {
+	PopulateBookSelector("SelectBook");
+	console.log("Loaded Bible Scripture Logic");
+});
 
 //On select Book Events
 document.getElementById("SelectBook").addEventListener("change",()=>{
