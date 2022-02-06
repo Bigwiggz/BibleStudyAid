@@ -53,7 +53,8 @@ namespace BibleStudyDataAccessLibrary.DataAccess
             var p = new
             {
                 TagsId = obj.TagsId,
-                FKTableIdandName = obj.FKTableIdandName
+                FKTableIdandName = obj.FKTableIdandName,
+                IsDeleted = false
             };
             var result = await _sql.SaveData<object, dynamic>("spCreateTagsToOtherTables", p);
             return result;

@@ -246,7 +246,7 @@ function ToggleSelectedRowId(currentTableRow) {
 function SubmitTableIdArray(className, tableBody) {
     //TODO: Send tableIdArray to post controller through fetch
     document.getElementById("DownloadSubmit").setAttribute("value", JSON.stringify(tableIdArray));
-    console.log(tableIdArray);
+    console.log(JSON.stringify(tableIdArray));
     ResetSelection(className, tableBody);
 }
 
@@ -279,7 +279,7 @@ window.addEventListener('load', () => {
 document.getElementById("AllTagList").addEventListener("change", () => {
     let select = document.getElementById("AllTagList");
     selectedTagsToAdd = GetSelectTagValues(select);
-    console.log(selectedTagsToAdd);
+    console.log(JSON.stringify(selectedTagsToAdd));
     document.getElementById("addTagsId").setAttribute("value", JSON.stringify(selectedTagsToAdd));
 
     //TODO: Update DOM
@@ -290,7 +290,7 @@ document.getElementById("ExistingTagList").addEventListener("change", () => {
     let select = document.getElementById("ExistingTagList");
     selectTagsToRemove = GetSelectTagValues(select);
     console.log(selectTagsToRemove);
-    document.getElementById("removeTagsId").setAttribute("value", JSON.stringify(selectTagsToRemove));
+    document.getElementById("removeTagsId").setAttribute("value", JSON.stringify(selectTagsToRemove.map(String)));
 
     //TODO: Update DOM
 });
@@ -324,7 +324,7 @@ function PopulateTagsList(tagsList, selectListId) {
     select.innerHTML = options;
 }
 
-
+//TODO: FIX THIS
 //get selected results
 function GetSelectTagValues(select) {
     let result = [];
@@ -335,7 +335,7 @@ function GetSelectTagValues(select) {
         opt = options[i];
 
         if (opt.selected) {
-            result.push(opt.value || opt.text);
+            result.push(parseInt(opt.value));
         }
     }
     return result;

@@ -4,6 +4,7 @@ using BibleStudyDataAccessLibrary.DataAccess;
 using BibleStudyDataAccessLibrary.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
 
 namespace BibleStudyAidMVC.Controllers
 {
@@ -46,7 +47,38 @@ namespace BibleStudyAidMVC.Controllers
             {
                 var model= _mapper.Map<TagsToOtherTables>(viewModel);
                 var Id=await _tagsToOtherTablesData.InsertAsync(model);
-                return RedirectToAction(nameof(Index));
+                return Redirect(HttpContext.Request.Headers["Referer"]);
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        // POST: TagsToTablesController/CreateMultiple
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateMultipleAsync([Bind("TagsId,FKTableIdandName")] TagsToOtherTablesViewModelMultiple viewModel)
+        {
+            try
+            {
+                var tagsList = JsonSerializer.Deserialize<List<int>>(viewModel.TagsId);
+                if(tagsList.Count > 0)
+                {
+                    foreach (var tag in tagsList)
+                    {
+                        var tagsToOtherTables = new TagsToOtherTables 
+                        {
+                            TagsId=tag,
+                            FKTableIdandName=viewModel.FKTableIdandName,
+                            IsDeleted=false
+                        };
+
+                        var Id = await _tagsToOtherTablesData.InsertAsync(tagsToOtherTables);
+                    }
+                }
+
+                return Redirect(HttpContext.Request.Headers["Referer"]);
             }
             catch
             {
@@ -67,7 +99,7 @@ namespace BibleStudyAidMVC.Controllers
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                return Redirect(HttpContext.Request.Headers["Referer"]);
             }
             catch
             {
@@ -94,7 +126,43 @@ namespace BibleStudyAidMVC.Controllers
                 {
                     var Id=await _tagsToOtherTablesData.DeleteAsync(tagModel);
                 }
-                return RedirectToAction(nameof(Index));
+                return Redirect(HttpContext.Request.Headers["Referer"]);
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        //POST: TagsToTablesController/DeleteMultiple
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteMultipleAsync([Bind("TagsId,FKTableIdandName")] TagsToOtherTablesViewModelMultiple viewModel)
+        {
+            try
+            {
+                var tagsList = JsonSerializer.Deserialize<List<int>>(viewModel.TagsId);
+                
+                if (tagsList.Count > 0)
+                {
+                    foreach (var tag in tagsList)
+                    {
+                        var tagsToOtherTables = new TagsToOtherTables
+                        {
+                            TagsId = tag,
+                            FKTableIdandName = viewModel.FKTableIdandName
+                        };
+
+                        var tagModel = await _tagsToOtherTablesData.GetByForeignKey(tagsToOtherTables);
+
+                        if (tagModel != null)
+                        {
+                            var Id = await _tagsToOtherTablesData.DeleteAsync(tagModel.Id);
+                        }
+                    }
+                }
+
+                return Redirect(HttpContext.Request.Headers["Referer"]);
             }
             catch
             {

@@ -382,8 +382,8 @@
                     <h4>Current Tags</h4>
                     <select id="ExistingTagList" multiple size="10"></select>
                 <a id="AddTagButton">Test Add Tag</a>
-              <form asp-controller="TagsData" asp-action="Delete">
-                <input type="hidden" id="removeTagsId" name="Id">
+              <form asp-controller="TagsToTables" asp-action="DeleteMultiple">
+                <input type="hidden" id="removeTagsId" name="TagsId">
                 <input type="hidden" name="FKTableIdandName" value="@Model.PKIdtblDailyBibleReadings">
                 <button class="btn btn-primary" type="submit">Remove Tags</button>
               </form>
@@ -392,8 +392,8 @@
                     <h4>List of Tags</h4>
                     <select id="AllTagList" multiple size="10"></select>
               <a id="AddTagButton">Test Add Tag</a>
-              <form asp-controller="TagsData" asp-action="Create">
-                <input type="hidden" id="addTagsId" name="Id">
+              <form asp-controller="TagsToTables" asp-action="CreateMultiple">
+                <input type="hidden" id="addTagsId" name="TagsId">
                 <input type="hidden" name="FKTableIdandName" value="@Model.PKIdtblDailyBibleReadings">
                 <button class="btn btn-primary" type="submit">Remove Tags</button>
               </form>
