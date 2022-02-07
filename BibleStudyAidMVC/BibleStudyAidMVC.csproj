@@ -26,7 +26,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\Tabs\" />
     <Folder Include="wwwroot\SavedDocuments\" />
   </ItemGroup>
 

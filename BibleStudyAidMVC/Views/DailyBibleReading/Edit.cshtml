@@ -31,6 +31,36 @@
     </div>
 </div>
 
+@*SCRIPTURES*@
+<div class="row">
+    <div class="col-12 col-lg-6 card m-1">
+        <div class="card-header border-primary">
+            <h5>From</h5>
+        </div>
+        <div class="car-body">
+            <h5>@Model.ScriptureStartPoint</h5>
+        </div>
+    </div>
+    <div class="col-12 col-lg-6 card m-1">
+        <div class="card-header border-primary">
+            <h5>To</h5>
+        </div>
+        <div class="car-body">
+            <h5>@Model.ScriptureEndPoint</h5>
+        </div>
+    </div>
+</div>
+@*LESSSONS LEARNED*@
+<div class="row">
+    <div class="col-12 card m-1">
+        <div class="card-header border-primary">
+            <h5>Lessons Learned</h5>
+        </div>
+        <div class="card-body">
+            <p>@Model.LessonLearnedDescription</p>
+        </div>
+    </div>
+</div>
 
 @*REFERENCES*@
 <div class="row">
@@ -150,7 +180,7 @@
             <!--Button Submit-->
             <form asp-controller="Documents" asp-action="Download" method="post">
                 <input type="hidden" id="DownloadSubmit" name="downloadIdString" value="" />
-                <button type="submit" class="btn btn-primary" id="submitDownloadButton">Submit</button>
+                <button type="submit" class="btn btn-primary" id="submitDownloadButton">Download</button>
             </form>
 
             <!--Upload-->
@@ -171,6 +201,18 @@
                 </div>
             </div>
             </form>
+        </div>
+    </div>
+</div>
+
+@*TEXT READ*@
+<div class="row">
+    <div class="col-12 card m-1">
+        <div class="card-header border-primary">
+            <h5>Scriptural Text</h5>
+        </div>
+        <div class="card-body">
+            <p>@Model.BibleText</p>
         </div>
     </div>
 </div>
