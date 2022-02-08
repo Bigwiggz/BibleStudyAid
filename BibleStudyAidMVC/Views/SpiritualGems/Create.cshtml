@@ -1,0 +1,21 @@
+﻿@model SpiritualGemsViewModel
+@{
+    ViewData["Title"]="Spiritual Gems";
+    Layout = "~/Views/Shared/AdminLTE/_Layout.cshtml";
+}
+<h3>@ViewData["Title"]</h3>
+
+<form asp-action="Create" enctype="multipart/form-data">
+     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="BriefDescription" class="control-label">Scripture Start Point</label>
+        <input type="text" asp-for="BriefDescription" class="form-control"/>
+        <span asp-validation-for="BriefDescription" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="LongDescription" class="control-label"> Lesson Learned</label>
+        <textarea asp-for="LongDescription" class="form-control"></textarea>
+        <span asp-validation-for="LongDescription" class="text-danger"></span>
+    </div>
+  <button type="submit" class="btn btn-primary">Save</button>
+</form>

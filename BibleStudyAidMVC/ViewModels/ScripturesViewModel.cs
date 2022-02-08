@@ -10,6 +10,7 @@
         public Guid UniqueId { get; set; }
         public string FKTableIdandName { get; set; }
         public string Description { get; set; }
+        public string ScriptureText { get; set; }
         public bool IsDeleted { get; set; }
     }
 }
