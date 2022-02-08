@@ -57,7 +57,6 @@ namespace BibleStudyDataAccessLibrary.DataAccess
         {
             var p = new
             {
-                Id = obj.Id,
                 BriefDescription = obj.BriefDescription,
                 LongDescription = obj.LongDescription,
                 IsDeleted = obj.IsDeleted

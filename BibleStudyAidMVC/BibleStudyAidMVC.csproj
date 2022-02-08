@@ -26,7 +26,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\js\Views\SpiritualGems\" />
     <Folder Include="wwwroot\SavedDocuments\" />
   </ItemGroup>
 

@@ -4,10 +4,10 @@ namespace BibleStudyAidMVC.ViewModels
 {
     public class SpiritualGemsAllViewModel:SpiritualGemsViewModel
     {
-        public List<References> ReferencesList { get; set; }
-        public List<ScripturesViewModel> ScripturesList { get; set; }
-        public List<Tags> Tags { get; set; }
-        public List<Documents> DocumentsList { get; set; }
-        public List<IFormFile> DocumentFiles { get; set; }
+        public List<References> ReferencesList { get; set; }=new List<References>();
+        public List<ScripturesViewModel> ScripturesList { get; set; }=new List<ScripturesViewModel>();
+        public List<Tags> Tags { get; set; } = new List<Tags>();
+        public List<Documents> DocumentsList { get; set; } = new List<Documents>();
+        public List<IFormFile> DocumentFiles { get; set; }=new List<IFormFile>();
     }
 }

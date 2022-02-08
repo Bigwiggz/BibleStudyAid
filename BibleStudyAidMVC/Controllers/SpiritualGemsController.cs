@@ -77,7 +77,7 @@ namespace BibleStudyAidMVC.Controllers
                 {
                     foreach (var text in viewModel.ScripturesList)
                     {
-                        var bibleCitation = text.Scripture.Split(':').First();
+                        var bibleCitation = text.Scripture;
                         var bibleAPIModel = await _httpRequestService.GetBibleVersesText(bibleCitation);
                         text.ScriptureText = bibleAPIModel.text;
                     }

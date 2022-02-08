@@ -17,7 +17,6 @@ let VerseCount=null;
 //On Page Load Events
 window.addEventListener("load", () => {
 	PopulateBookSelector("SelectBook");
-	console.log("Loaded Bible Scripture Logic");
 });
 
 //On select Book Events
