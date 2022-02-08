@@ -33,7 +33,8 @@ builder.Services.AddTransient<IReferencesData, ReferencesData>();
 builder.Services.AddTransient<IScripturesData, ScripturesData>();
 builder.Services.AddTransient<IMeetingAssembliesData, MeetingAssembliesData>();
 builder.Services.AddTransient<ITagsData, TagsData>();
-builder.Services.AddTransient<ITagsToOtherTablesData,TagsToOtherTablesData>();  
+builder.Services.AddTransient<ITagsToOtherTablesData,TagsToOtherTablesData>();
+builder.Services.AddTransient<ISpiritualGemsData, SpiritualGemsData>();
 
 //Add HttpClient
 string uri = builder.Configuration.GetValue<string>("BibleTextAPI");

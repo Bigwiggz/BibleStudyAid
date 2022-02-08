@@ -1,10 +1,10 @@
 ﻿/*
 ----------------------------------------------------------------------------
--- Object Name: dbo.spUpdateDailyBibleReading
+-- Object Name: dbo.spUpdateSpiritualGems
 -- Project: SqlTerritories
 -- Business Process: Sample code
 -- Purpose: Update a record into a table
--- Detailed Description: Update a record into the dbo.DailyBibleReading table
+-- Detailed Description: Update a record into the dbo.SpiritualGems table
 -- Database: DBBibleStudyAid
 -- Dependent Objects: None
 -- Called By: Application
@@ -18,12 +18,10 @@
 --
 */
 
-CREATE PROCEDURE [dbo].[spUpdateDailyBibleReading]
-    @Id INT,
-    @ScriptureStartPoint NVARCHAR(1000), 
-    @ScriptureEndPoint NVARCHAR(1000), 
-    @LessonLearnedDescription NVARCHAR(1000), 
-    @DateRead DATETIME2 NULL,
+CREATE PROCEDURE [dbo].[spUpdateSpiritualGems]
+	@Id INT, 
+    @BriefDescription NVARCHAR(255) NULL, 
+    @LongDescription NVARCHAR(4000) NULL, 
     @IsDeleted BIT NULL
 
 AS
@@ -32,12 +30,10 @@ BEGIN
  SET NOCOUNT ON; 
 
   BEGIN 
-    UPDATE [dbo].[tblDailyBibleReading]
+    UPDATE [dbo].[tblSpiritualGems]
     SET 
-    ScriptureStartPoint=ISNULL(@ScriptureStartPoint,ScriptureStartPoint), 
-	ScriptureEndPoint=ISNULL(@ScriptureEndPoint,ScriptureEndPoint),
-    LessonLearnedDescription=ISNULL(@LessonLearnedDescription,LessonLearnedDescription), 
-	DateRead =ISNULL(@DateRead ,DateRead),
+    BriefDescription=ISNULL(@BriefDescription,BriefDescription), 
+	LongDescription=ISNULL(@LongDescription,LongDescription),
     IsDeleted=ISNULL(@IsDeleted,IsDeleted)
 	WHERE Id=@Id;
     END 

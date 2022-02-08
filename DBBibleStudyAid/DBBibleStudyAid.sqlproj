@@ -148,6 +148,12 @@
     <Build Include="dbo\Stored Procedures\spUpdateDocuments.sql" />
     <Build Include="dbo\Stored Procedures\ChildTableSP\spGetByFKDocuments.sql" />
     <Build Include="dbo\Stored Procedures\ChildTableSP\spGetByFKTagsToTables.sql" />
+    <Build Include="dbo\Tables\tblSpiritualGems.sql" />
+    <Build Include="dbo\Stored Procedures\spCreateSpiritualGems.sql" />
+    <Build Include="dbo\Stored Procedures\spDeleteSpirituaGems.sql" />
+    <Build Include="dbo\Stored Procedures\spGetAllSpiritualGems.sql" />
+    <Build Include="dbo\Stored Procedures\spGetByIdSpiritualGems.sql" />
+    <Build Include="dbo\Stored Procedures\spUpdateSpiritualGems.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="DBBibleStudyAid.refactorlog" />

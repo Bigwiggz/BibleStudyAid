@@ -133,4 +133,11 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="BaseScripture" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="736b7a5d-5119-4a4f-b057-8132db635cc7" ChangeDateTime="02/08/2022 01:08:06">
+    <Property Name="ElementName" Value="[dbo].[tblSpiritualGems].[DateEntered]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[tblSpiritualGems]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="DateUpdated" />
+  </Operation>
 </Operations>
