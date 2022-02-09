@@ -53,6 +53,7 @@ namespace BibleStudyDataAccessLibrary.DataAccess
             {
                 TagName = obj.TagName,
                 TagDescription = obj.TagDescription,
+                TagColor=obj.TagColor, 
                 IsDeleted = obj.IsDeleted
             };
 
@@ -67,6 +68,7 @@ namespace BibleStudyDataAccessLibrary.DataAccess
                 Id = obj.Id,
                 TagName = obj.TagName,
                 TagDescription = obj.TagDescription,
+                TagColor = obj.TagColor,
                 IsDeleted = obj.IsDeleted
             };
 

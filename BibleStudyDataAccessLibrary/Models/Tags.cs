@@ -9,6 +9,7 @@ namespace BibleStudyDataAccessLibrary.Models
         public int Id { get; set; }
         public string TagName { get; set; }
         public string TagDescription { get; set; }
+        public string TagColor { get; set; }
         public DateTime TagCreatedDate { get;}
         public bool IsDeleted { get; set; }
     }
