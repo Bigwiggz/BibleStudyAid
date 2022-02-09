@@ -24,7 +24,10 @@ AS
 BEGIN
 	SET NOCOUNT ON;
 	DELETE FROM [dbo].[tblTags]
-	WHERE Id=@Id
+	WHERE Id=@Id;
+	
+	DELETE FROM [dbo].[tblTagsToOtherTables]
+	WHERE [TagsId]=@Id;
 END
 
 
