@@ -1,0 +1,30 @@
+﻿
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"]="Tags";
+    Layout = "~/Views/Shared/AdminLTE/_Layout.cshtml";
+}
+<h4>Create New Tag</h4>
+ <form asp-controller="Tags" asp-action="Create" method="post">
+        <div class="form-group">
+            <label for="tagCitation">Tag Name</label>
+            <input type="text"  name="TagName" class="form-control" id="tagNewCitation" aria-describedby="referenceCitation">
+        </div>
+        <div class="form-group">
+            <label for="tagDescription">Tag Description</label>
+            <textarea type="text" class="form-control" name="TagDescription" id="tagNewDescription"></textarea>
+        </div>
+        <div class="row">
+            <div class="form-group col-3">
+                <label for="tagColor">Tag Color</label>
+                <input type="color" class="form-control" name="TagColor" id="tagColor" value="#6c757d"/>
+            </div>
+            <div class="form-group col-3">
+                <label for="tagTextColor">Tag Text Color</label>
+                <input type="color" class="form-control" name="TagColor" id="tagTextColor" value="#ffffff"/>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Add Tag</button>
+</form>

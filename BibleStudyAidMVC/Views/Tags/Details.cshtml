@@ -1,0 +1,47 @@
+﻿@model BibleStudyAidMVC.ViewModels.TagsViewModel
+
+@{
+    ViewData["Title"]="Tags";
+    Layout = "~/Views/Shared/AdminLTE/_Layout.cshtml";
+}
+
+<div>
+    <h4>Tags Details</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TagName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TagName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TagDescription)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TagDescription)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TagColor)
+        </dt>
+        <dd class = "col-sm-10">
+            <input type="color" class="form-control" value="@Model.TagColor" disabled />
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TagTextColor)
+        </dt>
+        <dd class = "col-sm-10">
+            <input type="color" class="form-control" value="@Model.TagTextColor" disabled />
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TagCreatedDate)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TagCreatedDate)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-controller="Tags" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit Tag</a>
+    <a asp-action="Index" class="btn btn-primary">Back to List</a>
+</div>

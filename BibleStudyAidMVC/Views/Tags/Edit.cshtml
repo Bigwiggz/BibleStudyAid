@@ -1,0 +1,30 @@
+﻿@model TagsViewModel
+
+@{
+    ViewData["Title"]="Tags";
+    Layout = "~/Views/Shared/AdminLTE/_Layout.cshtml";
+}
+
+<h4>Edit Tag</h4>
+<form asp-controller="Tags" asp-action="Edit" method="post">
+    <input type="hidden" id="removeTagsId" name="Id" value="@Model.Id">
+    <div class="form-group">
+        <label for="tagCitation">Tag Name</label>
+        <input type="text" name="TagName" class="form-control" id="tagNewCitation" aria-describedby="Citation" value="@Model.TagName"/>
+    </div>
+    <div class="form-group">
+        <label for="tagDescription">Tag Description</label>
+        <textarea type="text" class="form-control" name="TagDescription" id="tagNewDescription">@Model.TagDescription</textarea>
+    </div>
+    <div class="row">
+        <div class="form-group col-3">
+            <label for="tagColor">Tag Color</label>
+            <input type="color" class="form-control" name="TagColor" id="tagColor" value="@Model.TagColor"/>
+        </div>
+        <div class="form-group col-3">
+            <label for="tagTextColor">Tag Text Color</label>
+            <input type="color" class="form-control" name="TagTextColor" id="tagTextColor" value="@Model.TagTextColor"/>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Save Changes</button>
+</form>

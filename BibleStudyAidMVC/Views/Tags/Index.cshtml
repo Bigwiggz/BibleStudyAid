@@ -1,5 +1,44 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model IEnumerable<TagsViewModel>
 @{
+    ViewData["Title"]="Tags";
+    Layout = "~/Views/Shared/AdminLTE/_Layout.cshtml";
 }
+<h1>@ViewData["Title"]</h1>
+
+@if (Model == null)
+{
+    <div id="loading">Loading...</div>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Tag Name</th>
+                <th>Tag Description</th>
+                <th>Tag Color</th>
+                <th>Tag Text Color</th>
+                <th>Example Tag</th>
+            </tr>
+        </thead>
+        @foreach (var tag in Model)
+        {
+            <tbody>
+                <tr>
+                    <td><a asp-controller="Tags" asp-action="Edit" asp-route-id="@tag.Id" class="nav-link">@tag.TagName</a></td>
+                    <td>@tag.TagDescription</td>
+                    <td><input type="color" class="form-control" value="@tag.TagColor" disabled /></td>
+                    <td><input type="color" class="form-control" value="@tag.TagTextColor" disabled /></td>
+                    <td>
+                        <span class="badge" style="background-color:@tag.TagColor;color:@tag.TagTextColor" data-toggle="tooltip" data-placement="bottom" title="@tag.TagDescription">@tag.TagName</span>
+                    </td>
+                </tr>
+            </tbody>
+        }
+
+    </table>
+}
+
+<br />
+<br />
+<a asp-action="Create"><input class="btn btn-primary" value="Create New Tag"/></a>

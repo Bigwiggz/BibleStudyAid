@@ -23,8 +23,8 @@ namespace BibleStudyAidMVC.Controllers
         public async Task<IActionResult> Index()
         {
             var model=await _tagsData.GetAllAsync();
-
-            return View(model);
+            var viewModel = _mapper.Map<IEnumerable<TagsViewModel>>(model);
+            return View(viewModel);
         }
 
         // GET: TabsController/Details/5
@@ -44,7 +44,7 @@ namespace BibleStudyAidMVC.Controllers
         // POST: TabsController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateAsync([Bind("TagName,TagColor,TagDescription")] TagsViewModel viewModel)
+        public async Task<IActionResult> CreateAsync([Bind("TagName,TagColor,TagTextColor,TagDescription")] TagsViewModel viewModel)
         {
             try
             {
@@ -59,15 +59,17 @@ namespace BibleStudyAidMVC.Controllers
         }
 
         // GET: TabsController/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<IActionResult> EditAsync(int Id)
         {
-            return View();
+            var model = await _tagsData.GetByIdAsync(Id);
+            var viewModel = _mapper.Map<TagsViewModel>(model);
+            return View(viewModel);
         }
 
         // POST: TabsController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditAsync([Bind("Id,TagName,TagColor,TagDescription, IsDeleted")] TagsViewModel viewModel)
+        public async Task<IActionResult> EditAsync([Bind("Id,TagName,TagColor,TagTextColor,TagDescription, IsDeleted")] TagsViewModel viewModel)
         {
             try
             {
