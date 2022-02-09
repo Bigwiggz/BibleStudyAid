@@ -44,7 +44,7 @@ namespace BibleStudyAidMVC.Controllers
         // POST: TabsController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateAsync([Bind("TagName,TagDescription")] TagsViewModel viewModel)
+        public async Task<IActionResult> CreateAsync([Bind("TagName,TagColor,TagDescription")] TagsViewModel viewModel)
         {
             try
             {
@@ -67,7 +67,7 @@ namespace BibleStudyAidMVC.Controllers
         // POST: TabsController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditAsync([Bind("Id,TagName,TagDescription, IsDeleted")] TagsViewModel viewModel)
+        public async Task<IActionResult> EditAsync([Bind("Id,TagName,TagColor,TagDescription, IsDeleted")] TagsViewModel viewModel)
         {
             try
             {

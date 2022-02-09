@@ -22,12 +22,13 @@ CREATE PROCEDURE [dbo].[spCreateTag]
 	@TagName NVARCHAR(100), 
     @TagDescription NVARCHAR(1000) NULL,
 	@TagColor NVARCHAR(7),
+	@TagTextColor NVARCHAR(7),
 	@IsDeleted BIT NULL
 AS
 BEGIN
 	SET NOCOUNT ON;
-	INSERT INTO [dbo].[tblTags] ([TagName],[TagDescription],[TagColor],[IsDeleted])
-	VALUES (@TagName,@TagDescription,@TagColor,@IsDeleted);
+	INSERT INTO [dbo].[tblTags] ([TagName],[TagDescription],[TagColor],[TagTextColor],[IsDeleted])
+	VALUES (@TagName,@TagDescription,@TagColor,@TagTextColor,@IsDeleted);
 END
 
 

@@ -20,12 +20,12 @@
             @foreach(var tag in @Model.Tags)
             {
                 <a asp-controller="Tags" asp-action="Details" asp-route-id="@tag.Id">
-                    <span class="badge bg-secondary" data-toggle="tooltip" data-placement="bottom" title="@tag.TagDescription">@tag.TagName</span>
+                    <span class="badge" style="background-color:@tag.TagColor;color:@tag.TagTextColor" data-toggle="tooltip" data-placement="bottom" title="@tag.TagDescription">@tag.TagName</span>
                 </a>
             }
         </div>
         <div class="card-footer">
-            <button class="btn btn-primary" data-toggle="modal" data-target="#tagsModal">Edit Tags</button>
+            <button class="btn btn-primary" data-toggle="modal" data-target="#tagsModal">Attach/Remove Tags</button>
             <a class="btn btn-primary" data-toggle="modal" data-target="#tagNewModal">Create New Tag</a>
         </div>
     </div>
@@ -467,6 +467,16 @@
             <div class="form-group">
                 <label for="tagDescription">Tag Description</label>
                 <textarea type="text" class="form-control" name="TagDescription" id="tagNewDescription"></textarea>
+            </div>
+            <div class="row">
+                <div class="form-group col-3">
+                    <label for="tagColor">Tag Color</label>
+                    <input type="color" class="form-control" name="TagColor" id="tagColor" value="#6c757d"/>
+                </div>
+                <div class="form-group col-3">
+                    <label for="tagTextColor">Tag Text Color</label>
+                    <input type="color" class="form-control" name="TagColor" id="tagTextColor" value="#ffffff"/>
+                </div>
             </div>
             <button type="submit" class="btn btn-primary">Save Changes</button>
         </form>

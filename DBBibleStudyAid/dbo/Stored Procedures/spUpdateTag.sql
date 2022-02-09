@@ -23,6 +23,7 @@ CREATE PROCEDURE [dbo].[spUpdateTag]
 	@Id INT,
 	@TagName NVARCHAR(100), 
 	@TagColor NVARCHAR(7),
+	@TagTextColor NVARCHAR(7),
     @TagDescription NVARCHAR(1000) NULL,
 	@IsDeleted BIT
 
@@ -36,6 +37,7 @@ BEGIN
     SET TagName=ISNULL(@TagName,TagName), 
 		TagDescription=ISNULL(@TagDescription,TagDescription),
 		TagColor=ISNULL(@TagColor,TagColor),
+		TagTextColor=ISNULL(@TagTextColor,TagTextColor),
 		IsDeleted=ISNULL(@IsDeleted,IsDeleted)
 	WHERE Id=@Id;
     END 
