@@ -109,6 +109,17 @@
             @if(User.Identity.IsAuthenticated)
             {
                 <li class="nav-item">
+                    <a class="nav-link @Url.MakeActiveClass("talks","index")" asp-controller="Talks" asp-action="Index">
+                        <i class="nav-icon fas fa-podium"></i>
+                        <p>
+                        Talks
+                        </p>
+                    </a>
+                </li>
+            }
+            @if(User.Identity.IsAuthenticated)
+            {
+                <li class="nav-item">
                     <a class="nav-link @Url.MakeActiveClass("tags","index")" asp-controller="Tags" asp-action="Index">
                         <i class="nav-icon fas fa-tag"></i>
                         <p>

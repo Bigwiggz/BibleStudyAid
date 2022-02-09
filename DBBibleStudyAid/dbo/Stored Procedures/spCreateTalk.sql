@@ -23,7 +23,6 @@ CREATE PROCEDURE [dbo].[spCreateTalk]
     @DateGiven DATETIME2,  
     @MeetingTypeId INT, 
     @Description NVARCHAR(1000), 
-    @TalkDocument VARBINARY(MAX),
     @TalkDocumentName NVARCHAR(256),
     @ThemeScripture NVARCHAR(1000) NULL,
     @IsDeleted BIT NULL
@@ -35,7 +34,6 @@ BEGIN
     [DateGiven],  
     [MeetingTypeId], 
     [Description], 
-    [TalkDocument], 
     [TalkDocumentName],
     [ThemeScripture],
     [IsDeleted])
@@ -44,7 +42,6 @@ BEGIN
     @DateGiven,  
     @MeetingTypeId, 
     @Description, 
-    @TalkDocument, 
     @TalkDocumentName,
     @ThemeScripture,
     @IsDeleted);

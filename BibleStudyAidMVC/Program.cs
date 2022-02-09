@@ -35,6 +35,7 @@ builder.Services.AddTransient<IMeetingAssembliesData, MeetingAssembliesData>();
 builder.Services.AddTransient<ITagsData, TagsData>();
 builder.Services.AddTransient<ITagsToOtherTablesData,TagsToOtherTablesData>();
 builder.Services.AddTransient<ISpiritualGemsData, SpiritualGemsData>();
+builder.Services.AddTransient<ITalksData, TalksData>();
 
 //Add HttpClient
 string uri = builder.Configuration.GetValue<string>("BibleTextAPI");

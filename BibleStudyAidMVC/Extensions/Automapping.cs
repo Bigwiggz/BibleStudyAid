@@ -41,9 +41,17 @@ namespace BibleStudyAidMVC.Extensions
             CreateMap<SpiritualGems, SpiritualGemsViewModel>();
             CreateMap<SpiritualGemsViewModel,SpiritualGems>();
 
-            //Spiritual Gems
+            //Spiritual Gems All
             CreateMap<SpiritualGemsAll, SpiritualGemsAllViewModel>();
             CreateMap<SpiritualGemsAllViewModel,SpiritualGemsAll>();
+
+            //Talks
+            CreateMap<Talks, TalksViewModel>();
+            CreateMap<TalksViewModel, Talks>();
+
+            //Talks All
+            CreateMap<TalksAll,TalksAllViewModel>();
+            CreateMap<TalksAllViewModel,TalksAll>();
         }
     }
 }

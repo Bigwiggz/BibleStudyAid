@@ -23,8 +23,7 @@ CREATE PROCEDURE [dbo].[spUpdateTalks]
     @TalkTitle NVARCHAR(100), 
     @DateGiven DATETIME2,  
     @MeetingTypeId INT, 
-    @Description NVARCHAR(1000), 
-    @TalkDocument VARBINARY(MAX), 
+    @Description NVARCHAR(1000),  
     @TalkDocumentName NVARCHAR(256),
     @ThemeScripture NVARCHAR(1000) NULL,
     @IsDeleted BIT
@@ -41,7 +40,6 @@ BEGIN
     DateGiven=ISNULL(@DateGiven,DateGiven),
     MeetingTypeId=ISNULL(@MeetingTypeId,MeetingTypeId),
 	[Description]=ISNULL(@Description,[Description]),
-    TalkDocument=ISNULL(@TalkDocument,TalkDocument), 
     TalkDocumentName=ISNULL(@TalkDocumentName,[TalkDocumentName]),
 	ThemeScripture=ISNULL(@ThemeScripture,ThemeScripture),
     IsDeleted=ISNULL(@IsDeleted,IsDeleted)
