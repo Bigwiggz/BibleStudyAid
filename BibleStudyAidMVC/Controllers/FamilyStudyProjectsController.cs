@@ -1,36 +1,91 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using BibleStudyAidMVC.Services.HttpServices;
+using BibleStudyAidMVC.ViewModels;
+using BibleStudyDataAccessLibrary.DataAccess;
+using BibleStudyDataAccessLibrary.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BibleStudyAidMVC.Controllers
 {
     public class FamilyStudyProjectsController : Controller
     {
-        // GET: FamilyStudyProjectsController
-        public ActionResult Index()
+        private readonly IFamilyStudyProjectsData _familyStudyProjectsData;
+        private readonly ILogger<FamilyStudyProjects> _logger;
+        private readonly IMapper _mapper;
+        private readonly IHttpRequestService _httpRequestService;
+
+        public FamilyStudyProjectsController(IFamilyStudyProjectsData familyStudyProjectsData, ILogger<FamilyStudyProjects> logger, IMapper mapper, IHttpRequestService httpRequestService)
         {
-            return View();
+            _familyStudyProjectsData = familyStudyProjectsData;
+            _logger = logger;
+            _mapper = mapper;
+            _httpRequestService = httpRequestService;
+        }
+        // GET: FamilyStudyProjectsController
+        public async Task<IActionResult> Index()
+        {
+            var modelList = await _familyStudyProjectsData.GetAllAsync();
+            var viewModelList = _mapper.Map<IEnumerable<FamilyStudyProjectsViewModel>>(modelList);
+            return View(viewModelList);
         }
 
         // GET: FamilyStudyProjectsController/Details/5
-        public ActionResult Details(int id)
+        public async Task<IActionResult> DetailsAsync(int? id)
         {
-            return View();
+            if (id is null)
+            {
+                return NotFound();
+            }
+            var dailyBibleReadingAll = await _familyStudyProjectsData.GetParentAndAllChildrenRecordsAsync(id.Value);
+            var viewModel = _mapper.Map<FamilyStudyProjectsAllViewModel>(dailyBibleReadingAll);
+            if (viewModel is not null)
+            {
+                try
+                {
+                    foreach (var text in viewModel.ScripturesList)
+                    {
+                        var bibleCitation = text.Scripture;
+                        var bibleAPIModel = await _httpRequestService.GetBibleVersesText(bibleCitation);
+                        text.ScriptureText = bibleAPIModel.text;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogInformation($"There was an error returning the Bible Text: {ex.Message}");
+                    throw;
+                }
+
+            }
+            if (viewModel is null)
+            {
+                return NotFound();
+            }
+
+            return View(viewModel);
         }
 
         // GET: FamilyStudyProjectsController/Create
         public ActionResult Create()
         {
+            var viewModel = new FamilyStudyProjectsViewModel();
             return View();
         }
 
         // POST: FamilyStudyProjectsController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<IActionResult> Create(FamilyStudyProjects viewModel)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                if(viewModel.FamilyStudyFindings is null) 
+                {
+                    viewModel.FamilyStudyFindings = "";
+                }
+                var model = _mapper.Map<FamilyStudyProjects>(viewModel);
+                var Id = await _familyStudyProjectsData.InsertAsync(model);
+                return View("Edit", Id);
             }
             catch
             {
@@ -39,24 +94,41 @@ namespace BibleStudyAidMVC.Controllers
         }
 
         // GET: FamilyStudyProjectsController/Edit/5
-        public ActionResult Edit(int id)
+        [HttpGet]
+        public async Task<IActionResult> Edit(int? id)
         {
-            return View();
-        }
+            if (id is null)
+            {
+                return NotFound();
+            }
 
-        // POST: FamilyStudyProjectsController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
+            var spiritualGemsAll = await _familyStudyProjectsData.GetParentAndAllChildrenRecordsAsync(id.Value);
+            var viewModel = _mapper.Map<FamilyStudyProjectsAllViewModel>(spiritualGemsAll);
+            if (viewModel is not null)
             {
-                return RedirectToAction(nameof(Index));
+                try
+                {
+                    foreach (var text in viewModel.ScripturesList)
+                    {
+                        var bibleCitation = text.Scripture;
+                        var bibleAPIModel = await _httpRequestService.GetBibleVersesText(bibleCitation);
+                        text.ScriptureText = bibleAPIModel.text;
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogInformation($"There was an error returning the Bible Text: {ex.Message}");
+                    throw;
+                }
+
             }
-            catch
+            if (viewModel is null)
             {
-                return View();
+                return NotFound();
             }
+
+            return View(viewModel);
         }
 
         // GET: FamilyStudyProjectsController/Delete/5

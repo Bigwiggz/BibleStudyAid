@@ -44,6 +44,7 @@ namespace BibleStudyAidMVC.Controllers
             {
                 try
                 {
+
                     var bibleCitation = dailyBibleReadingAll.ScriptureStartPoint.Split(':').First();
                     var bibleAPIModel = await _httpRequestService.GetBibleVersesText(bibleCitation);
                     viewModel.BibleText = bibleAPIModel.text;

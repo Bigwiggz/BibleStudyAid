@@ -1,0 +1,34 @@
+﻿@model FamilyStudyProjectsViewModel
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"]="Family Study Projects";
+    Layout = "~/Views/Shared/AdminLTE/_Layout.cshtml";
+}
+<h3>@ViewData["Title"]</h3>
+
+<form asp-action="Create" enctype="multipart/form-data" method="post">
+     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="FamilyStudyTitle" class="control-label">Title</label>
+        <input type="text" asp-for="FamilyStudyTitle" class="form-control"/>
+        <span asp-validation-for="FamilyStudyTitle" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="FamilyStudyDescription" class="control-label">Description</label>
+        <textarea asp-for="FamilyStudyDescription" class="form-control"></textarea>
+        <span asp-validation-for="FamilyStudyDescription" class="text-danger"></span>
+    </div>
+        <div class="form-group">
+        <label asp-for="FamilyStudyFindings" class="control-label">Findings</label>
+        <textarea asp-for="FamilyStudyFindings" class="form-control"></textarea>
+        <span asp-validation-for="FamilyStudyFindings" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="DateWhenCreated" class="control-label">Date Read</label>
+        <input type="datetime-local" asp-for="DateWhenCreated" class="form-control" value="@DateTime.Now"/>
+        <span asp-validation-for="DateWhenCreated" class="text-danger"></span>
+    </div>
+  <button type="submit" class="btn btn-primary">Save</button>
+</form>

@@ -1,0 +1,14 @@
+﻿/*
+Edit Family Study Projects CSS stylesheet
+*/
+
+/*Icons color*/
+
+i {
+    color: rgb(0,123,255);
+}
+
+    i:hover {
+        cursor: pointer;
+        color: rgb(0,200,255);
+    }

@@ -52,6 +52,14 @@ namespace BibleStudyAidMVC.Extensions
             //Talks All
             CreateMap<TalksAll,TalksAllViewModel>();
             CreateMap<TalksAllViewModel,TalksAll>();
+
+            //FamilyStudyProjects
+            CreateMap<FamilyStudyProjects, FamilyStudyProjectsViewModel>();
+            CreateMap<FamilyStudyProjectsViewModel, FamilyStudyProjects>();
+
+            //FamilyStudyProjectsAll
+            CreateMap<FamilyStudyProjectsAll, FamilyStudyProjectsAllViewModel>();
+            CreateMap<FamilyStudyProjectsAllViewModel, FamilyStudyProjectsAll>();
         }
     }
 }

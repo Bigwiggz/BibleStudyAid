@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using BibleStudyAidMVC.Services.HttpServices;
+using BibleStudyAidMVC.ViewModels;
 using BibleStudyDataAccessLibrary.DataAccess;
 using BibleStudyDataAccessLibrary.Models;
 using Microsoft.AspNetCore.Http;
@@ -11,23 +13,29 @@ namespace BibleStudyAidMVC.Controllers
         private readonly ITalksData _talksData;
         private readonly ILogger<Talks> _logger;
         private readonly IMapper _mapper;
+        private readonly IHttpRequestService _httpRequestService;
 
-        public TalksController(ITalksData talksData, ILogger<Talks> logger, IMapper mapper)
+        public TalksController(ITalksData talksData, ILogger<Talks> logger, IMapper mapper, IHttpRequestService httpRequestService)
         {
             _talksData = talksData;
             _logger = logger;
             _mapper = mapper;
+            _httpRequestService = httpRequestService;
         }
         // GET: TalksController
-        public ActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var modelList= await _talksData.GetAllAsync();
+            var viewModelList = _mapper.Map<IEnumerable<TalksViewModel>>(modelList);
+            return View(viewModelList);
         }
 
         // GET: TalksController/Details/5
-        public ActionResult Details(int id)
+        public async Task<IActionResult> Details(int id)
         {
-            return View();
+            var model=await _talksData.GetParentAndAllChildrenRecordsAsync(id);
+            var viewModel=_mapper.Map<TalksAllViewModel>(model);
+            return View(viewModel);
         }
 
         // GET: TalksController/Create
@@ -39,11 +47,14 @@ namespace BibleStudyAidMVC.Controllers
         // POST: TalksController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<IActionResult> Create(TalksViewModel viewModel)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                var model = _mapper.Map<Talks>(viewModel);
+                var Id = await _talksData.InsertAsync(model);
+
+                return View("Edit", Id);
             }
             catch
             {
@@ -60,16 +71,39 @@ namespace BibleStudyAidMVC.Controllers
         // POST: TalksController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<IActionResult> Edit(int? id)
         {
-            try
+            if (id is null)
             {
-                return RedirectToAction(nameof(Index));
+                return NotFound();
             }
-            catch
+
+            var talksAll = await _talksData.GetParentAndAllChildrenRecordsAsync(id.Value);
+            var viewModel = _mapper.Map<TalksAllViewModel>(talksAll);
+            if (viewModel is not null)
             {
-                return View();
+                try
+                {
+                    foreach (var text in viewModel.ScripturesList)
+                    {
+                        var bibleCitation = text.Scripture;
+                        var bibleAPIModel = await _httpRequestService.GetBibleVersesText(bibleCitation);
+                        text.ScriptureText = bibleAPIModel.text;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogInformation($"There was an error returning the Bible Text: {ex.Message}");
+                    throw;
+                }
+
             }
+            if (viewModel is null)
+            {
+                return NotFound();
+            }
+
+            return View(viewModel);
         }
 
         // GET: TalksController/Delete/5

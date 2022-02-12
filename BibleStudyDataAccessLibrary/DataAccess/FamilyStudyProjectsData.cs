@@ -143,6 +143,7 @@ namespace BibleStudyDataAccessLibrary.DataAccess
         {
             try
             {
+                _sql.StartTransaction("DBBibleStudyAid");
 
                 //Step 1) Get Parent Record Info
                 var familyStudyProjects = await _sql.LoadSingleObjectInTransaction<FamilyStudyProjects, dynamic>("spGetByIdFamilyStudyProjects", new { Id });
@@ -157,6 +158,8 @@ namespace BibleStudyDataAccessLibrary.DataAccess
                 var tagsList = await _sql.LoadDataInTransaction<Tags, dynamic>("spGetByFKTags", new { FK = PKId });
                 //Step 6) Get all children documents
                 var documentsList = await _sql.LoadDataInTransaction<Documents, dynamic>("spGetByFKDocuments", new { FK = PKId });
+
+                _sql.CommitTransaction();
 
                 //Build return model
                 FamilyStudyProjectsAll familyStudyProjectsAll = new FamilyStudyProjectsAll
