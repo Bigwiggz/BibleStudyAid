@@ -28,7 +28,7 @@ namespace BibleStudyDataAccessLibrary.DataAccess
                 Id = Id
             };
 
-            var result = await _sql.SaveData<object, dynamic>("spDeleteTalks", p);
+            var result = await _sql.SaveData<object, dynamic>("spDeleteTalk", p);
             return result;
         }
 
@@ -59,12 +59,11 @@ namespace BibleStudyDataAccessLibrary.DataAccess
                 DateGiven = obj.DateGiven,
                 MeetingType = obj.MeetingType,
                 Description = obj.Description,
-                TalkDocumentName = obj.TalkDocumentName,
                 ThemeScripture = obj.ThemeScripture,
                 IsDeleted = obj.IsDeleted
             };
 
-            var result = await _sql.SaveData<object, dynamic>("spCreateTalks", p);
+            var result = await _sql.SaveData<object, dynamic>("spCreateTalk", p);
 
             return result;
         }
@@ -140,7 +139,7 @@ namespace BibleStudyDataAccessLibrary.DataAccess
                 //Step 1) Get Parent Record Info
                 var talks = await _sql.LoadSingleObjectInTransaction<Talks, dynamic>("spGetByIdTalks", new { Id });
                 //Step 2) Get Parent Key for all children tables
-                var PKId = talks.PKldtblTalks;
+                var PKId = talks.PKIdtblTalks;
                 //Step 3) Get all children table info: References
                 var referencesList = await _sql.LoadDataInTransaction<References, dynamic>("spGetByFKReferences", new { FK = PKId });
                 //Step 4) Get all children table info: Scriptures
@@ -160,9 +159,8 @@ namespace BibleStudyDataAccessLibrary.DataAccess
                     CreatedDate = talks.CreatedDate,
                     DateGiven = talks.DateGiven,
                     Description = talks.Description,
-                    TalkDocumentName = talks.TalkDocumentName,
                     ThemeScripture = talks.ThemeScripture,
-                    PKldtblTalks = talks.PKldtblTalks,
+                    PKIdtblTalks = talks.PKIdtblTalks,
                     IsDeleted = talks.IsDeleted,
                     ReferencesList = referencesList,
                     ScripturesList = scripturesList,

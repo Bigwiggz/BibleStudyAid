@@ -1,5 +1,5 @@
 ﻿@model TalksViewModel
-@using BibleStudyAidMVC.ViewModels.Enums
+@using BibleStudyDataAccessLibrary.Models.Enums
 @{
     ViewData["Title"]="Talks";
     Layout = "~/Views/Shared/AdminLTE/_Layout.cshtml";
@@ -31,7 +31,7 @@
     </div>
     <div class="form-group">
         <label asp-for="MeetingType" class="control-label">Select Meeting</label>
-        <select asp-for="MeetingType" class="form-control" asp-items="Html.GetEnumSelectList<MeetingTypeViewModel>()"></select>
+        <select asp-for="MeetingType" class="form-control" asp-items="Html.GetEnumSelectList<MeetingType>()"></select>
         <span asp-validation-for="MeetingType" class="text-danger"></span>
     </div>
   <button type="submit" class="btn btn-primary">Save</button>

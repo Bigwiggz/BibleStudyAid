@@ -1,5 +1,516 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model TalksAllViewModel
 @{
+    ViewData["Title"]="Talks";
+    Layout = "~/Views/Shared/AdminLTE/_Layout.cshtml";
+}
+
+@*Styles*@
+@section Styles{
+    <link  rel="stylesheet" href="~/css/Views/Talks/EditTalks.css"/>
+}
+@*TAGS LIST*@
+<div class="row">
+    <div class="col-12 card m-1">
+        <div class="card-header border-primary">
+            <h5>Tags</h5>
+        </div>
+        <div class="card-body">
+            @if (@Model.Tags.Count>0)
+            {
+                @foreach(var tag in @Model.Tags)
+                {
+                    <a asp-controller="Tags" asp-action="Details" asp-route-id="@tag.Id">
+                        <span class="badge" style="background-color:@tag.TagColor;color:@tag.TagTextColor" data-toggle="tooltip" data-placement="bottom" title="@tag.TagDescription">@tag.TagName</span>
+                    </a>
+                }
+            }
+        </div>
+        <div class="card-footer">
+            <button class="btn btn-primary" data-toggle="modal" data-target="#tagsModal">Attach/Remove Tags</button>
+            <a class="btn btn-primary" data-toggle="modal" data-target="#tagNewModal">Create New Tag</a>
+        </div>
+    </div>
+</div>
+
+@*SCRIPTURES*@
+<div class="row">
+    <div class="col-12 card m-1">
+        <div class="card-header border-primary">
+            <h5>Title</h5>
+        </div>
+        <div class="car-body">
+            <h5>@Model.TalkTitle</h5>
+        </div>
+    </div>
+    <div class="col-12 card m-1">
+        <div class="card-header border-primary">
+            <h5>Theme Scripture</h5>
+        </div>
+        <div class="car-body">
+            <h5>@Model.ThemeScripture</h5>
+        </div>
+    </div>
+    <div class="col-12 card m-1">
+        <div class="card-header border-primary">
+            <h5>Description</h5>
+        </div>
+        <div class="car-body">
+            <h5>@Model.Description</h5>
+        </div>
+    </div>
+        <div class="col-12 card m-1">
+        <div class="card-header border-primary">
+            <h5>Date Updated</h5>
+        </div>
+        <div class="car-body">
+            <h5>@Model.CreatedDate</h5>
+        </div>
+    </div>
+</div>
+
+@*REFERENCES*@
+<div class="row">
+    <div class="col-12 card m-1">
+        <div class="card-header border-primary">
+            <h5>References</h5>
+        </div>
+        <div class="card-body">
+            @if(@Model.ReferencesList.Count==0)
+            {
+                <i class="fas fa-plus-square nav-icon" data-toggle="modal" data-target="#referenceNewModal" reference-FK="@Model.PKIdtblTalks"></i>
+            }
+            else
+            {
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                Reference
+                            </th>
+                            <th>Reference Description</th>
+                            <th>
+                                Edits
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody id="referenceTableEdits">
+                        @foreach(var reference in @Model.ReferencesList)
+                        {
+                            <tr>
+                                <td id="referenceText">@reference.Reference</td>
+                                <td>@reference.Description</td>
+                                <td>
+                                    <i class="fas fa-edit nav-icon" data-toggle="modal" data-target="#referenceModal" data-id="@reference.Id"></i>|
+                                    <i class="fas fa-plus-square nav-icon" data-toggle="modal" data-target="#referenceNewModal" data-id="@reference.Id"></i>|
+                                    <i class="fas fa-trash-alt nav-icon" data-toggle="modal" data-target="#referenceDeleteModal" data-id="@reference.Id"></i>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+        </div>
+    </div>
+</div>
+
+@*SCRIPTURAL REFERENCES*@
+<div class="row">
+    <div class="col-12 card m-1">
+        <div class="card-header border-primary">
+            <h5>Scriptural References</h5>
+        </div>
+        <div class="card-body">
+            @if(@Model.ScripturesList.Count==0)
+            {
+                <i class="fas fa-plus-square nav-icon" data-toggle="modal" data-target="#scriptureNewModal" reference-FK="@Model.PKIdtblTalks"></i> 
+            }
+            else
+            {
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Scripture</th>
+                            <th>Text</th>
+                            <th>Scripture Point</th>
+                            <th>Edits</th>
+                        </tr>
+                    </thead>
+                    <tbody id="scripturalTableEdits">
+                        @foreach(var scripture in @Model.ScripturesList)
+                        {
+                            <tr data-toggle="modal" data-target="#scriptureModal" data-id="@scripture.Id">
+                                <td>@scripture.Scripture</td>
+                                <th>@scripture.ScriptureText</th>
+                                <td>@scripture.Description</td>
+                                <td>
+                                    <i class="fas fa-edit nav-icon" data-toggle="modal" data-target="#scriptureEditModal" data-id="@scripture.Id"></i>|
+                                    <i class="fas fa-plus-square nav-icon" data-toggle="modal" data-target="#scriptureNewModal" data-id="@scripture.Id"></i>|
+                                    <i class="fas fa-trash-alt nav-icon" data-toggle="modal" data-target="#scriptureDeleteModal" data-id="@scripture.Id"></i>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>     
+            }
+        </div>
+    </div>
+</div>
+
+@*DOCUMENTS LIST*@
+
+<div class="row">
+    <div class="col-12 card m-1">
+        <div class="card-header border-primary">
+            <h5>Documents</h5>
+        </div>
+        <div class="card-body">
+            <!--Download Files-->
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>File Name</th>
+                        <th>File Size (kB)</th>
+                        <th>File Type</th>
+                    </tr>
+                </thead>
+                <tbody id="tableDocumentBody">
+                    @if (@Model.DocumentsList.Count > 0)
+                    {
+                        @foreach(var file in @Model.DocumentsList)
+                        {
+ 
+                                <tr doc-id="@file.Id">
+                                    <td>@file.FileName</td>
+                                    <td>@(file.ContentSize/1024)</td>
+                                    <td>@file.ContentType</td>
+                                </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+            <!--Button Submit-->
+            <form asp-controller="Documents" asp-action="Download" method="post">
+                <input type="hidden" id="DownloadSubmit" name="downloadIdString" value="" />
+                <button type="submit" class="btn btn-primary" id="submitDownloadButton">Download</button>
+            </form>
+
+            <!--Upload-->
+            <form asp-controller="Documents" asp-action="Upload" enctype="multipart/form-data" method="post">
+                <input type="hidden" name="FKTableIdandName" value="@Model.PKIdtblTalks"/>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Insert Documents</label>
+                <div class="col-sm-10">
+                    <div class="custom-file">
+                        <input type="file" name="Document" multiple class="form-control custom-file-input">
+                        <label class="custom-file-label">Choose File...</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-10">
+                    <button type="submit" class="btn btn-primary">Upload File(s)</button>
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<a asp-controller="Talks" asp-action="Details" asp-route-id="@Model.Id">See Details</a>
+@*MODAL LIST*@
+
+@*REFERENCES MODAL*@
+
+<!--Edit Reference Modal-->
+<div class="modal fade" id="referenceModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ModalLabel">Edit Reference</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form asp-controller="References" asp-action="Edit" method="post">
+            <input type="hidden" id="referenceFKId" name="FKTableIdandName" value="@Model.PKIdtblTalks"/>
+            <input type="hidden" id="referenceId" name="Id">
+            <div class="form-group">
+                <label for="referenceCitation">References</label>
+                <input type="text"  name="Reference" class="form-control" id="referenceCitation" aria-describedby="referenceCitation">
+            </div>
+            <div class="form-group">
+                <label for="referenceDescription">Description</label>
+                <textarea type="text" class="form-control" name="Description" id="referenceDescription"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--New Reference Modal-->
+<div class="modal fade" id="referenceNewModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ModalLabelNew">Create Reference</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form asp-controller="References" asp-action="Create" method="post">
+            <input type="hidden" id="referenceNewFKId" name="FKTableIdandName" value="@Model.PKIdtblTalks"/>
+            <div class="form-group">
+                <label for="referenceCitation">References</label>
+                <input type="text"  name="Reference" class="form-control" id="referenceNewCitation" aria-describedby="referenceCitation">
+            </div>
+            <div class="form-group">
+                <label for="referenceDescription">Description</label>
+                <textarea type="text" class="form-control" name="Description" id="referenceNewDescription"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Reference Soft Delete Modal-->
+<div class="modal fade" id="referenceDeleteModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ModalLabelDelete">Delete Reference!</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <h4 class="text-danger">Are you sure you want to delete this Reference?</h4>
+          <dl class"row">
+              <dt class="col-sm-4">Reference</dt>
+              <dd class="col-sm-8" id="referenceCitationDelete"></dd>
+              <dt class="col-sm-4">Description</dt>
+              <dd class="col-sm-8" id="referenceDescriptionDelete"></dd>
+          </dl>
+        <form asp-controller="References" asp-action="Edit" method="post">
+            <input type="hidden" id="referenceDeleteId" name="Id" value="@Model.PKIdtblTalks"/>
+            <input type="hidden" id="referenceDeleteBoolean" name="IsDeleted" value=true>
+            <button type="submit" class="btn btn-danger">Click Here to Delete Reference</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close and Not Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+@*Scripture Modal*@
+<!--Scripture Edit Modal-->
+
+@*TODO:Finish Scripture Edit Modal*@
+<!--Scripture New Modal-->
+<div class="modal fade" id="scriptureNewModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ModalLabelScriptureNew">Create Scripture Reference</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form asp-controller="Scriptures" asp-action="Create" method="post">
+            <div class="form-group">
+                <label for="SelectBook">Select Book</label>
+                <select class="form-control" id="SelectBook">
+                <option disabled>Choose...</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="SelectChapter">Select Chapter</label>
+                <select class="form-control" id="SelectChapter" disabled>
+                    <option disabled>Choose...</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="SelectVerse">Select Verse</label>
+                <select class="form-control" id="SelectVerse" disabled>
+                    <option disabled>Choose...</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="SelectVerseGroup">Select Verse To...</label>
+                <select class="form-control" id="SelectVerseGroup" disabled>
+                <option disabled>Choose...</option>
+                </select>
+            </div>
+            <input type="hidden" id="scriptureNewFKId" name="FKTableIdandName" value="@Model.PKIdtblTalks"/>
+            <input type="hidden" id="scriptureNewBook" name="Book" />
+            <input type="hidden" id="scriptureNewChapter" name="Chapter" />
+            <input type="hidden" id="scriptureNewVerse" name="Verse" />
+
+            <label>Reference Scripture</label>
+            <p name="Scripture" id="scriptureNewScripture">Scripture is Here</p>
+
+            <div class="form-group">
+                <label for="scriptureDescription">Description</label>
+                <textarea type="text" class="form-control" name="Description" id="scriptureNewDescription"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Scripture Soft Delete Modal-->
+<div class="modal fade" id="scriptureDeleteModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ModalLabelScriptureDelete">Delete Reference!</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <h4 class="text-danger">Are you sure you want to delete this Scriptureal reference?</h4>
+          <dl class"row">
+              <dt class="col-sm-4">Scripture</dt>
+              <dd class="col-sm-8" id="scriptureDelete"></dd>
+              <dt class="col-sm-4">Description</dt>
+              <dd class="col-sm-8" id="scriptureDescriptionDelete"></dd>
+          </dl>
+        <form asp-controller="Scriptures" asp-action="Edit" method="post">
+            <input type="hidden" id="scriptureDeleteId" name="Id">
+            <input type="hidden" id="scriptureDeleteBoolean" name="IsDeleted" value=true>
+            <button type="submit" class="btn btn-danger">Click Here to Delete Reference</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close and Not Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+@*Tag Modals*@
+
+<!--Add Tag Modal-->
+<div class="modal fade" id="tagsModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Edit Tags</h5>
+      </div>
+      <div class="modal-body">
+          <div class="row">
+              <div class="col-6">
+                    <h4>Current Tags</h4>
+                    <select id="ExistingTagList" multiple size="10"></select>
+              <form asp-controller="TagsToTables" asp-action="DeleteMultiple">
+                <input type="hidden" id="removeTagsId" name="TagsId">
+                <input type="hidden" name="FKTableIdandName" value="@Model.PKIdtblTalks">
+                <button class="btn btn-primary" type="submit">Remove Tags</button>
+              </form>
+              </div>
+              <div class="col-6">
+                    <h4>List of Tags</h4>
+                    <select id="AllTagList" multiple size="10"></select>
+              <form asp-controller="TagsToTables" asp-action="CreateMultiple">
+                <input type="hidden" id="addTagsId" name="TagsId">
+                <input type="hidden" name="FKTableIdandName" value="@Model.PKIdtblTalks">
+                <button class="btn btn-primary" type="submit">Add Tags</button>
+              </form>
+              </div>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--New Tag Modal-->
+<div class="modal fade" id="tagNewModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ModalLabelNew">Create Tag</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form asp-controller="Tags" asp-action="Create" method="post">
+            <div class="form-group">
+                <label for="tagCitation">Tag Name</label>
+                <input type="text"  name="TagName" class="form-control" id="tagNewCitation" aria-describedby="referenceCitation">
+            </div>
+            <div class="form-group">
+                <label for="tagDescription">Tag Description</label>
+                <textarea type="text" class="form-control" name="TagDescription" id="tagNewDescription"></textarea>
+            </div>
+            <div class="row">
+                <div class="form-group col-3">
+                    <label for="tagColor">Tag Color</label>
+                    <input type="color" class="form-control" name="TagColor" id="tagColor" value="#6c757d"/>
+                </div>
+                <div class="form-group col-3">
+                    <label for="tagTextColor">Tag Text Color</label>
+                    <input type="color" class="form-control" name="TagColor" id="tagTextColor" value="#ffffff"/>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+@*Scripts Section*@
+@section Scripts{
+    <script>
+        let getTalksData =@Json.Serialize(@Model);
+    </script>
+    <script src="~/js/Helpers/ScriptureValidator/BibleScriptureDoc.js"></script>
+    <script src="~/js/Helpers/ScriptureValidator/BibleScriptureLogic.js"></script>
+    <script src="~/js/Views/Talks/EditTalks.js"></script>
+    <script>
+            $(document).ready(function () {
+                $('.custom-file-input').on("change", function () {
+                    var fileLabel = $(this).next('.custom-file-label');
+                    var files = $(this)[0].files;
+                    if (files.length > 1) {
+                        fileLabel.html(files.length + ' files selected');
+                    }
+                    else if (files.length == 1) {
+                        fileLabel.html(files[0].name);
+                    }
+                });
+            });
+    </script>
+
 }

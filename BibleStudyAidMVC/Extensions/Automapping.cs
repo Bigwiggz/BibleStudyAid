@@ -51,10 +51,8 @@ namespace BibleStudyAidMVC.Extensions
             CreateMap<TalksViewModel, Talks>();
 
             //Talks All
-            CreateMap<TalksAll,TalksAllViewModel>()
-                .ForMember(dest => dest.MeetingType, opt => opt.MapFrom(src => src.MeetingType));
-            CreateMap<TalksAllViewModel,TalksAll>()
-                .ForMember(dest => dest.MeetingType, opt => opt.MapFrom(src => src.MeetingType));
+            CreateMap<TalksAll, TalksAllViewModel>();
+            CreateMap<TalksAllViewModel, TalksAll>();
 
 
             //FamilyStudyProjects
@@ -64,12 +62,6 @@ namespace BibleStudyAidMVC.Extensions
             //FamilyStudyProjectsAll
             CreateMap<FamilyStudyProjectsAll, FamilyStudyProjectsAllViewModel>();
             CreateMap<FamilyStudyProjectsAllViewModel, FamilyStudyProjectsAll>();
-
-            //Enum Mapping
-            CreateMap<BibleStudyDataAccessLibrary.Models.Enums.MeetingType, MeetingTypeViewModel>();
-            CreateMap<MeetingTypeViewModel, BibleStudyDataAccessLibrary.Models.Enums.MeetingType>();
-
-            
 
         }
     }

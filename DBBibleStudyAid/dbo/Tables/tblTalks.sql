@@ -6,7 +6,6 @@
     [DateGiven] DATETIME2 NOT NULL,  
     [MeetingType] INT NOT NULL, 
     [Description] NVARCHAR(1000) NOT NULL, 
-    [TalkDocumentName] NVARCHAR(256) NOT NULL,
     [ThemeScripture] NVARCHAR(1000) NULL, 
     [PKIdtblTalks] AS CONCAT(CONVERT(VARCHAR,[Id]),'tblTalks'), 
     [IsDeleted] BIT NOT NULL DEFAULT 0,

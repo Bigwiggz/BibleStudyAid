@@ -24,7 +24,6 @@ CREATE PROCEDURE [dbo].[spUpdateTalks]
     @DateGiven DATETIME2,  
     @MeetingType INT, 
     @Description NVARCHAR(1000),  
-    @TalkDocumentName NVARCHAR(256),
     @ThemeScripture NVARCHAR(1000) NULL,
     @IsDeleted BIT
 
@@ -40,7 +39,6 @@ BEGIN
     DateGiven=ISNULL(@DateGiven,DateGiven),
     MeetingType=ISNULL(@MeetingType,MeetingType),
 	[Description]=ISNULL(@Description,[Description]),
-    TalkDocumentName=ISNULL(@TalkDocumentName,[TalkDocumentName]),
 	ThemeScripture=ISNULL(@ThemeScripture,ThemeScripture),
     IsDeleted=ISNULL(@IsDeleted,IsDeleted)
 	WHERE Id=@Id;

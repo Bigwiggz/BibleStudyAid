@@ -51,7 +51,18 @@ namespace BibleStudyAidMVC.Controllers
         {
             try
             {
-                var model = _mapper.Map<Talks>(viewModel);
+                /*
+                var model = new Talks
+                {
+                    TalkTitle=viewModel.TalkTitle,
+                    ThemeScripture=viewModel.ThemeScripture,
+                    Description=viewModel.Description,
+                    DateGiven=viewModel.DateGiven,
+                    MeetingType=viewModel.MeetingType,
+                    IsDeleted=false
+                };
+                */
+                var model=_mapper.Map<Talks>(viewModel);
                 var Id = await _talksData.InsertAsync(model);
 
                 return View("Edit", Id);
@@ -63,16 +74,9 @@ namespace BibleStudyAidMVC.Controllers
         }
 
         // GET: TalksController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: TalksController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int? id)
         {
+
             if (id is null)
             {
                 return NotFound();
@@ -104,6 +108,14 @@ namespace BibleStudyAidMVC.Controllers
             }
 
             return View(viewModel);
+        }
+
+        // POST: TalksController/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(int id)
+        {
+            return View();
         }
 
         // GET: TalksController/Delete/5
