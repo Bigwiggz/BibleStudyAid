@@ -10,7 +10,7 @@ namespace BibleStudyDataAccessLibrary.Models
         public DateTime CreatedDate { get; set; }
         public DateTime DateofMeeting { get; set; }
         public string PartTitle { get; set; }
-        public int MeetingTypeId { get; set; }
+        public MeetingType MeetingType { get; set; }
         public string Scripture { get; set; }
         public string LessonLearnedDescription { get; set; }
         public string PKldtblMeetingAssemblies { get; set; }

@@ -18,7 +18,7 @@
 --
 */
 
-CREATE PROCEDURE [dbo].[spGetAllTalk]
+CREATE PROCEDURE [dbo].[spGetAllTalks]
 
 AS
 BEGIN

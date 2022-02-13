@@ -57,7 +57,7 @@ namespace BibleStudyDataAccessLibrary.DataAccess
             {
                 TalkTitle = obj.TalkTitle,
                 DateGiven = obj.DateGiven,
-                MeetingTypeId = obj.MeetingTypeId,
+                MeetingType = obj.MeetingType,
                 Description = obj.Description,
                 TalkDocumentName = obj.TalkDocumentName,
                 ThemeScripture = obj.ThemeScripture,
@@ -159,7 +159,6 @@ namespace BibleStudyDataAccessLibrary.DataAccess
                     TalkTitle = talks.TalkTitle,
                     CreatedDate = talks.CreatedDate,
                     DateGiven = talks.DateGiven,
-                    MeetingTypeId = talks.MeetingTypeId,
                     Description = talks.Description,
                     TalkDocumentName = talks.TalkDocumentName,
                     ThemeScripture = talks.ThemeScripture,

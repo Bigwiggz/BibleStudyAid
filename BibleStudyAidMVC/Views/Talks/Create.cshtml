@@ -1,0 +1,38 @@
+﻿@model TalksViewModel
+@using BibleStudyAidMVC.ViewModels.Enums
+@{
+    ViewData["Title"]="Talks";
+    Layout = "~/Views/Shared/AdminLTE/_Layout.cshtml";
+}
+
+<h3>@ViewData["Title"]</h3>
+
+<form asp-action="Create" enctype="multipart/form-data" method="post">
+     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="TalkTitle" class="control-label">Title</label>
+        <input type="text" asp-for="TalkTitle" class="form-control"/>
+        <span asp-validation-for="TalkTitle" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="ThemeScripture" class="control-label">Theme Scripture</label>
+        <input type="text" asp-for="ThemeScripture" class="form-control"/>
+        <span asp-validation-for="ThemeScripture" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="DateGiven" class="control-label">Date Read</label>
+        <input type="datetime-local" asp-for="DateGiven" class="form-control" value="@DateTime.Now"/>
+        <span asp-validation-for="DateGiven" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Description" class="control-label">Description</label>
+        <textarea asp-for="Description" class="form-control"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="MeetingType" class="control-label">Select Meeting</label>
+        <select asp-for="MeetingType" class="form-control" asp-items="Html.GetEnumSelectList<MeetingTypeViewModel>()"></select>
+        <span asp-validation-for="MeetingType" class="text-danger"></span>
+    </div>
+  <button type="submit" class="btn btn-primary">Save</button>
+</form>

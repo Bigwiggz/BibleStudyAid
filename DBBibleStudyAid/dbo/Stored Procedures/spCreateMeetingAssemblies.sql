@@ -21,7 +21,7 @@
 CREATE PROCEDURE [dbo].[spCreateMeetingAssemblies]
     @DateOfMeeting DATETIME2, 
     @PartTitle NCHAR(100), 
-    @MeetingTypeId INT, 
+    @MeetingType INT, 
     @Scripture NVARCHAR(1000), 
     @LessonLearnedDescription NVARCHAR(1000),
     @IsDeleted BIT NULL
@@ -31,14 +31,14 @@ BEGIN
 	INSERT INTO [dbo].[tblMeetingAssemblies] 
     ([DateOfMeeting], 
     [PartTitle], 
-    [MeetingTypeId], 
+    [MeetingType], 
     [Scripture], 
     [LessonLearnedDescription],
     [IsDeleted])
 	VALUES(
     @DateOfMeeting, 
     @PartTitle, 
-    @MeetingTypeId, 
+    @MeetingType, 
     @Scripture, 
     @LessonLearnedDescription,
     @IsDeleted);

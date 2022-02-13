@@ -121,7 +121,7 @@
     <Build Include="dbo\Stored Procedures\spGetAllScriptures.sql" />
     <Build Include="dbo\Stored Procedures\spGetAllTag.sql" />
     <Build Include="dbo\Stored Procedures\spGetAllTagToOtherTables.sql" />
-    <Build Include="dbo\Stored Procedures\spGetAllTalk.sql" />
+    <Build Include="dbo\Stored Procedures\spGetAllTalks.sql" />
     <Build Include="dbo\Stored Procedures\spGetByIdDailyBibleReading.sql" />
     <Build Include="dbo\Stored Procedures\spGetByIdFamilyStudyProjects.sql" />
     <Build Include="dbo\Stored Procedures\spGetByIdMeetingAssemblies.sql" />

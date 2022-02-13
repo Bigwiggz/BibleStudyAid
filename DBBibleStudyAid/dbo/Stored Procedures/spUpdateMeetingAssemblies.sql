@@ -22,7 +22,7 @@ CREATE PROCEDURE [dbo].[spUpdateMeetingAssemblies]
     @Id INT,
     @DateOfMeeting DATETIME2, 
     @PartTitle NCHAR(100), 
-    @MeetingTypeId INT, 
+    @MeetingType INT, 
     @Scripture NVARCHAR(1000), 
     @LessonLearnedDescription NVARCHAR(1000),
     @IsDeleted BIT
@@ -37,7 +37,7 @@ BEGIN
     SET 
     DateOfMeeting=ISNULL(@DateOfMeeting,DateOfMeeting), 
 	PartTitle=ISNULL(@PartTitle,PartTitle),
-    MeetingTypeId=ISNULL(@MeetingTypeId,MeetingTypeId), 
+    MeetingType=ISNULL(@MeetingType,MeetingType), 
 	Scripture =ISNULL(@Scripture ,Scripture),
     LessonLearnedDescription =ISNULL(@LessonLearnedDescription ,LessonLearnedDescription),
     IsDeleted=ISNULL(@IsDeleted,IsDeleted)

@@ -21,7 +21,7 @@
 CREATE PROCEDURE [dbo].[spCreateTalk]
     @TalkTitle NVARCHAR(100), 
     @DateGiven DATETIME2,  
-    @MeetingTypeId INT, 
+    @MeetingType INT, 
     @Description NVARCHAR(1000), 
     @TalkDocumentName NVARCHAR(256),
     @ThemeScripture NVARCHAR(1000) NULL,
@@ -32,7 +32,7 @@ BEGIN
 	INSERT INTO [dbo].[tblTalks] 
     ([TalkTitle],  
     [DateGiven],  
-    [MeetingTypeId], 
+    [MeetingType], 
     [Description], 
     [TalkDocumentName],
     [ThemeScripture],
@@ -40,7 +40,7 @@ BEGIN
 	VALUES(
     @TalkTitle, 
     @DateGiven,  
-    @MeetingTypeId, 
+    @MeetingType, 
     @Description, 
     @TalkDocumentName,
     @ThemeScripture,

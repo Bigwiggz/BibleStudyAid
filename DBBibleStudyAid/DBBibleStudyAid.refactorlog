@@ -140,4 +140,18 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="DateUpdated" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="f62204a0-9aea-4048-8d9a-7385323ed345" ChangeDateTime="02/13/2022 09:03:35">
+    <Property Name="ElementName" Value="[dbo].[tblTalks].[MeetingTypeId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[tblTalks]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="MeetingType" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="7f7c3fa3-8e72-41f3-af3c-f924f1e7a43e" ChangeDateTime="02/13/2022 09:04:52">
+    <Property Name="ElementName" Value="[dbo].[tblMeetingAssemblies].[MeetingTypeId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[tblMeetingAssemblies]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="MeetingType" />
+  </Operation>
 </Operations>

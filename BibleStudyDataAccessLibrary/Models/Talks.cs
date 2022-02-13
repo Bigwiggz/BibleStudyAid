@@ -10,7 +10,7 @@ namespace BibleStudyDataAccessLibrary.Models
         public string TalkTitle { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime DateGiven { get; set; }
-        public int MeetingTypeId { get; set; }
+        public MeetingType MeetingType { get; set; }
         public string Description { get; set; }
         public string TalkDocumentName { get; set; }
         public string ThemeScripture { get; set; }

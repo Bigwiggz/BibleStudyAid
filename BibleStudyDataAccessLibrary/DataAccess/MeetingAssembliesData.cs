@@ -53,7 +53,7 @@ namespace BibleStudyDataAccessLibrary.DataAccess
             var p = new
             {
                 LessonLearnedDescription = obj.LessonLearnedDescription,
-                MeetingTypeId = obj.MeetingTypeId,
+                MeetingType = obj.MeetingType,
                 PartTitle = obj.PartTitle,
                 Scripture = obj.Scripture,
                 DateofMeeting = obj.DateofMeeting,
@@ -70,7 +70,7 @@ namespace BibleStudyDataAccessLibrary.DataAccess
             {
                 Id=obj.Id,
                 LessonLearnedDescription = obj.LessonLearnedDescription,
-                MeetingTypeId = obj.MeetingTypeId,
+                MeetingType = obj.MeetingType,
                 PartTitle = obj.PartTitle,
                 Scripture = obj.Scripture,
                 DateofMeeting = obj.DateofMeeting,
@@ -141,6 +141,7 @@ namespace BibleStudyDataAccessLibrary.DataAccess
         {
             try
             {
+                _sql.StartTransaction("DBBibleStudyAid");
 
                 //Step 1) Get Parent Record Info
                 var meetingAssemblies = await _sql.LoadSingleObjectInTransaction<MeetingAssemblies, dynamic>("spGetByIdMeetingAssembliess", new { Id });
@@ -156,12 +157,14 @@ namespace BibleStudyDataAccessLibrary.DataAccess
                 //Step 6) Get all children documents
                 var documentsList = await _sql.LoadDataInTransaction<Documents, dynamic>("spGetByFKDocuments", new { FK = PKId });
 
+                _sql.CommitTransaction();
+
                 //Build return model
                 MeetingAssembliesAll meetingAssembliesAll = new MeetingAssembliesAll
                 {
                     Id = meetingAssemblies.Id,
                     LessonLearnedDescription = meetingAssemblies.LessonLearnedDescription,
-                    MeetingTypeId = meetingAssemblies.MeetingTypeId,
+                    MeetingType = meetingAssemblies.MeetingType,
                     PartTitle = meetingAssemblies.PartTitle,
                     PKldtblMeetingAssemblies = meetingAssemblies.PKldtblMeetingAssemblies,
                     Scripture = meetingAssemblies.Scripture,
