@@ -10,6 +10,7 @@ namespace BibleStudyDataAccessLibrary.Models
         public string FKTableIdandName { get; set; }
         public string Reference { get; set; }
         public string Description { get; set; }
+        public DateTime DateUpdated { get; set; }
         public bool IsDeleted { get; set; }
     }
 }

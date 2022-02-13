@@ -42,6 +42,7 @@ BEGIN
 	Chapter=ISNULL(@Chapter,Chapter),
     Verse=ISNULL(@Verse,Verse),
     [Description]=ISNULL(@Description,[Description]),
+    DateUpdated=GETUTCDATE(),
     IsDeleted=ISNULL(@IsDeleted,IsDeleted)
 	WHERE Id=@Id;
     END 

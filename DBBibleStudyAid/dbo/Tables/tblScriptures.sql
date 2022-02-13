@@ -8,5 +8,6 @@
     [UniqueId] UNIQUEIDENTIFIER NOT NULL DEFAULT newId(), 
     [FKTableIdandName] NVARCHAR(1000) NOT NULL,
     [Description] NVARCHAR(2500) NULL,
+    [DateUpdated] DATETIME2 NOT NULL DEFAULT getutcdate(),
     [IsDeleted] BIT NOT NULL DEFAULT 0
 )

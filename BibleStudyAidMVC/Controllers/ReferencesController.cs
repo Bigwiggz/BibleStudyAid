@@ -21,9 +21,11 @@ namespace BibleStudyAidMVC.Controllers
         }
 
         // GET: ReferencesController
-        public ActionResult Index()
+        public async Task<IActionResult> IndexAsync()
         {
-            return View();
+            var modelList=await _referencesData.GetAllAsync();   
+            var viewModel=_mapper.Map<IEnumerable<ReferencesViewModel>>(modelList);
+            return View(viewModel);
         }
 
         // GET: ReferencesController/Details/5

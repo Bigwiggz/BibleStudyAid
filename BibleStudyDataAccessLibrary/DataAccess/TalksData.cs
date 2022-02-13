@@ -46,7 +46,7 @@ namespace BibleStudyDataAccessLibrary.DataAccess
                 Id = Id
             };
 
-            var result = await _sql.LoadSingleRecord<Talks, dynamic>("spGetByIdTalks", p);
+            var result = await _sql.LoadSingleRecord<Talks, dynamic>("spGetByIdTalk", p);
 
             return result;
         }
@@ -87,7 +87,7 @@ namespace BibleStudyDataAccessLibrary.DataAccess
 
                 //Step 1: Save to Master Table dailyBibleReading
                 //Step 2: Get the Id from the Master Table
-                string tblId = await _sql.LoadSingleObjectInTransaction<string, dynamic>("spCreateTalks", talks);
+                string tblId = await _sql.LoadSingleObjectInTransaction<string, dynamic>("spCreateTalk", talks);
 
 
                 //Step 3: add Id to references and add in all references
@@ -137,7 +137,7 @@ namespace BibleStudyDataAccessLibrary.DataAccess
                 _sql.StartTransaction("DBBibleStudyAid");
 
                 //Step 1) Get Parent Record Info
-                var talks = await _sql.LoadSingleObjectInTransaction<Talks, dynamic>("spGetByIdTalks", new { Id });
+                var talks = await _sql.LoadSingleObjectInTransaction<Talks, dynamic>("spGetByIdTalk", new { Id });
                 //Step 2) Get Parent Key for all children tables
                 var PKId = talks.PKIdtblTalks;
                 //Step 3) Get all children table info: References

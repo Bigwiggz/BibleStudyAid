@@ -1,5 +1,40 @@
-﻿@{
-    ViewData["Title"]="References";
+﻿@model IEnumerable<ReferencesViewModel>
+@{
+    ViewData["Title"]="References List";
     Layout = "~/Views/Shared/AdminLTE/_Layout.cshtml";
+    int i = 1;
 }
-<h3>@ViewData["Title"] View</h3>
+<h3>@ViewData["Title"]</h3>
+
+@if (Model == null)
+{
+    <div id="loading">Loading...</div>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Reference</th>
+                <th>Information</th>
+                <th>From</th>
+            </tr>
+        </thead>
+        @foreach (var item in Model)
+        {
+            <tbody>
+                <tr>
+                    <td>@i</td>
+                    <td><a asp-controller="References" asp-action="Edit" asp-route-id="@item.Id" class="nav-link">@item.Reference</a></td>
+                    <td>@item.Description</td>
+                    <td>@item.ReferenceIsFrom</td>
+                </tr>
+            </tbody>
+            i++;
+        }
+
+    </table>
+}
+<br />
+<br />

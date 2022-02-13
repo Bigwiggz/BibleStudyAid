@@ -36,6 +36,7 @@ BEGIN
     Reference=ISNULL(@Reference,Reference), 
 	FKTableIdandName=ISNULL(@FKTableIdandName,FKTableIdandName),
     [Description]=ISNULL(@Description,[Description]),
+    DateUpdated=GETUTCDATE(),
     IsDeleted=ISNULL(@IsDeleted,IsDeleted)
 	WHERE Id=@Id;
     END 
