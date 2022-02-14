@@ -25,7 +25,7 @@ CREATE PROCEDURE [dbo].[spUpdatePersonalStudyProjects]
     @PersonalStudyQuestionAssignment NVARCHAR(1000) , 
     @DateFinished DATETIME2 NULL, 
     @BaseScripture NVARCHAR(1000) NULL,
-    @IsDeleted BIT
+    @IsDeleted BIT NULL,
 
 AS
 BEGIN 

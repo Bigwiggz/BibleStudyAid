@@ -65,6 +65,7 @@
     <Folder Include="dbo\Stored Procedures\Transactional" />
     <Folder Include="dbo\Types" />
     <Folder Include="dbo\Stored Procedures\ChildTableSP" />
+    <Folder Include="dbo\Stored Procedures\ParentTableSP" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\tblTalks.sql" />
@@ -154,6 +155,12 @@
     <Build Include="dbo\Stored Procedures\spGetAllSpiritualGems.sql" />
     <Build Include="dbo\Stored Procedures\spGetByIdSpiritualGems.sql" />
     <Build Include="dbo\Stored Procedures\spUpdateSpiritualGems.sql" />
+    <Build Include="dbo\Stored Procedures\ParentTableSP\spGetByFKDailyBibleReading.sql" />
+    <Build Include="dbo\Stored Procedures\ParentTableSP\spGetByFKFamilyStudyProjects.sql" />
+    <Build Include="dbo\Stored Procedures\ParentTableSP\spGetByFKMeetingAssemblies.sql" />
+    <Build Include="dbo\Stored Procedures\ParentTableSP\spGetByFKPersonalStudyProjects.sql" />
+    <Build Include="dbo\Stored Procedures\ParentTableSP\spGetByFKSpiritualGems.sql" />
+    <Build Include="dbo\Stored Procedures\ParentTableSP\spGetByFKTalks.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="DBBibleStudyAid.refactorlog" />

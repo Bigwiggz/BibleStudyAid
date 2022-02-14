@@ -7,6 +7,7 @@
     [PersonalStudyQuestionAssignment] NVARCHAR(1000) NOT NULL, 
     [DateFinished] DATETIME2 NULL, 
     [BaseScripture] NVARCHAR(1000) NULL,
+    [PKIdtblPersonalStudyProjects] AS CONCAT(CONVERT(VARCHAR,[Id]),'tblPersonalStudyProjects'),
     [IsDeleted] BIT NOT NULL DEFAULT 0
     
 )
