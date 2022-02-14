@@ -83,16 +83,100 @@ namespace BibleStudyDataAccessLibrary.DataAccess
             List<TagsToOtherTables> tagsToOtherTables,
             List<Documents> documents)
         {
-            //TODO: Finish Implementation
-            throw new NotImplementedException();
+            //TODO: Make this SOLID/DRY/BETTER
+            try
+            {
+                _sql.StartTransaction("DBBibleStudyAid");
+
+                //Step 1: Save to Master Table dailyBibleReading
+                //Step 2: Get the Id from the Master Table
+                string tblId = await _sql.LoadSingleObjectInTransaction<string, dynamic>("spCreatePersonalStudyProjects", personalStudyProjects);
+
+
+                //Step 3: add Id to references and add in all references
+                foreach (var item in references)
+                {
+                    item.FKTableIdandName = tblId;
+                    _sql.SaveDataInTransaction("spCreateReferences", item);
+                }
+
+                //Step 4: add Id to all scriptures and add in all scriptures
+                foreach (var item in scriptures)
+                {
+                    item.FKTableIdandName = tblId;
+                    _sql.SaveDataInTransaction("spCreateScriptures", item);
+                }
+
+                //Step 5: add Id to all tagsToOtherTables
+                foreach (var item in tagsToOtherTables)
+                {
+                    item.FKTableIdandName = tblId;
+                    _sql.SaveDataInTransaction("spCreateTagsToOtherTables", item);
+                }
+
+                //Step6 add in all documents
+                foreach (var item in documents)
+                {
+                    item.FKTableIdandName = tblId;
+                    _sql.SaveDataInTransaction("spCreateDocuments", item);
+                }
+
+
+                _sql.CommitTransaction();
+            }
+            catch
+            {
+                _logger.LogInformation("Insert Transaction of {PersonalStudyProjectsId} could not be inserted.", personalStudyProjects.Id);
+                _sql.RollBackTransaction();
+                throw;
+            }
         }
 
         public async Task<PersonalStudyProjectsAll> GetParentAndAllChildrenRecordsAsync(int Id)
         {
             //TODO: Finish Implementation
-            throw new NotImplementedException();
+            try
+            {
+                _sql.StartTransaction("DBBibleStudyAid");
+
+                //Step 1) Get Parent Record Info
+                var personalStudyProjects = await _sql.LoadSingleObjectInTransaction<DailyBibleReading, dynamic>("spGetByIdPersonalStudyProjects", new { Id });
+                //Step 2) Get Parent Key for all children tables
+                var PKId = personalStudyProjects.PKIdtblPersonalStudyProjects;
+                //Step 3) Get all children table info: References
+                var referencesList = await _sql.LoadDataInTransaction<References, dynamic>("spGetByFKReferences", new { FK = PKId });
+                //Step 4) Get all children table info: Scriptures
+                var scripturesList = await _sql.LoadDataInTransaction<Scriptures, dynamic>("spGetByFKScriptures", new { FK = PKId });
+                //Step 5) Get all children table info: Tags to Other Tables
+                var tagsList = await _sql.LoadDataInTransaction<Tags, dynamic>("spGetByFKTags", new { FK = PKId });
+                //Step 6) Get all children documents
+                var documentsList = await _sql.LoadDataInTransaction<Documents, dynamic>("spGetByFKDocuments", new { FK = PKId });
+
+                _sql.CommitTransaction();
+
+                //Build return model
+                PersonalStudyProjectsAll personalStudyProjectsAll = new PersonalStudyProjectsAll
+                {
+                    Id=personalStudyProjects.Id,
+                    CreatedDate=personalStudyProjects.CreatedDate,
+                    PersonalStudyTitle=personalStudyProjects.PersonalStudyTitle,
+                    PersonalStudyQuestionAssignment=personalStudyProjects.PersonalStudyQuestionAssignment,
+                    DateFinished=personalStudyProjects.DateFinished,
+                    BaseScripture=personalStudyProjects.BaseScripture,
+                    PKIdtblPersonalStudyProjects=personalStudyProjects.PKIdtblPersonalStudyProjects,
+                    IsDeleted=personalStudyProjects.IsDeleted,
+                    ReferencesList = referencesList,
+                    ScripturesList = scripturesList,
+                    Tags = tagsList,
+                    DocumentsList= documentsList
+                };
+                return personalStudyProjectsAll;
+            }
+            catch
+            {
+                _logger.LogInformation("Unable to retreive full record of Personal Study Project Record of {Id}.", Id);
+                throw;
+            }
         }
-
-
     }
 }
