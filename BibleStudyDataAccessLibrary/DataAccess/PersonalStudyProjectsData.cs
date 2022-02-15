@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace BibleStudyDataAccessLibrary.DataAccess
 {
-    public class PersonalStudyProjectsData : IGenericInterface<PersonalStudyProjects>
+    public class PersonalStudyProjectsData : IGenericInterface<PersonalStudyProjects>, IPersonalStudyProjectsData
     {
         private readonly IConfiguration _config;
         private readonly ISqlDataAccess _sql;
@@ -57,12 +57,12 @@ namespace BibleStudyDataAccessLibrary.DataAccess
         {
             var p = new
             {
-                PersonalStudyTitle=obj.PersonalStudyTitle,
-                PersonalStudyDescription=obj.PersonalStudyDescription,  
+                PersonalStudyTitle = obj.PersonalStudyTitle,
+                PersonalStudyDescription = obj.PersonalStudyDescription,
                 PersonalStudyQuestionAssignment = obj.PersonalStudyQuestionAssignment,
-                DateFinished=obj.DateFinished,
-                BaseScripture=obj.BaseScripture,
-                IsDeleted=obj.IsDeleted
+                DateFinished = obj.DateFinished,
+                BaseScripture = obj.BaseScripture,
+                IsDeleted = obj.IsDeleted
 
             };
 
@@ -134,13 +134,12 @@ namespace BibleStudyDataAccessLibrary.DataAccess
 
         public async Task<PersonalStudyProjectsAll> GetParentAndAllChildrenRecordsAsync(int Id)
         {
-            //TODO: Finish Implementation
             try
             {
                 _sql.StartTransaction("DBBibleStudyAid");
 
                 //Step 1) Get Parent Record Info
-                var personalStudyProjects = await _sql.LoadSingleObjectInTransaction<DailyBibleReading, dynamic>("spGetByIdPersonalStudyProjects", new { Id });
+                var personalStudyProjects = await _sql.LoadSingleObjectInTransaction<PersonalStudyProjects, dynamic>("spGetByIdPersonalStudyProjects", new { Id });
                 //Step 2) Get Parent Key for all children tables
                 var PKId = personalStudyProjects.PKIdtblPersonalStudyProjects;
                 //Step 3) Get all children table info: References
@@ -157,24 +156,70 @@ namespace BibleStudyDataAccessLibrary.DataAccess
                 //Build return model
                 PersonalStudyProjectsAll personalStudyProjectsAll = new PersonalStudyProjectsAll
                 {
-                    Id=personalStudyProjects.Id,
-                    CreatedDate=personalStudyProjects.CreatedDate,
-                    PersonalStudyTitle=personalStudyProjects.PersonalStudyTitle,
-                    PersonalStudyQuestionAssignment=personalStudyProjects.PersonalStudyQuestionAssignment,
-                    DateFinished=personalStudyProjects.DateFinished,
-                    BaseScripture=personalStudyProjects.BaseScripture,
-                    PKIdtblPersonalStudyProjects=personalStudyProjects.PKIdtblPersonalStudyProjects,
-                    IsDeleted=personalStudyProjects.IsDeleted,
+                    Id = personalStudyProjects.Id,
+                    CreatedDate = personalStudyProjects.CreatedDate,
+                    PersonalStudyTitle = personalStudyProjects.PersonalStudyTitle,
+                    PersonalStudyQuestionAssignment = personalStudyProjects.PersonalStudyQuestionAssignment,
+                    DateFinished = personalStudyProjects.DateFinished,
+                    BaseScripture = personalStudyProjects.BaseScripture,
+                    PKIdtblPersonalStudyProjects = personalStudyProjects.PKIdtblPersonalStudyProjects,
+                    IsDeleted = personalStudyProjects.IsDeleted,
                     ReferencesList = referencesList,
                     ScripturesList = scripturesList,
                     Tags = tagsList,
-                    DocumentsList= documentsList
+                    DocumentsList = documentsList
                 };
                 return personalStudyProjectsAll;
             }
             catch
             {
                 _logger.LogInformation("Unable to retreive full record of Personal Study Project Record of {Id}.", Id);
+                throw;
+            }
+        }
+
+        public async Task<PersonalStudyProjectsAll> GetParentAndAllChildrenRecordsByForeignKeyAsync(string FK)
+        {
+            try
+            {
+                _sql.StartTransaction("DBBibleStudyAid");
+
+                //Step 1) Get Parent Record Info
+                var personalStudyProjects = await _sql.LoadSingleObjectInTransaction<PersonalStudyProjects, dynamic>("spGetByFKPersonalStudyProjects", new { PKIdtblPersonalStudyProjects = FK });
+                //Step 2) Get Parent Key for all children tables
+                var PKId = personalStudyProjects.PKIdtblPersonalStudyProjects;
+                //Step 3) Get all children table info: References
+                var referencesList = await _sql.LoadDataInTransaction<References, dynamic>("spGetByFKReferences", new { FK = PKId });
+                //Step 4) Get all children table info: Scriptures
+                var scripturesList = await _sql.LoadDataInTransaction<Scriptures, dynamic>("spGetByFKScriptures", new { FK = PKId });
+                //Step 5) Get all children table info: Tags to Other Tables
+                var tagsList = await _sql.LoadDataInTransaction<Tags, dynamic>("spGetByFKTags", new { FK = PKId });
+                //Step 6) Get all children documents
+                var documentsList = await _sql.LoadDataInTransaction<Documents, dynamic>("spGetByFKDocuments", new { FK = PKId });
+
+                _sql.CommitTransaction();
+
+                //Build return model
+                PersonalStudyProjectsAll personalStudyProjectsAll = new PersonalStudyProjectsAll
+                {
+                    Id = personalStudyProjects.Id,
+                    CreatedDate = personalStudyProjects.CreatedDate,
+                    PersonalStudyTitle = personalStudyProjects.PersonalStudyTitle,
+                    PersonalStudyQuestionAssignment = personalStudyProjects.PersonalStudyQuestionAssignment,
+                    DateFinished = personalStudyProjects.DateFinished,
+                    BaseScripture = personalStudyProjects.BaseScripture,
+                    PKIdtblPersonalStudyProjects = personalStudyProjects.PKIdtblPersonalStudyProjects,
+                    IsDeleted = personalStudyProjects.IsDeleted,
+                    ReferencesList = referencesList,
+                    ScripturesList = scripturesList,
+                    Tags = tagsList,
+                    DocumentsList = documentsList
+                };
+                return personalStudyProjectsAll;
+            }
+            catch
+            {
+                _logger.LogInformation("Unable to retreive full record of Personal Study Project Record of {ForeignKey}.", FK);
                 throw;
             }
         }

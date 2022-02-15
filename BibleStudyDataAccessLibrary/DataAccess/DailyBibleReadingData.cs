@@ -183,5 +183,49 @@ namespace BibleStudyDataAccessLibrary.DataAccess
                 throw;
             }
         }
+
+        public async Task<DailyBibleReadingAll> GetParentAndAllChildrenRecordsByForeignKeyAsync(string FK)
+        {
+            try
+            {
+                _sql.StartTransaction("DBBibleStudyAid");
+
+                //Step 1) Get Parent Record Info
+                var dailyBibleReading = await _sql.LoadSingleObjectInTransaction<DailyBibleReading, dynamic>("spGetByFKDailyBibleReading", new { PKIdtblDailyBibleReadings=FK });
+                //Step 2) Get Parent Key for all children tables
+                var PKId = dailyBibleReading.PKIdtblDailyBibleReadings;
+                //Step 3) Get all children table info: References
+                var referencesList = await _sql.LoadDataInTransaction<References, dynamic>("spGetByFKReferences", new { FK = PKId });
+                //Step 4) Get all children table info: Scriptures
+                var scripturesList = await _sql.LoadDataInTransaction<Scriptures, dynamic>("spGetByFKScriptures", new { FK = PKId });
+                //Step 5) Get all children table info: Tags to Other Tables
+                var tagsList = await _sql.LoadDataInTransaction<Tags, dynamic>("spGetByFKTags", new { FK = PKId });
+                //Step 6) Get all children documents
+                var documentsList = await _sql.LoadDataInTransaction<Documents, dynamic>("spGetByFKDocuments", new { FK = PKId });
+
+                _sql.CommitTransaction();
+
+                //Build return model
+                DailyBibleReadingAll dailyBibleReadingAll = new DailyBibleReadingAll
+                {
+                    Id = dailyBibleReading.Id,
+                    DateRead = dailyBibleReading.DateRead,
+                    LessonLearnedDescription = dailyBibleReading.LessonLearnedDescription,
+                    PKIdtblDailyBibleReadings = dailyBibleReading.PKIdtblDailyBibleReadings,
+                    ScriptureStartPoint = dailyBibleReading.ScriptureStartPoint,
+                    ScriptureEndPoint = dailyBibleReading.ScriptureEndPoint,
+                    ReferencesList = referencesList,
+                    ScripturesList = scripturesList,
+                    Tags = tagsList,
+                    DocumentsList = documentsList
+                };
+                return dailyBibleReadingAll;
+            }
+            catch
+            {
+                _logger.LogInformation("Unable to retreive full record of Daily Bible Reading Record of {ForeignKey}.", FK);
+                throw;
+            }
+        }
     }
 }

@@ -14,5 +14,7 @@ namespace BibleStudyDataAccessLibrary.DataAccess
         Task<object> InsertAsync(Talks obj);
         void SaveFullParentAndAllChildrenRecords(Talks talks, List<References> references, List<Scriptures> scriptures, List<TagsToOtherTables> tagsToOtherTables, List<Documents> documents);
         Task<object> UpdateAsync(Talks obj);
+
+        Task<TalksAll> GetParentAndAllChildrenRecordsByForeignKeyAsync(string FK);
     }
 }

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using BibleStudyAidMVC.ViewModels;
 using BibleStudyDataAccessLibrary.DataAccess;
+using BibleStudyDataAccessLibrary.HelperMethods;
 using BibleStudyDataAccessLibrary.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -12,12 +13,14 @@ namespace BibleStudyAidMVC.Controllers
         private readonly IReferencesData _referencesData;
         private readonly ILogger<References> _logger;
         private readonly IMapper _mapper;
+        private readonly IDataAccessHelperMethods _dataAccessHelperMethods;
 
-        public ReferencesController(IReferencesData referencesData,ILogger<References> logger, IMapper mapper)
+        public ReferencesController(IReferencesData referencesData,ILogger<References> logger, IMapper mapper, IDataAccessHelperMethods dataAccessHelperMethods)
         {
             _referencesData = referencesData;
             _logger = logger;
             _mapper = mapper;
+            _dataAccessHelperMethods = dataAccessHelperMethods;
         }
 
         // GET: ReferencesController
@@ -66,14 +69,31 @@ namespace BibleStudyAidMVC.Controllers
         // POST: ReferencesController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind("Id,Reference,Description,FKTableIdandName,IsDeleted")] ReferencesViewModel viewModel)
+        public async Task<IActionResult> Edit([Bind("Id,Reference,Description,FKTableIdandName,IsDeleted")] ReferencesViewModel viewModel)
         {
             try
             {
 
                 var model=_mapper.Map<References>(viewModel);
-                var id=_referencesData.UpdateAsync(model);  
+                var id= await _referencesData.UpdateAsync(model);  
                 return Redirect(HttpContext.Request.Headers["Referer"]); 
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        //POST: ReferenceController/PrimaryProjectEdit
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> PrimaryProjectEdit(string foreignKey)
+        {
+            try
+            {
+                 var topLevelTableSelectormodel=await _dataAccessHelperMethods.SelectTopLevelTableGivenForiegnKey(foreignKey);
+                //TODO: Finish this with Id
+                return RedirectToAction("Edit", topLevelTableSelectormodel.ControllerName, topLevelTableSelectormodel.ReturnedObject);
             }
             catch
             {

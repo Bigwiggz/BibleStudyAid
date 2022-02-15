@@ -175,5 +175,51 @@ namespace BibleStudyDataAccessLibrary.DataAccess
                 throw;
             }
         }
+
+        public async Task<TalksAll> GetParentAndAllChildrenRecordsByForeignKeyAsync(string FK)
+        {
+            try
+            {
+                _sql.StartTransaction("DBBibleStudyAid");
+
+                //Step 1) Get Parent Record Info
+                var talks = await _sql.LoadSingleObjectInTransaction<Talks, dynamic>("spGetByFKTalks", new { PKIdtblTalks=FK });
+                //Step 2) Get Parent Key for all children tables
+                var PKId = talks.PKIdtblTalks;
+                //Step 3) Get all children table info: References
+                var referencesList = await _sql.LoadDataInTransaction<References, dynamic>("spGetByFKReferences", new { FK = PKId });
+                //Step 4) Get all children table info: Scriptures
+                var scripturesList = await _sql.LoadDataInTransaction<Scriptures, dynamic>("spGetByFKScriptures", new { FK = PKId });
+                //Step 5) Get all children table info: Tags to Other Tables
+                var tagsList = await _sql.LoadDataInTransaction<Tags, dynamic>("spGetByFKTags", new { FK = PKId });
+                //Step 6) Get all children documents
+                var documentsList = await _sql.LoadDataInTransaction<Documents, dynamic>("spGetByFKDocuments", new { FK = PKId });
+
+                _sql.CommitTransaction();
+
+                //Build return model
+                TalksAll talksAll = new TalksAll
+                {
+                    Id = talks.Id,
+                    TalkTitle = talks.TalkTitle,
+                    CreatedDate = talks.CreatedDate,
+                    DateGiven = talks.DateGiven,
+                    Description = talks.Description,
+                    ThemeScripture = talks.ThemeScripture,
+                    PKIdtblTalks = talks.PKIdtblTalks,
+                    IsDeleted = talks.IsDeleted,
+                    ReferencesList = referencesList,
+                    ScripturesList = scripturesList,
+                    Tags = tagsList,
+                    DocumentsList = documentsList
+                };
+                return talksAll;
+            }
+            catch
+            {
+                _logger.LogInformation("Unable to retreive full record of Talks Record of {ForeignKey}.", FK);
+                throw;
+            }
+        }
     }
 }

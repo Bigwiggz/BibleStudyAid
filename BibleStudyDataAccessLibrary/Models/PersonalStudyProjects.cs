@@ -7,7 +7,7 @@ namespace BibleStudyDataAccessLibrary.Models
     public class PersonalStudyProjects
     {
         public int Id { get; set; }
-        public DateTime CreatedDate { get;}
+        public DateTime CreatedDate { get; set; }
         public string PersonalStudyTitle { get; set; }
         public string PersonalStudyDescription { get; set; }
         public string PersonalStudyQuestionAssignment { get; set; }

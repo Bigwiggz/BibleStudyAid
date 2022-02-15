@@ -184,5 +184,50 @@ namespace BibleStudyDataAccessLibrary.DataAccess
                 throw;
             }
         }
+
+        public async Task<FamilyStudyProjectsAll> GetParentAndAllChildrenRecordsByForeignKeyAsync(string FK)
+        {
+            try
+            {
+                _sql.StartTransaction("DBBibleStudyAid");
+
+                //Step 1) Get Parent Record Info
+                var familyStudyProjects = await _sql.LoadSingleObjectInTransaction<FamilyStudyProjects, dynamic>("spGetByFKFamilyStudyProjects", new { PKIdtblFamilyStudyProjects=FK });
+                //Step 2) Get Parent Key for all children tables
+                var PKId = familyStudyProjects.PKIdtblFamilyStudyProjects;
+                //Step 3) Get all children table info: References
+                var referencesList = await _sql.LoadDataInTransaction<References, dynamic>("spGetByFKReferences", new { FK = PKId });
+                //Step 4) Get all children table info: Scriptures
+                var scripturesList = await _sql.LoadDataInTransaction<Scriptures, dynamic>("spGetByFKScriptures", new { FK = PKId });
+                //Step 5) Get all children table info: Tags to Other Tables
+                var tagsList = await _sql.LoadDataInTransaction<Tags, dynamic>("spGetByFKTags", new { FK = PKId });
+                //Step 6) Get all children documents
+                var documentsList = await _sql.LoadDataInTransaction<Documents, dynamic>("spGetByFKDocuments", new { FK = PKId });
+
+                _sql.CommitTransaction();
+
+                //Build return model
+                FamilyStudyProjectsAll familyStudyProjectsAll = new FamilyStudyProjectsAll
+                {
+                    Id = familyStudyProjects.Id,
+                    DateCreated = familyStudyProjects.DateCreated,
+                    DateWhenCreated = familyStudyProjects.DateWhenCreated,
+                    FamilyStudyTitle = familyStudyProjects.FamilyStudyTitle,
+                    FamilyStudyDescription = familyStudyProjects.FamilyStudyDescription,
+                    FamilyStudyFindings = familyStudyProjects.FamilyStudyFindings,
+                    PKIdtblFamilyStudyProjects = familyStudyProjects.PKIdtblFamilyStudyProjects,
+                    ReferencesList = referencesList,
+                    ScripturesList = scripturesList,
+                    Tags = tagsList,
+                    DocumentsList = documentsList
+                };
+                return familyStudyProjectsAll;
+            }
+            catch
+            {
+                _logger.LogInformation("Unable to retreive full record of Family Study Prjects Record of {ForeignKey}.", FK);
+                throw;
+            }
+        }
     }
 }

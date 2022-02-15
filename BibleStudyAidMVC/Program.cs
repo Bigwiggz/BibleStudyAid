@@ -11,6 +11,7 @@ using System.Configuration;
 using AutoMapper;
 using BibleStudyAidMVC.Services.HttpServices;
 using BibleStudyAidMVC.Extensions;
+using BibleStudyDataAccessLibrary.HelperMethods;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -36,6 +37,8 @@ builder.Services.AddTransient<ITagsData, TagsData>();
 builder.Services.AddTransient<ITagsToOtherTablesData,TagsToOtherTablesData>();
 builder.Services.AddTransient<ISpiritualGemsData, SpiritualGemsData>();
 builder.Services.AddTransient<ITalksData, TalksData>();
+builder.Services.AddTransient<IPersonalStudyProjectsData,PersonalStudyProjectsData>();
+builder.Services.AddTransient<IDataAccessHelperMethods, DataAccessHelperMethods>();
 
 //Add HttpClient
 string uri = builder.Configuration.GetValue<string>("BibleTextAPI");

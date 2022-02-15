@@ -19,6 +19,8 @@ namespace BibleStudyDataAccessLibrary.DataAccess
             List<TagsToOtherTables> tagsToOtherTables,
             List<Documents> documents);
         
-            Task<FamilyStudyProjectsAll> GetParentAndAllChildrenRecordsAsync(int Id);
+        Task<FamilyStudyProjectsAll> GetParentAndAllChildrenRecordsAsync(int Id);
+
+        Task<FamilyStudyProjectsAll> GetParentAndAllChildrenRecordsByForeignKeyAsync(string FK);
     }
 }
