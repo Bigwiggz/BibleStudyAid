@@ -91,9 +91,8 @@ namespace BibleStudyAidMVC.Controllers
         {
             try
             {
-                 var topLevelTableSelectormodel=await _dataAccessHelperMethods.SelectTopLevelTableGivenForiegnKey(foreignKey);
-                //TODO: Finish this with Id
-                return RedirectToAction("Edit", topLevelTableSelectormodel.ControllerName, topLevelTableSelectormodel.ReturnedObject);
+                var topLevelTableSelectorModel=await _dataAccessHelperMethods.SelectTopLevelTableGivenForiegnKey(foreignKey);
+                return RedirectToAction("Edit", topLevelTableSelectorModel.ControllerName, topLevelTableSelectorModel.Id);
             }
             catch
             {
