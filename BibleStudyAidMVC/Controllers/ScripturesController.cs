@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
+using BibleStudyAidMVC.Services.HttpServices;
 using BibleStudyDataAccessLibrary.DataAccess;
+using BibleStudyDataAccessLibrary.HelperMethods;
 using BibleStudyDataAccessLibrary.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -11,12 +13,16 @@ namespace BibleStudyAidMVC.Controllers
         private readonly IScripturesData _scripturesData;
         private readonly ILogger<Scriptures> _logger;
         private readonly IMapper _mapper;
+        private readonly IHttpRequestService _httpRequestService;
+        private readonly IDataAccessHelperMethods _dataAccessHelperMethods;
 
-        public ScripturesController(IScripturesData scripturesData,ILogger<Scriptures> logger, IMapper mapper)
+        public ScripturesController(IScripturesData scripturesData,ILogger<Scriptures> logger, IMapper mapper, IHttpRequestService httpRequestService, IDataAccessHelperMethods dataAccessHelperMethods)
         {
             _scripturesData = scripturesData;
             _logger = logger;
             _mapper = mapper;
+            _httpRequestService = httpRequestService;
+            _dataAccessHelperMethods = dataAccessHelperMethods;
         }
         // GET: ScripturesController
         public ActionResult Index()
@@ -98,6 +104,22 @@ namespace BibleStudyAidMVC.Controllers
             try
             {
                 return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        //POST PrimaryProjectEdit to Primary Table
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> PrimaryProjectEdit(string foreignKey)
+        {
+            try
+            {
+                var topLevelTableSelectorModel = await _dataAccessHelperMethods.SelectTopLevelTableGivenForiegnKey(foreignKey);
+                return RedirectToAction("Edit", topLevelTableSelectorModel.ControllerName, topLevelTableSelectorModel.Id);
             }
             catch
             {

@@ -154,4 +154,18 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="MeetingType" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="c895ca1e-5a94-4ef5-8c62-e03b97251811" ChangeDateTime="02/18/2022 10:47:15">
+    <Property Name="ElementName" Value="[dbo].[tblWorldMap].[Geometry]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[tblWorldMap]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Geography" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="5369daec-7821-41f0-9c18-bad97fd96c76" ChangeDateTime="02/18/2022 10:56:45">
+    <Property Name="ElementName" Value="[dbo].[tblWorldMap].[Identifier]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[tblWorldMap]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Guid" />
+  </Operation>
 </Operations>

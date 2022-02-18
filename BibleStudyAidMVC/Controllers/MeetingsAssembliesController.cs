@@ -98,21 +98,5 @@ namespace BibleStudyAidMVC.Controllers
                 return View();
             }
         }
-
-        //POST PrimaryProjectEdit to Primary Table
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> PrimaryProjectEdit(string foreignKey)
-        {
-            try
-            {
-                var topLevelTableSelectorModel = await _dataAccessHelperMethods.SelectTopLevelTableGivenForiegnKey(foreignKey);
-                return RedirectToAction("Edit", topLevelTableSelectorModel.ControllerName, topLevelTableSelectorModel.Id);
-            }
-            catch
-            {
-                return View();
-            }
-        }
     }
 }

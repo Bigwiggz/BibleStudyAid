@@ -1,10 +1,17 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using BibleStudyDataAccessLibrary.HelperMethods;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BibleStudyAidMVC.Controllers
 {
     public class WorldMapController : Controller
     {
+        private readonly IDataAccessHelperMethods _dataAccessHelperMethods;
+
+        public WorldMapController(IDataAccessHelperMethods dataAccessHelperMethods)
+        {
+            _dataAccessHelperMethods = dataAccessHelperMethods;
+        }
         // GET: WorldMapController
         public ActionResult Index()
         {
@@ -73,6 +80,22 @@ namespace BibleStudyAidMVC.Controllers
             try
             {
                 return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        //POST PrimaryProjectEdit to Primary Table
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> PrimaryProjectEdit(string foreignKey)
+        {
+            try
+            {
+                var topLevelTableSelectorModel = await _dataAccessHelperMethods.SelectTopLevelTableGivenForiegnKey(foreignKey);
+                return RedirectToAction("Edit", topLevelTableSelectorModel.ControllerName, topLevelTableSelectorModel.Id);
             }
             catch
             {
