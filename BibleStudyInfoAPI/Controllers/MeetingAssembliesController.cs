@@ -14,61 +14,61 @@ namespace BibleStudyInfoAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class MeetingAssembliesController : ControllerBase
+    public class MeetingsAssembliesController : ControllerBase
     {
-        private readonly IMeetingAssembliesData _MeetingAssembliesData;
+        private readonly IMeetingsAssembliesData _MeetingsAssembliesData;
         private readonly IMapper _mapper;
 
-        public MeetingAssembliesController(IMeetingAssembliesData MeetingAssembliesData, IMapper mapper)
+        public MeetingsAssembliesController(IMeetingsAssembliesData MeetingsAssembliesData, IMapper mapper)
         {
-            _MeetingAssembliesData = MeetingAssembliesData;
+            _MeetingsAssembliesData = MeetingsAssembliesData;
             _mapper = mapper;
         }
 
-        // GET: api/<MeetingAssembliesController>
+        // GET: api/<MeetingsAssembliesController>
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<MeetingAssembliesDTO>>> GetAllAsync()
+        public async Task<ActionResult<IEnumerable<MeetingsAssembliesDTO>>> GetAllAsync()
         {
-            var MeetingAssembliesList = await _MeetingAssembliesData.GetAllAsync();
+            var MeetingsAssembliesList = await _MeetingsAssembliesData.GetAllAsync();
 
-            var DTOList = _mapper.Map<IEnumerable<MeetingAssembliesDTO>>(MeetingAssembliesList);
+            var DTOList = _mapper.Map<IEnumerable<MeetingsAssembliesDTO>>(MeetingsAssembliesList);
 
             return Ok(DTOList);
         }
 
-        // GET api/<MeetingAssembliesController>/5
+        // GET api/<MeetingsAssembliesController>/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<MeetingAssembliesDTO>> GetByIdAsync(int id)
+        public async Task<ActionResult<MeetingsAssembliesDTO>> GetByIdAsync(int id)
         {
-            var MeetingAssemblies = await _MeetingAssembliesData.GetByIdAsync(id);
-            var dTOModel = _mapper.Map<MeetingAssembliesDTO>(MeetingAssemblies);
+            var MeetingsAssemblies = await _MeetingsAssembliesData.GetByIdAsync(id);
+            var dTOModel = _mapper.Map<MeetingsAssembliesDTO>(MeetingsAssemblies);
 
             return Ok(dTOModel);
         }
 
-        // POST api/<MeetingAssembliesController>
+        // POST api/<MeetingsAssembliesController>
         [HttpPost]
-        public void Post([FromBody] MeetingAssembliesDTO MeetingAssembliesDTO)
+        public void Post([FromBody] MeetingsAssembliesDTO MeetingsAssembliesDTO)
         {
-            var Model = _mapper.Map<MeetingAssemblies>(MeetingAssembliesDTO);
+            var Model = _mapper.Map<MeetingsAssemblies>(MeetingsAssembliesDTO);
 
-            _MeetingAssembliesData.InsertAsync(Model);
+            _MeetingsAssembliesData.InsertAsync(Model);
         }
 
-        // PUT api/<MeetingAssembliesController>/5
+        // PUT api/<MeetingsAssembliesController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] MeetingAssembliesDTO MeetingAssembliesDTO)
+        public void Put(int id, [FromBody] MeetingsAssembliesDTO MeetingsAssembliesDTO)
         {
-            MeetingAssembliesDTO.Id = id;
-            var Model = _mapper.Map<MeetingAssemblies>(MeetingAssembliesDTO);
-            _MeetingAssembliesData.UpdateAsync(Model);
+            MeetingsAssembliesDTO.Id = id;
+            var Model = _mapper.Map<MeetingsAssemblies>(MeetingsAssembliesDTO);
+            _MeetingsAssembliesData.UpdateAsync(Model);
         }
 
-        // DELETE api/<MeetingAssembliesController>/5
+        // DELETE api/<MeetingsAssembliesController>/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-            _MeetingAssembliesData.DeleteAsync(id);
+            _MeetingsAssembliesData.DeleteAsync(id);
         }
     }
 }

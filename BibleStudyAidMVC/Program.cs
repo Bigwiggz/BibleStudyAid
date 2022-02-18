@@ -32,7 +32,7 @@ builder.Services.AddTransient<IFamilyStudyProjectsData, FamilyStudyProjectsData>
 builder.Services.AddTransient<IDocumentsData, DocumentsData>();
 builder.Services.AddTransient<IReferencesData, ReferencesData>();
 builder.Services.AddTransient<IScripturesData, ScripturesData>();
-builder.Services.AddTransient<IMeetingAssembliesData, MeetingAssembliesData>();
+builder.Services.AddTransient<IMeetingsAssembliesData, MeetingsAssembliesData>();
 builder.Services.AddTransient<ITagsData, TagsData>();
 builder.Services.AddTransient<ITagsToOtherTablesData,TagsToOtherTablesData>();
 builder.Services.AddTransient<ISpiritualGemsData, SpiritualGemsData>();

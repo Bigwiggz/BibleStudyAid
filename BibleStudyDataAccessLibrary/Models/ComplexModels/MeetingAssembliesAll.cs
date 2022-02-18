@@ -4,7 +4,7 @@ using System.Text;
 
 namespace BibleStudyDataAccessLibrary.Models.ComplexModels
 {
-    public class MeetingAssembliesAll:MeetingAssemblies
+    public class MeetingsAssembliesAll:MeetingsAssemblies
     {
         public List<References> ReferencesList { get; set; }
         public List<Scriptures> ScripturesList { get; set; }

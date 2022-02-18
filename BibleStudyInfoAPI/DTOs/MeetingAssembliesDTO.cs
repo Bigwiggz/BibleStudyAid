@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace BibleStudyInfoAPI.DTOs
 {
-    public class MeetingAssembliesDTO
+    public class MeetingsAssembliesDTO
     {
         public int Id { get; set; }
         public DateTime CreatedDate { get; set; }
@@ -14,6 +14,6 @@ namespace BibleStudyInfoAPI.DTOs
         public int MeetingTypeId { get; set; }
         public string Scripture { get; set; }
         public string LessonLearnedDescription { get; set; }
-        public string PKldtblMeetingAssemblies { get; set; }
+        public string PKldtblMeetingsAssemblies { get; set; }
     }
 }

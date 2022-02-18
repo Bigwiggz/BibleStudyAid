@@ -1,10 +1,10 @@
 ﻿/*
 ----------------------------------------------------------------------------
--- Object Name: dbo.spDeleteMeetingAssemblies
+-- Object Name: dbo.spDeleteMeetingsAssemblies
 -- Project: DBBibleStudyAid
 -- Business Process: N/A
 -- Purpose: C Operations on a record into a table
--- Detailed Description: Insert a record into the dbo.MeetingAssemblies table
+-- Detailed Description: Insert a record into the dbo.MeetingsAssemblies table
 -- Database: DBBibleStudyAid
 -- Dependent Objects: None
 -- Called By: Application
@@ -18,11 +18,11 @@
 --
 */
 
-CREATE PROCEDURE [dbo].[spDeleteMeetingAssemblies]
+CREATE PROCEDURE [dbo].[spDeleteMeetingsAssemblies]
     @Id INT
 AS
 BEGIN
     SET NOCOUNT ON;
-	DELETE FROM [dbo].[tblMeetingAssemblies] 
+	DELETE FROM [dbo].[tblMeetingsAssemblies] 
     WHERE Id= @Id
 END

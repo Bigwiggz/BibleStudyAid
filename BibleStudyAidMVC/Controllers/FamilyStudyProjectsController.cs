@@ -2,6 +2,7 @@
 using BibleStudyAidMVC.Services.HttpServices;
 using BibleStudyAidMVC.ViewModels;
 using BibleStudyDataAccessLibrary.DataAccess;
+using BibleStudyDataAccessLibrary.HelperMethods;
 using BibleStudyDataAccessLibrary.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

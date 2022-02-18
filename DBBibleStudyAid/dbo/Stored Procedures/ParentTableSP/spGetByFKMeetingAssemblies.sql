@@ -1,6 +1,6 @@
 ﻿/*
 ----------------------------------------------------------------------------
--- Object Name: dbo.spGetByFKMeetingAssemblies
+-- Object Name: dbo.spGetByFKMeetingsAssemblies
 -- Project: DBBibleStudyAid
 -- Business Process: N/A
 -- Purpose: C Operations on a record into a table
@@ -18,13 +18,13 @@
 --
 */
 
-CREATE PROCEDURE [dbo].[spGetByFKMeetingAssemblies]
+CREATE PROCEDURE [dbo].[spGetByFKMeetingsAssemblies]
 	@FK NVARCHAR(1000)
 AS
 BEGIN
     SET NOCOUNT ON;
 	SELECT *
-	FROM [dbo].[tblMeetingAssemblies]
-	WHERE PKIdtblMeetingAssemblies=@FK
-	AND [tblMeetingAssemblies].[IsDeleted]='FALSE';
+	FROM [dbo].[tblMeetingsAssemblies]
+	WHERE PKIdtblMeetingsAssemblies=@FK
+	AND [tblMeetingsAssemblies].[IsDeleted]='FALSE';
 END

@@ -1,10 +1,10 @@
 ﻿/*
 ----------------------------------------------------------------------------
--- Object Name: dbo.spGetByIdMeetingAssemblies
+-- Object Name: dbo.spGetByIdMeetingsAssemblies
 -- Project: DBBibleStudyAid
 -- Business Process: N/A
 -- Purpose: C Operations on a record into a table
--- Detailed Description: Insert a record into the dbo.MeetingAssemblies table
+-- Detailed Description: Insert a record into the dbo.MeetingsAssemblies table
 -- Database: DBBibleStudyAid
 -- Dependent Objects: None
 -- Called By: Application
@@ -18,12 +18,12 @@
 --
 */
 
-CREATE PROCEDURE [dbo].[spGetByIdMeetingAssemblies]
+CREATE PROCEDURE [dbo].[spGetByIdMeetingsAssemblies]
 	@Id INT
 AS
 BEGIN
     SET NOCOUNT ON;
 	SELECT *
-	FROM [dbo].[tblMeetingAssemblies]
+	FROM [dbo].[tblMeetingsAssemblies]
 	WHERE Id=@Id;
 END

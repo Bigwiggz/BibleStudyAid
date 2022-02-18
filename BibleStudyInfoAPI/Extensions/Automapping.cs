@@ -37,9 +37,9 @@ namespace BibleStudyInfoAPI.Extensions
             CreateMap<Scriptures, ScripturesDTO>();
             CreateMap<ScripturesDTO, Scriptures>();
 
-            //Create MeetingAssemblies Mapping
-            CreateMap<MeetingAssemblies, MeetingAssembliesDTO>();
-            CreateMap<MeetingAssembliesDTO, MeetingAssemblies>();
+            //Create MeetingsAssemblies Mapping
+            CreateMap<MeetingsAssemblies, MeetingsAssembliesDTO>();
+            CreateMap<MeetingsAssembliesDTO, MeetingsAssemblies>();
         }
     }
 }

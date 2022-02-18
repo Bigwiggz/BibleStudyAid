@@ -2,6 +2,7 @@
 using BibleStudyAidMVC.Extensions;
 using BibleStudyAidMVC.ViewModels;
 using BibleStudyDataAccessLibrary.DataAccess;
+using BibleStudyDataAccessLibrary.HelperMethods;
 using BibleStudyDataAccessLibrary.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -15,13 +16,15 @@ namespace BibleStudyAidMVC.Controllers
         private readonly ILogger<Documents> _logger;
         private readonly IMapper _mapper;
         private readonly IDocumentMigration _documentMigration;
+        private readonly IDataAccessHelperMethods _dataAccessHelperMethods;
 
-        public DocumentsController(IDocumentsData documentsData, ILogger<Documents> logger, IMapper mapper, IDocumentMigration documentMigration)
+        public DocumentsController(IDocumentsData documentsData, ILogger<Documents> logger, IMapper mapper, IDocumentMigration documentMigration, IDataAccessHelperMethods dataAccessHelperMethods)
         {
             _documentsData = documentsData;
             _logger = logger;
             _mapper = mapper;
             _documentMigration = documentMigration;
+            _dataAccessHelperMethods = dataAccessHelperMethods;
         }
         // GET DOWNLOAD CONTROLLER
         [HttpPost]
@@ -161,6 +164,22 @@ namespace BibleStudyAidMVC.Controllers
             var fileResult = await _documentMigration.DownloadMultipleFilesAsync(documentsList);
             return File(fileResult.fileBytes, fileResult.contentType, fileResult.fileName);
             
+        }
+
+        //POST PrimaryProjectEdit to Primary Table
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> PrimaryProjectEdit(string foreignKey)
+        {
+            try
+            {
+                var topLevelTableSelectorModel = await _dataAccessHelperMethods.SelectTopLevelTableGivenForiegnKey(foreignKey);
+                return RedirectToAction("Edit", topLevelTableSelectorModel.ControllerName, topLevelTableSelectorModel.Id);
+            }
+            catch
+            {
+                return View();
+            }
         }
     }
 }

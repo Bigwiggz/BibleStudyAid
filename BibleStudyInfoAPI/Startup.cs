@@ -39,7 +39,7 @@ namespace BibleStudyInfoAPI
             services.AddTransient<IDocumentsData, DocumentsData>();
             services.AddTransient<IReferencesData, ReferencesData>();
             services.AddTransient<IScripturesData, ScripturesData>();
-            services.AddTransient<IMeetingAssembliesData, MeetingAssembliesData>();
+            services.AddTransient<IMeetingsAssembliesData, MeetingsAssembliesData>();
 
             //Enable CORS
             services.AddCors(o => o.AddDefaultPolicy(

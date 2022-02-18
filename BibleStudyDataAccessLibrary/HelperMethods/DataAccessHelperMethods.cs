@@ -12,20 +12,20 @@ namespace BibleStudyDataAccessLibrary.HelperMethods
     {
         private readonly IDailyBibleReadingData _dailyBibleReadingData;
         private readonly IFamilyStudyProjectsData _familyStudyProjectsData;
-        private readonly IMeetingAssembliesData _meetingAssembliesData;
+        private readonly IMeetingsAssembliesData _MeetingsAssembliesData;
         private readonly IPersonalStudyProjectsData _personalStudyProjectsData;
         private readonly ITalksData _talksData;
 
         public DataAccessHelperMethods(
             IDailyBibleReadingData dailyBibleReadingData,
             IFamilyStudyProjectsData familyStudyProjectsData,
-            IMeetingAssembliesData meetingAssembliesData,
+            IMeetingsAssembliesData MeetingsAssembliesData,
             IPersonalStudyProjectsData personalStudyProjectsData,
             ITalksData talksData)
         {
             _dailyBibleReadingData = dailyBibleReadingData;
             _familyStudyProjectsData = familyStudyProjectsData;
-            _meetingAssembliesData = meetingAssembliesData;
+            _MeetingsAssembliesData = MeetingsAssembliesData;
             _personalStudyProjectsData = personalStudyProjectsData;
             _talksData = talksData;
         }
@@ -50,12 +50,12 @@ namespace BibleStudyDataAccessLibrary.HelperMethods
                 dataObject= familyStudyProjects;
                 Id = familyStudyProjects.Id;
             }
-            else if (foreignKey.Contains("MeetingAssemblies"))
+            else if (foreignKey.Contains("MeetingsAssemblies"))
             {
-                controllerName = "MeetingAssemblies";
-                MeetingAssemblies meetingAssemblies = await _meetingAssembliesData.GetParentAndAllChildrenRecordsByForeignKeyAsync(foreignKey);
-                dataObject = meetingAssemblies;
-                Id = meetingAssemblies.Id;
+                controllerName = "MeetingsAssemblies";
+                MeetingsAssemblies MeetingsAssemblies = await _MeetingsAssembliesData.GetParentAndAllChildrenRecordsByForeignKeyAsync(foreignKey);
+                dataObject = MeetingsAssemblies;
+                Id = MeetingsAssemblies.Id;
             }
             else if (foreignKey.Contains("PersonalStudyProjects"))
             {

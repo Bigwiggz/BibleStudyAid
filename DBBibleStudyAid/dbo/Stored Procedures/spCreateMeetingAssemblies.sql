@@ -1,10 +1,10 @@
 ﻿/*
 ----------------------------------------------------------------------------
--- Object Name: dbo.spCreateMeetingAssemblies
+-- Object Name: dbo.spCreateMeetingsAssemblies
 -- Project: DBBibleStudyAid
 -- Business Process: N/A
 -- Purpose: C Operations on a record into a table
--- Detailed Description: Insert a record into the dbo.MeetingAssemblies table
+-- Detailed Description: Insert a record into the dbo.MeetingsAssemblies table
 -- Database: DBBibleStudyAid
 -- Dependent Objects: None
 -- Called By: Application
@@ -18,7 +18,7 @@
 --
 */
 
-CREATE PROCEDURE [dbo].[spCreateMeetingAssemblies]
+CREATE PROCEDURE [dbo].[spCreateMeetingsAssemblies]
     @DateOfMeeting DATETIME2, 
     @PartTitle NCHAR(100), 
     @MeetingType INT, 
@@ -28,7 +28,7 @@ CREATE PROCEDURE [dbo].[spCreateMeetingAssemblies]
 AS
 BEGIN
     SET NOCOUNT ON;
-	INSERT INTO [dbo].[tblMeetingAssemblies] 
+	INSERT INTO [dbo].[tblMeetingsAssemblies] 
     ([DateOfMeeting], 
     [PartTitle], 
     [MeetingType], 
