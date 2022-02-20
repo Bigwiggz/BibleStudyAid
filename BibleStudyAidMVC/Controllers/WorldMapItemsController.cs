@@ -1,15 +1,24 @@
-﻿using BibleStudyDataAccessLibrary.HelperMethods;
+﻿using AutoMapper;
+using BibleStudyDataAccessLibrary.DataAccess;
+using BibleStudyDataAccessLibrary.HelperMethods;
+using BibleStudyDataAccessLibrary.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BibleStudyAidMVC.Controllers
 {
-    public class WorldMapController : Controller
+    public class WorldMapItemsController : Controller
     {
+        private readonly IWorldMapItemData _worldMapItemsData;
+        private readonly ILogger<WorldMapItem> _logger;
+        private readonly IMapper _mapper;
         private readonly IDataAccessHelperMethods _dataAccessHelperMethods;
 
-        public WorldMapController(IDataAccessHelperMethods dataAccessHelperMethods)
+        public WorldMapItemsController(IWorldMapItemData worldMapItemsData, ILogger<WorldMapItem> logger, IMapper mapper, IDataAccessHelperMethods dataAccessHelperMethods)
         {
+            _worldMapItemsData = worldMapItemsData;
+            _logger = logger;
+            _mapper = mapper;
             _dataAccessHelperMethods = dataAccessHelperMethods;
         }
         // GET: WorldMapController

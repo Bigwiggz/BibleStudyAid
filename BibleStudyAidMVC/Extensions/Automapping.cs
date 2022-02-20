@@ -67,6 +67,10 @@ namespace BibleStudyAidMVC.Extensions
             CreateMap<PersonalStudyProjects, PersonalStudyProjectsViewModel>();
             CreateMap<PersonalStudyProjectsViewModel, PersonalStudyProjects>(); 
 
+            //WorldMapData
+            CreateMap<WorldMapItem, WorldMapItemViewModel>();
+            CreateMap<WorldMapItemViewModel, WorldMapItem>();
+
         }
     }
 }

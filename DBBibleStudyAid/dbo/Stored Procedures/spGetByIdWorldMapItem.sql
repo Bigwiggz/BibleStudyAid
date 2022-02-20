@@ -1,6 +1,6 @@
 ﻿/*
 ----------------------------------------------------------------------------
--- Object Name: dbo.spCreateWorldMapItem
+-- Object Name: dbo.spGetByIdWorldMapItem
 -- Project: DBBibleStudyAid
 -- Business Process: N/A
 -- Purpose: C Operations on a record into a table
@@ -18,20 +18,13 @@
 --
 */
 
-CREATE PROCEDURE [dbo].[spCreateWorldMapItem]
+CREATE PROCEDURE [dbo].[spGetByIdWorldMapItem]
+	@Id INT
 
-    @Description NVARCHAR(1000) NULL, 
-    @FKTableIdandName NVARCHAR(1000) NOT NULL, 
-    @Title NVARCHAR(255) NOT NULL, 
-    @GeographyData GEOGRAPHY NOT NULL, 
-    @Color NVARCHAR(7) NOT NULL,  
-    @GeographyType NCHAR(255) NOT NULL,
-    @IsDeleted BIT
 AS
 BEGIN
     SET NOCOUNT ON;
-	INSERT INTO [dbo].[tblWorldMapItem] ([Description],[FKTableIdandName],[Title],[GeographyData],[Color],[GeographyType],[IsDeleted])
-	VALUES (@Description,@FKTableIdandName,@Title,@GeographyData,@Color,@GeographyType,@IsDeleted);
-    DECLARE @Id INT;
-    SET @Id=SCOPE_IDENTITY();
+	SELECT *
+	FROM [dbo].[tblWorldMapItem]
+	WHERE Id=@Id;
 END

@@ -19,7 +19,7 @@
 */
 
 CREATE PROCEDURE [dbo].[spCreateDocuments]
-    @FKTableIdandName NVARCHAR(1000) NOT NULL, 
+    @FKTableIdandName NVARCHAR(1000), 
     @ContentType NVARCHAR(255),
     @ContentDisposition NVARCHAR(255),
     @ContentSize BIGINT,

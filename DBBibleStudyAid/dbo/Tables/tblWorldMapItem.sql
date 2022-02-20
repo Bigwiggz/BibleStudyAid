@@ -2,6 +2,7 @@
 (
 	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
     [FKTableIdandName] NVARCHAR(1000) NOT NULL,
+    [UpdatedDate] DATETIME2 NOT NULL DEFAULT getutcdate(), 
     [Description] NVARCHAR(1000) NULL, 
     [Title] NVARCHAR(255) NOT NULL, 
     [GeographyData] [sys].[geography] NOT NULL, 

@@ -23,14 +23,19 @@
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.2" />
     <PackageReference Include="MimeKit" Version="3.1.1" />
+    <PackageReference Include="NetTopologySuite.IO.GeoJSON4STJ" Version="2.1.1" />
+    <PackageReference Include="ProjNet" Version="2.0.0" />
     <PackageReference Include="SharpZipLib" Version="1.3.3" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BibleStudyAidBusinessLogic\BibleStudyAidBusinessLogic.csproj" />
     <ProjectReference Include="..\BibleStudyDataAccessLibrary\BibleStudyDataAccessLibrary.csproj" />
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="wwwroot\css\Views\WorldMapItems\" />
+    <Folder Include="wwwroot\js\Views\WorldMapItems\" />
     <Folder Include="wwwroot\SavedDocuments\" />
   </ItemGroup>
 

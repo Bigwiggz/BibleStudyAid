@@ -12,6 +12,9 @@ using AutoMapper;
 using BibleStudyAidMVC.Services.HttpServices;
 using BibleStudyAidMVC.Extensions;
 using BibleStudyDataAccessLibrary.HelperMethods;
+using Dapper;
+using BibleStudyDataAccessLibrary.Extensions;
+using NetTopologySuite.Geometries;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -39,6 +42,16 @@ builder.Services.AddTransient<ISpiritualGemsData, SpiritualGemsData>();
 builder.Services.AddTransient<ITalksData, TalksData>();
 builder.Services.AddTransient<IPersonalStudyProjectsData,PersonalStudyProjectsData>();
 builder.Services.AddTransient<IDataAccessHelperMethods, DataAccessHelperMethods>();
+builder.Services.AddTransient<IWorldMapItemData, WorldMapItemData>();   
+
+//Add Geometry mapping to Sql Server
+SqlMapper.AddTypeHandler(new GeometryHandler<Geometry>(geography: true));
+
+//
+builder.Services.AddControllersWithViews().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.Converters.Add(new NetTopologySuite.IO.Converters.GeoJsonConverterFactory());
+});
 
 //Add HttpClient
 string uri = builder.Configuration.GetValue<string>("BibleTextAPI");
