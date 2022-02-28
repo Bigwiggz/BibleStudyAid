@@ -42,7 +42,7 @@ namespace BibleStudyAidMVC.Controllers
         // POST: WorldMapController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create([FromBody]string geoJSON)
         {
             try
             {

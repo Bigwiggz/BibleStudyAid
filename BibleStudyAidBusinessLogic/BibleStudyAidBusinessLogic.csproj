@@ -14,4 +14,12 @@
     <PackageReference Include="ProjNet" Version="2.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\BibleStudyDataAccessLibrary\BibleStudyDataAccessLibrary.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Extensions\" />
+  </ItemGroup>
+
 </Project>

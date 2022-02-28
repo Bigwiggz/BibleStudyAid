@@ -1,5 +1,78 @@
-﻿@{
+﻿@model string
+
+@section Styles{
+    <!--Page Stylesheet-->
+    <link rel="stylesheet" href="~/css/Views/WorldMapItems/IndexWorldItem.css"/>
+    <!--Leaflet Stylesheet-->
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />
+    <!--Leaflet Geoman-->
+    <link rel="stylesheet" href="https://unpkg.com/@@geoman-io/leaflet-geoman-free@latest/dist/leaflet-geoman.css" />  
+}
+
+@{
     ViewData["Title"]="World Map";
     Layout = "~/Views/Shared/AdminLTE/_Layout.cshtml";
+	string testData=@"{""type"":""FeatureCollection"",""features"":[{""type"":""Feature"",""geometry"":{""type"":""Point"",""coordinates"":[-71.064544,42.28787]},""properties"":{""Id"":1,""Color"":""#f432ac"",""Description"":""Standard Description"",""Title"":""Generic Title"",""GeographyType"":""Point"",""FKTableIdandName"":""MyId"",""UpdatedDate"":""2022-02-25T00:47:13.5087497Z"",""Guid"":""e6227618-7998-437d-803e-f5f9b5048814"",""IsDeleted"":false}},{""type"":""Feature"",""geometry"":{""type"":""Point"",""coordinates"":[-84.21112,33.7888]},""properties"":{""Id"":1,""Color"":""#432acb"",""Description"":""Standard Description 2"",""Title"":""Generic Title 2"",""GeographyType"":""Point"",""FKTableIdandName"":""MyId 2"",""UpdatedDate"":""2022-02-25T00:47:13.6112327Z"",""Guid"":""9936db3b-4c2e-4b46-bf63-2cff6e1158ea"",""IsDeleted"":false}}]}";
 }
-<h3>@ViewData["Title"] View</h3>
+<h3>@ViewData["Title"]</h3>
+<div>
+    <!--Map-->
+	<h3 class="text-center">Example Map</h3>
+    <div id="map"></div>
+</div>
+<div>
+    <a class="btn btn-primary" data-toggle="modal" data-target="#createNewWorldMapItemModal">Create New Map Item</a>
+</div>
+
+@*REFERENCES MODAL*@
+
+<!--Edit Reference Modal-->
+<div class="modal fade" id="createNewWorldMapItemModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ModalLabel">Enter Map Details</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+            <input type="hidden" id="referenceFKId" name="FKTableIdandName" value="testValue"/>
+            <div class="form-group">
+                <label for="color">Choose Color</label>
+                <input type="color" id="colorModal" name="color" value="#000000">
+            </div>
+            <div class="form-group">
+                <label for="color">Title</label>
+                <input type="text" id="titleModal" name="color" value="">
+            </div>
+            <div class="form-group">
+                <label for="referenceDescription">Description</label>
+                <textarea type="text" class="form-control" name="Description" id="descriptionModal"></textarea>
+            </div>
+            <div class="form-group">
+                <button type="button" id="CreateModalPropertiesSaveModalButton" class="btn btn-secondary" data-dismiss="modal">Save</button>
+            </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+@*Scripts Section*@
+@section Scripts{
+	<!--WorldMapItemsString-->
+	<script>
+        let getWorldMapItemsList ="Test Info";
+    </script>
+    <!-- Leaflet JavaScript Package -->
+	<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+   <!--Leaflet Provider Tiles-->
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-providers/1.13.0/leaflet-providers.min.js"></script>
+   <!--Leaflet Drawing Library Geoman js (Must be included right after leaflet-->
+   <script src="https://unpkg.com/@@geoman-io/leaflet-geoman-free@latest/dist/leaflet-geoman.min.js"></script> 	
+   <!--Leaflet JavaSript File-->
+   <script src="~/js/Views/WorldMapItems/IndexWorldMapItem.js"></script>
+}

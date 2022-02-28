@@ -1,4 +1,5 @@
 ﻿using BibleStudyAidBusinessLogic.Models;
+using BibleStudyDataAccessLibrary.Models;
 using NetTopologySuite.Features;
 using NetTopologySuite.Geometries;
 using NetTopologySuite.IO;
@@ -79,14 +80,14 @@ namespace BibleStudyAidBusinessLogic.GeoFunctions
         }
 
         //GeoJSON to Model
-        public List<WorldMapItemBL> CreateModelsFromGeoJSON(string geoJSONObject)
+        public List<WorldMapItem> CreateModelsFromGeoJSON(string geoJSONObject)
         {
             GeoJsonReader reader = new GeoJsonReader();
             FeatureCollection collection = reader.Read<FeatureCollection>(geoJSONObject);
-            List<WorldMapItemBL> worldMapItems = new List<WorldMapItemBL>();
+            List<WorldMapItem> worldMapItems = new List<WorldMapItem>();
             foreach(var feature in collection)
             {
-                WorldMapItemBL item = new WorldMapItemBL();
+                WorldMapItem item = new WorldMapItem();
                 item.GeographyData = feature.Geometry;
                 item.GeographyType = feature.Geometry.GeometryType;
                 item.Id = Convert.ToInt32(feature.Attributes.GetOptionalValue("Id"));

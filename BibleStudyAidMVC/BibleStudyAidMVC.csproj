@@ -34,8 +34,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\css\Views\WorldMapItems\" />
-    <Folder Include="wwwroot\js\Views\WorldMapItems\" />
     <Folder Include="wwwroot\SavedDocuments\" />
   </ItemGroup>
 
