@@ -10,6 +10,7 @@ using System.Text;
 namespace BibleStudyDataAccessLibrary.Extensions
 {
     //Call .Serialize() method on any read action for Sql Server Geography
+    //TODO: Try naming all fields and the geography field with GeographyData.Serialize() AS GeographyData
     public class GeometryHandler<T> : SqlMapper.TypeHandler<T>
     where T : Geometry
     {

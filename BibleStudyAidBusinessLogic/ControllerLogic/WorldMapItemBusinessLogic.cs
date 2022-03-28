@@ -27,7 +27,7 @@ namespace BibleStudyAidBusinessLogic.ControllerLogic
         }
 
         //Index Get
-        public async Task<string> IndexBusinessLogic()
+        public async Task<string> GetAllIndexBusinessLogic()
         {
             var allWorldMapsModelsList = await _worldMapItemsData.GetAllAsync();
 
@@ -75,7 +75,5 @@ namespace BibleStudyAidBusinessLogic.ControllerLogic
                 var Id = await _worldMapItemsData.DeleteAsync(model.Id);
             }
         }
-
-        //
     }
 }

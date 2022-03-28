@@ -6,7 +6,7 @@ namespace BibleStudyAidBusinessLogic.ControllerLogic
         Task CreatePostBusinessLogic(string geoJSON);
         Task DeletePostBusinessLogic(string geoJSON);
         Task EditPostBusinessLogic(string geoJSON);
-        Task<string> IndexBusinessLogic();
+        Task<string> GetAllIndexBusinessLogic();
         Task PrimaryProjectEditBusinessLogic(string foreignKey);
     }
 }

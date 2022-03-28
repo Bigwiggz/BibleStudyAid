@@ -279,7 +279,7 @@ function generateGeoJson() {
 	fg.addLayer(layers.slice(-1)[0]);
 	/*
 	layers.forEach(function (layer) {
-		fg.addLayer(layer);
+		fg.addLayer(layer
 	});
 	*/
 	var data = fg.toGeoJSON();

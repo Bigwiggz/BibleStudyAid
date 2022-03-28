@@ -26,9 +26,11 @@ namespace BibleStudyAidMVC.Controllers
             _dataAccessHelperMethods = dataAccessHelperMethods;
         }
         // GET: WorldMapController
-        public ActionResult Index()
+        [HttpGet]
+        public async Task<IActionResult> IndexAsync()
         {
-            return View();
+            var allWorldMapData = await _worldMapItemBusinessLogic.GetAllIndexBusinessLogic();
+            return View(allWorldMapData);
         }
 
         // GET: WorldMapController/Details/5
