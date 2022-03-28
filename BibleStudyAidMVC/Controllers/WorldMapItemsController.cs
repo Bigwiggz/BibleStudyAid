@@ -30,7 +30,7 @@ namespace BibleStudyAidMVC.Controllers
         public async Task<IActionResult> IndexAsync()
         {
             var allWorldMapData = await _worldMapItemBusinessLogic.GetAllIndexBusinessLogic();
-            return View(allWorldMapData);
+            return View("Index",allWorldMapData);
         }
 
         // GET: WorldMapController/Details/5

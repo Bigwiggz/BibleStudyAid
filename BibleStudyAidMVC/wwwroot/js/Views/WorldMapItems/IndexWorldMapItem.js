@@ -13,7 +13,7 @@ let map = L.map('map');//.setView([33.996166, -81.031456], 13);
 //Create Global Variables
 ///////////////////////////////////////////
 //Load Information
-let importedWorldMapItemsList = JSON.parse('{"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[-71.064544,42.28787]},"properties":{"Id":1,"Color":"#f432ac","Description":"Standard Description","Title":"Generic Title","GeographyType":"Point","FKTableIdandName":"MyId","UpdatedDate":"2022-02-25T00:47:13.5087497Z","Guid":"e6227618-7998-437d-803e-f5f9b5048814","IsDeleted":false}},{"type":"Feature","geometry":{"type":"Point","coordinates":[-84.21112,33.7888]},"properties":{"Id":1,"Color":"#432acb","Description":"Standard Description 2","Title":"Generic Title 2","GeographyType":"Point","FKTableIdandName":"MyId 2","UpdatedDate":"2022-02-25T00:47:13.6112327Z","Guid":"9936db3b-4c2e-4b46-bf63-2cff6e1158ea","IsDeleted":false}}]}');
+let importedWorldMapItemsList = getWorldMapItemsList;
 
 
 //Used to display variables
@@ -172,9 +172,6 @@ function LoadItemInformation(properties) {
 ///////////////////////////////////////////
 //Add Leaflet Drawing Controls 
 ///////////////////////////////////////////
-
-
-
 
 map.pm.addControls({
 	position: 'topleft',

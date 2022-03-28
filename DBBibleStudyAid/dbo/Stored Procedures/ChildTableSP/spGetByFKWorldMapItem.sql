@@ -23,8 +23,20 @@ CREATE PROCEDURE [dbo].[spGetByFKWorldMapItem]
 AS
 BEGIN
     SET NOCOUNT ON;
-	SELECT *
+	SELECT     
+    [Id],               
+    [FKTableIdandName], 
+    [UpdatedDate],      
+    [Description],      
+    [Title],          
+    GeographyData.Serialize() AS GeographyData,   
+    [Color],            
+    [Guid],            
+    [GeographyType],    
+    [IsDeleted] 
 	FROM [dbo].[tblWorldMapItem]
 	WHERE FKTableIdandName=@FK
 	AND [tblWorldMapItem].[IsDeleted]='FALSE';
 END
+
+    
