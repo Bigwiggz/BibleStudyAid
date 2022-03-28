@@ -64,7 +64,7 @@ namespace BibleStudyDataAccessLibrary.DataAccess
                 Description = obj.Description,
                 GeographyType=obj.GeographyType,
                 GeographyData=obj.GeographyData,
-                Guid=obj.Guid,
+                //Guid=obj.Guid,
                 Title=obj.Title,
                 IsDeleted = obj.IsDeleted
             };

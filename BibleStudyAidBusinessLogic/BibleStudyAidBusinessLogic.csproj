@@ -18,8 +18,4 @@
     <ProjectReference Include="..\BibleStudyDataAccessLibrary\BibleStudyDataAccessLibrary.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Extensions\" />
-  </ItemGroup>
-
 </Project>

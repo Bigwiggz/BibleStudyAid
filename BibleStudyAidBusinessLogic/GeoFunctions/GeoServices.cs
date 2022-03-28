@@ -4,6 +4,7 @@ using NetTopologySuite.Features;
 using NetTopologySuite.Geometries;
 using NetTopologySuite.IO;
 using Newtonsoft.Json;
+using NetTopologySuite.Algorithm;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -14,7 +15,7 @@ using System.Text.Json;
 
 namespace BibleStudyAidBusinessLogic.GeoFunctions
 {
-    public class GeoServices
+    public class GeoServices : IGeoServices
     {
         //Create Net Topology Suite Geometry
         public Geometry CreateGeometryFromWKT(string wkt)
@@ -79,35 +80,46 @@ namespace BibleStudyAidBusinessLogic.GeoFunctions
             return geometry.IsValid;
         }
 
+        //Reverse Geometry if needed
+        public Geometry CheckFixCoordinateOrder(Geometry geometry)
+        {
+            if (geometry.GeometryType.ToUpper() == "POLYGON" && !Orientation.IsCCW(geometry.Coordinates))
+            {
+               return geometry.Reverse();
+            }
+            else
+            {
+                return geometry;
+            }
+        }
+
         //GeoJSON to Model
         public List<WorldMapItem> CreateModelsFromGeoJSON(string geoJSONObject)
         {
             GeoJsonReader reader = new GeoJsonReader();
             FeatureCollection collection = reader.Read<FeatureCollection>(geoJSONObject);
             List<WorldMapItem> worldMapItems = new List<WorldMapItem>();
-            foreach(var feature in collection)
+            foreach (var feature in collection)
             {
-                WorldMapItem item = new WorldMapItem();
-                item.GeographyData = feature.Geometry;
-                item.GeographyType = feature.Geometry.GeometryType;
-                item.Id = Convert.ToInt32(feature.Attributes.GetOptionalValue("Id"));
-                item.Title = (string)feature.Attributes.GetOptionalValue("Title");
-                item.Color = (string)feature.Attributes.GetOptionalValue("Color");
-                item.IsDeleted = (bool)feature.Attributes.GetOptionalValue("IsDeleted");
-                item.UpdatedDate = (DateTime)feature.Attributes.GetOptionalValue("UpdatedDate");
-                item.FKTableIdandName = (string)feature.Attributes.GetOptionalValue("FKTableIdandName");
-                item.Description = (string)feature.Attributes.GetOptionalValue("DescriptionAttribute");
-                item.Guid = Guid.Parse(feature.Attributes.GetOptionalValue("Guid").ToString());
-
-                var listofFeatureProperties = item.GetType().GetProperties();
-                foreach (var prop in listofFeatureProperties)
+                
+                bool isDeletedValue = false;
+                if (feature.Attributes.GetOptionalValue("isDeleted") is not null)
                 {
-                    if(prop.PropertyType.Name != "Geometry" && prop.PropertyType.Name !="GeographyType")
-                    {
-                        prop.SetValue(feature, feature.Attributes.GetType().GetProperties().Where(p => p.Name == prop.Name).FirstOrDefault().GetValue(feature, null));
-                    }
+                    isDeletedValue = (bool)feature.Attributes.GetOptionalValue("isDeleted");
                 }
+                WorldMapItem item = new WorldMapItem();
+                var checkedGeometry=CheckFixCoordinateOrder(feature.Geometry);
+                item.GeographyData = checkedGeometry;
+                item.GeographyType = feature.Geometry.GeometryType;
+                item.Id = Convert.ToInt32(feature.Attributes.GetOptionalValue("id"));
+                item.Title = (string)feature.Attributes.GetOptionalValue("title") ?? "";
+                item.Color = (string)feature.Attributes.GetOptionalValue("color") ?? "#000000";
+                item.IsDeleted = isDeletedValue;
+                item.FKTableIdandName = (string)feature.Attributes.GetOptionalValue("fKTableIdandName");
+                item.Description = (string)feature.Attributes.GetOptionalValue("description");
+
                 worldMapItems.Add(item);
+                
             };
             return worldMapItems;
         }

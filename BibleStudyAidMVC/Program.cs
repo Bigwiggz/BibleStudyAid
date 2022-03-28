@@ -15,6 +15,8 @@ using BibleStudyDataAccessLibrary.HelperMethods;
 using Dapper;
 using BibleStudyDataAccessLibrary.Extensions;
 using NetTopologySuite.Geometries;
+using BibleStudyAidBusinessLogic.ControllerLogic;
+using BibleStudyAidBusinessLogic.GeoFunctions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -42,7 +44,11 @@ builder.Services.AddTransient<ISpiritualGemsData, SpiritualGemsData>();
 builder.Services.AddTransient<ITalksData, TalksData>();
 builder.Services.AddTransient<IPersonalStudyProjectsData,PersonalStudyProjectsData>();
 builder.Services.AddTransient<IDataAccessHelperMethods, DataAccessHelperMethods>();
-builder.Services.AddTransient<IWorldMapItemData, WorldMapItemData>();   
+builder.Services.AddTransient<IWorldMapItemData, WorldMapItemData>();
+
+//Business Logic
+builder.Services.AddTransient<IWorldMapItemBusinessLogic, WorldMapItemBusinessLogic>();
+builder.Services.AddTransient<IGeoServices, GeoServices>();
 
 //Add Geometry mapping to Sql Server
 SqlMapper.AddTypeHandler(new GeometryHandler<Geometry>(geography: true));

@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using BibleStudyAidBusinessLogic.ControllerLogic;
+using BibleStudyAidMVC.ViewModels;
 using BibleStudyDataAccessLibrary.DataAccess;
 using BibleStudyDataAccessLibrary.HelperMethods;
 using BibleStudyDataAccessLibrary.Models;
@@ -9,13 +11,15 @@ namespace BibleStudyAidMVC.Controllers
 {
     public class WorldMapItemsController : Controller
     {
+        private readonly IWorldMapItemBusinessLogic _worldMapItemBusinessLogic;
         private readonly IWorldMapItemData _worldMapItemsData;
         private readonly ILogger<WorldMapItem> _logger;
         private readonly IMapper _mapper;
         private readonly IDataAccessHelperMethods _dataAccessHelperMethods;
 
-        public WorldMapItemsController(IWorldMapItemData worldMapItemsData, ILogger<WorldMapItem> logger, IMapper mapper, IDataAccessHelperMethods dataAccessHelperMethods)
+        public WorldMapItemsController(IWorldMapItemBusinessLogic worldMapItemBusinessLogic, IWorldMapItemData worldMapItemsData, ILogger<WorldMapItem> logger, IMapper mapper, IDataAccessHelperMethods dataAccessHelperMethods)
         {
+            _worldMapItemBusinessLogic = worldMapItemBusinessLogic;
             _worldMapItemsData = worldMapItemsData;
             _logger = logger;
             _mapper = mapper;
@@ -33,6 +37,7 @@ namespace BibleStudyAidMVC.Controllers
             return View();
         }
 
+        [HttpGet]
         // GET: WorldMapController/Create
         public ActionResult Create()
         {
@@ -42,10 +47,11 @@ namespace BibleStudyAidMVC.Controllers
         // POST: WorldMapController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([FromBody]string geoJSON)
+        public async Task<ActionResult> Create([Bind("GeoJsonString")] WorldMapItemStringViewModel viewModel)
         {
             try
             {
+                await _worldMapItemBusinessLogic.CreatePostBusinessLogic(viewModel.GeoJsonString);
                 return RedirectToAction(nameof(Index));
             }
             catch

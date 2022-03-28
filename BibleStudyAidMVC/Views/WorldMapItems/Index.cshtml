@@ -22,6 +22,10 @@
 </div>
 <div>
     <a class="btn btn-primary" data-toggle="modal" data-target="#createNewWorldMapItemModal">Create New Map Item</a>
+    <form asp-controller="WorldMapItems" asp-action="Create" method="post">
+        <input type="hidden" id="geoJsonString" name="GeoJsonString">
+        <button type="submit" class="btn btn-primary" id="createWorldMapItemButton" disabled>Save Object</button>
+    </form>
 </div>
 
 @*REFERENCES MODAL*@

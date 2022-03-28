@@ -275,15 +275,18 @@ document.getElementById("CreateModalPropertiesSaveModalButton").addEventListener
 function generateGeoJson() {
 	var fg = L.featureGroup();
 	var layers = findLayers(map);
+	//Get last drawn layer
+	fg.addLayer(layers.slice(-1)[0]);
+	/*
 	layers.forEach(function (layer) {
 		fg.addLayer(layer);
 	});
+	*/
 	var data = fg.toGeoJSON();
 	addPropertiesToFeatureGroup(data);
 	console.log(data);
 	console.log(JSON.stringify(data));
-
-	let postBack=postData('/WorldMapItems/Create', data);
+	addgeoJSONStringToFormForSubmission(JSON.stringify(data));
 }
 
 
@@ -300,18 +303,27 @@ function addPropertiesToFeatureGroup(data) {
 	data.features.forEach(x => {
 		x.properties = {
 			color: colorProperty,
-			myName: titleProperty,
+			title: titleProperty,
 			description: DescriptionProperty,
 			fKTableIdandName:FKTableIdandName
 		};
 	})
 }
 
+function addgeoJSONStringToFormForSubmission(data) {
+	//Set geostring attribute
+	document.getElementById("geoJsonString").setAttribute("value", data);
+	//Activate button
+	document.getElementById("createWorldMapItemButton").removeAttribute("disabled");
+
+}
+
 function getModalPropertiesToCreateWorldMapItem() {
 	colorProperty = document.getElementById("colorModal").value;
 	titleProperty = document.getElementById("titleModal").value;
 	DescriptionProperty = document.getElementById("descriptionModal").value;
-	FKTableIdandName = "";
+	FKTableIdandName = "1tblDailyBibleReading";
+	//TODO: Fix this
 }
 
 function clearAllModalPropertiesForWorldMapItem() {

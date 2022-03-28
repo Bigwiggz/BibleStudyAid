@@ -26,7 +26,6 @@ CREATE PROCEDURE [dbo].[spUpdateWorldMapItem]
     @Title NVARCHAR(255), 
     @GeographyData GEOGRAPHY, 
     @Color NVARCHAR(7), 
-    @Guid UNIQUEIDENTIFIER, 
     @GeographyType NCHAR(255), 
     @IsDeleted BIT
 
@@ -43,7 +42,6 @@ BEGIN
     Title=ISNULL(@Title,Title), 
 	GeographyData =ISNULL(@GeographyData ,GeographyData),
     Color=ISNULL(@Color,Color),
-    [Guid]=ISNULL(@Guid,[Guid]),
     GeographyType=ISNULL(@GeographyType,GeographyType),
     IsDeleted=ISNULL(@IsDeleted,IsDeleted)
 	WHERE Id=@Id;

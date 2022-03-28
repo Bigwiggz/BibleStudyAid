@@ -11,37 +11,37 @@ using System.Threading.Tasks;
 
 namespace BibleStudyAidBusinessLogic.ControllerLogic
 {
-    public class WorldMapItemBusinessLogic
+    public class WorldMapItemBusinessLogic : IWorldMapItemBusinessLogic
     {
         private readonly IWorldMapItemData _worldMapItemsData;
         private readonly ILogger<WorldMapItem> _logger;
         private readonly IDataAccessHelperMethods _dataAccessHelperMethods;
-        private readonly GeoServices _geoServices;
+        private readonly IGeoServices _geoServices;
 
-        public WorldMapItemBusinessLogic(IWorldMapItemData worldMapItemsData, ILogger<WorldMapItem> logger, IDataAccessHelperMethods dataAccessHelperMethods, GeoServices geoServices)
+        public WorldMapItemBusinessLogic(IWorldMapItemData worldMapItemsData, ILogger<WorldMapItem> logger, IDataAccessHelperMethods dataAccessHelperMethods, IGeoServices geoServices)
         {
             _worldMapItemsData = worldMapItemsData;
             _logger = logger;
             _dataAccessHelperMethods = dataAccessHelperMethods;
-            _geoServices = new GeoServices();
+            _geoServices = geoServices;
         }
 
         //Index Get
         public async Task<string> IndexBusinessLogic()
         {
-            var allWorldMapsModelsList= await _worldMapItemsData.GetAllAsync();
+            var allWorldMapsModelsList = await _worldMapItemsData.GetAllAsync();
 
-            string allWorldMapGeoJSON= _geoServices.CreateFeatureCollectionGeoJSONFromModel<WorldMapItem>(allWorldMapsModelsList.ToList());  
-            
-            return allWorldMapGeoJSON;  
+            string allWorldMapGeoJSON = _geoServices.CreateFeatureCollectionGeoJSONFromModel<WorldMapItem>(allWorldMapsModelsList.ToList());
+
+            return allWorldMapGeoJSON;
         }
 
         //Create Post
         public async Task CreatePostBusinessLogic(string geoJSON)
         {
-            var createWorldMapModelList= _geoServices.CreateModelsFromGeoJSON(geoJSON);
-            
-            foreach(var model in createWorldMapModelList)
+            var createWorldMapModelList = _geoServices.CreateModelsFromGeoJSON(geoJSON);
+
+            foreach (var model in createWorldMapModelList)
             {
                 var Id = await _worldMapItemsData.InsertAsync(model);
             }
