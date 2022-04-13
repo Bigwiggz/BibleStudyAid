@@ -46,9 +46,11 @@ builder.Services.AddTransient<IPersonalStudyProjectsData,PersonalStudyProjectsDa
 builder.Services.AddTransient<IDataAccessHelperMethods, DataAccessHelperMethods>();
 builder.Services.AddTransient<IWorldMapItemData, WorldMapItemData>();
 
+
 //Business Logic
 builder.Services.AddTransient<IWorldMapItemBusinessLogic, WorldMapItemBusinessLogic>();
 builder.Services.AddTransient<IGeoServices, GeoServices>();
+builder.Services.AddTransient<DashboardLogic>();
 
 //Add Geometry mapping to Sql Server
 SqlMapper.AddTypeHandler(new GeometryHandler<Geometry>(geography: true));

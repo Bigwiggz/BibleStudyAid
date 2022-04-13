@@ -1,7 +1,125 @@
-﻿@{
+﻿@model AllDashboardItemsViewModel
+
+@{
     ViewData["Title"]="Home Page";
     Layout = "~/Views/Shared/AdminLTE/_Layout.cshtml";
 }
+
+<!-- Small Box (Stat cards) -->
+        <h5 class="mb-2 mt-4">Main Tabs</h5>
+        <div class="row">
+          <div class="col-lg-3 col-6">
+            <!-- small card -->
+            <div class="small-box bg-info">
+              <div class="inner">
+                <h3>@Model.DailyBibleReadingList.Count</h3>
+
+                <p>Daily Bible Reading</p>
+              </div>
+              <div class="icon">
+                <i class="fas fa-book"></i>
+              </div>
+              <a asp-controller="DailyBibleReading" asp-action="Index" class="small-box-footer">
+                More info <i class="fas fa-arrow-circle-right"></i>
+              </a>
+            </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-lg-3 col-6">
+            <!-- small card -->
+            <div class="small-box bg-success">
+              <div class="inner">
+                <h3>@Model.SpiritualGemsList.Count</h3>
+
+                <p>Spiritual Gems</p>
+              </div>
+              <div class="icon">
+                <i class="fas fa-gem"></i>
+              </div>
+              <a asp-controller="SpiritualGems" asp-action="Index" class="small-box-footer">
+                More info <i class="fas fa-arrow-circle-right"></i>
+              </a>
+            </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-lg-3 col-6">
+            <!-- small card -->
+            <div class="small-box bg-warning">
+              <div class="inner">
+                <h3>@Model.FamilyStudyProjectsList.Count</h3>
+
+                <p>Family Study Projects</p>
+              </div>
+              <div class="icon">
+                <i class="fas fa-book-reader"></i>
+              </div>
+              <a asp-controller="FamilyStudyProjects" asp-action="Index" class="small-box-footer">
+                More info <i class="fas fa-arrow-circle-right"></i>
+              </a>
+            </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-lg-3 col-6">
+            <!-- small card -->
+            <div class="small-box bg-danger">
+              <div class="inner">
+                <h3>@Model.MeetingsAssembliesList.Count</h3>
+
+                <p>Meetings And Assemblies</p>
+              </div>
+              <div class="icon">
+                <i class="fas fa-users"></i>
+              </div>
+              <a asp-controller="MeetingsAssemblies" asp-action="Index" class="small-box-footer">
+                More info <i class="fas fa-arrow-circle-right"></i>
+              </a>
+            </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-lg-3 col-6">
+          <!-- small card -->
+            <div class="small-box bg-primary">
+              <div class="inner">
+                <h3>@Model.TalksList.Count</h3>
+
+                <p>Talks</p>
+              </div>
+              <div class="icon">
+                <i class="fas fa-map"></i>
+              </div>
+              <a asp-controller="Talks" asp-action="Index" class="small-box-footer">
+                More info <i class="fas fa-arrow-circle-right"></i>
+              </a>
+            </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-lg-3 col-6">
+          <!-- small card -->
+            <div class="small-box bg-light">
+              <div class="inner">
+                <h3>@Model.TagsList.Count</h3>
+
+                <p>Tags</p>
+              </div>
+              <div class="icon">
+                <i class="fas fa-tag"></i>
+              </div>
+              <a asp-controller="Tags" asp-action="Index" class="small-box-footer">
+                More info <i class="fas fa-arrow-circle-right"></i>
+              </a>
+            </div>
+          </div>
+          <!-- ./col -->
+        </div>
+        <!-- /.row -->
+
+<!--Charts-->
+<!--Bar Chart-->
+<div class="ChartJS">
+    <canvas id="projectLineChart" width="1600" height="600">
+        <p>Sorry, The Chart could not load properly.</p>
+    </canvas>
+</div>
 
 <div class="row">
           <div class="col-lg-6">
@@ -61,3 +179,10 @@
           <!-- /.col-md-6 -->
         </div>
         <!-- /.row -->
+
+@section Scripts{
+    <script>
+        let getProjectChartData =@Json.Serialize(@Model);
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+}

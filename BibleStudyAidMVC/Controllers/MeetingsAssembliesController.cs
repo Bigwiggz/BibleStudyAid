@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BibleStudyAidMVC.Services.HttpServices;
+using BibleStudyDataAccessLibrary.DataAccess;
 using BibleStudyDataAccessLibrary.HelperMethods;
 using BibleStudyDataAccessLibrary.Models;
 using Microsoft.AspNetCore.Http;
@@ -10,15 +11,15 @@ namespace BibleStudyAidMVC.Controllers
 {
     public class MeetingsAssembliesController : Controller
     {
-        private readonly MeetingsAssemblies _meetingsAssemblies;
+        private readonly IMeetingsAssembliesData _meetingsAssembliesData;
         private readonly ILogger<MeetingsAssemblies> _logger;
         private readonly IMapper _mapper;
         private readonly IHttpRequestService _httpRequestService;
         private readonly IDataAccessHelperMethods _dataAccessHelperMethods;
 
-        public MeetingsAssembliesController(MeetingsAssemblies meetingsAssemblies, ILogger<MeetingsAssemblies> logger, IMapper mapper, IHttpRequestService httpRequestService, IDataAccessHelperMethods dataAccessHelperMethods)
+        public MeetingsAssembliesController(IMeetingsAssembliesData meetingsAssembliesData, ILogger<MeetingsAssemblies> logger, IMapper mapper, IHttpRequestService httpRequestService, IDataAccessHelperMethods dataAccessHelperMethods)
         {
-            _meetingsAssemblies = meetingsAssemblies;
+            _meetingsAssembliesData = meetingsAssembliesData;
             _logger = logger;
             _mapper = mapper;
             _httpRequestService = httpRequestService;

@@ -1,4 +1,7 @@
-﻿using BibleStudyAidMVC.Models;
+﻿using AutoMapper;
+using BibleStudyAidBusinessLogic.ControllerLogic;
+using BibleStudyAidMVC.Models;
+using BibleStudyAidMVC.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
@@ -9,15 +12,21 @@ namespace BibleStudyAidMVC.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly DashboardLogic _dashboardLogic;
+        private readonly IMapper _mapper;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, DashboardLogic dashboardLogic, IMapper mapper)
         {
             _logger = logger;
+            _dashboardLogic = dashboardLogic;
+            _mapper = mapper;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var allDashboardItems=await _dashboardLogic.LoadDashboardItems();
+            var viewModel = _mapper.Map<AllDashboardItemsViewModel>(allDashboardItems);
+            return View(viewModel);
         }
 
         public IActionResult Privacy()

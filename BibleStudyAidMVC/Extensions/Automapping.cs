@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using BibleStudyAidBusinessLogic.Models;
 using BibleStudyAidMVC.ViewModels;
 using BibleStudyAidMVC.ViewModels.Enums;
 using BibleStudyDataAccessLibrary.Models;
@@ -71,6 +72,9 @@ namespace BibleStudyAidMVC.Extensions
             CreateMap<WorldMapItem, WorldMapItemViewModel>();
             CreateMap<WorldMapItemViewModel, WorldMapItem>();
 
+            //AllDashboardItems
+            CreateMap<AllDashboardItems, AllDashboardItemsViewModel>();
+            CreateMap<AllDashboardItemsViewModel, AllDashboardItems>();
         }
     }
 }
