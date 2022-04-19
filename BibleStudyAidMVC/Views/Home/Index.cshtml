@@ -8,7 +8,7 @@
 <!-- Small Box (Stat cards) -->
         <h5 class="mb-2 mt-4">Main Tabs</h5>
         <div class="row">
-          <div class="col-lg-3 col-6">
+          <div class="col-lg-3 col-6 col-xl-2">
             <!-- small card -->
             <div class="small-box bg-info">
               <div class="inner">
@@ -25,7 +25,7 @@
             </div>
           </div>
           <!-- ./col -->
-          <div class="col-lg-3 col-6">
+          <div class="col-lg-3 col-6 col-xl-2">
             <!-- small card -->
             <div class="small-box bg-success">
               <div class="inner">
@@ -42,7 +42,7 @@
             </div>
           </div>
           <!-- ./col -->
-          <div class="col-lg-3 col-6">
+          <div class="col-lg-3 col-6 col-xl-2">
             <!-- small card -->
             <div class="small-box bg-warning">
               <div class="inner">
@@ -59,7 +59,7 @@
             </div>
           </div>
           <!-- ./col -->
-          <div class="col-lg-3 col-6">
+          <div class="col-lg-3 col-6 col-xl-2">
             <!-- small card -->
             <div class="small-box bg-danger">
               <div class="inner">
@@ -76,7 +76,7 @@
             </div>
           </div>
           <!-- ./col -->
-          <div class="col-lg-3 col-6">
+          <div class="col-lg-3 col-6 col-xl-2">
           <!-- small card -->
             <div class="small-box bg-primary">
               <div class="inner">
@@ -93,7 +93,7 @@
             </div>
           </div>
           <!-- ./col -->
-          <div class="col-lg-3 col-6">
+          <div class="col-lg-3 col-6 col-xl-2">
           <!-- small card -->
             <div class="small-box bg-light">
               <div class="inner">
@@ -113,13 +113,36 @@
         </div>
         <!-- /.row -->
 
-<!--Charts-->
+@*CALENDAR CHART*@
 <!--Bar Chart-->
-<div class="ChartJS">
-    <canvas id="projectLineChart" width="1600" height="600">
-        <p>Sorry, The Chart could not load properly.</p>
-    </canvas>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="m-0">TimeLine</h5>
+            </div>
+            <div class="card-body">
+                <div id="google-charts"></div>
+              </div>
+        </div>
+    </div>
 </div>
+
+@*TABS BAR CHART*@
+<!--Bar Chart-->
+<div class="row">
+    <div class="col-md-12 col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="m-0">Tabs</h5>
+            </div>
+            <div class="card-body">
+                  <div id="tabs-bar-chart"></div>
+              </div>
+        </div>
+    </div>
+</div>
+
 
 <div class="row">
           <div class="col-lg-6">
@@ -184,5 +207,9 @@
     <script>
         let getProjectChartData =@Json.Serialize(@Model);
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!--Google Charts-->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <!--Index.js-->
+    <script src="~/js/Views/Home/Index.js"></script>
+
 }

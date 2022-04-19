@@ -2,139 +2,116 @@
  * Index Home Page
  */
 
-//////////////////////////////////////////
-//ChartJS Project Index Page
-//////////////////////////////////////////
+/////////////////////////////
+//Google Calendar Chart
+/////////////////////////////
 
+//Google Chart Global Variables
+let startDate = new Date(new Date().setFullYear(new Date().getFullYear() - 1));
+let endDate = new Date();
+let googleChartFakeCalendarObjects = [];
+let googleChartCalendarObjects = restructureChartData();
+generateFakeData();
 
-//CPI ChartsJS
-let chartTitle = 'Projects by Date';
+//Initialize Google Calendar
+google.charts.load("current", { packages: ["calendar"] });
+google.charts.setOnLoadCallback(drawCalendarChart);
 
-//---------------------
-//- STACKED BAR CHART -
-//---------------------
+//Function to generate fake Data
+function generateFakeData() {
+    let dateEventObject = {};
 
+    for (var d = startDate; d <= endDate; d.setDate(d.getDate() + 1)) {
+        let randomNumber = Math.floor(Math.random() * 101);
+        //google-charts
+        googleChartFakeCalendarObjects.push([new Date(d), randomNumber]);
+    }
 
-function newDate(days) {
-	return moment().add(days, 'd');
-}
-
-let data={
-	labels: [newDate(-11), newDate(-3), newDate(2), newDate(3), newDate(4), newDate(5), newDate(6)],
-	datasets: [
-		{
-			label: "My First dataset",
-			data: [1, 3, 4, 2, 1, 4, 2],
-			backgroundColor: "rgba(20,255,20,0.5)"
-		},
-		{
-			label: "My Second dataset",
-			data: [4, 2, 3, 1, 2, 3, 2],
-			backgroundColor: "rgba(20,0,255,0.5)"
-		}
-	]
+    return dateEventObject;
 };
 
-var stackedBarChartCanvas = document.getElementById("projectLineChart").getContext('2d');
-var stackedBarChartData = data;
+//
+function restructureChartData() {
+    let calendarObjectsToChart = getProjectChartData.timeEntryProjectsList;
+    //TODO: finish restructuring data for google charts
+    let googleChartArraysList = [];
+    let dateEntryList = [];
+    for (var d = startDate; d <= endDate; d.setDate(d.getDate() + 1)) {
+        //google-charts
+        googleChartArraysList.push([new Date(d), 0]);
+    };
 
-let	stackedBarChartOptions = {
-	responsive: true,
-	maintainAspectRatio: false,
-	scales: {
-		xAxes: [{
-			stacked: true,
-		}],
-		yAxes: [{
-			stacked: true
-		}]
-	},
-	plugins: {
-		title: {
-			display: true,
-			text: chartTitle,
-			font: {
-				size: 20
-			}
-		}
-	}
+    calendarObjectsToChart.forEach(dateExamined => {
+        let dateObject = new Date(dateExamined.dateOfRecord.split("T")[0]);
+
+        if (dateEntryList.includes(dateObject) === true) {
+            let indexOfRecord = dateEntryList.indexOf(dateObject);
+            googleChartArraysList[indexOfRecord][1] += 1;
+        };
+        if (dateEntryList.length == 0 || dateEntryList.includes(dateObject) === false) {
+            let addGoogleChartArray = [dateObject, 1];
+            googleChartArraysList.push(addGoogleChartArray);
+            dateEntryList.push(dateObject);
+        };
+    });
+
+    return googleChartArraysList;
 };
 
-new Chart(stackedBarChartCanvas, {
-	type: 'bar',
-	data: stackedBarChartData,
-	options: stackedBarChartOptions
-});
- 
 
+//Draw Calendar Chart
+function drawCalendarChart() {
+    var dataTable = new google.visualization.DataTable();
+    dataTable.addColumn({ type: 'date', id: 'Date' });
+    dataTable.addColumn({ type: 'number', id: 'Won/Loss' });
+    dataTable.addRows(googleChartCalendarObjects);
 
-/*
-//Get unique record types
-let myRecordTypes = results.map(item => item.recordType)
-	.filter((value, index, self) => self.indexOf(value) === index);
+    var chart = new google.visualization.Calendar(document.getElementById('google-charts'));
 
-let datasets = [];
+    var options = {
+        title: "Daily Bible Reading",
+        height: 350,
+        calendar: {
+            cellColor: {
+                stroke: '#76a7fa',
+                strokeOpacity: 0.5,
+                strokeWidth: 1,
+            }
+        }
+    };
 
-myRecordTypes.forEach(uniqueDataset => {
-	let entryDataset = {};
-	entryDataset.label = uniqueDataset;
-
-	datasets.push(entryDataset);
-});
-*/
-
-
-
-/*
-ShowLineChart(getCPIChartData);
-
-//Line Chart
-
-function ShowLineChart(results) {
-
-	let myRecordType = [];
-	let myDates = [];
-
-	results.sort((a, b) => new Date(a.dateOfRecord) - new Date(b.dateOfRecord));
-
-	for (let i = 0; i < results.length; i++) {
-		myRecordType.push(parseFloat(results[i].recordType));
-		console.log(parseFloat(results[i].recordType));
-		myDates.push(results[i].dateOfRecord.slice(0, 10));
-	}
-
-	let popCanvasName = document.getElementById("lineChart");
-	new Chart("lineChart", {
-		type: 'line',
-		data: {
-			labels: myDates,
-			datasets: [{
-				label: 'CPI Index data',
-				data: myRecordType,
-				backgroundColor: "rgba(0,0,255,1.0)"
-			}]
-		},
-		options: {
-			responsive: true,
-			scales: {
-				yAxes: [{
-					ticks: {
-						beginAtZero: true,
-						min: 0,
-						max: 100
-					}
-				}]
-			},
-			plugins: {
-				title: {
-					display: true,
-					text: chartTitle,
-					font: {
-						size: 20
-					}
-				}
-			}
-		}
-	});
+    chart.draw(dataTable, options);
 }
-*/
+
+/////////////////////////////
+//Google Bar Chart
+/////////////////////////////
+
+google.charts.load('current', { packages: ['corechart', 'bar'] });
+google.charts.setOnLoadCallback(drawMultSeries);
+
+function drawMultSeries() {
+    var data = google.visualization.arrayToDataTable([
+        ['City', '2010 Population', '2000 Population'],
+        ['New York City, NY', 8175000, 8008000],
+        ['Los Angeles, CA', 3792000, 3694000],
+        ['Chicago, IL', 2695000, 2896000],
+        ['Houston, TX', 2099000, 1953000],
+        ['Philadelphia, PA', 1526000, 1517000]
+    ]);
+
+    var options = {
+        title: 'Population of Largest U.S. Cities',
+        chartArea: { width: '50%' },
+        hAxis: {
+            title: 'Total Population',
+            minValue: 0
+        },
+        vAxis: {
+            title: 'City'
+        }
+    };
+
+    var chart = new google.visualization.BarChart(document.getElementById('tabs-bar-chart'));
+    chart.draw(data, options);
+}
