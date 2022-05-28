@@ -8,5 +8,6 @@ namespace BibleStudyAidBusinessLogic.ControllerLogic
         Task EditPostBusinessLogic(string geoJSON);
         Task<string> GetAllIndexBusinessLogic();
         Task PrimaryProjectEditBusinessLogic(string foreignKey);
+        Task<string> GetGeoJSONbyForeignKey(string foreignKey);
     }
 }

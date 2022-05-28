@@ -18,6 +18,7 @@ using NetTopologySuite.Geometries;
 using BibleStudyAidBusinessLogic.ControllerLogic;
 using BibleStudyAidBusinessLogic.GeoFunctions;
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -46,6 +47,9 @@ builder.Services.AddTransient<IPersonalStudyProjectsData,PersonalStudyProjectsDa
 builder.Services.AddTransient<IDataAccessHelperMethods, DataAccessHelperMethods>();
 builder.Services.AddTransient<IWorldMapItemData, WorldMapItemData>();
 
+//Add Syncfusion
+var syncFusionKey = builder.Configuration["Syncfusion:ProjectUserKey"];
+Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense(syncFusionKey);
 
 //Business Logic
 builder.Services.AddTransient<IWorldMapItemBusinessLogic, WorldMapItemBusinessLogic>();

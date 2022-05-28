@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using BibleStudyAidBusinessLogic.ControllerLogic;
 using BibleStudyAidMVC.Services.HttpServices;
 using BibleStudyAidMVC.ViewModels;
 using BibleStudyDataAccessLibrary.DataAccess;
@@ -14,13 +15,19 @@ namespace BibleStudyAidMVC.Controllers
         private readonly ILogger<DailyBibleReadingData> _logger;
         private readonly IMapper _mapper;
         private readonly IHttpRequestService _httpRequestService;
+        private readonly IWorldMapItemBusinessLogic _worldMapItemBusinessLogic;
 
-        public DailyBibleReadingController(IDailyBibleReadingData dailyBibleReadingData, ILogger<DailyBibleReadingData> logger, IMapper mapper, IHttpRequestService httpRequestService)
+        public DailyBibleReadingController(IDailyBibleReadingData dailyBibleReadingData, 
+            ILogger<DailyBibleReadingData> logger, 
+            IMapper mapper, 
+            IHttpRequestService httpRequestService, 
+            IWorldMapItemBusinessLogic worldMapItemBusinessLogic)
         {
             _dailyBibleReadingData = dailyBibleReadingData;
             _logger = logger;
             _mapper = mapper;
             _httpRequestService = httpRequestService;
+            _worldMapItemBusinessLogic = worldMapItemBusinessLogic;
         }
 
         // GET: DailyBibleReadingController
@@ -40,6 +47,7 @@ namespace BibleStudyAidMVC.Controllers
             }
             var dailyBibleReadingAll = await _dailyBibleReadingData.GetParentAndAllChildrenRecordsAsync(id.Value);
             var viewModel = _mapper.Map<DailyBibleReadingAllViewModel>(dailyBibleReadingAll);
+            viewModel.WorldMapItems = await _worldMapItemBusinessLogic.GetGeoJSONbyForeignKey(viewModel.PKIdtblDailyBibleReadings);
             if (viewModel is not null)
             {
                 try
@@ -81,7 +89,7 @@ namespace BibleStudyAidMVC.Controllers
                 var model=_mapper.Map<DailyBibleReading>(viewModel);
                 var Id=await _dailyBibleReadingData.InsertAsync(model);
                 
-                return View("Edit", Id);
+                return View("Edit", (int)Id);
             }
             catch
             {
@@ -105,7 +113,7 @@ namespace BibleStudyAidMVC.Controllers
                 {
                     var bibleCitation = dailyBibleReadingAll.ScriptureStartPoint.Split(':').First();
                     var bibleAPIModel = await _httpRequestService.GetBibleVersesText(bibleCitation);
-                    viewModel.BibleText = bibleAPIModel.text;
+                    viewModel.WorldMapItems = await _worldMapItemBusinessLogic.GetGeoJSONbyForeignKey(viewModel.PKIdtblDailyBibleReadings);
                 }
                 catch (Exception ex)
                 {
@@ -120,21 +128,6 @@ namespace BibleStudyAidMVC.Controllers
             }
 
             return View(viewModel);
-        }
-
-        // POST: DailyBibleReadingController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
         }
 
         // GET: DailyBibleReadingController/Delete/5

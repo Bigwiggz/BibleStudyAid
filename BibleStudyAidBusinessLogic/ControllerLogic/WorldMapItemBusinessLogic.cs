@@ -36,6 +36,14 @@ namespace BibleStudyAidBusinessLogic.ControllerLogic
             return allWorldMapGeoJSON;
         }
 
+        //Get by FK
+        public async Task<string> GetGeoJSONbyForeignKey(string foreignKey)
+        {
+            var worldMapsModelList = await _worldMapItemsData.GetByForeignKey(foreignKey);
+            string worldMapGeoJSON = _geoServices.CreateFeatureCollectionGeoJSONFromModel<WorldMapItem>(worldMapsModelList.ToList());
+            return worldMapGeoJSON;
+        }
+
         //Create Post
         public async Task CreatePostBusinessLogic(string geoJSON)
         {

@@ -9,6 +9,7 @@ namespace BibleStudyAidMVC.ViewModels
         public List<Tags> Tags { get; set; }= new List<Tags>();
         public List<Documents> DocumentsList { get; set; }=new List<Documents>();
         public List<IFormFile> DocumentFiles { get; set; } = new List<IFormFile>();
+        public string WorldMapItems { get; set; }
         public string BibleText { get; set; }
     }
 }
