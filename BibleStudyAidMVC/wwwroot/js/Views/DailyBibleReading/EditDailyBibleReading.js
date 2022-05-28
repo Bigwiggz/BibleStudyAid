@@ -653,7 +653,7 @@ function getModalPropertiesToCreateWorldMapItem() {
     colorProperty = document.getElementById("colorModal").value;
     titleProperty = document.getElementById("titleModal").value;
     DescriptionProperty = document.getElementById("descriptionModal").value;
-    FKTableIdandName = "1tblDailyBibleReading";
+    FKTableIdandName = getDailyBibleReadingData.pKIdtblDailyBibleReadings;
     //TODO: Fix this
 }
 
