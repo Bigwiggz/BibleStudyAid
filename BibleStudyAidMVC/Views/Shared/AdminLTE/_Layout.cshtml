@@ -7,6 +7,9 @@
     <!--Styles Partial-->
     <partial name="AdminLTE/_Styles" />
     @RenderSection("Styles", required: false)
+    @*Syncfusion Controls*@
+    <link rel="stylesheet" href="https://cdn.syncfusion.com/ej2/20.1.47/material.css" />
+    <script src="https://cdn.syncfusion.com/ej2/20.1.47/dist/ej2.min.js"></script>
 
 </head>
 <body class="hold-transition sidebar-mini">
@@ -69,6 +72,7 @@
 
 <!--Scripts Partial-->
 <partial name="AdminLTE/_Scripts" />
+<ejs-scripts></ejs-scripts>
 @RenderSection("Scripts", required: false)
 </body>
 </html>
