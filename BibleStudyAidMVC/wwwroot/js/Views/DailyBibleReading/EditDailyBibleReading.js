@@ -10,45 +10,46 @@
 window.addEventListener("load", function () {
 
     //Reference Modals
+    /*
     let referenceModal = new bootstrap.Modal(document.getElementById('referenceModal'), {
         backdrop: true,
         keyboard: false,
         focus:true
     });
-
+    */
     AddReferenceEditModal();
-
+    /*
     let addReferenceModal = new bootstrap.Modal(document.getElementById('referenceNewModal'), {
         backdrop: true,
         keyboard: false,
         focus: true
     });
-
+    */
     AddReferenceNewModal();
-
+    /*
     let deleteReferenceModal = new bootstrap.Modal(document.getElementById('referenceDeleteModal'), {
         backdrop: true,
         keyboard: false,
         focus: true
     });
-
+    */
     AddReferenceDeleteModal();
-
+    /*
     //Scripture Modals
     let addScriptureModal = new bootstrap.Modal(document.getElementById('scriptureNewModal'), {
         backdrop: true,
         keyboard: false,
         focus: true
     });
-
+    */
     AddScriptureNewModal();
-
+    /*
     let scriptureDeleteModal = new bootstrap.Modal(document.getElementById('scriptureDeleteModal'), {
         backdrop: true,
         keyboard: false,
         focus: true
     });
-
+    */
     AddScriptureDeleteModal();
 
 });

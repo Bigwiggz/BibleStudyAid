@@ -1,0 +1,45 @@
+﻿@using BibleStudyAidMVC.ViewModels
+
+@model IEnumerable<DailyBibleReadingViewModel>
+@{
+    ViewData["Title"]="Daily Bible Reading";
+    Layout = "~/Views/Shared/AdminLTE/_Layout.cshtml";
+}
+
+<p class="h1">Test Page</p>
+
+@*Blazor Component Render*@
+<div>
+    @(await Html.RenderComponentAsync<BibleStudyAidMVC.Views.Shared.Component.TestComponent>(RenderMode.ServerPrerendered,new{Data="This is a test."}))
+</div>
+<hr>
+<div>
+    @(await Html.RenderComponentAsync<BibleStudyAidMVC.Views.Shared.Component.TestCounter>(RenderMode.ServerPrerendered))
+</div>
+<hr>
+<div>
+    @(await Html.RenderComponentAsync<BibleStudyAidMVC.Views.Shared.Component.SyncfusionBlazorTest>(RenderMode.ServerPrerendered,new{dateTime=DateTime.Now}))
+</div>
+<hr>
+
+@*Daily Bible Readings*@
+<p class="h3">Daily Bible Readings</p>
+<div id="ControlRegion">
+    <ejs-grid id="Grid" dataSource="@Model.ToList()" 
+    allowPaging="true"
+    allowSorting="true"
+    allowFiltering="true"
+    allowSelection="true"
+    allowTextWrap="true">
+        <e-grid-pagesettings pageCount="5"></e-grid-pagesettings>
+        <e-grid-filtersettings type="Menu"></e-grid-filtersettings>
+        <e-grid-selectionsettings persistSelection="true" type="Multiple" checkboxOnly="true"></e-grid-selectionsettings>
+            <e-grid-columns>
+                <e-grid-column field="Id" headerText="Id" isPrimaryKey="true" visible="false"/>
+                <e-grid-column field="LessonLearnedDescription" headerText="Description" filter="@(new { type="CheckBox"})" width="200" />
+                <e-grid-column field="DateRead" headerText="Date Read" format="yMd" filter="@(new { type="CheckBox"})" width="40"/>
+                <e-grid-column field="ScriptureStartPoint" headerText="Starting Scripture" filter="@(new { type="CheckBox"})" width="100"/>
+                <e-grid-column field="ScriptureEndPoint" headerText="Ending Scripture" filter="@(new { type="CheckBox"})" width="100"/>
+            </e-grid-columns>
+    </ejs-grid> 
+</div>

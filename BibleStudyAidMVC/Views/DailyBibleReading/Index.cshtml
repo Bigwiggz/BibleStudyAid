@@ -33,7 +33,42 @@ else
         }
 
     </table>
+    
+    <div id="ControlRegion">
+        <ejs-grid id="Grid" dataSource="@Model.ToList()" 
+        allowPaging="true"
+        allowSorting="true"
+        allowFiltering="true"
+        allowSelection="true"
+        allowTextWrap="true">
+          <e-grid-pagesettings pageCount="5"></e-grid-pagesettings>
+           <e-grid-filtersettings type="Menu"></e-grid-filtersettings>
+            <e-grid-selectionsettings persistSelection="true" type="Multiple" checkboxOnly="true"></e-grid-selectionsettings>
+                <e-grid-columns>
+                    <e-grid-column field="Id" headerText="Id" isPrimaryKey="true" visible="false"/>
+                    <e-grid-column field="LessonLearnedDescription" headerText="Description" filter="@(new { type="CheckBox"})" width="200" />
+                    <e-grid-column field="DateRead" headerText="Date Read" format="yMd" filter="@(new { type="CheckBox"})" width="40"/>
+                    <e-grid-column field="ScriptureStartPoint" headerText="Starting Scripture" filter="@(new { type="CheckBox"})" width="100"/>
+                    <e-grid-column field="ScriptureEndPoint" headerText="Ending Scripture" filter="@(new { type="CheckBox"})" width="100"/>
+                </e-grid-columns>
+        </ejs-grid> 
+    </div>
 }
+
+@*Toast Example*@
+<ejs-toast id="element" 
+    title="Matt sent you a friend request" 
+    content="You have a new friend request yet to accept">
+    <e-toast-position X="Right" Y="Top"></e-toast-position>
+</ejs-toast>
+<script type="text/javascript">
+    setTimeout(
+        () => {
+            var toastObj = document.getElementById('element').ej2_instances[0];
+            toastObj.target = document.body;
+            toastObj.show();
+        }, 1000);
+</script>
 
 <br />
 <br />

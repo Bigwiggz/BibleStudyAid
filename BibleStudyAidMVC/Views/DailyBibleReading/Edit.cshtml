@@ -25,13 +25,13 @@
             @foreach(var tag in @Model.Tags)
             {
                 <a asp-controller="Tags" asp-action="Details" asp-route-id="@tag.Id">
-                    <span class="badge" style="background-color:@tag.TagColor;color:@tag.TagTextColor" data-toggle="tooltip" data-placement="bottom" title="@tag.TagDescription">@tag.TagName</span>
+                    <span class="badge" style="background-color:@tag.TagColor;color:@tag.TagTextColor" data-bs-toggle="tooltip" data-placement="bottom" title="@tag.TagDescription">@tag.TagName</span>
                 </a>
             }
         </div>
         <div class="card-footer">
-            <button class="btn btn-primary" data-toggle="modal" data-target="#tagsModal">Attach/Remove Tags</button>
-            <a class="btn btn-primary" data-toggle="modal" data-target="#tagNewModal">Create New Tag</a>
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#tagsModal">Attach/Remove Tags</button>
+            <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#tagNewModal">Create New Tag</a>
         </div>
     </div>
 </div>
@@ -76,7 +76,7 @@
         <div class="card-body">
             @if(@Model.ReferencesList.Count==0)
             {
-                <i class="fas fa-plus-square nav-icon" data-toggle="modal" data-target="#referenceNewModal" reference-FK="@Model.PKIdtblDailyBibleReadings"></i>
+                <i class="fas fa-plus-square nav-icon" data-bs-toggle="modal" data-bs-target="#referenceNewModal" reference-FK="@Model.PKIdtblDailyBibleReadings"></i>
             }
             else
             {
@@ -99,9 +99,9 @@
                                 <td id="referenceText">@reference.Reference</td>
                                 <td>@reference.Description</td>
                                 <td>
-                                    <i class="fas fa-edit nav-icon" data-toggle="modal" data-target="#referenceModal" data-id="@reference.Id"></i>|
-                                    <i class="fas fa-plus-square nav-icon" data-toggle="modal" data-target="#referenceNewModal" data-id="@reference.Id"></i>|
-                                    <i class="fas fa-trash-alt nav-icon" data-toggle="modal" data-target="#referenceDeleteModal" data-id="@reference.Id"></i>
+                                    <i class="fas fa-edit nav-icon" data-bs-toggle="modal" data-bs-target="#referenceModal" data-id="@reference.Id"></i>|
+                                    <i class="fas fa-plus-square nav-icon" data-bs-toggle="modal" data-bs-target="#referenceNewModal" data-id="@reference.Id"></i>|
+                                    <i class="fas fa-trash-alt nav-icon" data-bs-toggle="modal" data-bs-target="#referenceDeleteModal" data-id="@reference.Id"></i>
                                 </td>
                             </tr>
                         }
@@ -121,7 +121,7 @@
         <div class="card-body">
             @if(@Model.ScripturesList.Count==0)
             {
-                <i class="fas fa-plus-square nav-icon" data-toggle="modal" data-target="#scriptureNewModal" reference-FK="@Model.PKIdtblDailyBibleReadings"></i> 
+                <i class="fas fa-plus-square nav-icon" data-bs-toggle="modal" data-bs-target="#scriptureNewModal" reference-FK="@Model.PKIdtblDailyBibleReadings"></i> 
             }
             else
             {
@@ -136,13 +136,13 @@
                     <tbody id="scripturalTableEdits">
                         @foreach(var scripture in @Model.ScripturesList)
                         {
-                            <tr data-toggle="modal" data-target="#scriptureModal" data-id="@scripture.Id">
+                            <tr data-bs-toggle="modal" data-bs-target="#scriptureModal" data-id="@scripture.Id">
                                 <td>@scripture.Scripture</td>
                                 <td>@scripture.Description</td>
                                 <td>
-                                    <i class="fas fa-edit nav-icon" data-toggle="modal" data-target="#scriptureEditModal" data-id="@scripture.Id"></i>|
-                                    <i class="fas fa-plus-square nav-icon" data-toggle="modal" data-target="#scriptureNewModal" data-id="@scripture.Id"></i>|
-                                    <i class="fas fa-trash-alt nav-icon" data-toggle="modal" data-target="#scriptureDeleteModal" data-id="@scripture.Id"></i>
+                                    <i class="fas fa-edit nav-icon" data-bs-toggle="modal" data-bs-target="#scriptureEditModal" data-id="@scripture.Id"></i>|
+                                    <i class="fas fa-plus-square nav-icon" data-bs-toggle="modal" data-bs-target="#scriptureNewModal" data-id="@scripture.Id"></i>|
+                                    <i class="fas fa-trash-alt nav-icon" data-bs-toggle="modal" data-bs-target="#scriptureDeleteModal" data-id="@scripture.Id"></i>
                                 </td>
                             </tr>
                         }
@@ -219,7 +219,7 @@
             <div id="map"></div>
         </div>
         <div class="card-footer">
-            <a class="btn btn-primary" data-toggle="modal" data-target="#createNewWorldMapItemModal">Create New Map Item</a>
+            <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createNewWorldMapItemModal">Create New Map Item</a>
             <form asp-controller="WorldMapItems" asp-action="Create" method="post">
                 <input type="hidden" id="geoJsonString" name="GeoJsonString">
                 <button type="submit" class="btn btn-primary" id="createWorldMapItemButton" disabled>Save Object</button>

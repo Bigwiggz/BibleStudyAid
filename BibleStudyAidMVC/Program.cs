@@ -17,6 +17,7 @@ using BibleStudyDataAccessLibrary.Extensions;
 using NetTopologySuite.Geometries;
 using BibleStudyAidBusinessLogic.ControllerLogic;
 using BibleStudyAidBusinessLogic.GeoFunctions;
+using Syncfusion.Blazor;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -30,6 +31,9 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
+
+//Add Blazor Server
+builder.Services.AddServerSideBlazor();
 
 //Add Personal Services
 builder.Services.AddTransient<ISqlDataAccess, SqlDataAccess>();
@@ -50,6 +54,10 @@ builder.Services.AddTransient<IWorldMapItemData, WorldMapItemData>();
 //Add Syncfusion
 var syncFusionKey = builder.Configuration["Syncfusion:ProjectUserKey"];
 Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense(syncFusionKey);
+
+
+//Add Syncfusion Blazor
+builder.Services.AddSyncfusionBlazor(options => { options.IgnoreScriptIsolation = true; });
 
 //Business Logic
 builder.Services.AddTransient<IWorldMapItemBusinessLogic, WorldMapItemBusinessLogic>();
@@ -119,5 +127,6 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 app.MapRazorPages();
+app.MapBlazorHub();
 
 app.Run();

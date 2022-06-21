@@ -1,0 +1,21 @@
+﻿<h3>DailyBibleReadingTable</h3>
+ 
+
+@if (DailyBibleReadingList != null)
+{
+    <SfGrid DataSource="@DailyBibleReadingList">
+        <GridColumns>
+            <GridColumn Field=@nameof(DailyBibleReadingList.Id) HeaderText="ID"></GridColumn>
+            <GridColumn Field=@nameof(DailyBibleReadingList.LessonLearnedDescription) HeaderText="First Name"></GridColumn>
+            <GridColumn Field=@nameof(DailyBibleReadingList.DateRead) HeaderText="Date Read"></GridColumn>
+            <GridColumn Field=@nameof(DailyBibleReadingList.ScriptureStartPoint) HeaderText="Starting Scripture"></GridColumn>
+            <GridColumn Field=@nameof(DailyBibleReadingList.ScriptureEndPoint) HeaderText="Ending Scripture"></GridColumn>
+        </GridColumns>
+    </SfGrid>
+}
+
+@code{
+    [Parameter]
+    public IEnumerable<DailyBibleReadingViewModel> DailyBibleReadingList { get; set; } = null;
+
+}

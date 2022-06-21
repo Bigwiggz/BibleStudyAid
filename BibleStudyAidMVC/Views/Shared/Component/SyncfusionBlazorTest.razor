@@ -1,0 +1,16 @@
+﻿
+
+<h3>Syncfusion Blazor Test</h3>
+
+<SfCalendar TValue="DateTime" />
+
+@code {
+    [Parameter]
+    public DateTime dateTime { get; set; }
+
+    private void OnInitializedAsync()
+    {
+        dateTime = DateTime.Now;
+    }
+
+}
