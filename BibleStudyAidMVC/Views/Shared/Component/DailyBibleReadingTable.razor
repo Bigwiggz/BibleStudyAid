@@ -1,21 +1,23 @@
-﻿<h3>DailyBibleReadingTable</h3>
+﻿@using BibleStudyAidMVC.ViewModels
+
+<h3>DailyBibleReadingTable</h3>
  
 
 @if (DailyBibleReadingList != null)
 {
+    <p class="h3">Daily Bible Readings</p>
     <SfGrid DataSource="@DailyBibleReadingList">
         <GridColumns>
-            <GridColumn Field=@nameof(DailyBibleReadingList.Id) HeaderText="ID"></GridColumn>
-            <GridColumn Field=@nameof(DailyBibleReadingList.LessonLearnedDescription) HeaderText="First Name"></GridColumn>
-            <GridColumn Field=@nameof(DailyBibleReadingList.DateRead) HeaderText="Date Read"></GridColumn>
-            <GridColumn Field=@nameof(DailyBibleReadingList.ScriptureStartPoint) HeaderText="Starting Scripture"></GridColumn>
-            <GridColumn Field=@nameof(DailyBibleReadingList.ScriptureEndPoint) HeaderText="Ending Scripture"></GridColumn>
+            <GridColumn Field=@nameof(DailyBibleReadingViewModel.Id) HeaderText="ID"></GridColumn>
+            <GridColumn Field=@nameof(DailyBibleReadingViewModel.LessonLearnedDescription) HeaderText="First Name"></GridColumn>
+            <GridColumn Field=@nameof(DailyBibleReadingViewModel.DateRead) HeaderText="Date Read"></GridColumn>
+            <GridColumn Field=@nameof(DailyBibleReadingViewModel.ScriptureStartPoint) HeaderText="Starting Scripture"></GridColumn>
+            <GridColumn Field=@nameof(DailyBibleReadingViewModel.ScriptureEndPoint) HeaderText="Ending Scripture"></GridColumn>
         </GridColumns>
     </SfGrid>
 }
 
 @code{
     [Parameter]
-    public IEnumerable<DailyBibleReadingViewModel> DailyBibleReadingList { get; set; } = null;
-
+    public List<DailyBibleReadingViewModel>? DailyBibleReadingList { get; set; }
 }

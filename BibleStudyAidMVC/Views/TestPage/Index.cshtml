@@ -21,6 +21,10 @@
     @(await Html.RenderComponentAsync<BibleStudyAidMVC.Views.Shared.Component.SyncfusionBlazorTest>(RenderMode.ServerPrerendered,new{dateTime=DateTime.Now}))
 </div>
 <hr>
+<div>
+    @(await Html.RenderComponentAsync<BibleStudyAidMVC.Views.Shared.Component.DailyBibleReadingTable>(RenderMode.ServerPrerendered,new{DailyBibleReadingList=@Model.ToList()}))
+</div>
+<hr>
 
 @*Daily Bible Readings*@
 <p class="h3">Daily Bible Readings</p>
