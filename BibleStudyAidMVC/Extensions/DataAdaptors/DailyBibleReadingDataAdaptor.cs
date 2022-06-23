@@ -27,13 +27,13 @@ namespace BibleStudyAidMVC.Extensions.DataAdaptors
 
         }
 
-        public override async Task<object> InsertAsync(DataManagerRequest dataManagerRequest, object data, string key)
+        public override async Task<object> InsertAsync(DataManager dataManager, object data, string key)
         {
             await _dailyBibleReadingData.InsertAsync(data as DailyBibleReading);
             return data;
         }
 
-        public override async Task<object> UpdateAsync(DataManagerRequest dataManagerRequest, object data, string key)
+        public override async Task<object> UpdateAsync(DataManager dataManager, object data, string keyField, string key)
         {
             await _dailyBibleReadingData.UpdateAsync(data as DailyBibleReading);
             return data;
