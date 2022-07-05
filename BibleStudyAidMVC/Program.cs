@@ -18,7 +18,7 @@ using NetTopologySuite.Geometries;
 using BibleStudyAidBusinessLogic.ControllerLogic;
 using BibleStudyAidBusinessLogic.GeoFunctions;
 using Syncfusion.Blazor;
-
+using BibleStudyAidMVC.Extensions.DataAdaptors;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -50,6 +50,9 @@ builder.Services.AddTransient<ITalksData, TalksData>();
 builder.Services.AddTransient<IPersonalStudyProjectsData,PersonalStudyProjectsData>();
 builder.Services.AddTransient<IDataAccessHelperMethods, DataAccessHelperMethods>();
 builder.Services.AddTransient<IWorldMapItemData, WorldMapItemData>();
+
+//Data Adaptors
+
 
 //Add Syncfusion
 var syncFusionKey = builder.Configuration["Syncfusion:ProjectUserKey"];

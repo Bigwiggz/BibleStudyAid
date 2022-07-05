@@ -22,7 +22,7 @@
 </div>
 <hr>
 <div>
-    @(await Html.RenderComponentAsync<BibleStudyAidMVC.Views.Shared.Component.DailyBibleReadingTable>(RenderMode.ServerPrerendered,new{DailyBibleReadingList=@Model.ToList()}))
+    @(await Html.RenderComponentAsync<BibleStudyAidMVC.Views.Shared.Component.DailyBibleReadingTable>(RenderMode.ServerPrerendered,new{DailyBibleReadingList=@Model.ToList(),ControllerName="DailyBibleReading",ActionName="Edit"}))
 </div>
 <hr>
 

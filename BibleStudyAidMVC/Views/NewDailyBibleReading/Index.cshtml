@@ -1,0 +1,22 @@
+﻿@using BibleStudyAidMVC.ViewModels
+
+@model IEnumerable<DailyBibleReadingViewModel>
+
+@{
+    ViewData["Title"]=" New Daily Bible Reading";
+    Layout = "~/Views/Shared/AdminLTE/_Layout.cshtml";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+@*Styles*@
+@section Styles{
+
+}
+
+<hr>
+<div>
+    @(await Html.RenderComponentAsync<BibleStudyAidMVC.Views.Shared.Component.DailyBibleReadingTable>(RenderMode.ServerPrerendered,new{DailyBibleReadingList=@Model.ToList(),ControllerName="NewDailyBibleReading",ActionName="Edit"}))
+</div>
+
+

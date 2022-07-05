@@ -194,6 +194,17 @@
                     </a>
                 </li>
             }
+            @if(User.Identity.IsAuthenticated)
+            {
+                <li class="nav-item">
+                    <a class="nav-link @Url.MakeActiveClass("simple","index")" asp-controller="NewDailyBibleReading" asp-action="Index">
+                        <i class="nav-icon fas fa-flask-vial"></i>
+                        <p>
+                        New Daily Bible Reading
+                        </p>
+                    </a>
+                </li>
+            }
             </ul>
       </nav>
       <!-- /.sidebar-menu -->

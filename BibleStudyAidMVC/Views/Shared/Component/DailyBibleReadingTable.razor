@@ -1,15 +1,31 @@
 ﻿@using BibleStudyAidMVC.ViewModels
-
-<h3>DailyBibleReadingTable</h3>
+@using BibleStudyDataAccessLibrary.Models
+@using BibleStudyAidMVC.Extensions.DataAdaptors
+@inject NavigationManager UriHelper
  
 
 @if (DailyBibleReadingList != null)
 {
     <p class="h3">Daily Bible Readings</p>
-    <SfGrid DataSource="@DailyBibleReadingList">
+    <SfGrid DataSource="@DailyBibleReadingList" 
+        AllowPaging="true" 
+        Toolbar="@(new List<string>() { "Add", "Edit", "Delete", "Update", "Cancel" })">
+        @*
+            <SfDataManager AdaptorInstance="@typeof(DailyBibleReadingDataAdaptor)" Adaptor="Adaptors.CustomAdaptor"></SfDataManager>
+        *@
+        <GridEditSettings AllowAdding="true" AllowEditing="true" AllowDeleting="true"></GridEditSettings>
         <GridColumns>
-            <GridColumn Field=@nameof(DailyBibleReadingViewModel.Id) HeaderText="ID"></GridColumn>
-            <GridColumn Field=@nameof(DailyBibleReadingViewModel.LessonLearnedDescription) HeaderText="First Name"></GridColumn>
+            <GridColumn Field=@nameof(DailyBibleReadingViewModel.Id) HeaderText="ID" IsPrimaryKey="true"></GridColumn>
+            <GridColumn HeaderText="Lesson Learned">
+                <Template>
+                    @{
+                        var dailyBibleReadingRecord = (context as DailyBibleReadingViewModel);
+                        <div>                      
+                            <a><a href="#" @onclick="@(() => Navigate(dailyBibleReadingRecord, @ControllerName, @ActionName))">@dailyBibleReadingRecord.LessonLearnedDescription</a></a>
+                        </div>
+                    }
+                </Template>
+            </GridColumn>
             <GridColumn Field=@nameof(DailyBibleReadingViewModel.DateRead) HeaderText="Date Read"></GridColumn>
             <GridColumn Field=@nameof(DailyBibleReadingViewModel.ScriptureStartPoint) HeaderText="Starting Scripture"></GridColumn>
             <GridColumn Field=@nameof(DailyBibleReadingViewModel.ScriptureEndPoint) HeaderText="Ending Scripture"></GridColumn>
@@ -20,4 +36,15 @@
 @code{
     [Parameter]
     public List<DailyBibleReadingViewModel>? DailyBibleReadingList { get; set; }
+
+    [Parameter]
+    public string ControllerName { get; set; }
+
+    [Parameter]
+    public string ActionName { get; set; }
+
+    private void Navigate(DailyBibleReadingViewModel dailyBibleReadingRecord, string controllerName, string actionName)
+    {
+        UriHelper.NavigateTo($"{controllerName}/{actionName}/{dailyBibleReadingRecord.Id}");
+    }
 }

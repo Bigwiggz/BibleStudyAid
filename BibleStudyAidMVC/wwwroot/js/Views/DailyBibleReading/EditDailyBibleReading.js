@@ -465,46 +465,6 @@ L.control.layers(baseMaps, overlayMaps).addTo(map);
 
 
 ///////////////////////////////////////////
-//Function to add input information
-///////////////////////////////////////////
-
-function LoadItemInformation(properties) {
-
-
-    //Append html table information
-    const InformationTable = document.getElementById("InformationTableBody");
-    InformationTable.textContent = "";
-
-    let htmlTable = "";
-
-    for (var key of Object.keys(properties)) {
-        let columnField = key.replace(/([A-Z])/g, ' $1').trim();
-        let columnValue = properties[key];
-
-        htmlTable +=
-            `
-		<tr>
-			<td><b>${columnField}</b></td>
-			<td>${columnValue}</td>
-		</tr>
-		`
-    }
-
-    //Append html table information
-    InformationTable.insertAdjacentHTML('afterbegin', htmlTable);
-
-    //turn visibility of element on to display table
-    document.getElementById("table-information-section").style.visibility = "visible";
-
-    //clear input array after information is posted
-    result = [];
-
-    //scroll to Item Information Table
-    document.getElementById("table-information-section").scrollIntoView();
-
-}
-
-///////////////////////////////////////////
 //Add Leaflet Drawing Controls 
 ///////////////////////////////////////////
 

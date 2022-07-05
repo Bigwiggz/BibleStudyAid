@@ -1,0 +1,91 @@
+﻿@using BibleStudyAidMVC.ViewModels
+
+@model DailyBibleReadingAllViewModel
+
+@{
+    ViewData["Title"]=" New Daily Bible Reading";
+    Layout = "~/Views/Shared/AdminLTE/_Layout.cshtml";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+@*Styles*@
+@section Styles{
+    <!--Page Stylesheet-->
+    <link  rel="stylesheet" href="~/css/Views/NewDailyBibleReading/EditNewDailyBibleReading.css"/>
+    <!--Leaflet Stylesheet-->
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />
+    <!--Leaflet Geoman-->
+    <link rel="stylesheet" href="https://unpkg.com/@@geoman-io/leaflet-geoman-free@latest/dist/leaflet-geoman.css" />  
+}
+@*TAGS LIST*@
+<div>
+    <div>
+        <p class="h3">Tags</p>
+    </div>
+    <div>
+        @foreach(var tag in @Model.Tags)
+        {
+            <a asp-controller="Tags" asp-action="Details" asp-route-id="@tag.Id">
+                <span class="badge" style="background-color:@tag.TagColor;color:@tag.TagTextColor" data-bs-toggle="tooltip" data-placement="bottom" title="@tag.TagDescription">@tag.TagName</span>
+            </a>
+        }
+    </div>
+</div>
+
+@*TAGS LIST*@
+<div class="row">
+    <div class="col-12 card m-1">
+        <div class="card-header border-primary">
+            <h5>Tags</h5>
+        </div>
+        <div class="card-body">
+            @foreach(var tag in @Model.Tags)
+            {
+                <a asp-controller="Tags" asp-action="Details" asp-route-id="@tag.Id">
+                    <span class="badge" style="background-color:@tag.TagColor;color:@tag.TagTextColor" data-bs-toggle="tooltip" data-placement="bottom" title="@tag.TagDescription">@tag.TagName</span>
+                </a>
+            }
+        </div>
+        <div class="card-footer">
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#tagsModal">Attach/Remove Tags</button>
+            <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#tagNewModal">Create New Tag</a>
+        </div>
+    </div>
+</div>
+
+@*Scripts Section*@
+@section Scripts{
+    <script>
+        let getDailyBibleReadingData =@Json.Serialize(@Model);
+    </script>
+    <!--WorldMapItemsString-->
+	<script>
+        let getWorldMapItemsList =@Html.Raw(@Model.WorldMapItems);
+    </script>
+    <!-- Leaflet JavaScript Package -->
+	<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+   <!--Leaflet Provider Tiles-->
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-providers/1.13.0/leaflet-providers.min.js"></script>
+   <!--Leaflet Drawing Library Geoman js (Must be included right after leaflet-->
+   <script src="https://unpkg.com/@@geoman-io/leaflet-geoman-free@latest/dist/leaflet-geoman.min.js"></script> 
+   <!--Bible Scripture Info-->
+    <script src="~/js/Helpers/ScriptureValidator/BibleScriptureDoc.js"></script>
+    <script src="~/js/Helpers/ScriptureValidator/BibleScriptureLogic.js"></script>
+    <script src="~/js/Views/DailyBibleReading/EditDailyBibleReading.js"></script>
+    <script>
+            $(document).ready(function () {
+                $('.custom-file-input').on("change", function () {
+                    var fileLabel = $(this).next('.custom-file-label');
+                    var files = $(this)[0].files;
+                    if (files.length > 1) {
+                        fileLabel.html(files.length + ' files selected');
+                    }
+                    else if (files.length == 1) {
+                        fileLabel.html(files[0].name);
+                    }
+                });
+            });
+    </script>
+
+}
