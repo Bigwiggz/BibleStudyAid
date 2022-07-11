@@ -8,12 +8,18 @@
 {
     <p class="h3">Daily Bible Readings</p>
     <SfGrid DataSource="@DailyBibleReadingList" 
-        AllowPaging="true" 
-        Toolbar="@(new List<string>() { "Add", "Edit", "Delete", "Update", "Cancel" })">
+        AllowPaging="true"
+        AllowSorting="true"
+        AllowFiltering="true"
+        AllowSelection="true"
+        AllowTextWrap="true">
         @*
+            Toolbar="@(new List<string>() { "Add", "Edit", "Delete", "Update", "Cancel" })">
             <SfDataManager AdaptorInstance="@typeof(DailyBibleReadingDataAdaptor)" Adaptor="Adaptors.CustomAdaptor"></SfDataManager>
+            <GridEditSettings AllowAdding="true" AllowEditing="true" AllowDeleting="true"></GridEditSettings>
         *@
-        <GridEditSettings AllowAdding="true" AllowEditing="true" AllowDeleting="true"></GridEditSettings>
+        <GridFilterSettings Type="Syncfusion.Blazor.Grids.FilterType.Menu"></GridFilterSettings>
+        <GridPageSettings PageCount="10"></GridPageSettings>
         <GridColumns>
             <GridColumn Field=@nameof(DailyBibleReadingViewModel.Id) HeaderText="ID" IsPrimaryKey="true"></GridColumn>
             <GridColumn HeaderText="Lesson Learned">
@@ -45,6 +51,12 @@
 
     private void Navigate(DailyBibleReadingViewModel dailyBibleReadingRecord, string controllerName, string actionName)
     {
-        UriHelper.NavigateTo($"{controllerName}/{actionName}/{dailyBibleReadingRecord.Id}");
+        UriHelper.NavigateTo($"/{controllerName}/{actionName}/{dailyBibleReadingRecord.Id}",true);
+    }
+
+    public class FilterType
+    {
+        public string id { get; set; }
+        public string type { get; set; }
     }
 }
